@@ -1,0 +1,41 @@
+.g_depth_button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #6c7dfb;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.g_depth_button:before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  border-radius: inherit;
+  z-index: -1;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.g_depth_button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.g_depth_button:hover:before {
+  transform: translateY(3px);
+  /* box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.g_depth_button:active {
+  transform: translate(0, 0.5em);
+}

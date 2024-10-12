@@ -27,6 +27,7 @@
   box-shadow: inset 0 -4px 0 #6893b7;
 }
 
+
 @keyframes blink {
   0% {
     opacity: 0;
