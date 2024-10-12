@@ -17,6 +17,16 @@
   line-height: 74px;
 }
 
+.l_menu_tab {
+  color: #9ca3af;
+  position: relative;
+}
+
+.l_menu_tab.active {
+  color: #000000;
+  box-shadow: inset 0 -4px 0 #6893b7;
+}
+
 @keyframes blink {
   0% {
     opacity: 0;

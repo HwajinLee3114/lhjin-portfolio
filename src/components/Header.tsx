@@ -57,25 +57,25 @@ const Header = () => {
       <nav className={`hidden md:flex space-x-4`}>
         <button
           onClick={() => scrollToSection("about")}
-          className={`p-2 ${activeSection === "about" ? "bg-gray-200" : ""}`}
+          className={`p-2 l_menu_tab ${activeSection === "about" ? "active" : ""}`}
         >
           About ME
         </button>
         <button
           onClick={() => scrollToSection("skills")}
-          className={`p-2 ${activeSection === "skills" ? "bg-gray-200" : ""}`}
+          className={`p-2 l_menu_tab ${activeSection === "skills" ? "active" : ""}`}
         >
           Skills
         </button>
         <button
           onClick={() => scrollToSection("projects")}
-          className={`p-2 ${activeSection === "projects" ? "bg-gray-200" : ""}`}
+          className={`p-2 l_menu_tab ${activeSection === "projects" ? "active" : ""}`}
         >
           Projects
         </button>
         <button
           onClick={() => scrollToSection("career")}
-          className={`p-2 ${activeSection === "career" ? "bg-gray-200" : ""}`}
+          className={`p-2 l_menu_tab ${activeSection === "career" ? "active" : ""}`}
         >
           Career
         </button>
@@ -90,32 +90,32 @@ const Header = () => {
         </button>
         <button
           onClick={() => scrollToSection("about")}
-          className={`block p-4 ${
-            activeSection === "about" ? "bg-gray-200" : ""
+          className={`block p-4 w-full l_menu_tab ${
+            activeSection === "about" ? "active" : ""
           }`}
         >
           About ME
         </button>
         <button
           onClick={() => scrollToSection("about")}
-          className={`block p-4 ${
-            activeSection === "skills" ? "bg-gray-200" : ""
+          className={`block p-4 w-full l_menu_tab ${
+            activeSection === "skills" ? "active" : ""
           }`}
         >
           Skills
         </button>
         <button
           onClick={() => scrollToSection("projects")}
-          className={`block p-4 ${
-            activeSection === "projects" ? "bg-gray-200" : ""
+          className={`block p-4 w-full l_menu_tab ${
+            activeSection === "projects" ? "active" : ""
           }`}
         >
           Projects
         </button>
         <button
           onClick={() => scrollToSection("career")}
-          className={`block p-4 ${
-            activeSection === "career" ? "bg-gray-200" : ""
+          className={`block p-4 w-full l_menu_tab ${
+            activeSection === "career" ? "active" : ""
           }`}
         >
           Career
