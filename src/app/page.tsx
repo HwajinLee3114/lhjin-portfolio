@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import Career from "@/components/Career";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HomeSec from "@/components/Home";
 import Projects from "@/components/Projects";
@@ -16,6 +17,7 @@ export default function Home() {
         <Projects />
         <Career />    
       </main>
+      <Footer />
     </div>
   );
 }
