@@ -1,3 +1,4 @@
+import About from "@/components/About";
 import Career from "@/components/Career";
 import Header from "@/components/Header";
 import HomeSec from "@/components/Home";
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <main>
         <HomeSec />
+        <About />
         <Skills />
         <Projects />
         <Career />    

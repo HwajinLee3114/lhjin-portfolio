@@ -1,54 +1,29 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 const Header = () => {
-  const [activeSection, setActiveSection] = useState<string>("home");
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
   const handleScroll = () => {
-    const sections = ["skills", "projects", "career"]; // 'home' 제외
-    const scrollPosition = window.scrollY + 100; // 헤더 높이에 맞춰 조정
+    const sections = ["home", "about", "skills", "projects", "career"];
+    const scrollY = window.scrollY;
 
-    // 메인 섹션 active 해제
-    const homeSection = document.getElementById("home");
-    if (
-      homeSection &&
-      scrollPosition < homeSection.offsetTop + homeSection.clientHeight
-    ) {
-      setActiveSection("");
-      // return;
-    }
-
-    // 스크롤 상태 업데이트
-    if (scrollPosition > 105) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-
-    for (const sectionId of sections) {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-
-        if (
-          scrollPosition >= sectionTop &&
-          scrollPosition < sectionTop + sectionHeight
-        ) {
-          setActiveSection(sectionId);
-          break;
+    sections.forEach((section) => {
+      const element = document.getElementById(section);
+      if (element) {
+        const { offsetTop, clientHeight } = element;
+        if (scrollY >= offsetTop - 50 && scrollY < offsetTop + clientHeight) {
+          setActiveSection(section);
         }
       }
-    }
+    });
   };
 
   useEffect(() => {
@@ -58,35 +33,93 @@ const Header = () => {
     };
   }, []);
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false); // 사이드 메뉴 닫기
+  };
+
   return (
     <header
-      className={`flex justify-between fixed top-0 left-0 right-0 p-4 z-10 transition-all duration-300 
-      ${
-        isScrolled
-          ? "bg-white text-maincolor shadow-lg"
-          : "bg-transparent text-black"
-      }`}
+      className={`flex items-center justify-between p-4 bg-white shadow-md fixed w-full transition-all duration-300 z-50`}
     >
       <button
-        className="text-2xl font-bold"
+        className="text-blue-600 font-bold"
         onClick={() => scrollToSection("home")}
       >
         lhjin's Portfolio
       </button>
-      <nav className="mt-2">
-        {["skills", "projects", "career"].map(
-          (section) => (
-            <button
-              key={section}
-              className={`mx-2 text-lg ${
-                activeSection === section ? "underline" : ""
-              }`} // active 클래스 적용
-              onClick={() => scrollToSection(section)}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </button>
-          )
-        )}
+      <button onClick={toggleMenu} className="md:hidden focus:outline-none">
+        {isOpen ? "✖" : "☰"}
+      </button>
+      <nav className={`hidden md:flex space-x-4`}>
+        <button
+          onClick={() => scrollToSection("about")}
+          className={`p-2 ${activeSection === "about" ? "bg-gray-200" : ""}`}
+        >
+          About ME
+        </button>
+        <button
+          onClick={() => scrollToSection("skills")}
+          className={`p-2 ${activeSection === "skills" ? "bg-gray-200" : ""}`}
+        >
+          Skills
+        </button>
+        <button
+          onClick={() => scrollToSection("projects")}
+          className={`p-2 ${activeSection === "projects" ? "bg-gray-200" : ""}`}
+        >
+          Projects
+        </button>
+        <button
+          onClick={() => scrollToSection("career")}
+          className={`p-2 ${activeSection === "career" ? "bg-gray-200" : ""}`}
+        >
+          Career
+        </button>
+      </nav>
+      <nav
+        className={`fixed top-0 right-0 bg-white h-full w-3/4 md:hidden transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } z-50`}
+      >
+        <button className="p-4" onClick={toggleMenu}>
+          ✖
+        </button>
+        <button
+          onClick={() => scrollToSection("about")}
+          className={`block p-4 ${
+            activeSection === "about" ? "bg-gray-200" : ""
+          }`}
+        >
+          About ME
+        </button>
+        <button
+          onClick={() => scrollToSection("about")}
+          className={`block p-4 ${
+            activeSection === "skills" ? "bg-gray-200" : ""
+          }`}
+        >
+          Skills
+        </button>
+        <button
+          onClick={() => scrollToSection("projects")}
+          className={`block p-4 ${
+            activeSection === "projects" ? "bg-gray-200" : ""
+          }`}
+        >
+          Projects
+        </button>
+        <button
+          onClick={() => scrollToSection("career")}
+          className={`block p-4 ${
+            activeSection === "career" ? "bg-gray-200" : ""
+          }`}
+        >
+          Career
+        </button>
       </nav>
     </header>
   );
