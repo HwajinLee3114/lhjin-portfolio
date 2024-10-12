@@ -5,7 +5,7 @@ npm run dev
 ```
 
 ### Tech 
-NEXT.js SSG
+NEXT.js
 TypeScript
 TailwindCSS
 Vercel
