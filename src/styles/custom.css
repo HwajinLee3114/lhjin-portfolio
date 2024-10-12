@@ -1,0 +1,28 @@
+.l_main_title::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 2.4rem;
+  border-right: 5px solid #9ca3af;
+  animation: blink 0.7s infinite ease;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.l_search_div {
+  border: 1px solid #c3c3c3;
+  padding: 1rem 6rem;
+  border-radius: 1rem;
+  height: 74px;
+  line-height: 74px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
