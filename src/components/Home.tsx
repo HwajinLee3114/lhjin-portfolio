@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import ScrollDownBtn from "./ScrollDownBtn";
 
 export default function HomeSec() {
   const content = "프론트엔드 개발자 이화진 입니다";
@@ -23,7 +24,7 @@ export default function HomeSec() {
   return (
     <section
       id="home"
-      className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
+      className="flex flex-col items-center justify-center min-h-35 h-full bg-gray-100"
     >
       <div className="l_search_div flex relative">
         <img
@@ -35,6 +36,8 @@ export default function HomeSec() {
           {title}
         </h1>
       </div>
+
+      <ScrollDownBtn />
     </section>
   );
 }
