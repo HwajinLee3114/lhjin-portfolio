@@ -26,14 +26,12 @@ export default function HomeSec() {
       className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
     >
       <div className="l_search_div flex relative">
-        <Image
-          src="/images/search-120.png"
-          alt="search icon"
-          width={40}
-          height={40}
-          className="absolute left-5"
+        <img
+          src="/images/search-240.svg"
+          alt="icon"
+          className="absolute left-2 w-7 md:w-12 md:h-8 lg:w-16 lg:h-10"
         />
-        <h1 className="l_main_title text-4xl font-bold text-center text-blue-600">
+        <h1 className="l_main_title text-base md:text-xl lg:text-4xl font-bold text-center text-blue-600">
           {title}
         </h1>
       </div>

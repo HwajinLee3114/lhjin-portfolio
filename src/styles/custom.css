@@ -26,3 +26,28 @@
     opacity: 1;
   }
 }
+
+@media (max-width: 1024px) {
+  .l_main_title::after {
+    height: 2rem;
+  }
+
+  .l_search_div {
+    padding: .8rem 5rem;
+    height: 60px;
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .l_main_title::after {
+    height: 1.5rem;
+  }
+
+  .l_search_div {
+    padding: .5rem 3rem;
+    border-radius: .5rem;
+    height: 45px;
+    line-height: 45px;
+  }
+}
