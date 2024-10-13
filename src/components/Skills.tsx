@@ -4,7 +4,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="flex flex-col items-center justify-center min-h-screen bg-themacolor3"
+      className="flex flex-col items-center justify-center min-h-screen bg-themacolor1"
     >
       <h2 className="text-3xl font-bold">Skills</h2>
       <p className="mt-4">
