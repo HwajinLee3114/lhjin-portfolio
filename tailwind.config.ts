@@ -13,9 +13,13 @@ const config: Config = {
         foreground: "var(--foreground)",
         maincolor: "#6893b7",
 
-        themacolor1: '#F6F1E3',
-        themacolor2: '#FAAD1A',
-        themacolor3: '#344C36',
+        themacolor1: '#F6F1E3', // 연노랑
+        themacolor15: '#F5E8B6',
+        themacolor2: '#FAAD1A', // 진노랑
+        themacolor3: '#344C36', // 진녹색
+      },
+      height: {
+        '43': '43rem'
       },
       minHeight: {
         '35': '35rem', // 35rem을 'min-h-35'로 사용

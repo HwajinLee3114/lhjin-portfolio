@@ -1,18 +1,25 @@
 import React from "react";
-import CompleteDown from "./CompleteDown";
-import DepthButton from "./DepthButton/DepthButton";
+import SlideButton from "./button/SlideButton";
 
 export default function About() {
   return (
     <section
       id="about"
-      className="flex flex-col items-center justify-center min-h-screen bg-themacolor1"
+      className="flex flex-col md:flex-row items-center gap-5 justify-around h-43 bg-themacolor1"
     >
-      <h2 className="text-3xl font-bold">About ME</h2>
-      <p className="mt-4">내 이름은 이화진</p>
+      <div className="h-full p-2 w-full md:w-2/4 flex flex-col items-center justify-center rounded-lg overflow-hidden">
+        {/* <img
+          src="/images/profile.jpg"
+          alt="Profile"
+          className="w-72 h-72 rounded-full"
+        /> */}
+        <div className="w-72 h-72 bg-themacolor2 rounded-full"></div>
+        <h1 className="text-lg">234234</h1>
+        <p className="text-center mb-10">sadfasdfasdf</p>
+        <SlideButton text="이력서 다운로드" href="#" color="#344C36" />
+      </div>
 
-      <CompleteDown />
-      <DepthButton text="이력서 다운로드" />
+      <div className="h-full flex-grow w-full"></div>
     </section>
   );
 }
