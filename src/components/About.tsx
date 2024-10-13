@@ -1,6 +1,6 @@
 import React from "react";
 import SlideButton from "./button/SlideButton";
-import ProfileCircle from "./ProfileCircle";
+import ProfileCircle from "./comn/ProfileCircle";
 import HoverAMenu from "./menu/HoverAMenu";
 
 export default function About() {
