@@ -28,7 +28,7 @@ export default function About() {
       </div>
 
       <div className="h-full flex-grow w-full flex flex-col items-center justify-center">
-        <div className="flex flex-col md:flex-row gap-5">
+        <div className="flex flex-col xl:flex-row gap-5">
           <HoverAMenu
             url="https://github.com/HwajinLee3114"
             title="Git Hub"
