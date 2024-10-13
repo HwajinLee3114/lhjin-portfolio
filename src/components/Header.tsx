@@ -19,7 +19,8 @@ const Header = () => {
       const element = document.getElementById(section);
       if (element) {
         const { offsetTop, clientHeight } = element;
-        if (scrollY >= offsetTop - 50 && scrollY < offsetTop + clientHeight) {
+
+        if (scrollY >= offsetTop - 200 && scrollY < offsetTop + clientHeight) {
           setActiveSection(section);
         }
       }
@@ -38,15 +39,16 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsOpen(false); // 사이드 메뉴 닫기
+    setIsOpen(false);
   };
 
   return (
     <header
-      className={`flex items-center justify-between p-4 bg-white shadow-md fixed w-full transition-all duration-300 z-50`}
+    // backdrop-blur-sm
+      className={`flex items-center justify-between p-4 backdrop-blur-sm shadow-md fixed w-full transition-all duration-300 z-50`}
     >
       <button
-        className="text-blue-600 font-bold"
+        className="font-bold"
         onClick={() => scrollToSection("home")}
       >
         lhjin's Portfolio
@@ -59,7 +61,7 @@ const Header = () => {
           onClick={() => scrollToSection("about")}
           className={`p-2 l_menu_tab ${activeSection === "about" ? "active" : ""}`}
         >
-          About ME
+          It's ME
         </button>
         <button
           onClick={() => scrollToSection("skills")}
@@ -81,7 +83,7 @@ const Header = () => {
         </button>
       </nav>
       <nav
-        className={`fixed top-0 right-0 bg-white h-full w-3/4 md:hidden transition-transform duration-300 ${
+        className={`fixed top-0 right-0 bg-yellow-50 h-screen w-3/4 md:hidden transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } z-50`}
       >
@@ -94,7 +96,7 @@ const Header = () => {
             activeSection === "about" ? "active" : ""
           }`}
         >
-          About ME
+          It's ME
         </button>
         <button
           onClick={() => scrollToSection("about")}
