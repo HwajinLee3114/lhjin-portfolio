@@ -19,7 +19,8 @@ const config: Config = {
         themacolor3: '#344C36', // 진녹색
       },
       height: {
-        '43': '43rem'
+        '43': '43rem',
+        '50': '50rem',
       },
       minHeight: {
         '35': '35rem', // 35rem을 'min-h-35'로 사용

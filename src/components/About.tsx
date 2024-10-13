@@ -7,8 +7,15 @@ export default function About() {
   return (
     <section
       id="about"
-      className="flex flex-col md:flex-row items-center gap-5 justify-around h-43 bg-themacolor3"
+      className="flex flex-col md:flex-row items-center gap-5 justify-around h-50 md:h-43 bg-themacolor3"
     >
+      <div className="w-full md:w-96 text-center mb-5">
+        <h2 className="text-2xl font-bold text-white">About Me</h2>
+        <p className="text-lg text-gray-300">
+          저는 개발자로서의 여정을<br/>나누고 싶습니다
+        </p>
+      </div>
+
       <div className="h-full p-2 w-full md:w-2/4 flex flex-col items-center justify-center rounded-lg">
         <ProfileCircle />
         <div className="pb-5" />
