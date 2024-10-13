@@ -1,3 +1,7 @@
+section {
+  padding: 1rem;
+}
+
 .l_main_title::after {
   content: "";
   position: absolute;
@@ -27,6 +31,58 @@
   box-shadow: inset 0 -4px 0 #FAAD1A;
 }
 
+
+/* 사이드메뉴 햄버거 버튼 S */
+.l_hamburger_menu,
+.l_hamburger_menu:after,
+.l_hamburger_menu:before {
+  width: 40px; /* 바의 너비 */
+  height: 8px; /* 바의 높이 */
+  border-radius: 2px; /* 바의 테두리 */
+  opacity: 0.8;
+  background: #FAAD1A; /* 바의 색상 */
+}
+
+.l_hamburger_menu {
+  z-index: 100;
+  position: absolute;
+  top: -.4rem;
+  right: .5rem;
+  margin: 30px;
+  transition: all 300ms;
+}
+
+.l_hamburger_menu.animate {
+  background: rgba(255, 255, 255, 0); /* 애니메이션 상태일 때 배경 투명화 */
+}
+
+.l_hamburger_menu:before,
+.l_hamburger_menu:after {
+  content: ""; /* 바의 내용 */
+  position: absolute;
+  width: 100%; /* 바의 너비 */
+  height: 100%; /* 바의 높이 */
+  transition: all 300ms ease; /* 애니메이션 효과 */
+}
+
+.l_hamburger_menu:before {
+  top: -10px; /* 위쪽 바 */
+}
+
+.l_hamburger_menu:after {
+  bottom: -10px; /* 아래쪽 바 */
+}
+
+.l_hamburger_menu.animate:before {
+  transform: rotate(45deg); /* 위쪽 바 회전 */
+  top: 0; /* 위치 조정 */
+}
+
+.l_hamburger_menu.animate:after {
+  transform: rotate(-45deg); /* 아래쪽 바 회전 */
+  bottom: 0; /* 위치 조정 */
+}
+/* 사이드메뉴 햄버거 버튼 E */
 
 @keyframes blink {
   0% {

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,58 +37,62 @@ const Header = () => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(id); // 여기에서 활성화 상태 업데이트
     }
     setIsOpen(false);
   };
 
   return (
-    <header
-    // backdrop-blur-sm
-      className={`flex items-center justify-between p-4 backdrop-blur-sm shadow-md fixed w-full transition-all duration-300 z-50`}
-    >
-      <button
-        className="font-bold"
-        onClick={() => scrollToSection("home")}
-      >
+    <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
+      <button onClick={() => scrollToSection("home")} className="font-bold">
         lhjin's Portfolio
       </button>
-      <button onClick={toggleMenu} className="md:hidden focus:outline-none">
-        {isOpen ? "✖" : "☰"}
+      {/* 모바일 햄버거 버튼 */}
+      <button onClick={toggleMenu} className="md:hidden">
+        <div className={`l_hamburger_menu ${isOpen ? "animate" : ""}`}></div>
       </button>
-      <nav className={`hidden md:flex space-x-4`}>
+      {/* PC 메뉴 */}
+      <nav className="hidden md:flex space-x-4">
         <button
           onClick={() => scrollToSection("about")}
-          className={`p-2 l_menu_tab ${activeSection === "about" ? "active" : ""}`}
+          className={`p-2 l_menu_tab ${
+            activeSection === "about" ? "active" : ""
+          }`}
         >
           It's ME
         </button>
         <button
           onClick={() => scrollToSection("skills")}
-          className={`p-2 l_menu_tab ${activeSection === "skills" ? "active" : ""}`}
+          className={`p-2 l_menu_tab ${
+            activeSection === "skills" ? "active" : ""
+          }`}
         >
           Skills
         </button>
         <button
           onClick={() => scrollToSection("projects")}
-          className={`p-2 l_menu_tab ${activeSection === "projects" ? "active" : ""}`}
+          className={`p-2 l_menu_tab ${
+            activeSection === "projects" ? "active" : ""
+          }`}
         >
           Projects
         </button>
         <button
           onClick={() => scrollToSection("career")}
-          className={`p-2 l_menu_tab ${activeSection === "career" ? "active" : ""}`}
+          className={`p-2 l_menu_tab ${
+            activeSection === "career" ? "active" : ""
+          }`}
         >
           Career
         </button>
       </nav>
+      {/* 모바일 사이드 메뉴 */}
       <nav
-        className={`fixed top-0 right-0 bg-yellow-50 h-screen w-3/4 md:hidden transition-transform duration-300 ${
+        className={`shadow-md fixed top-0 right-0 bg-themacolor1 h-screen w-3/4 md:hidden transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } z-50`}
       >
-        <button className="p-4" onClick={toggleMenu}>
-          ✖
-        </button>
+        <div className="h-12"></div>
         <button
           onClick={() => scrollToSection("about")}
           className={`block p-4 w-full l_menu_tab ${
@@ -99,7 +102,7 @@ const Header = () => {
           It's ME
         </button>
         <button
-          onClick={() => scrollToSection("about")}
+          onClick={() => scrollToSection("skills")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "skills" ? "active" : ""
           }`}
