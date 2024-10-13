@@ -1,5 +1,6 @@
 .archive {
-  width: 26rem;
+  min-width: 350px;
+  width: 100%;
   padding: 2rem;
   background-color: #f5f5f5;
   border-radius: 1rem;
@@ -22,3 +23,9 @@
 }
 
 .description {}
+
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+}

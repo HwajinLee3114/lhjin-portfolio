@@ -9,7 +9,7 @@ export default function About() {
       id="about"
       className="flex flex-col md:flex-row items-center gap-5 justify-around h-43 bg-themacolor3"
     >
-      <div className="h-full p-2 w-full md:w-2/4 flex flex-col items-center justify-center rounded-lg overflow-hidden">
+      <div className="h-full p-2 w-full md:w-2/4 flex flex-col items-center justify-center rounded-lg">
         <ProfileCircle />
         <div className="pb-5" />
         <SlideButton
@@ -21,7 +21,7 @@ export default function About() {
       </div>
 
       <div className="h-full flex-grow w-full flex flex-col items-center justify-center">
-        <div className="flex gap-5">
+        <div className="flex flex-col md:flex-row gap-5">
           <HoverAMenu
             url="https://github.com/HwajinLee3114"
             title="Git Hub"
