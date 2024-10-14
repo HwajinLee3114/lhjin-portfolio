@@ -16,7 +16,7 @@ export default function Skills() {
       <div className="w-full xl:w-9/12 h-3/5 md:h-96 shadow-md mt-5 rounded-lg bg-themacolor1 p-5 md:p-10">
         {skills.map((skill, index) => (
           <SkillItem
-            key={index}
+            key={`skill_${index}`}
             title={skill.title}
             skills={skill.skills}
             img={skill.img}

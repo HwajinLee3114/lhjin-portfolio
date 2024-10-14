@@ -5,15 +5,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { projects } from "@/data/projects";
 
-const variants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0 },
-};
-
-interface ProjectsProps {
-  activeSection: string;
-}
-
 /*
   - 필터(전체/개인/팀), 주요 프로젝트만 보기(체크)
   - 프로젝트 카드 컴포넌트 생성
@@ -77,13 +68,13 @@ export default function Projects() {
         <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-14 font-scoreRegular">
           {filteredPj.map((project, index) => (
             <motion.li
-              key={index}
+              key={`project_${index}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 ease: "easeInOut",
                 duration: 0.5,
-                delay: index * 0.1,
+                delay: projects.indexOf(project) * 0.1,
                 y: { duration: 0.5 },
               }}
             >

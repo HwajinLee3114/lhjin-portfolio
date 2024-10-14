@@ -20,7 +20,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ title, skills, img }) => {
       <ul className="flex gap-3 flex-wrap">
         {skills.map((skill, index) => (
           <li
-            key={index}
+            key={`skillItem_${index}`}
             className="rounded-md px-2 py-1 font-bold text-sm"
             style={{
               backgroundColor: skill.color,
