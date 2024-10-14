@@ -17,6 +17,7 @@ const config: Config = {
         themacolor15: '#F5E8B6',
         themacolor2: '#FAAD1A', // 진노랑
         themacolor3: '#344C36', // 진녹색
+        themacolor4: '#3b82f6', // 파란색
       },
       height: {
         '43': '43rem',
