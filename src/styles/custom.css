@@ -7,18 +7,23 @@ section {
   position: absolute;
   width: 1px;
   height: 2.4rem;
-  border-right: 5px solid #9ca3af;
+  margin-left: .1rem;
+  border-right: .05em solid #464545;
   animation: blink 0.7s infinite ease;
   animation-delay: 0.4s;
   opacity: 0;
 }
 
 .l_search_div {
-  border: 1px solid #c3c3c3;
   padding: 1rem 6rem;
-  border-radius: 1rem;
   height: 74px;
+  width: 660px;
+  overflow: hidden;
+  white-space: nowrap;
   line-height: 74px;
+  border: solid 1px #e6e6e6;
+  border-radius: 2.8em;
+  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.25);
 }
 
 .l_menu_tab {
@@ -30,7 +35,6 @@ section {
   color: #3b82f6;
   box-shadow: inset 0 -4px 0 #FAAD1A;
 }
-
 
 /* 사이드메뉴 햄버거 버튼 S */
 .l_hamburger_menu,
@@ -93,13 +97,8 @@ section {
 }
 
 @keyframes blink {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 @media (max-width: 1024px) {
@@ -109,6 +108,7 @@ section {
 
   .l_search_div {
     padding: .8rem 5rem;
+    width: 400px;
     height: 60px;
     line-height: 60px;
   }
@@ -121,7 +121,7 @@ section {
 
   .l_search_div {
     padding: .5rem 3rem;
-    border-radius: .5rem;
+    width: 300px;
     height: 45px;
     line-height: 45px;
   }
