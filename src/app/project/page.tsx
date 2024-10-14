@@ -1,5 +1,18 @@
+"use client";
+
 import ProjectCard from "@/components/project/ProjectCard";
 import React from "react";
+import { motion } from "framer-motion";
+import { projects } from "@/data/projects";
+
+const variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 },
+};
+
+interface ProjectsProps {
+  activeSection: string;
+}
 
 /*
   - 필터(전체/개인/팀), 주요 프로젝트만 보기(체크)
@@ -31,32 +44,35 @@ export default function Projects() {
         <li value="personal">Personal</li>
         <li value="team">Team</li>
       </ul>
-
-
+      {/* link, imageSrc */}
+      {/* 
+        initial: 시작 상태. opacity, 위치 지정
+        whileInView: 뷰 진입 시. opacity, 위치 지정
+        transition: 전환 효과 / ease: 속도 조절 함수. duration: 지속 시간. delay: 지연. 
+      */}
       <div className="w-full h-full flex-grow shadow-md mt-5 mb-5 rounded-lg bg-themacolor1 p-5 md:p-10">
-        <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3  mb-14 font-scoreRegular">
-          <li>
-            {/* link, imageSrc */}
-            <ProjectCard
-            title="프로젝트명"
-            period="2024.10 ~ 2024.11"
-            skill="react, javascript, mysql"
-            filter={[
-              {
-                name:'filter1',
-                color:'skyblue'
-              },
-              {
-                name:'filter2',
-                color:'coral'
-              }
-            ]}
-            description={[
-              '설명1',
-              '설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2설명2'
-            ]}
-            />
-          </li>
+        <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-14 font-scoreRegular">
+          {projects.map((project, index) => (
+            <motion.li
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                ease: "easeInOut",
+                duration: 0.5,
+                delay: index * 0.1,
+                y: { duration: 0.5 },
+              }}
+            >
+              <ProjectCard
+                title={project.title}
+                period={project.period}
+                skill={project.skill}
+                filter={project.filter}
+                description={project.description}
+              />
+            </motion.li>
+          ))}
         </ul>
       </div>
     </section>

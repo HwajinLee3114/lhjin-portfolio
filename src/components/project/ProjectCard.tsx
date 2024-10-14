@@ -74,7 +74,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {description && (
           <ul className="list-disc pl-3">
             {description.map((desc, index) => (
-              <li className="text-gray-700 text-base">{desc}</li>
+              <li key={index} className="text-gray-700 text-base">
+                <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
+                  {desc}
+                </span>
+              </li>
             ))}
           </ul>
         )}
