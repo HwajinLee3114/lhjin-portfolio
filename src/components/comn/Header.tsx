@@ -2,9 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 
-const Header = () => {
+interface HeaderProps {
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
