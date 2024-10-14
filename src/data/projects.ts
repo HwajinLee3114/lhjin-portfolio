@@ -4,7 +4,7 @@ export const projects = [
     period: "2024.10 ~ 2024.11",
     skill: "react, javascript, mysql",
     filter: [
-      { name: "filter1", color: "skyblue" },
+      { name: "team", color: "skyblue" },
       { name: "filter2", color: "coral" },
     ],
     description: [
@@ -17,7 +17,7 @@ export const projects = [
     period: "2024.12 ~ 2025.01",
     skill: "typescript, node.js",
     filter: [
-      { name: "filter3", color: "lightgreen" },
+      { name: "personal", color: "lightgreen" },
       { name: "filter4", color: "tomato" },
     ],
     description: [

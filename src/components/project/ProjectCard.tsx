@@ -45,8 +45,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   skill,
 }) => {
   return (
-    <div className="max-w-sm rounded-md overflow-hidden shadow-lg p-4 bg-white cursor-pointer">
-      <img className="w-full h-48 object-cover" src={imageSrc} alt={title} />
+    <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
+      <div className="flex justify-center">
+        {/* h-full overflow-hidden absolute */}
+        <img className="w-full h-48 object-cover" src={imageSrc} alt={title} />
+      </div>
       <div className="py-4">
         <div className="flex gap-2 justify-between items-center">
           <h2 className="text-base font-bold">{title}</h2>

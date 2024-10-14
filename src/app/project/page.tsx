@@ -1,7 +1,7 @@
 "use client";
 
 import ProjectCard from "@/components/project/ProjectCard";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { projects } from "@/data/projects";
 
@@ -26,6 +26,14 @@ interface ProjectsProps {
   - hover 이벤트 / 스크롤되어 내려올 때 카드 슉슉 뜨는 
 */
 export default function Projects() {
+  const [filter, setFilter] = useState("all");
+
+  const filteredPj = projects.filter((project) => {
+    if (filter === "personal")
+      return project.filter.some((f) => f.name === "personal");
+    if (filter === "team") return project.filter.some((f) => f.name === "team");
+    return true;
+  });
   return (
     <section
       id="projects"
@@ -38,11 +46,26 @@ export default function Projects() {
 
       <ul className="l_pjfilter flex gap-3 cursor-pointer mt-10 justify-center">
         <img src="/images/filterYellow-100.png" className="w-5" alt="filter" />
-        <li className="selected" value="">
+        <li
+          className={`cursor-pointer ${filter === "all" ? "selected" : ""}`}
+          onClick={() => setFilter("all")}
+        >
           All
         </li>
-        <li value="personal">Personal</li>
-        <li value="team">Team</li>
+        <li
+          className={`cursor-pointer ${
+            filter === "personal" ? "selected" : ""
+          }`}
+          onClick={() => setFilter("personal")}
+        >
+          Personal
+        </li>
+        <li
+          className={`cursor-pointer ${filter === "team" ? "selected" : ""}`}
+          onClick={() => setFilter("team")}
+        >
+          Team
+        </li>
       </ul>
       {/* link, imageSrc */}
       {/* 
@@ -52,7 +75,7 @@ export default function Projects() {
       */}
       <div className="w-full h-full flex-grow shadow-md mt-5 mb-5 rounded-lg bg-themacolor1 p-5 md:p-10">
         <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-14 font-scoreRegular">
-          {projects.map((project, index) => (
+          {filteredPj.map((project, index) => (
             <motion.li
               key={index}
               initial={{ opacity: 0, y: 20 }}
