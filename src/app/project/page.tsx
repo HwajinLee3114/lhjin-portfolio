@@ -6,7 +6,7 @@ import React from "react";
   - 프로젝트 카드 컴포넌트 생성
     > 미리보기 이미지
       제목, 필터 항목 해시태그 처럼
-      개발 기간 yy.mm ~ yy.mm
+      개발 기간 yyyy.mm ~ yyyy.mm
       프로젝트 한줄 소개 / 개발한 내용 
       사용 언어
       README - 선택 시 상세 내용
