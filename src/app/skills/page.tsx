@@ -1,5 +1,6 @@
+import SkillItem from "@/components/comn/SkillItem";
 import React from "react";
-import SkillItem from "./comn/SkillItem";
+
 
 export default function Skills() {
   return (

@@ -1,5 +1,5 @@
+import ProjectCard from "@/components/comn/ProjectCard";
 import React from "react";
-import ProjectCard from "./comn/\bProjectCard";
 
 /*
   - 필터(전체/개인/팀), 주요 프로젝트만 보기(체크)

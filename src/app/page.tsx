@@ -1,10 +1,10 @@
-import About from "@/components/About";
-import Career from "@/components/Career";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import HomeSec from "@/components/Home";
-import Projects from "@/components/Projects";
-import Skills from "@/components/Skills";
+import Projects from "./project/page";
+import HomeSec from "./home/page";
+import About from "./about/page";
+import Career from "./career/page";
+import Skills from "./skills/page";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
         <About />
         <Skills />
         <Projects />
-        <Career />    
+        <Career />
       </main>
       <Footer />
     </div>

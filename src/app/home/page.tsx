@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import ScrollDownBtn from "./button/ScrollDownBtn";
+import ScrollDownBtn from "@/components/button/ScrollDownBtn";
 
 export default function HomeSec() {
   const content = "프론트엔드 개발자 이화진 입니다";
