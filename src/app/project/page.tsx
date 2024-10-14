@@ -1,4 +1,4 @@
-import ProjectCard from "@/components/comn/ProjectCard";
+import ProjectCard from "@/components/project/ProjectCard";
 import React from "react";
 
 /*

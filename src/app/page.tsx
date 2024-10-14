@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "@/components/comn/Footer";
+import Header from "@/components/comn/Header";
 import Projects from "./project/page";
 import HomeSec from "./home/page";
 import About from "./about/page";

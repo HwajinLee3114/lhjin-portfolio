@@ -1,4 +1,4 @@
-import SkillItem from "@/components/comn/SkillItem";
+import SkillItem from "@/components/skill/SkillItem";
 import React from "react";
 
 

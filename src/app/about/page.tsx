@@ -1,5 +1,5 @@
 import SlideButton from "@/components/button/SlideButton";
-import ProfileCircle from "@/components/comn/ProfileCircle";
+import ProfileCircle from "@/components/about/ProfileCircle";
 import HoverAMenu from "@/components/menu/HoverAMenu";
 import React from "react";
 
