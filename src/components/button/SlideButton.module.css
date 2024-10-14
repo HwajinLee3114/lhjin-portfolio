@@ -1,0 +1,37 @@
+.wrapper {
+  display: inline-block;
+}
+
+.link {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+.link span,
+.link i {
+  position: relative;
+}
+
+.link i {
+  margin-left: 0.5em;
+}
+
+.link .color {
+  width: 2em;
+  height: 2em;
+  border-radius: 2em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -0.65em;
+  transition: width 0.4s ease, left 0.4s ease;
+}
+
+.link:hover .color {
+  width: calc(100% + 1.3em);
+  /* left: calc(100% - 1.45em); */
+  left: -9%;
+}

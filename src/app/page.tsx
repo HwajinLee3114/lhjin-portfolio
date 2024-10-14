@@ -1,11 +1,30 @@
-import Image from "next/image";
+"use client";
+
+import Footer from "@/components/comn/Footer";
+import Header from "@/components/comn/Header";
+import Projects from "./project/page";
+import HomeSec from "./home/page";
+import About from "./about/page";
+import Career from "./career/page";
+import Skills from "./skills/page";
+import { useState } from "react";
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState("");
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-center text-blue-600">
-        lhjee Portfolio
-      </h1>
+    <div>
+      <Header
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
+      <main>
+        <HomeSec />
+        <About />
+        <Skills />
+        <Projects />
+        <Career />
+      </main>
+      <Footer />
     </div>
   );
 }
