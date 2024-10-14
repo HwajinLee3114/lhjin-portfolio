@@ -25,6 +25,7 @@ export default function Home() {
         <Career />
       </main>
       <Footer />
+      <div id="modalTmp"></div>
     </div>
   );
 }
