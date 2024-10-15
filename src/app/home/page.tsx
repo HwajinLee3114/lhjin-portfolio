@@ -9,14 +9,14 @@ export default function HomeSec() {
   const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
-    const typing = () => {
+    const lf_typing = () => {
       if (index < content.length) {
         setTitle((prev) => prev + content[index]);
         setIndex((prev) => prev + 1);
       }
     };
 
-    const interval = setInterval(typing, 100);
+    const interval = setInterval(lf_typing, 100);
     return () => clearInterval(interval);
   }, [index, content]);
 
