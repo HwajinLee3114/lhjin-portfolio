@@ -35,7 +35,6 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
   };
 
   const closePreview = (e: React.MouseEvent) => {
-    e.stopPropagation();
     setPreviewImgUrl(undefined);
   };
 
@@ -50,6 +49,9 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
         }}
       />
       <AnimatePresence>
+        <div className="absolute top-20 right-16 z-10">
+          <img src="/images/b2close-100.png" className="w-8" alt="" />
+        </div>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}

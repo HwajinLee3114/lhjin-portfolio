@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
 import { ProjectDetailModal } from "./detail/ProjectDetailModal";
 import ModalPortal from "../comn/ModalPortal";
@@ -55,11 +55,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeId, setActiveId] = useState<string>(""); // 상세 프로젝트
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <>
       <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
         <div className="flex justify-center">
-          {/* h-full overflow-hidden absolute */}
           <img
             className="w-full h-48 object-cover"
             src={imageSrc}
