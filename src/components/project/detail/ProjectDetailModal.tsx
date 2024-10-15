@@ -15,6 +15,7 @@ const QuoteDiv = tw.div`
   mb-4
   border-l-4 border-gray-600
   text-gray-600
+  bg-quotecolor
 `;
 
 export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
@@ -139,7 +140,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                     <img src="/images/popular-100.png" className="w-7" alt="" />
                     <div>주요 기능</div>
                   </div>
-                  <ul className="list-disc pl-3 text-left">
+                  <ul className="list-disc text-left">
                     {project.feature.map((feat, idx) => (
                       <li
                         key={`feat${idx}`}
@@ -156,14 +157,19 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                     <img src="/images/hand-100.png" className="w-7" alt="" />
                     <div>기여 부분</div>
                   </div>
-                  <ul className="list-disc pl-3 text-left">
-                    {project.contribution.map((contri, idx) => (
-                      <li
-                        key={`contri${idx}`}
-                        className="text-gray-700 text-base"
-                      >
-                        {contri}
-                      </li>
+                  <ul className="list-disc text-left">
+                    {project.contribution.map((contri, index) => (
+                      <div key={`contri${index}`} className="mb-5">
+                        {contri?.title && <QuoteDiv>{contri.title}</QuoteDiv>}
+                        {contri.desc.map((condesc, idx) => (
+                          <li
+                            key={`condesc${idx}`}
+                            className="text-gray-700 text-base"
+                          >
+                            {condesc}
+                          </li>
+                        ))}
+                      </div>
                     ))}
                   </ul>
                 </section>
