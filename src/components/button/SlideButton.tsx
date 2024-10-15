@@ -20,7 +20,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({
   isDown,
   url,
 }) => {
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  const lf_slideBtnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (isDown && url) {
       event.preventDefault(); // 기본 동작 방지
       const link = document.createElement("a");
@@ -42,7 +42,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({
         className={`${styles.link} flex items-center`}
         href={href}
         target="_blank"
-        onClick={handleClick}
+        onClick={lf_slideBtnClick}
       >
         <div className={styles.color} style={{ backgroundColor: color }}></div>
         <span>{text}</span>

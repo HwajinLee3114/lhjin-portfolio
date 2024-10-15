@@ -10,11 +10,11 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const lf_toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleScroll = () => {
+  const lf_handleScroll = () => {
     const sections = ["home", "about", "skills", "projects", "career"];
     const scrollY = window.scrollY;
 
@@ -31,13 +31,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", lf_handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", lf_handleScroll);
     };
   }, []);
 
-  const scrollToSection = (id: string) => {
+  const lf_scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -48,17 +48,17 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
 
   return (
     <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
-      <button onClick={() => scrollToSection("home")} className="font-bold">
+      <button onClick={() => lf_scrollToSection("home")} className="font-bold">
         lhjin's Portfolio
       </button>
       {/* 모바일 햄버거 버튼 */}
-      <button onClick={toggleMenu} className="md:hidden">
+      <button onClick={lf_toggleMenu} className="md:hidden">
         <div className={`l_hamburger_menu ${isOpen ? "animate" : ""}`}></div>
       </button>
       {/* PC 메뉴 */}
       <nav className="hidden md:flex space-x-4">
         <button
-          onClick={() => scrollToSection("about")}
+          onClick={() => lf_scrollToSection("about")}
           className={`p-2 l_menu_tab ${
             activeSection === "about" ? "active" : ""
           }`}
@@ -66,7 +66,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           It's ME
         </button>
         <button
-          onClick={() => scrollToSection("skills")}
+          onClick={() => lf_scrollToSection("skills")}
           className={`p-2 l_menu_tab ${
             activeSection === "skills" ? "active" : ""
           }`}
@@ -74,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           Skills
         </button>
         <button
-          onClick={() => scrollToSection("projects")}
+          onClick={() => lf_scrollToSection("projects")}
           className={`p-2 l_menu_tab ${
             activeSection === "projects" ? "active" : ""
           }`}
@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           Projects
         </button>
         <button
-          onClick={() => scrollToSection("career")}
+          onClick={() => lf_scrollToSection("career")}
           className={`p-2 l_menu_tab ${
             activeSection === "career" ? "active" : ""
           }`}
@@ -98,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
       >
         <div className="h-12"></div>
         <button
-          onClick={() => scrollToSection("about")}
+          onClick={() => lf_scrollToSection("about")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "about" ? "active" : ""
           }`}
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           It's ME
         </button>
         <button
-          onClick={() => scrollToSection("skills")}
+          onClick={() => lf_scrollToSection("skills")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "skills" ? "active" : ""
           }`}
@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           Skills
         </button>
         <button
-          onClick={() => scrollToSection("projects")}
+          onClick={() => lf_scrollToSection("projects")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "projects" ? "active" : ""
           }`}
@@ -122,7 +122,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           Projects
         </button>
         <button
-          onClick={() => scrollToSection("career")}
+          onClick={() => lf_scrollToSection("career")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "career" ? "active" : ""
           }`}
