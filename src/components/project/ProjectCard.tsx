@@ -40,7 +40,6 @@ const ModalWrapper = tw.div`
 fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center items-center bg-black bg-opacity-60 z-40 
 overflow-y-auto
 scrollbar-hide
-selection:bg-blueLight_color
 `;
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -105,14 +104,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {skill}
         </div>
         <div className="flex justify-end">
-          {/* inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition */}
-          <TxtButton onClick={() => setIsOpen(!isOpen)}>DETAIL</TxtButton>
+          <TxtButton onClick={() => setIsOpen(true)}>DETAIL</TxtButton>
         </div>
       </div>
 
       {isOpen && (
         <ModalPortal>
-          <ModalWrapper onClick={() => setIsOpen(false)}>
+          <ModalWrapper onClick={(e) => setIsOpen(false)}>
             <ProjectDetailModal isOpen={isOpen} />
           </ModalWrapper>
         </ModalPortal>
