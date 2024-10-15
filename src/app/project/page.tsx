@@ -17,7 +17,7 @@ import { projects } from "@/data/projects";
   - hover 이벤트 / 스크롤되어 내려올 때 카드 슉슉 뜨는 
 */
 export default function Projects() {
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState<string>("all");
 
   const filteredPj = projects.filter((project) => {
     if (filter === "personal")

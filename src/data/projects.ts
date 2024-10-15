@@ -25,9 +25,9 @@ export const projects = [
       { id: "3", name: "TailwindCSS", url: "/images/tailwind-100.png" },
     ],
     images: [
-      { id: "1", url: "#", name:"" },
-      { id: "2", url: "#", name:"" },
-      { id: "3", url: "#", name:"" },
+      { id: "1", url: "", name:"" },
+      { id: "2", url: "", name:"" },
+      { id: "3", url: "", name:"" },
     ],
   },
   {
@@ -56,12 +56,12 @@ export const projects = [
       { id: "3", name: "TailwindCSS", url: "/images/tailwind-100.png" },
     ],
     images: [
-      { id: "4", url: "#", name:"" },
-      { id: "5", url: "#", name:"" },
-      { id: "6", url: "#", name:"" },
-      { id: "7", url: "#", name:"" },
-      { id: "8", url: "#", name:"" },
-      { id: "9", url: "#", name:"" },
+      { id: "4", url: "/images/sample.jpg", name:"sample" },
+      { id: "5", url: "", name:"" },
+      { id: "6", url: "", name:"" },
+      { id: "7", url: "", name:"" },
+      { id: "8", url: "", name:"" },
+      { id: "9", url: "", name:"" },
     ],
   },
 ];

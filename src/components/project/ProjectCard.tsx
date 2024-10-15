@@ -53,8 +53,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageSrc,
   skill,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeId, setActiveId] = useState(""); // 상세 프로젝트
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [activeId, setActiveId] = useState<string>(""); // 상세 프로젝트
   return (
     <>
       <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
