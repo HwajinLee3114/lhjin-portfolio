@@ -75,7 +75,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                   {project.skillItem &&
                     project.skillItem.map((skill) => (
                       <img
-                        key={`skill${skill.id}`}
+                        key={`skill_${project.id}_${skill.id}`}
                         src={skill.url}
                         className="w-7"
                         alt={skill.name}
@@ -121,7 +121,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center cursor-pointer">
                     {project.images.map((img) => (
                       <div
-                        key={`detailImg${img.id}`}
+                        key={`detailImg_${project.id}_${img.id}`}
                         className="relative bg-yellow-50 w-[38vw] h-[25vw] sm:w-[22vw] sm:h-[15vw] md:w-[18vw] md:h-[13vw]"
                         onClick={() => lf_showImgPreview(img.id)}
                       >
@@ -143,7 +143,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                   <ul className="list-disc text-left">
                     {project.feature.map((feat, idx) => (
                       <li
-                        key={`feat${idx}`}
+                        key={`feat_${project.id}_${idx}`}
                         className="text-gray-700 text-base"
                       >
                         {feat}
@@ -159,11 +159,11 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                   </div>
                   <ul className="list-disc text-left">
                     {project.contribution.map((contri, index) => (
-                      <div key={`contri${index}`} className="mb-5">
+                      <div key={`contri_${project.id}_${index}`} className="mb-5">
                         {contri?.title && <QuoteDiv>{contri.title}</QuoteDiv>}
                         {contri.desc.map((condesc, idx) => (
                           <li
-                            key={`condesc${idx}`}
+                            key={`condesc${index}_${idx}`}
                             className="text-gray-700 text-base"
                           >
                             {condesc}

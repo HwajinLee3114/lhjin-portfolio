@@ -105,7 +105,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {feature && (
             <ul className="list-disc pl-3">
               {feature.map((feat, index) => (
-                <li key={`desc_${index}`} className="text-gray-700 text-base">
+                <li key={`pjdesc_${index}`} className="text-gray-700 text-base">
                   <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
                     {feat}
                   </span>
