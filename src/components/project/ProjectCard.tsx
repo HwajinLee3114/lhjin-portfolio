@@ -12,10 +12,11 @@ interface Tag {
 }
 
 interface ProjectCardProps {
+  id?: string;
   title?: string;
   filter?: Tag[];
   period?: string;
-  description?: string[];
+  feature?: string[];
   link?: string;
   imageSrc?: string;
   skill: string;
@@ -43,15 +44,17 @@ scrollbar-hide
 `;
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
+  id,
   title,
   filter,
   period,
-  description,
+  feature,
   link,
   imageSrc,
   skill,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeId, setActiveId] = useState(""); // 상세 프로젝트
   return (
     <>
       <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
@@ -88,12 +91,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             <p className="text-gray-600 text-base md:text-sm mb-1">{period}</p>
           )}
 
-          {description && (
+          {feature && (
             <ul className="list-disc pl-3">
-              {description.map((desc, index) => (
+              {feature.map((feat, index) => (
                 <li key={`desc_${index}`} className="text-gray-700 text-base">
                   <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
-                    {desc}
+                    {feat}
                   </span>
                 </li>
               ))}
@@ -103,15 +106,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="self-start py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
           {skill}
         </div>
-        <div className="flex justify-end">
-          <TxtButton onClick={() => setIsOpen(true)}>DETAIL</TxtButton>
-        </div>
+        {id && (
+          <div className="flex justify-end">
+            <TxtButton
+              onClick={() => {
+                setIsOpen(true);
+                setActiveId(id);
+              }}
+            >
+              DETAIL
+            </TxtButton>
+          </div>
+        )}
       </div>
 
       {isOpen && (
         <ModalPortal>
-          <ModalWrapper onClick={(e) => setIsOpen(false)}>
-            <ProjectDetailModal isOpen={isOpen} />
+          <ModalWrapper
+            onClick={(e) => {
+              setIsOpen(false);
+              setActiveId("");
+            }}
+          >
+            <ProjectDetailModal isOpen={isOpen} activeId={activeId} />
           </ModalWrapper>
         </ModalPortal>
       )}

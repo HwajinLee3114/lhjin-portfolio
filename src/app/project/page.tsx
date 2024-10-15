@@ -79,11 +79,13 @@ export default function Projects() {
               }}
             >
               <ProjectCard
+                id={project.id}
                 title={project.title}
                 period={project.period}
                 skill={project.skill}
                 filter={project.filter}
-                description={project.description}
+                imageSrc={project.images[0].url}
+                feature={project.feature}
               />
             </motion.li>
           ))}
