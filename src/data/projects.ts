@@ -7,7 +7,6 @@ export const projects = [
     git: "",
     site: "",
     filter: [
-      // tomato, lightgreen
       { name: "team", color: "skyblue" },
       { name: "풀스택", color: "tomato" },
     ],
@@ -23,11 +22,12 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj1.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -37,8 +37,7 @@ export const projects = [
     skill: "JavaScript, JSP, MySQL, Java",
     git: "",
     site: "",
-    filter: [
-      // tomato, lightgreen
+    filter: [      
       { name: "team", color: "skyblue" },
       { name: "풀스택", color: "tomato" },
     ],
@@ -57,9 +56,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj2.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -91,9 +91,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj3.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -108,6 +109,7 @@ export const projects = [
     filter: [
       { name: "team", color: "skyblue" },
       { name: "FE", color: "lightgreen" },
+      { name: "BE", color: "coral" },
     ],
     description: "체험형 게임 사용자 웹앱, 관리자 페이지",
     feature: [
@@ -125,9 +127,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj4.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -142,6 +145,7 @@ export const projects = [
     filter: [
       { name: "team", color: "skyblue" },
       { name: "FE", color: "lightgreen" },
+      { name: "BE", color: "coral" },
     ],
     description: "운동 기록 플랫폼",
     feature: [
@@ -159,9 +163,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj5.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -193,9 +198,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj6.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -226,9 +232,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj7.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -260,9 +267,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj8.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -294,9 +302,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj9.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -330,9 +339,44 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/js-100.png" },
-      { id: "2", name: "Java", url: "/images/java-100.png" },
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
     ],
+    thumb: '/images/thumb/pj10.png',
+    images: [
+      { id: "1", url: "", name: "" },
+    ],
+  },
+  {
+    id: '11',
+    title: "Portfolio",
+    period: "2024.10 ~",
+    skill: "Next.js, TypeScript, TailwindCSS, Vercel",
+    git: "",
+    site: "https://lhjin-portfolio.vercel.app/",
+    filter: [
+      { name: "personal", color: "skyblue" },
+      { name: "FE", color: "lightgreen" },
+    ],
+    description: "Next.js, TypeScript로 개발한 포트폴리오 사이트",
+    feature: [
+    ],
+    contribution: [
+      {
+        id: '1',
+        title: '',
+        desc: [
+          'Next.js, TypeScript, TailwindCSS 활용',
+          'framer motion를 이용한 효과 적용',
+          'Vercel 배포',
+        ]
+      },
+    ],
+    skillItem: [
+      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
+      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+    ],
+    thumb: '/images/thumb/pj11.png',
     images: [
       { id: "1", url: "", name: "" },
     ],

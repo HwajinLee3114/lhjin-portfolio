@@ -48,7 +48,10 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
 
   return (
     <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
-      <button onClick={() => lf_scrollToSection("home")} className="g_titleEngFont text-themacolor4">
+      <button
+        onClick={() => lf_scrollToSection("home")}
+        className="g_titleEngFont text-themacolor4"
+      >
         lhjin's Portfolio
       </button>
       {/* 모바일 햄버거 버튼 */}
@@ -61,7 +64,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("about")}
           className={`p-2 l_menu_tab ${
             activeSection === "about" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           It's ME
         </button>
@@ -69,7 +73,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("skills")}
           className={`p-2 l_menu_tab ${
             activeSection === "skills" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           Skills
         </button>
@@ -77,7 +82,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("projects")}
           className={`p-2 l_menu_tab ${
             activeSection === "projects" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           Projects
         </button>
@@ -85,7 +91,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("career")}
           className={`p-2 l_menu_tab ${
             activeSection === "career" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           Career
         </button>
@@ -101,7 +108,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("about")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "about" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           It's ME
         </button>
@@ -109,7 +117,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("skills")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "skills" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           Skills
         </button>
@@ -117,7 +126,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("projects")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "projects" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           Projects
         </button>
@@ -125,7 +135,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           onClick={() => lf_scrollToSection("career")}
           className={`block p-4 w-full l_menu_tab ${
             activeSection === "career" ? "active" : ""
-          }`}
+          }
+          hover:font-bold`}
         >
           Career
         </button>

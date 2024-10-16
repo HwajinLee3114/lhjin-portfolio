@@ -91,7 +91,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                     <a href={project.git} target="_blank">
                       <div className="bg-white rounded-full p-2 hover:shadow-md">
                         <img
-                          src="/images/github-100.png"
+                          src="/images/tech/github-100.png"
                           className="w-7"
                           alt=""
                         />
@@ -113,28 +113,34 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
               </div>
 
               <div className="w-full flex flex-col gap-3 items-center px-10 py-3">
-                <section className="w-full h-full">
-                  <div className="flex gap-2 text-xl font-bold text-left mb-5">
-                    <img src="/images/monitor-100.png" className="w-7" alt="" />
-                    <div>작업 화면</div>
-                  </div>
+                {project.images && project.images.length > 0 && (
+                  <section className="w-full h-full">
+                    <div className="flex gap-2 text-xl font-bold text-left mb-5">
+                      <img
+                        src="/images/monitor-100.png"
+                        className="w-7"
+                        alt=""
+                      />
+                      <div>작업 화면</div>
+                    </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center cursor-pointer">
-                    {project.images.map((img) => (
-                      <div
-                        key={`${project.id}_detailImg_${img.id}`}
-                        className="relative bg-yellow-50 w-[38vw] h-[25vw] sm:w-[22vw] sm:h-[15vw] md:w-[18vw] md:h-[13vw]"
-                        onClick={() => lf_showImgPreview(img.id)}
-                      >
-                        <img
-                          src={img.url}
-                          className="absolute w-full h-full text-transparent object-cover border-stone-400"
-                          alt={img.name}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </section>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center cursor-pointer">
+                      {project.images.map((img) => (
+                        <div
+                          key={`${project.id}_detailImg_${img.id}`}
+                          className="relative bg-yellow-50 w-[38vw] h-[25vw] sm:w-[22vw] sm:h-[15vw] md:w-[18vw] md:h-[13vw]"
+                          onClick={() => lf_showImgPreview(img.id)}
+                        >
+                          <img
+                            src={img.url}
+                            className="absolute w-full h-full text-transparent object-cover border-stone-400"
+                            alt={img.name}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 <section className="w-full h-full">
                   <div className="flex gap-2 text-xl font-bold text-left mb-5">
@@ -160,7 +166,10 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                   </div>
                   <ul className="list-disc text-left">
                     {project.contribution.map((contri, index) => (
-                      <div key={`${project.id}_contri_${contri.id}`} className="mb-5">
+                      <div
+                        key={`${project.id}_contri_${contri.id}`}
+                        className="mb-5"
+                      >
                         {contri?.title && <QuoteDiv>{contri.title}</QuoteDiv>}
                         {contri.desc.map((condesc, idx) => (
                           <li

@@ -84,7 +84,7 @@ export default function Projects() {
                 period={project.period}
                 skill={project.skill}
                 filter={project.filter}
-                imageSrc={project.images?.[0]?.url}
+                imageSrc={project.thumb}
                 feature={project.feature}
               />
             </motion.li>
