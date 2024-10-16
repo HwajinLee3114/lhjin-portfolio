@@ -32,7 +32,7 @@ export default function Projects() {
     >
       <div className="text-center text-white">
         <h2 className="text-3xl g_titleEngFont mt-5">Projects</h2>
-        <p className="mt-4">내가 만든 프로젝트들을 확인하세요.</p>
+        {/* <p className="mt-4">다양한 프로젝트 경험을 통해</p> */}
       </div>
 
       <ul className="l_pjfilter flex gap-3 cursor-pointer mt-10 justify-center">

@@ -69,7 +69,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
+      <div className="max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
         <div className="flex justify-center">
           <img
             className="w-full h-48 object-cover"
@@ -77,8 +77,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             alt={title}
           />
         </div>
-        <div className="py-4">
-          <div className="flex gap-2 justify-between items-center">
+        <div className="py-2">
+          <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
             <h2 className="text-base font-bold">{title}</h2>
             {filter && (
               <div className="flex gap-2">
@@ -99,7 +99,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
 
           {period && (
-            <p className="text-gray-600 text-base md:text-sm mb-1">{period}</p>
+            <p className="text-gray-600 text-base md:text-sm">{period}</p>
           )}
 
           {feature && (

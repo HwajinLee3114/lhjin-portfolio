@@ -39,7 +39,6 @@ export const career = [
       'C#',
     ],
     projects: [
-      '2'
     ]
   },
   {
@@ -52,7 +51,7 @@ export const career = [
       '풀스택 개발',
       'JavaScript',
       'JSP',
-      'React.js',
+      'React',
       'Java',
       'Spring',
       'MySQL',
@@ -60,6 +59,7 @@ export const career = [
       'MariaDB',
     ],
     projects: [
+      '2', '3', '4', '5', '6', '7', '8', '9'
     ]
   },
   {
@@ -75,6 +75,7 @@ export const career = [
       'MySQL'
     ],
     projects: [
+      '10'
     ]
   },
 ];
