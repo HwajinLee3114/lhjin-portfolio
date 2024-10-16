@@ -12,6 +12,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         maincolor: "#6893b7",
+        quotecolor: "#e2e4e4",
 
         themacolor1: '#F6F1E3', // 연노랑
         themacolor15: '#F5E8B6',

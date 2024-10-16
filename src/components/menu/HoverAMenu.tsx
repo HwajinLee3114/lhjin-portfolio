@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './HoverAMenu.module.css';
 
 interface HoverAMenuProps {
-  img?: string;  // 이미지 URL
-  title?: string;  // 타이틀
-  url: string;  // URL
-  description?: string;  // 설명
+  img?: string;
+  title?: string;
+  url: string;
+  description?: string;
 }
 
 const HoverAMenu: React.FC<HoverAMenuProps> = ({ img, title, url, description }) => {
@@ -23,7 +23,7 @@ const HoverAMenu: React.FC<HoverAMenuProps> = ({ img, title, url, description })
           />
         </div>
       )}
-      {title && <div className={`${styles.url} text-3xl mb-10`}>{title}</div>}
+      {title && <div className={`${styles.url} text-2xl mb-10 g_RiaSansFont`}>{title}</div>}
       {url && <div className={styles.url}>{url}</div>}
       {description && <div className={styles.description}>{description}</div>}
     </a>

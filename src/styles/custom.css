@@ -1,3 +1,15 @@
+.g_titleEngFontBlack {
+  font-family: 'TitleEngFontBlack', serif;
+}
+
+.g_titleEngFontOutline {
+  font-family: 'TitleEngFontOutline', serif;
+}
+
+.g_RiaSansFont {
+  font-family: 'RiaSansFont', serif;
+}
+
 section {
   padding: 1rem;
 }
@@ -32,6 +44,7 @@ section {
 }
 
 .l_menu_tab.active {
+  font-weight: bold;
   color: #3b82f6;
   box-shadow: inset 0 -4px 0 #FAAD1A;
 }
@@ -107,7 +120,7 @@ section {
   }
 
   .l_search_div {
-    padding: .8rem 5rem;
+    padding: .8rem 4rem;
     width: 400px;
     height: 60px;
     line-height: 60px;
@@ -120,7 +133,7 @@ section {
   }
 
   .l_search_div {
-    padding: .5rem 3rem;
+    padding: .5rem 2.5rem;
     width: 300px;
     height: 45px;
     line-height: 45px;

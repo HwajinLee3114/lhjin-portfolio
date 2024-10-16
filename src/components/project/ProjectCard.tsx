@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
 import { ProjectDetailModal } from "./detail/ProjectDetailModal";
 import ModalPortal from "../comn/ModalPortal";
@@ -53,27 +53,38 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageSrc,
   skill,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeId, setActiveId] = useState(""); // 상세 프로젝트
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [activeId, setActiveId] = useState<string>(""); // 상세 프로젝트
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <>
-      <div className="max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
+      <div className="max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
         <div className="flex justify-center">
-          {/* h-full overflow-hidden absolute */}
           <img
             className="w-full h-48 object-cover"
             src={imageSrc}
             alt={title}
           />
         </div>
-        <div className="py-4">
-          <div className="flex gap-2 justify-between items-center">
+        <div className="py-2">
+          <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
             <h2 className="text-base font-bold">{title}</h2>
             {filter && (
               <div className="flex gap-2">
                 {filter.map((fil, idx) => (
                   <p
-                    key={`pjfilter_${idx}`}
+                    key={`projectfilter${idx}`}
                     className="text-xs px-2 py-0.5 rounded-lg"
                     style={{
                       backgroundColor: fil.color,
@@ -88,13 +99,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
 
           {period && (
-            <p className="text-gray-600 text-base md:text-sm mb-1">{period}</p>
+            <p className="text-gray-600 text-base md:text-sm">{period}</p>
           )}
 
           {feature && (
             <ul className="list-disc pl-3">
               {feature.map((feat, index) => (
-                <li key={`desc_${index}`} className="text-gray-700 text-base">
+                <li key={`projectfeat${index}`} className="text-gray-700 text-base">
                   <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
                     {feat}
                   </span>

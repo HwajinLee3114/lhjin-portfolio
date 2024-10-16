@@ -10,7 +10,7 @@ import Skills from "./skills/page";
 import { useState } from "react";
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState<string>("");
   return (
     <div>
       <Header
