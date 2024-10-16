@@ -7,7 +7,7 @@ export const projects = [
     git: "",
     site: "",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "풀스택", color: "tomato" },
     ],
     description: "VR 계열사 및 관리자들이 콘텐츠와 서비스를 관리하는 서비스",
@@ -38,7 +38,7 @@ export const projects = [
     git: "",
     site: "",
     filter: [      
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "풀스택", color: "tomato" },
     ],
     description: "전국 아파트 분양 정보 조회 플랫폼 개발",
@@ -72,7 +72,7 @@ export const projects = [
     git: "",
     site: "",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "FE", color: "lightgreen" },
     ],
     description: "운동 매칭 시스템 코치 웹앱",
@@ -107,7 +107,7 @@ export const projects = [
     git: "",
     site: "https://www.djes.co.kr",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "FE", color: "lightgreen" },
       { name: "BE", color: "coral" },
     ],
@@ -143,7 +143,7 @@ export const projects = [
     git: "",
     site: "",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "FE", color: "lightgreen" },
       { name: "BE", color: "coral" },
     ],
@@ -179,7 +179,7 @@ export const projects = [
     git: "",
     site: "",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "FE", color: "lightgreen" },
     ],
     description: "입찰 정보, 지원 사업, 스타트업 정보 조회 사이트",
@@ -214,7 +214,7 @@ export const projects = [
     git: "",
     site: "",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "풀스택", color: "tomato" },
     ],
     description: "면세 상품 및 점포 관리자, 사용자 페이지",
@@ -248,7 +248,7 @@ export const projects = [
     git: "",
     site: "",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "FE", color: "lightgreen" },
     ],
     description: "지역 소상공인을 위한 상품 판매 및 배송 관리 플랫폼",
@@ -283,7 +283,7 @@ export const projects = [
     git: "",
     site: "http://we.cookplay.net",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "FE", color: "lightgreen" },
     ],
     description: "암센터 환자 습관 관리 플랫폼",
@@ -318,7 +318,7 @@ export const projects = [
     git: "",
     site: "https://lmedrp.com",
     filter: [
-      { name: "team", color: "skyblue" },
+      { name: "team", color: "cornflowerblue" },
       { name: "FE", color: "lightgreen" },
     ],
     description: "스튜디오 스케줄 및 촬영 관리 EDRP",
@@ -355,7 +355,7 @@ export const projects = [
     git: "",
     site: "https://lhjin-portfolio.vercel.app/",
     filter: [
-      { name: "personal", color: "skyblue" },
+      { name: "personal", color: "hotpink" },
       { name: "FE", color: "lightgreen" },
     ],
     description: "Next.js, TypeScript로 개발한 포트폴리오 사이트",

@@ -24,7 +24,7 @@ export default function Projects() {
       return project.filter.some((f) => f.name === "personal");
     if (filter === "team") return project.filter.some((f) => f.name === "team");
     return true;
-  });
+  }).sort((a, b) => Number(b.id) - Number(a.id));
   return (
     <section
       id="projects"
@@ -69,13 +69,12 @@ export default function Projects() {
           {filteredPj.map((project, index) => (
             <motion.li
               key={`project_${project.id}`}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 ease: "easeInOut",
                 duration: 0.3,
-                delay: projects.indexOf(project) * 0.1,
-                // y: { duration: 0.5 },
+                delay: index * 0.1,
               }}
             >
               <ProjectCard

@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import { career } from "@/data/career";
 import { projects } from "@/data/projects";
 
-const careerWithProjects = career.map((c) => ({
-  ...c,
-  projectDetails: c.projects
-    .map((projectId) => projects.find((p) => p.id === projectId))
-    .filter(Boolean)
-    .reverse(),
-}));
+// const careerWithProjects = career.map((c) => ({
+//   ...c,
+//   projectDetails: c.projects
+//     .map((projectId) => projects.find((p) => p.id === projectId))
+//     .filter(Boolean)
+//     .reverse(),
+// }));
 
 export default function Career() {
   const sortedCareer = useMemo(() => {
