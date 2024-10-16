@@ -1,5 +1,9 @@
-.g_titleEngFont {
-  font-family: 'TitleEngFont', serif;
+.g_titleEngFontBlack {
+  font-family: 'TitleEngFontBlack', serif;
+}
+
+.g_titleEngFontOutline {
+  font-family: 'TitleEngFontOutline', serif;
 }
 
 section {

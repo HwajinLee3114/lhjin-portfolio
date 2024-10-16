@@ -31,7 +31,7 @@ export default function Projects() {
       className="flex flex-col min-h-screen bg-themacolor3"
     >
       <div className="text-center text-white">
-        <h2 className="text-3xl g_titleEngFont mt-5">Projects</h2>
+        <h2 className="text-3xl g_titleEngFontOutline mt-5">Projects</h2>
         {/* <p className="mt-4">다양한 프로젝트 경험을 통해</p> */}
       </div>
 

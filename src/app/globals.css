@@ -10,8 +10,15 @@
 }
 
 @font-face {
-  font-family: 'TitleEngFont';
-  src: url('/fonts/SB 어그로 B.ttf') format('truetype');
+  font-family: 'TitleEngFontBlack';
+  src: url('/fonts/Hakgyoansim Puzzle TTF Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TitleEngFontOutline';
+  src: url('/fonts/Hakgyoansim Puzzle TTF Outline.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

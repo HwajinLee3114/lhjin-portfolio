@@ -50,9 +50,10 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
     <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
       <button
         onClick={() => lf_scrollToSection("home")}
-        className="g_titleEngFont text-themacolor4"
+        className="flex gap-2 text-lg md:text-2xl text-themacolor4"
       >
-        lhjin's Portfolio
+        <div className="g_titleEngFontBlack">lhjin's</div>
+        <div className="g_titleEngFontOutline">Portfolio</div>
       </button>
       {/* 모바일 햄버거 버튼 */}
       <button onClick={lf_toggleMenu} className="md:hidden">
