@@ -14,7 +14,7 @@ export default function Career() {
       <div className="max-w-2xl w-full">
         <ul className="flex flex-col gap-5">
           {career.map((item, index) => (
-            <li key={`carrer_${index}`}>
+            <li key={`carrer_${index}`} className="bg-white rounded-md shadow-md p-4">
               <div className="flex flex-col sm:flex-row gap-2 mb-2 items-start sm:items-center">
                 <h2 className="text-lg font-bold">{item.company}</h2>
                 <div className="text-gray-600 text-base md:text-sm">
