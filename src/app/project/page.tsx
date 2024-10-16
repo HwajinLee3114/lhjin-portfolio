@@ -73,9 +73,9 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 ease: "easeInOut",
-                duration: 0.5,
+                duration: 0.3,
                 delay: projects.indexOf(project) * 0.1,
-                y: { duration: 0.5 },
+                // y: { duration: 0.5 },
               }}
             >
               <ProjectCard
@@ -84,7 +84,7 @@ export default function Projects() {
                 period={project.period}
                 skill={project.skill}
                 filter={project.filter}
-                imageSrc={project.images[0].url}
+                imageSrc={project.images?.[0]?.url}
                 feature={project.feature}
               />
             </motion.li>
