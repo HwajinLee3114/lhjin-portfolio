@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(id); // 여기에서 활성화 상태 업데이트
+      setActiveSection(id);
     }
     setIsOpen(false);
   };

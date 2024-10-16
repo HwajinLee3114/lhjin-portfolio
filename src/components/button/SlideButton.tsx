@@ -7,7 +7,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 interface SlideButtonProps {
   text: string;
-  href?: string; // href를 선택적으로 수정
+  href?: string;
   color: string;
   isDown?: boolean; // 다운로드 여부
   url?: string; // 다운로드 URL
@@ -22,17 +22,16 @@ const SlideButton: React.FC<SlideButtonProps> = ({
 }) => {
   const lf_slideBtnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (isDown && url) {
-      event.preventDefault(); // 기본 동작 방지
+      event.preventDefault();
       const link = document.createElement("a");
       link.href = url;
-      link.download = ""; // 다운로드 속성 추가
+      link.download = "";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } else if (href) {
-      // href가 있을 경우에만 페이지 이동
       window.open(href, "_blank");
-      event.preventDefault(); // 기본 동작 방지
+      event.preventDefault();
     }
   };
 

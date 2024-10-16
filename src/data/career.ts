@@ -48,7 +48,10 @@ export const career = [
   }
 ];
 
-const careerWithProjects = career.map(c => ({
-  ...c,
-  projectDetails: c.projects.map(projectId => projects.find(p => p.id === projectId)).filter(Boolean),
-}));
+// const careerWithProjects = career.map(c => ({
+//   ...c,
+//   projectDetails: c.projects
+//     .map(projectId => projects.find(p => p.id === projectId))
+//     .filter(Boolean)
+//     .reverse()
+// }));

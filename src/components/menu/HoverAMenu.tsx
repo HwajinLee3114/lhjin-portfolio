@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './HoverAMenu.module.css';
 
 interface HoverAMenuProps {
-  img?: string;  // 이미지 URL
-  title?: string;  // 타이틀
-  url: string;  // URL
-  description?: string;  // 설명
+  img?: string;
+  title?: string;
+  url: string;
+  description?: string;
 }
 
 const HoverAMenu: React.FC<HoverAMenuProps> = ({ img, title, url, description }) => {

@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { career } from "@/data/career";
 import { projects } from "@/data/projects";
 
+const careerWithProjects = career.map((c) => ({
+  ...c,
+  projectDetails: c.projects
+    .map((projectId) => projects.find((p) => p.id === projectId))
+    .filter(Boolean)
+    .reverse(),
+}));
+
 export default function Career() {
+  const sortedCareer = useMemo(() => {
+    return career
+      .map((c) => {
+        const projectDetails = c.projects
+          .map((projectId) => projects.find((p) => p.id === projectId))
+          .filter(Boolean)
+          .reverse();
+
+        return {
+          ...c,
+          projectDetails,
+        };
+      })
+      .sort((a, b) => parseInt(b.id) - parseInt(a.id));
+  }, []);
+
   return (
     <section
       id="career"
@@ -14,7 +38,7 @@ export default function Career() {
 
       <div className="max-w-2xl w-full">
         <ul className="flex flex-col gap-5">
-          {career.map((item, index) => (
+          {sortedCareer.map((item, index) => (
             <motion.li
               key={`career_${index}`}
               className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl"
@@ -23,7 +47,7 @@ export default function Career() {
               transition={{
                 ease: "easeInOut",
                 duration: 0.5,
-                delay: career.indexOf(item) * 0.1,
+                delay: sortedCareer.indexOf(item) * 0.1,
                 y: { duration: 0.5 },
               }}
             >
@@ -45,14 +69,13 @@ export default function Career() {
                 ))}
               </div>
 
-              {item.projects &&
-                item.projects.map((pjId, idx) => {
-                  const pj = projects.find((p) => p.id === pjId);
-                  return (
+              {item.projectDetails &&
+                item.projectDetails.map(
+                  (pj, idx) =>
                     pj && (
                       <section
                         className="py-3.5 px-0 md:p-4"
-                        key={`${pjId}_career_${idx}`}
+                        key={`${pj.id}_career_${idx}`}
                       >
                         <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 text-gray-600 bg-quotecolor">
                           {pj.title}
@@ -63,8 +86,7 @@ export default function Career() {
                         <div>{pj.description}</div>
                       </section>
                     )
-                  );
-                })}
+                )}
             </motion.li>
           ))}
         </ul>

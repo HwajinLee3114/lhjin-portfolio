@@ -55,7 +55,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
         </div>
         {isOpen && (
           <motion.div
-            // key="projectDetailModal"
+            key="projectDetailModal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
