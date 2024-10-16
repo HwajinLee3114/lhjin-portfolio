@@ -38,13 +38,13 @@ export default function Projects() {
       <ul className="l_pjfilter flex gap-3 cursor-pointer mt-10 justify-center">
         <img src="/images/filterYellow-100.png" className="w-5" alt="filter" />
         <li
-          className={`cursor-pointer ${filter === "all" ? "selected" : ""}`}
+          className={`cursor-pointer g_RiaSansFont ${filter === "all" ? "selected" : ""}`}
           onClick={() => setFilter("all")}
         >
           All
         </li>
         <li
-          className={`cursor-pointer ${
+          className={`cursor-pointer g_RiaSansFont ${
             filter === "personal" ? "selected" : ""
           }`}
           onClick={() => setFilter("personal")}
@@ -52,7 +52,7 @@ export default function Projects() {
           Personal
         </li>
         <li
-          className={`cursor-pointer ${filter === "team" ? "selected" : ""}`}
+          className={`cursor-pointer g_RiaSansFont ${filter === "team" ? "selected" : ""}`}
           onClick={() => setFilter("team")}
         >
           Team

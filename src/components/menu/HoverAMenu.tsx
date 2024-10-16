@@ -23,7 +23,7 @@ const HoverAMenu: React.FC<HoverAMenuProps> = ({ img, title, url, description })
           />
         </div>
       )}
-      {title && <div className={`${styles.url} text-3xl mb-10`}>{title}</div>}
+      {title && <div className={`${styles.url} text-2xl mb-10 g_RiaSansFont`}>{title}</div>}
       {url && <div className={styles.url}>{url}</div>}
       {description && <div className={styles.description}>{description}</div>}
     </a>

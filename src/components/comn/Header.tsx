@@ -63,37 +63,37 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
       <nav className="hidden md:flex space-x-4">
         <button
           onClick={() => lf_scrollToSection("about")}
-          className={`p-2 l_menu_tab ${
+          className={`p-2 l_menu_tab g_RiaSansFont ${
             activeSection === "about" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           It's ME
         </button>
         <button
           onClick={() => lf_scrollToSection("skills")}
-          className={`p-2 l_menu_tab ${
+          className={`p-2 l_menu_tab g_RiaSansFont ${
             activeSection === "skills" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           Skills
         </button>
         <button
           onClick={() => lf_scrollToSection("projects")}
-          className={`p-2 l_menu_tab ${
+          className={`p-2 l_menu_tab g_RiaSansFont ${
             activeSection === "projects" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           Projects
         </button>
         <button
           onClick={() => lf_scrollToSection("career")}
-          className={`p-2 l_menu_tab ${
+          className={`p-2 l_menu_tab g_RiaSansFont ${
             activeSection === "career" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           Career
         </button>
@@ -107,37 +107,37 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="h-12"></div>
         <button
           onClick={() => lf_scrollToSection("about")}
-          className={`block p-4 w-full l_menu_tab ${
+          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === "about" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           It's ME
         </button>
         <button
           onClick={() => lf_scrollToSection("skills")}
-          className={`block p-4 w-full l_menu_tab ${
+          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === "skills" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           Skills
         </button>
         <button
           onClick={() => lf_scrollToSection("projects")}
-          className={`block p-4 w-full l_menu_tab ${
+          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === "projects" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           Projects
         </button>
         <button
           onClick={() => lf_scrollToSection("career")}
-          className={`block p-4 w-full l_menu_tab ${
+          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === "career" ? "active" : ""
           }
-          hover:font-bold`}
+          `}
         >
           Career
         </button>
