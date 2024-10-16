@@ -84,7 +84,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               <div className="flex gap-2">
                 {filter.map((fil, idx) => (
                   <p
-                    key={`pjfilter_${idx}`}
+                    key={`projectfilter${idx}`}
                     className="text-xs px-2 py-0.5 rounded-lg"
                     style={{
                       backgroundColor: fil.color,
@@ -105,7 +105,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {feature && (
             <ul className="list-disc pl-3">
               {feature.map((feat, index) => (
-                <li key={`pjdesc_${index}`} className="text-gray-700 text-base">
+                <li key={`projectfeat${index}`} className="text-gray-700 text-base">
                   <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
                     {feat}
                   </span>
