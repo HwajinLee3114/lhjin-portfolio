@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { career } from "@/data/career";
 import { projects } from "@/data/projects";
 
@@ -14,7 +15,18 @@ export default function Career() {
       <div className="max-w-2xl w-full">
         <ul className="flex flex-col gap-5">
           {career.map((item, index) => (
-            <li key={`carrer_${index}`} className="bg-white rounded-md shadow-md p-4">
+            <motion.li
+              key={`carrer_${index}`}
+              className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                ease: "easeInOut",
+                duration: 0.5,
+                delay: career.indexOf(item) * 0.1,
+                y: { duration: 0.5 },
+              }}
+            >
               <div className="flex flex-col sm:flex-row gap-2 mb-2 items-start sm:items-center">
                 <h2 className="text-lg font-bold">{item.company}</h2>
                 <div className="text-gray-600 text-base md:text-sm">
@@ -53,7 +65,7 @@ export default function Career() {
                     )
                   );
                 })}
-            </li>
+            </motion.li>
           ))}
         </ul>
       </div>
