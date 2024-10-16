@@ -16,7 +16,7 @@ export default function Career() {
         <ul className="flex flex-col gap-5">
           {career.map((item, index) => (
             <motion.li
-              key={`carrer_${index}`}
+              key={`career_${index}`}
               className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function Career() {
                     pj && (
                       <section
                         className="py-3.5 px-0 md:p-4"
-                        key={`${pjId}_carrer_${idx}`}
+                        key={`${pjId}_career_${idx}`}
                       >
                         <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 text-gray-600 bg-quotecolor">
                           {pj.title}
