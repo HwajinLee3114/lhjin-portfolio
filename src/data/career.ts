@@ -10,25 +10,33 @@ export const career = [
   */
   {
     id: '1',
-    company: '회사이름',
-    period: 'yyyy.mm ~ yyyy.mm(n년 n개월)',
-    companyInfo: '',
+    company: 'A2TEC',
+    period: '2018.11 - 2020.01 (1년 2개월)',
+    role: 'SW 개발자, 정직원',
+    companyInfo: 'VR/AR 교육센터와 온라인 VR 콘텐츠 서비스 분야에 제공하는 멀티미디어 및 임베디드 솔루션',
     tag: [
-      '111',
-      '2222'
+      '풀스택 개발',
+      '전자정부프레임워크',
+      'Java',
+      'Spring',
+      'JavaScript',
+      'JSP',
+      'PostgreSQL',
     ],
     projects: [
-      '1', '2'
+      '1'
     ]
   },
   {
     id: '2',
-    company: '회사이름2',
-    period: 'yyyy.mm ~ yyyy.mm(n년 n개월)',
-    companyInfo: '',
+    company: 'ArkData',
+    period: '2021.02 - 2021.04 (3개월)',
+    role: 'SW 개발자, 인턴',
+    companyInfo: '이기종 DBMS 간 실시간 데이터 복제를 통해 기업의 데이터 통합과 관리의 자유를 제공하는 솔루션',
     tag: [
-      '111',
-      '2222'
+      'Oracle',
+      'C',
+      'C#',
     ],
     projects: [
       '2'
@@ -36,22 +44,37 @@ export const career = [
   },
   {
     id: '3',
-    company: '회사이름3',
-    period: 'yyyy.mm ~ yyyy.mm(n년 n개월)',
-    companyInfo: '',
+    company: '퓨쳐솔루션',
+    period: '2021.05 - 2024.05 (3년 0개월)',
+    role: 'SW 개발자, 정직원',
+    companyInfo: '웹앱 개발 전문 SI',
     tag: [
-      '111',
-      '2222'
+      '풀스택 개발',
+      'JavaScript',
+      'JSP',
+      'React.js',
+      'Java',
+      'Spring',
+      'MySQL',
+      'Oracle',
+      'MariaDB',
     ],
     projects: [
     ]
-  }
+  },
+  {
+    id: '4',
+    company: 'LUVMOM (럽맘)',
+    period: '2024.06 - 2024.08 (3개월)',
+    role: '프론트엔드 개발자, 프리랜서',
+    companyInfo: '임신, 출산, 육아 플랫폼',
+    tag: [
+      '프론트엔드 개발',
+      'JavaScript',
+      'JSP',
+      'MySQL'
+    ],
+    projects: [
+    ]
+  },
 ];
-
-// const careerWithProjects = career.map(c => ({
-//   ...c,
-//   projectDetails: c.projects
-//     .map(projectId => projects.find(p => p.id === projectId))
-//     .filter(Boolean)
-//     .reverse()
-// }));

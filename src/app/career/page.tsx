@@ -51,14 +51,17 @@ export default function Career() {
                 y: { duration: 0.5 },
               }}
             >
-              <div className="flex flex-col sm:flex-row gap-2 mb-2 items-start sm:items-center">
+              <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
                 <h2 className="text-lg font-bold">{item.company}</h2>
                 <div className="text-gray-600 text-base md:text-sm">
                   {item.period}
                 </div>
               </div>
-              <div>{item.companyInfo}</div>
-              <div className="flex gap-2">
+              <div className="text-gray-600 text-base md:text-sm mb-1">
+                {item.role}
+              </div>
+              <div className="my-2">{item.companyInfo}</div>
+              <div className="flex gap-2 mt-2 flex-wrap">
                 {item.tag.map((t, idx) => (
                   <p
                     key={`carrerTag_${idx}`}
