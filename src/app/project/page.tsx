@@ -30,8 +30,8 @@ export default function Projects() {
       id="projects"
       className="flex flex-col min-h-screen bg-themacolor3"
     >
-      <div className="text-center">
-        <h2 className="text-3xl font-bold">Projects</h2>
+      <div className="text-center text-white">
+        <h2 className="text-3xl g_titleEngFont mt-5">Projects</h2>
         <p className="mt-4">내가 만든 프로젝트들을 확인하세요.</p>
       </div>
 

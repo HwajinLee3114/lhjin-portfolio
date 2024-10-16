@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
 
   return (
     <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
-      <button onClick={() => lf_scrollToSection("home")} className="font-bold">
+      <button onClick={() => lf_scrollToSection("home")} className="g_titleEngFont text-themacolor4">
         lhjin's Portfolio
       </button>
       {/* 모바일 햄버거 버튼 */}

@@ -9,7 +9,7 @@ export default function Career() {
       id="career"
       className="flex flex-col items-center justify-center min-h-screen bg-themacolor1"
     >
-      <h2 className="text-3xl font-bold">Career</h2>
+      <h2 className="text-3xl g_titleEngFont mt-3">Career</h2>
       <p className="my-4">내 경력에 대해 알아보세요.</p>
 
       <div className="max-w-2xl w-full">

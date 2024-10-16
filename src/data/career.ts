@@ -52,5 +52,3 @@ const careerWithProjects = career.map(c => ({
   ...c,
   projectDetails: c.projects.map(projectId => projects.find(p => p.id === projectId)).filter(Boolean),
 }));
-
-console.info('careerWithProjects:', careerWithProjects);

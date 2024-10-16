@@ -11,9 +11,9 @@ export default function About() {
       className="flex flex-col md:flex-row items-center gap-5 justify-around h-50 md:h-43 bg-themacolor3"
     >
       <div className="w-full md:w-96 text-center mb-5">
-        <h2 className="text-2xl font-bold text-white">About Me</h2>
+        <h2 className="text-2xl text-white g_titleEngFont">About Me</h2>
         <p className="text-lg text-gray-300">
-          저는 개발자로서의 여정을<br/>나누고 싶습니다
+          개발자로서의 여정을<br/>나누고 싶습니다
         </p>
       </div>
 
