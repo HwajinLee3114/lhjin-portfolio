@@ -1,32 +1,20 @@
 import React, { useMemo } from "react";
-import { motion } from "framer-motion";
 import { career } from "@/data/career";
 import { projects } from "@/data/projects";
+import { motion } from "framer-motion";
 
-// const careerWithProjects = career.map((c) => ({
-//   ...c,
-//   projectDetails: c.projects
-//     .map((projectId) => projects.find((p) => p.id === projectId))
-//     .filter(Boolean)
-//     .reverse(),
-// }));
+const careerWithProjects = career.map((c) => ({
+  ...c,
+  projectDetails: c.projects
+    .map((projectId) => projects.find((p) => p.id === projectId))
+    .filter(Boolean)
+    .reverse(),
+}));
 
 export default function Career() {
   const sortedCareer = useMemo(() => {
-    return career
-      .map((c) => {
-        const projectDetails = c.projects
-          .map((projectId) => projects.find((p) => p.id === projectId))
-          .filter(Boolean)
-          .reverse();
-
-        return {
-          ...c,
-          projectDetails,
-        };
-      })
-      .sort((a, b) => parseInt(b.id) - parseInt(a.id));
-  }, []);
+    return careerWithProjects.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+  }, [careerWithProjects]);
 
   return (
     <section
@@ -39,17 +27,17 @@ export default function Career() {
       <div className="max-w-2xl w-full">
         <ul className="flex flex-col gap-5">
           {sortedCareer.map((item, index) => (
-            <motion.li
+            <li
               key={`career_${index}`}
               className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                ease: "easeInOut",
-                duration: 0.5,
-                delay: sortedCareer.indexOf(item) * 0.1,
-                y: { duration: 0.5 },
-              }}
+              // initial={{ opacity: 0, y: 20 }}
+              // whileInView={{ opacity: 1, y: 0 }}
+              // transition={{
+              //   ease: "easeInOut",
+              //   duration: 0.5,
+              //   delay: sortedCareer.indexOf(item) * 0.1,
+              //   y: { duration: 0.5 },
+              // }}
             >
               <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
                 <h2 className="text-lg font-bold">{item.company}</h2>
@@ -90,7 +78,7 @@ export default function Career() {
                       </section>
                     )
                 )}
-            </motion.li>
+            </li>
           ))}
         </ul>
       </div>
