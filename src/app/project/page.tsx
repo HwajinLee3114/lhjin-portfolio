@@ -69,7 +69,7 @@ export default function Projects() {
           {filteredPj.map((project, index) => (
             <motion.li
               key={`project_${project.id}`}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 ease: "easeInOut",
@@ -81,10 +81,11 @@ export default function Projects() {
                 id={project.id}
                 title={project.title}
                 period={project.period}
-                skill={project.skill}
+                skillItem={project.skillItem}
                 filter={project.filter}
                 imageSrc={project.thumb}
                 feature={project.feature}
+                description={project.description}
               />
             </motion.li>
           ))}

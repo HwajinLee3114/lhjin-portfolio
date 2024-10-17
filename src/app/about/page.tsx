@@ -1,6 +1,6 @@
 import SlideButton from "@/components/button/SlideButton";
 import ProfileCircle from "@/components/about/ProfileCircle";
-import HoverAMenu from "@/components/menu/HoverAMenu";
+import HoverAMenu from "@/components/comn/HoverAMenu";
 import React from "react";
 
 
@@ -29,16 +29,21 @@ export default function About() {
       </div>
 
       <div className="h-full flex-grow w-full flex flex-col items-center justify-center">
-        <div className="flex flex-col xl:flex-row gap-5">
+        <div className="flex flex-col flex-wrap xl:flex-row gap-5">
           <HoverAMenu
             url="https://github.com/HwajinLee3114"
             title="Git Hub"
             description="소스 코드 관리"
           />
           <HoverAMenu
-            url="https://lhjini.tistory.com/"
+            url="https://lhjini.tistory.com"
             title="lhjin.log"
             description="공부 및 기록 목적의 블로그"
+          />
+          <HoverAMenu
+            url="https://www.linkedin.com/in/hwajinlee"
+            title="링크드인"
+            description=""
           />
         </div>
       </div>

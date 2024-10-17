@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './HoverAMenu.module.css';
 
 interface HoverAMenuProps {
   img?: string;
@@ -10,22 +9,22 @@ interface HoverAMenuProps {
 
 const HoverAMenu: React.FC<HoverAMenuProps> = ({ img, title, url, description }) => {
   return (
-    <a className={styles.archive} href={url} target="_blank" rel="noopener noreferrer">
+    <a className='min-w-[300px] max-w-[320px] w-full p-6 bg-gray-200 rounded-lg text-decoration-none transition-transform duration-200 ease-linear hover:scale-105' href={url} target="_blank" rel="noopener noreferrer">
       {img && (
-        <div className={styles.imgWrapper}>
+        <div>
           <img
             alt={`${title} 이미지`}
             loading="lazy"
             width="384"
             height="84"
             src={img}
-            className={`${styles.image} mb-5`}
+            className={`transparent mb-5`}
           />
         </div>
       )}
-      {title && <div className={`${styles.url} text-2xl mb-10 g_RiaSansFont`}>{title}</div>}
-      {url && <div className={styles.url}>{url}</div>}
-      {description && <div className={styles.description}>{description}</div>}
+      {title && <div className='text-2xl mb-5 g_RiaSansFont'>{title}</div>}
+      {url && <div className='font-bold'>{url}</div>}
+      {description && <div>{description}</div>}
     </a>
   );
 };

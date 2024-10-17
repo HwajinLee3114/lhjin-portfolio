@@ -20,7 +20,6 @@ export interface Project {
   id: string;
   title: string;
   period: string;
-  skill: string;
   git: string;
   site: string;
   filter: { name: string; color: string }[];
@@ -37,61 +36,76 @@ export const projects: Project[] = [
     id: '1',
     title: "KT GiGA Live CMS",
     period: "2024.10 ~ 2024.11",
-    skill: "전자정부프레임워크, Java, Spring, JavaScript, JSP, PostgreSQL",
     git: "",
     site: "",
     filter: [
       { name: "team", color: "cornflowerblue" },
       { name: "풀스택", color: "tomato" },
     ],
-    description: "VR 계열사 및 관리자들이 콘텐츠와 서비스를 관리하는 서비스",
+    description: "VR 계열사 및 관리자들이 콘텐츠와 서비스를 관리하는 CMS입니다.",
     feature: [
+      'VR의 카테고리와 카테고리별 콘텐츠를 관리',
+      'VR 제공 계열사 관리',
     ],
     contribution: [
       {
         id: '1',
         title: 'VR 계열사 및 관리자 콘텐츠 관리 사이트 유지보수 및 신규 페이지 개발',
         desc: [
+          '콘텐츠 관리 페이지 유지 보수 및 신규 기능 추가',
+          '검색 키워드 관리, 앱 버전 관리 신규 개발'
         ]
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "0", name: "전자정부프레임워크", url: "" },
+      { id: "1", name: "Java", url: "java-100.png" },
+      { id: "2", name: "Spring", url: "spring-100.png" },
+      { id: "3", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
+      { id: "4", name: "PostgreSQL", url: "postgreesql-100.png" },
     ],
     thumb: 'pj1.png',
-    images: [
-      // { id: "1", url: "", name: "" },
-    ],
+    images: [],
   },
   {
     id: '2',
     title: "분양이부장",
     period: "2021.05 ~ 2022.05",
-    skill: "JavaScript, JSP, MySQL, Java",
     git: "",
     site: "",
     filter: [
       { name: "team", color: "cornflowerblue" },
       { name: "풀스택", color: "tomato" },
     ],
-    description: "전국 아파트 분양 정보 조회 플랫폼 개발",
+    description: "전국 아파트 분양 정보를 알고 싶은 사용자, 지역별 분양 정보를 등록하고 홍보 및 구인 활동을 원하는 관계자,\n관련 분야에서 구직 중인 사용자들이 이용할 수 있는 서비스입니다.",
     feature: [
+      '사용자 위치 정보를 기반으로 인근의 아파트 분양 정보를 조회하는 기능 제공',
+      '아파트 분양 시 견적서를 생성하고, 직급에 따른 수수료를 계산할 수 있는 서비스 제공',
+      '구인 게시판을 통해 사용자가 즉시 서류를 제출할 수 있어, 효율적인 구직 활동을 지원',
+      '지역별 아파트 분양 정보를 등록하고, 사용자가 설정한 지역에 대한 알림을 발송하며, 엑셀 파일을 통한 정보 업로드 기능을 지원',
+      '관계자가 등록한 분양 정보와 공공 API에서 제공하는 정보를 지도에 마커로 표시',
+      '전단지 및 브로슈어를 등록하여 홍보할 수 있으며, 사용자에게 첨부 파일 다운로드 기능을 제공',
     ],
     contribution: [
       {
         id: '1',
-        title: '',
+        title: '전체적인 페이지 프론트엔드 화면 및 기능 구현과 백엔드 오류 유지보수를 맡았습니다.',
         desc: [
-          '계약금 및 잔금 출력 기능, 직급별 수수료 계산기 기능 처리',
-          '카카오맵 API 연동을 통한 전국 분양지 마크 표시 및 상세 정보 출력',
-          '분양 정보 공공 데이터 연동 및 구인 공고 등록 및 이력서 제출 기능 처리',
+          'Access Token을 함께 전송하여 보안 강화',
+          '문자 발송 시스템을 연동해 인증번호 기능 구현',
+          '카카오맵, 청약 분양 정보 조회 공공 API를 연동해 분양 정보 지도 표시 및 상세 정보 조회 구현',
+          '파일 업로드, 다운로드 기능 구현',
+          '견적서, 수수료 계산 시 항목별 계산 함수 구현 및 적용',
         ]
       },
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj2.png',
     images: [
@@ -116,7 +130,6 @@ export const projects: Project[] = [
     id: '3',
     title: "Pleisure",
     period: "2021.05 ~ 2022.02",
-    skill: "JavaScript, JSP, Spring, MySQL",
     git: "",
     site: "",
     filter: [
@@ -140,7 +153,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj3.png',
     images: [
@@ -162,7 +178,6 @@ export const projects: Project[] = [
     id: '4',
     title: "Digital Real Trip(DRT)",
     period: "2021.10 ~ 2021.12, 2022.04 ~ 2022.09",
-    skill: "JavaScript, JSP, Spring, MySQL",
     git: "",
     site: "https://www.djes.co.kr",
     filter: [
@@ -187,7 +202,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj4.png',
     images: [
@@ -205,7 +223,6 @@ export const projects: Project[] = [
     id: '5',
     title: "너의 운동은",
     period: "2022.02 ~ 2022.04",
-    skill: "React, Spring, Java, MySQL",
     git: "",
     site: "",
     filter: [
@@ -229,8 +246,10 @@ export const projects: Project[] = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "1", name: "React", url: "react-100.png" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj5.png',
     images: [
@@ -249,7 +268,6 @@ export const projects: Project[] = [
     id: '6',
     title: "포켓데이터",
     period: "2022.02 ~ 2022.04",
-    skill: "React, Spring, Java, MySQL",
     git: "",
     site: "",
     filter: [
@@ -272,8 +290,10 @@ export const projects: Project[] = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "1", name: "React", url: "react-100.png" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj6.png',
     images: [
@@ -288,7 +308,6 @@ export const projects: Project[] = [
     id: '7',
     title: "면세점 사이트",
     period: "2022.09 ~ 2023.07",
-    skill: "JavaScript, JSP, React, Spring, Java, Oracle",
     git: "",
     site: "",
     filter: [
@@ -311,7 +330,11 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "00", name: "JSP", url: "" },
+      { id: "2", name: "React", url: "react-100.png" },
+      { id: "3", name: "Java", url: "java-100.png" },
+      { id: "4", name: "Spring", url: "spring-100.png" },
+      { id: "5", name: "Oracle", url: "oracle-100.png" },
     ],
     thumb: 'pj7.png',
     images: [
@@ -346,7 +369,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MariaDB", url: "maria-100.png" },
     ],
     thumb: 'pj8.png',
     images: [
@@ -371,7 +397,6 @@ export const projects: Project[] = [
     id: '9',
     title: "WE 돌봄이",
     period: "2023.08 ~ 2024.03",
-    skill: "JavaScript, JSP, Spring, Java, MariaDB",
     git: "",
     site: "http://we.cookplay.net",
     filter: [
@@ -395,7 +420,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MariaDB", url: "maria-100.png" },
     ],
     thumb: 'pj9.png',
     images: [
@@ -418,7 +446,6 @@ export const projects: Project[] = [
     id: '10',
     title: "LMEDRP",
     period: "2024.06 ~ 2024.08",
-    skill: "JavaScript, JSP, Django, MySQL",
     git: "",
     site: "https://lmedrp.com",
     filter: [
@@ -444,7 +471,9 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "00", name: "JSP", url: "" },
+      { id: "2", name: "Django", url: "django-100.png" },
+      { id: "3", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj10.png',
     images: [
@@ -466,23 +495,28 @@ export const projects: Project[] = [
       { name: "personal", color: "hotpink" },
       { name: "FE", color: "lightgreen" },
     ],
-    description: "Next.js, TypeScript로 개발한 포트폴리오 사이트",
+    
+    description: "Next.js, TypeScript로 지금까지 진행했던 프로젝트, 사용 기술 스택 등을 한눈에 볼 수 있는 포트폴리오 사이트를 구현하였습니다.\n앞으로도 계속해서 발전해나가는 모습을 반영해 나갈 예정입니다.",
     feature: [
-      'Next.js, TypeScript, TailwindCSS 활용',
-      'framer motion를 이용한 효과 적용',
-      'Vercel 배포',
+      'TailwindCSS를 사용하여 간결하고 일관된 스타일링 코드 구현 및 반응형 적용',
+      '메인 화면에 타이핑 효과를 적용하여 시각적인 효과 제공',
+      'Framer Motion을 사용하여 스크롤 시 노출 효과 구현',
+      'Vercel 배포를 통한 CI/CD 자동화',
     ],
     contribution: [
       // {
       //   id: '1',
       //   title: '',
       //   desc: [
+      //     '',
       //   ]
       // },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "1", name: "Next.js", url: "next-100.png" },
+      { id: "2", name: "TypeScript", url: "typescript-100.png" },
+      { id: "3", name: "TailwindCSS", url: "tailwind-100.png" },
+      { id: "4", name: "Vercel", url: "vercel-100.png" },
     ],
     thumb: 'pj11.png',
     images: [
