@@ -1,6 +1,20 @@
 import { projects } from './projects';
 
-export const career = [
+export interface CareerProject {
+  id: string;
+}
+
+export interface Career {
+  id: string;
+  company: string;
+  period: string;
+  role: string;
+  companyInfo: string;
+  tag: string[];
+  projects: CareerProject[];
+}
+
+export const career: Career[] = [
   /*
     회사명
   * 근무 기간(1년 2개월)

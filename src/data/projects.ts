@@ -1,4 +1,38 @@
-export const projects = [
+export interface Image {
+  id: string;
+  url: string;
+  name: string;
+}
+
+export interface SkillItem {
+  id: string;
+  name: string;
+  url: string;
+}
+
+export interface Contribution {
+  id: string;
+  title: string;
+  desc: string[];
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  period: string;
+  skill: string;
+  git: string;
+  site: string;
+  filter: { name: string; color: string }[];
+  description: string;
+  feature: string[];
+  contribution: Contribution[];
+  skillItem: SkillItem[];
+  thumb: string;
+  images: Image[];
+}
+
+export const projects: Project[] = [
   {
     id: '1',
     title: "KT GiGA Live CMS",
@@ -61,7 +95,7 @@ export const projects = [
     ],
     thumb: 'pj2.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -96,7 +130,7 @@ export const projects = [
     ],
     thumb: 'pj3.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -132,7 +166,7 @@ export const projects = [
     ],
     thumb: 'pj4.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -168,7 +202,7 @@ export const projects = [
     ],
     thumb: 'pj5.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -203,7 +237,7 @@ export const projects = [
     ],
     thumb: 'pj6.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -237,7 +271,7 @@ export const projects = [
     ],
     thumb: 'pj7.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -272,7 +306,7 @@ export const projects = [
     ],
     thumb: 'pj8.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -307,7 +341,7 @@ export const projects = [
     ],
     thumb: 'pj9.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -344,7 +378,7 @@ export const projects = [
     ],
     thumb: 'pj10.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -360,15 +394,15 @@ export const projects = [
     ],
     description: "Next.js, TypeScript로 개발한 포트폴리오 사이트",
     feature: [
+      'Next.js, TypeScript, TailwindCSS 활용',
+      'framer motion를 이용한 효과 적용',
+      'Vercel 배포',
     ],
     contribution: [
       {
         id: '1',
         title: '',
         desc: [
-          'Next.js, TypeScript, TailwindCSS 활용',
-          'framer motion를 이용한 효과 적용',
-          'Vercel 배포',
         ]
       },
     ],
@@ -378,7 +412,7 @@ export const projects = [
     ],
     thumb: 'pj11.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
 ];
