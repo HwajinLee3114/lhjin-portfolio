@@ -77,7 +77,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                     project.skillItem.map((skill) => (
                       <img
                         key={`${project.id}_skill_${skill.id}`}
-                        src={skill.url}
+                        src={`/images/tech/${skill.url}`}
                         className="w-7"
                         alt={skill.name}
                       />

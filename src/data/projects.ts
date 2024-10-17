@@ -22,10 +22,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj1.png',
+    thumb: 'pj1.png',
     images: [
       // { id: "1", url: "", name: "" },
     ],
@@ -56,10 +56,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj2.png',
+    thumb: 'pj2.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -91,10 +91,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj3.png',
+    thumb: 'pj3.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -127,10 +127,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj4.png',
+    thumb: 'pj4.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -163,10 +163,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj5.png',
+    thumb: 'pj5.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -198,10 +198,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj6.png',
+    thumb: 'pj6.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -232,10 +232,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj7.png',
+    thumb: 'pj7.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -267,10 +267,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj8.png',
+    thumb: 'pj8.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -302,10 +302,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj9.png',
+    thumb: 'pj9.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -339,10 +339,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj10.png',
+    thumb: 'pj10.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
@@ -373,10 +373,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj11.png',
+    thumb: 'pj11.png',
     images: [
       { id: "1", url: "", name: "" },
     ],
