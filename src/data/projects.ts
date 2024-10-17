@@ -100,7 +100,7 @@ export const projects: Project[] = [
   },
   {
     id: '3',
-    title: "플레져",
+    title: "Pleisure",
     period: "2021.05 ~ 2022.02",
     skill: "JavaScript, JSP, Spring, MySQL",
     git: "",
