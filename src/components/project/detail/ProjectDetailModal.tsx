@@ -72,7 +72,11 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                   {project.period}
                 </div>
 
-                <div className="flex flex-row items-center mb-2">
+                <div className="items-center py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
+                  {project.skill}
+                </div>
+
+                {/* <div className="flex flex-row items-center mb-2">
                   {project.skillItem &&
                     project.skillItem.map((skill) => (
                       <img
@@ -82,7 +86,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                         alt={skill.name}
                       />
                     ))}
-                </div>
+                </div> */}
 
                 <div className="whitespace-pre-line">{project.description}</div>
 

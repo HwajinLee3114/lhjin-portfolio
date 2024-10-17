@@ -82,6 +82,7 @@ export default function Projects() {
                 title={project.title}
                 period={project.period}
                 skill={project.skill}
+                skillItem={project.skillItem}
                 filter={project.filter}
                 imageSrc={project.thumb}
                 feature={project.feature}

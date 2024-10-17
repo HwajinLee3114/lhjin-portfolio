@@ -60,8 +60,10 @@ export const projects: Project[] = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "1", name: "Java", url: "java-100.png" },
+      { id: "2", name: "Spring", url: "spring-100.png" },
+      { id: "3", name: "JavaScript", url: "js-100.png" },
+      { id: "4", name: "PostgreSQL", url: "postgreesql-100.png" },
     ],
     thumb: 'pj1.png',
     images: [

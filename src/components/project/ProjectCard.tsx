@@ -10,6 +10,11 @@ interface Tag {
   color: string;
   txtcolor?: string;
 }
+export interface SkillItem {
+  id: string;
+  name: string;
+  url: string;
+}
 
 interface ProjectCardProps {
   id?: string;
@@ -20,6 +25,7 @@ interface ProjectCardProps {
   link?: string;
   imageSrc?: string;
   skill: string;
+  skillItem: SkillItem[];
   description: string;
 }
 
@@ -53,6 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   link,
   imageSrc,
   skill,
+  skillItem,
   description,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -119,8 +126,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {description}
           </span>
         </div>
-        <div className="self-start py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
+        {/* <div className="self-start py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
           {skill}
+        </div> */}
+        <div className="flex flex-row items-center mb-2">
+          {skillItem &&
+            skillItem.map((skillI) => (
+              <img
+                key={`${id}_skill_${skillI.id}`}
+                src={`/images/tech/${skillI.url}`}
+                className="w-7"
+                alt={skillI.name}
+              />
+            ))}
         </div>
         {id && (
           <div className="flex justify-end">
