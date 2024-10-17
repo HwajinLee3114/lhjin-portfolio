@@ -73,7 +73,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="flex justify-center">
           <img
             className="w-full h-48 object-cover"
-            src={imageSrc}
+            src={`/images/thumb/${imageSrc}`}
             alt={title}
           />
         </div>

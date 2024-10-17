@@ -1,4 +1,38 @@
-export const projects = [
+export interface Image {
+  id: string;
+  url: string;
+  name: string;
+}
+
+export interface SkillItem {
+  id: string;
+  name: string;
+  url: string;
+}
+
+export interface Contribution {
+  id: string;
+  title: string;
+  desc: string[];
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  period: string;
+  skill: string;
+  git: string;
+  site: string;
+  filter: { name: string; color: string }[];
+  description: string;
+  feature: string[];
+  contribution: Contribution[];
+  skillItem: SkillItem[];
+  thumb: string;
+  images: Image[];
+}
+
+export const projects: Project[] = [
   {
     id: '1',
     title: "KT GiGA Live CMS",
@@ -22,10 +56,10 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj1.png',
+    thumb: 'pj1.png',
     images: [
       // { id: "1", url: "", name: "" },
     ],
@@ -37,7 +71,7 @@ export const projects = [
     skill: "JavaScript, JSP, MySQL, Java",
     git: "",
     site: "",
-    filter: [      
+    filter: [
       { name: "team", color: "cornflowerblue" },
       { name: "풀스택", color: "tomato" },
     ],
@@ -56,17 +90,31 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj2.png',
+    thumb: 'pj2.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "2_1.png", name: "daily" },
+      { id: "2", url: "2_2.png", name: "daily" },
+      { id: "3", url: "2_3.png", name: "daily" },
+      { id: "4", url: "2_4.png", name: "daily" },
+      { id: "5", url: "2_5.png", name: "daily" },
+      { id: "6", url: "2_6.png", name: "daily" },
+      { id: "7", url: "2_7.png", name: "daily" },
+      { id: "8", url: "2_8.png", name: "daily" },
+      { id: "9", url: "2_9.png", name: "daily" },
+      { id: "10", url: "2_10.png", name: "daily" },
+      { id: "11", url: "2_11.png", name: "daily" },
+      { id: "12", url: "2_12.png", name: "daily" },
+      { id: "13", url: "2_13.png", name: "daily" },
+      { id: "14", url: "2_14.png", name: "daily" },
+
     ],
   },
   {
     id: '3',
-    title: "플레져",
+    title: "Pleisure",
     period: "2021.05 ~ 2022.02",
     skill: "JavaScript, JSP, Spring, MySQL",
     git: "",
@@ -91,12 +139,23 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj3.png',
+    thumb: 'pj3.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "3_1.png", name: "daily" },
+      { id: "2", url: "3_2.png", name: "daily" },
+      { id: "3", url: "3_3.png", name: "daily" },
+      { id: "4", url: "3_4.png", name: "daily" },
+      { id: "5", url: "3_5.png", name: "daily" },
+      { id: "6", url: "3_6.png", name: "daily" },
+      { id: "7", url: "3_7.png", name: "daily" },
+      { id: "8", url: "3_8.png", name: "daily" },
+      { id: "9", url: "3_9.png", name: "daily" },
+      { id: "10", url: "3_10.png", name: "daily" },
+      { id: "11", url: "3_11.png", name: "daily" },
+
     ],
   },
   {
@@ -127,12 +186,19 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj4.png',
+    thumb: 'pj4.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "4_1.png", name: "daily" },
+      { id: "2", url: "4_2.png", name: "daily" },
+      { id: "3", url: "4_3.png", name: "daily" },
+      { id: "4", url: "4_4.png", name: "daily" },
+      { id: "5", url: "4_5.png", name: "daily" },
+      { id: "6", url: "4_6.png", name: "daily" },
+      { id: "7", url: "4_7.png", name: "daily" },
+      { id: "8", url: "4_8.png", name: "daily" },
     ],
   },
   {
@@ -163,12 +229,20 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj5.png',
+    thumb: 'pj5.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "5_1.png", name: "daily" },
+      { id: "2", url: "5_2.png", name: "daily" },
+      { id: "3", url: "5_3.png", name: "daily" },
+      { id: "4", url: "5_4.png", name: "daily" },
+      { id: "5", url: "5_5.png", name: "daily" },
+      { id: "6", url: "5_6.png", name: "daily" },
+      { id: "7", url: "5_7.png", name: "daily" },
+      { id: "8", url: "5_8.png", name: "daily" },
+      { id: "9", url: "5_9.png", name: "daily" },
     ],
   },
   {
@@ -198,12 +272,16 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj6.png',
+    thumb: 'pj6.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "6_1.png", name: "daily" },
+      { id: "2", url: "6_2.png", name: "daily" },
+      { id: "3", url: "6_3.png", name: "daily" },
+      { id: "4", url: "6_4.png", name: "daily" },
+      { id: "5", url: "6_5.png", name: "daily" },
     ],
   },
   {
@@ -232,12 +310,12 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj7.png',
+    thumb: 'pj7.png',
     images: [
-      { id: "1", url: "", name: "" },
+      // { id: "1", url: "", name: "" },
     ],
   },
   {
@@ -267,12 +345,26 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj8.png',
+    thumb: 'pj8.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "8_1.png", name: "daily" },
+      { id: "2", url: "8_2.png", name: "daily" },
+      { id: "3", url: "8_3.png", name: "daily" },
+      { id: "4", url: "8_4.png", name: "daily" },
+      { id: "5", url: "8_5.png", name: "daily" },
+      { id: "6", url: "8_6.png", name: "daily" },
+      { id: "7", url: "8_7.png", name: "daily" },
+      { id: "8", url: "8_8.png", name: "daily" },
+      { id: "9", url: "8_9.png", name: "daily" },
+      { id: "10", url: "8_10.png", name: "daily" },
+      { id: "11", url: "8_11.png", name: "daily" },
+      { id: "12", url: "8_12.png", name: "daily" },
+      { id: "13", url: "8_13.png", name: "daily" },
+      { id: "14", url: "8_14.png", name: "daily" },
+      { id: "15", url: "8_15.png", name: "daily" },
     ],
   },
   {
@@ -302,12 +394,24 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj9.png',
+    thumb: 'pj9.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "9_1.png", name: "daily" },
+      { id: "2", url: "9_2.png", name: "daily" },
+      { id: "3", url: "9_3.png", name: "daily" },
+      { id: "4", url: "9_4.png", name: "daily" },
+      { id: "5", url: "9_5.png", name: "daily" },
+      { id: "6", url: "9_6.png", name: "daily" },
+      { id: "7", url: "9_7.png", name: "daily" },
+      { id: "8", url: "9_8.png", name: "daily" },
+      { id: "9", url: "9_9.png", name: "daily" },
+      { id: "10", url: "9_10.png", name: "daily" },
+      { id: "11", url: "9_11.png", name: "daily" },
+      { id: "12", url: "9_12.png", name: "daily" },
+      { id: "13", url: "9_13.png", name: "daily" },
     ],
   },
   {
@@ -339,12 +443,16 @@ export const projects = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj10.png',
+    thumb: 'pj10.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "10_1.png", name: "daily" },
+      { id: "2", url: "10_2.png", name: "monthly" },
+      { id: "3", url: "10_3.png", name: "product" },
+      { id: "4", url: "10_4.png", name: "upload" },
+      { id: "5", url: "10_5.png", name: "preview" },
     ],
   },
   {
@@ -360,25 +468,29 @@ export const projects = [
     ],
     description: "Next.js, TypeScript로 개발한 포트폴리오 사이트",
     feature: [
+      'Next.js, TypeScript, TailwindCSS 활용',
+      'framer motion를 이용한 효과 적용',
+      'Vercel 배포',
     ],
     contribution: [
-      {
-        id: '1',
-        title: '',
-        desc: [
-          'Next.js, TypeScript, TailwindCSS 활용',
-          'framer motion를 이용한 효과 적용',
-          'Vercel 배포',
-        ]
-      },
+      // {
+      //   id: '1',
+      //   title: '',
+      //   desc: [
+      //   ]
+      // },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "/images/tech/js-100.png" },
-      { id: "2", name: "Java", url: "/images/tech/java-100.png" },
+      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "2", name: "Java", url: "java-100.png" },
     ],
-    thumb: '/images/thumb/pj11.png',
+    thumb: 'pj11.png',
     images: [
-      { id: "1", url: "", name: "" },
+      { id: "1", url: "11_1.png", name: "main" },
+      { id: "2", url: "11_2.png", name: "about" },
+      { id: "3", url: "11_3.png", name: "skills" },
+      { id: "4", url: "11_4.png", name: "projects" },
+      { id: "5", url: "11_5.png", name: "career" },
     ],
   },
 ];
