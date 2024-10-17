@@ -24,6 +24,9 @@ const config: Config = {
         '43': '43rem',
         '50': '50rem',
       },
+      maxHeight: {
+        '80p': '80%'
+      },
       minHeight: {
         '35': '35rem', // 35rem을 'min-h-35'로 사용
       },

@@ -95,7 +95,21 @@ export const projects: Project[] = [
     ],
     thumb: 'pj2.png',
     images: [
-      // { id: "1", url: "", name: "" },
+      { id: "1", url: "2_1.png", name: "daily" },
+{ id: "2", url: "2_2.png", name: "daily" },
+{ id: "3", url: "2_3.png", name: "daily" },
+{ id: "4", url: "2_4.png", name: "daily" },
+{ id: "5", url: "2_5.png", name: "daily" },
+{ id: "6", url: "2_6.png", name: "daily" },
+{ id: "7", url: "2_7.png", name: "daily" },
+{ id: "8", url: "2_8.png", name: "daily" },
+{ id: "9", url: "2_9.png", name: "daily" },
+{ id: "10", url: "2_10.png", name: "daily" },
+{ id: "11", url: "2_11.png", name: "daily" },
+{ id: "12", url: "2_12.png", name: "daily" },
+{ id: "13", url: "2_13.png", name: "daily" },
+{ id: "14", url: "2_14.png", name: "daily" },
+
     ],
   },
   {
@@ -130,7 +144,18 @@ export const projects: Project[] = [
     ],
     thumb: 'pj3.png',
     images: [
-      // { id: "1", url: "", name: "" },
+      { id: "1", url: "3_1.png", name: "daily" },
+      { id: "2", url: "3_2.png", name: "daily" },
+      { id: "3", url: "3_3.png", name: "daily" },
+      { id: "4", url: "3_4.png", name: "daily" },
+      { id: "5", url: "3_5.png", name: "daily" },
+      { id: "6", url: "3_6.png", name: "daily" },
+      { id: "7", url: "3_7.png", name: "daily" },
+      { id: "8", url: "3_8.png", name: "daily" },
+      { id: "9", url: "3_9.png", name: "daily" },
+      { id: "10", url: "3_10.png", name: "daily" },
+      { id: "11", url: "3_11.png", name: "daily" },
+
     ],
   },
   {
@@ -166,7 +191,14 @@ export const projects: Project[] = [
     ],
     thumb: 'pj4.png',
     images: [
-      // { id: "1", url: "", name: "" },
+      { id: "1", url: "4_1.png", name: "daily" },
+      { id: "2", url: "4_2.png", name: "daily" },
+      { id: "3", url: "4_3.png", name: "daily" },
+      { id: "4", url: "4_4.png", name: "daily" },
+      { id: "5", url: "4_5.png", name: "daily" },
+      { id: "6", url: "4_6.png", name: "daily" },
+      { id: "7", url: "4_7.png", name: "daily" },
+      { id: "8", url: "4_8.png", name: "daily" },
     ],
   },
   {
@@ -202,7 +234,15 @@ export const projects: Project[] = [
     ],
     thumb: 'pj5.png',
     images: [
-      // { id: "1", url: "", name: "" },
+      { id: "1", url: "5_1.png", name: "daily" },
+      { id: "2", url: "5_2.png", name: "daily" },
+      { id: "3", url: "5_3.png", name: "daily" },
+      { id: "4", url: "5_4.png", name: "daily" },
+      { id: "5", url: "5_5.png", name: "daily" },
+      { id: "6", url: "5_6.png", name: "daily" },
+      { id: "7", url: "5_7.png", name: "daily" },
+      { id: "8", url: "5_8.png", name: "daily" },
+      { id: "9", url: "5_9.png", name: "daily" },
     ],
   },
   {
@@ -237,7 +277,11 @@ export const projects: Project[] = [
     ],
     thumb: 'pj6.png',
     images: [
-      // { id: "1", url: "", name: "" },
+      { id: "1", url: "6_1.png", name: "daily" },
+      { id: "2", url: "6_2.png", name: "daily" },
+      { id: "3", url: "6_3.png", name: "daily" },
+      { id: "4", url: "6_4.png", name: "daily" },
+      { id: "5", url: "6_5.png", name: "daily" },
     ],
   },
   {
