@@ -345,7 +345,6 @@ export const projects: Project[] = [
     id: '8',
     title: "링크오더",
     period: "2023.08 ~ 2024.03",
-    skill: "JavaScript, JSP, MariaDB",
     git: "",
     site: "",
     filter: [
@@ -488,7 +487,6 @@ export const projects: Project[] = [
     id: '11',
     title: "Portfolio",
     period: "2024.10 ~",
-    skill: "Next.js, TypeScript, TailwindCSS, Vercel",
     git: "",
     site: "https://lhjin-portfolio.vercel.app/",
     filter: [
