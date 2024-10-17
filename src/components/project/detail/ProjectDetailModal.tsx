@@ -84,7 +84,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                     ))}
                 </div>
 
-                <div>{project.description}</div>
+                <div className="whitespace-pre-line">{project.description}</div>
 
                 <div className="flex flex-col md:flex-row items-center gap-3 py-3">
                   {project.git && (

@@ -20,6 +20,7 @@ interface ProjectCardProps {
   link?: string;
   imageSrc?: string;
   skill: string;
+  description: string;
 }
 
 const TxtButton = tw.button`
@@ -52,6 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   link,
   imageSrc,
   skill,
+  description,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeId, setActiveId] = useState<string>(""); // 상세 프로젝트
@@ -102,7 +104,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             <p className="text-gray-600 text-base md:text-sm">{period}</p>
           )}
 
-          {feature && (
+          {/* {feature && (
             <ul className="list-disc pl-3">
               {feature.map((feat, index) => (
                 <li key={`projectfeat${index}`} className="text-gray-700 text-base">
@@ -112,7 +114,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 </li>
               ))}
             </ul>
-          )}
+          )} */}
+          <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
+            {description}
+          </span>
         </div>
         <div className="self-start py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
           {skill}

@@ -85,6 +85,7 @@ export default function Projects() {
                 filter={project.filter}
                 imageSrc={project.thumb}
                 feature={project.feature}
+                description={project.description}
               />
             </motion.li>
           ))}
