@@ -28,11 +28,11 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
     return null;
   }
 
-  const lf_showImgPreview = (imgId: string) => {
-    const img = project.images.find((image) => image.id === imgId);
-    if (img) {
-      setPreviewImgUrl(img.url);
-    }
+  const lf_showImgPreview = (imgUrl: string) => {
+    // const img = project.images.find((image) => image.id === imgId);
+    // if (img) {
+    imgUrl && setPreviewImgUrl(`/images/project/${imgUrl}`);
+    // }
   };
 
   const closePreview = (e: React.MouseEvent) => {
@@ -171,13 +171,14 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center cursor-pointer">
                       {project.images.map((img) => (
                         <div
-                          key={`${project.id}_detailImg_${img.id}`}
-                          className="relative bg-yellow-50 w-[38vw] h-[25vw] sm:w-[22vw] sm:h-[15vw] md:w-[18vw] md:h-[13vw]"
-                          onClick={() => lf_showImgPreview(img.id)}
+                          key={`${project.id}_detailImg_${img.url}`}
+                          className="relative bg-yellow-50 shadow-md rounded-md hover:border-2 border-themacolor4
+                          w-[38vw] h-[25vw] sm:w-[22vw] sm:h-[15vw] md:w-[18vw] md:h-[13vw]"
+                          onClick={() => lf_showImgPreview(img.url)}
                         >
                           <img
-                            src={img.url}
-                            className="absolute w-full h-full text-transparent object-cover border-stone-400"
+                            src={`/images/project/${img.url}`}
+                            className="absolute w-full h-full text-transparent object-contain border-stone-400"
                             alt={img.name}
                           />
                         </div>

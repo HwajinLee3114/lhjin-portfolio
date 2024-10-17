@@ -412,7 +412,11 @@ export const projects: Project[] = [
     ],
     thumb: 'pj11.png',
     images: [
-      // { id: "1", url: "", name: "" },
+      { id: "1", url: "1_1.png", name: "main" },
+      { id: "1", url: "1_2.png", name: "about" },
+      { id: "1", url: "1_3.png", name: "skills" },
+      { id: "1", url: "1_4.png", name: "projects" },
+      { id: "1", url: "1_5.png", name: "career" },
     ],
   },
 ];
