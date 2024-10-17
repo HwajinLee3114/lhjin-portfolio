@@ -399,12 +399,12 @@ export const projects: Project[] = [
       'Vercel 배포',
     ],
     contribution: [
-      {
-        id: '1',
-        title: '',
-        desc: [
-        ]
-      },
+      // {
+      //   id: '1',
+      //   title: '',
+      //   desc: [
+      //   ]
+      // },
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },

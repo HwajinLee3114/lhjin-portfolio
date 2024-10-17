@@ -1,9 +1,5 @@
 import { projects } from './projects';
 
-export interface CareerProject {
-  id: string;
-}
-
 export interface Career {
   id: string;
   company: string;
@@ -11,7 +7,7 @@ export interface Career {
   role: string;
   companyInfo: string;
   tag: string[];
-  projects: CareerProject[];
+  projects: string[];
 }
 
 export const career: Career[] = [
