@@ -50,7 +50,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
         }}
       />
       <AnimatePresence>
-        <div className="absolute top-20 right-16 z-10">
+        <div className="absolute top-20 right-16 z-10 cursor-pointer">
           <img src="/images/b2close-100.png" className="w-8" alt="" />
         </div>
         {isOpen && (
@@ -113,22 +113,28 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
               </div>
 
               <div className="w-full flex flex-col gap-3 items-center px-10 py-3">
-                <section className="w-full h-full">
-                  <div className="flex gap-2 text-xl font-bold text-left mb-5">
-                    <img src="/images/popular-100.png" className="w-7" alt="" />
-                    <div>주요 기능</div>
-                  </div>
-                  <ul className="list-disc text-left">
-                    {project.feature.map((feat, idx) => (
-                      <li
-                        key={`${project.id}_feat_${idx}`}
-                        className="text-gray-700 text-base"
-                      >
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
+                {project.feature && project.feature.length > 0 && (
+                  <section className="w-full h-full">
+                    <div className="flex gap-2 text-xl font-bold text-left mb-5">
+                      <img
+                        src="/images/popular-100.png"
+                        className="w-7"
+                        alt=""
+                      />
+                      <div>주요 기능</div>
+                    </div>
+                    <ul className="list-disc text-left">
+                      {project.feature.map((feat, idx) => (
+                        <li
+                          key={`${project.id}_feat_${idx}`}
+                          className="text-gray-700 text-base"
+                        >
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
 
                 {project.contribution && project.contribution.length > 0 && (
                   <section className="w-full h-full">

@@ -23,7 +23,7 @@ export const ImagePreviewModal = ({
           <motion.img
             src={imageUrl}
             alt=""
-            className="max-w-xs sm:max-w-lg md:max-w-2xl xl:max-w-4xl"
+            className="max-w-xs h-4/5 sm:max-w-lg md:max-w-2xl xl:max-w-4xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
