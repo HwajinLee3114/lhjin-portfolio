@@ -20,7 +20,6 @@ export interface Project {
   id: string;
   title: string;
   period: string;
-  skill: string;
   git: string;
   site: string;
   filter: { name: string; color: string }[];
@@ -37,7 +36,6 @@ export const projects: Project[] = [
     id: '1',
     title: "KT GiGA Live CMS",
     period: "2024.10 ~ 2024.11",
-    skill: "전자정부프레임워크, Java, Spring, JavaScript, JSP, PostgreSQL",
     git: "",
     site: "",
     filter: [
@@ -60,21 +58,20 @@ export const projects: Project[] = [
       },
     ],
     skillItem: [
+      { id: "0", name: "전자정부프레임워크", url: "" },
       { id: "1", name: "Java", url: "java-100.png" },
       { id: "2", name: "Spring", url: "spring-100.png" },
       { id: "3", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "4", name: "PostgreSQL", url: "postgreesql-100.png" },
     ],
     thumb: 'pj1.png',
-    images: [
-      // { id: "1", url: "", name: "" },
-    ],
+    images: [],
   },
   {
     id: '2',
     title: "분양이부장",
     period: "2021.05 ~ 2022.05",
-    skill: "JavaScript, JSP, MySQL, Java",
     git: "",
     site: "",
     filter: [
@@ -105,7 +102,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj2.png',
     images: [
@@ -130,7 +130,6 @@ export const projects: Project[] = [
     id: '3',
     title: "Pleisure",
     period: "2021.05 ~ 2022.02",
-    skill: "JavaScript, JSP, Spring, MySQL",
     git: "",
     site: "",
     filter: [
@@ -154,7 +153,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj3.png',
     images: [
@@ -176,7 +178,6 @@ export const projects: Project[] = [
     id: '4',
     title: "Digital Real Trip(DRT)",
     period: "2021.10 ~ 2021.12, 2022.04 ~ 2022.09",
-    skill: "JavaScript, JSP, Spring, MySQL",
     git: "",
     site: "https://www.djes.co.kr",
     filter: [
@@ -201,7 +202,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj4.png',
     images: [
@@ -219,7 +223,6 @@ export const projects: Project[] = [
     id: '5',
     title: "너의 운동은",
     period: "2022.02 ~ 2022.04",
-    skill: "React, Spring, Java, MySQL",
     git: "",
     site: "",
     filter: [
@@ -243,8 +246,10 @@ export const projects: Project[] = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "1", name: "React", url: "react-100.png" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj5.png',
     images: [
@@ -263,7 +268,6 @@ export const projects: Project[] = [
     id: '6',
     title: "포켓데이터",
     period: "2022.02 ~ 2022.04",
-    skill: "React, Spring, Java, MySQL",
     git: "",
     site: "",
     filter: [
@@ -286,8 +290,10 @@ export const projects: Project[] = [
       },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "1", name: "React", url: "react-100.png" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj6.png',
     images: [
@@ -302,7 +308,6 @@ export const projects: Project[] = [
     id: '7',
     title: "면세점 사이트",
     period: "2022.09 ~ 2023.07",
-    skill: "JavaScript, JSP, React, Spring, Java, Oracle",
     git: "",
     site: "",
     filter: [
@@ -325,7 +330,11 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "00", name: "JSP", url: "" },
+      { id: "2", name: "React", url: "react-100.png" },
+      { id: "3", name: "Java", url: "java-100.png" },
+      { id: "4", name: "Spring", url: "spring-100.png" },
+      { id: "5", name: "Oracle", url: "oracle-100.png" },
     ],
     thumb: 'pj7.png',
     images: [
@@ -360,7 +369,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MariaDB", url: "maria-100.png" },
     ],
     thumb: 'pj8.png',
     images: [
@@ -385,7 +397,6 @@ export const projects: Project[] = [
     id: '9',
     title: "WE 돌봄이",
     period: "2023.08 ~ 2024.03",
-    skill: "JavaScript, JSP, Spring, Java, MariaDB",
     git: "",
     site: "http://we.cookplay.net",
     filter: [
@@ -409,7 +420,10 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
+      { id: "00", name: "JSP", url: "" },
       { id: "2", name: "Java", url: "java-100.png" },
+      { id: "3", name: "Spring", url: "spring-100.png" },
+      { id: "4", name: "MariaDB", url: "maria-100.png" },
     ],
     thumb: 'pj9.png',
     images: [
@@ -432,7 +446,6 @@ export const projects: Project[] = [
     id: '10',
     title: "LMEDRP",
     period: "2024.06 ~ 2024.08",
-    skill: "JavaScript, JSP, Django, MySQL",
     git: "",
     site: "https://lmedrp.com",
     filter: [
@@ -458,7 +471,9 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "00", name: "JSP", url: "" },
+      { id: "2", name: "Django", url: "django-100.png" },
+      { id: "3", name: "MySQL", url: "mysql-100.png" },
     ],
     thumb: 'pj10.png',
     images: [
@@ -498,8 +513,10 @@ export const projects: Project[] = [
       // },
     ],
     skillItem: [
-      { id: "1", name: "JavaScript", url: "js-100.png" },
-      { id: "2", name: "Java", url: "java-100.png" },
+      { id: "1", name: "Next.js", url: "next-100.png" },
+      { id: "2", name: "TypeScript", url: "typescript-100.png" },
+      { id: "3", name: "TailwindCSS", url: "tailwind-100.png" },
+      { id: "4", name: "Vercel", url: "vercel-100.png" },
     ],
     thumb: 'pj11.png',
     images: [

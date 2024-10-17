@@ -24,7 +24,6 @@ interface ProjectCardProps {
   feature?: string[];
   link?: string;
   imageSrc?: string;
-  skill: string;
   skillItem: SkillItem[];
   description: string;
 }
@@ -58,7 +57,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   feature,
   link,
   imageSrc,
-  skill,
   skillItem,
   description,
 }) => {
@@ -127,11 +125,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </span>
         </div>
         {/* <div className="self-start py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
-          {skill}
+          {skillItem.map(item => item.name).join(', ')}
         </div> */}
-        <div className="flex flex-row items-center mb-2">
+        <div className="flex flex-row gap-1 items-center mb-2">
           {skillItem &&
-            skillItem.map((skillI) => (
+            skillItem.map((skillI) => skillI.url && (
               <img
                 key={`${id}_skill_${skillI.id}`}
                 src={`/images/tech/${skillI.url}`}

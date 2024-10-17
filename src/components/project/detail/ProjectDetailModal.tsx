@@ -73,12 +73,12 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                 </div>
 
                 <div className="items-center py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
-                  {project.skill}
+                  {project.skillItem.map(item => item.name).join(', ')}
                 </div>
 
                 {/* <div className="flex flex-row items-center mb-2">
                   {project.skillItem &&
-                    project.skillItem.map((skill) => (
+                    project.skillItem.map((skill) => skillI.url && (
                       <img
                         key={`${project.id}_skill_${skill.id}`}
                         src={`/images/tech/${skill.url}`}
