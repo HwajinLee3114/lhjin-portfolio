@@ -36,7 +36,7 @@ export default function Projects() {
       </div>
 
       <ul className="l_pjfilter flex gap-3 cursor-pointer mt-10 justify-center">
-        <img src="/images/filterYellow-100.png" className="w-5" alt="filter" />
+        <img src="/images/filterYellow-100.png" className="w-6" alt="filter" />
         <li
           className={`cursor-pointer g_RiaSansFont ${filter === "all" ? "selected" : ""}`}
           onClick={() => setFilter("all")}
