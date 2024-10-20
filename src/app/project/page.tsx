@@ -1,9 +1,10 @@
 "use client";
 
-import ProjectCard from "@/components/project/ProjectCard";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+
 import { projects } from "@/data/projects";
+import ProjectCard from "@/components/project/ProjectCard";
 
 /*
   - 필터(전체/개인/팀), 주요 프로젝트만 보기(체크)
@@ -19,12 +20,15 @@ import { projects } from "@/data/projects";
 export default function Projects() {
   const [filter, setFilter] = useState<string>("all");
 
-  const filteredPj = projects.filter((project) => {
-    if (filter === "personal")
-      return project.filter.some((f) => f.name === "personal");
-    if (filter === "team") return project.filter.some((f) => f.name === "team");
-    return true;
-  }).sort((a, b) => Number(b.id) - Number(a.id));
+  const filteredPj = projects
+    .filter((project) => {
+      if (filter === "personal")
+        return project.filter.some((f) => f.name === "personal");
+      if (filter === "team")
+        return project.filter.some((f) => f.name === "team");
+      return true;
+    })
+    .sort((a, b) => Number(b.id) - Number(a.id));
   return (
     <section
       id="projects"

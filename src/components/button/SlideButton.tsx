@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
-import styles from "./SlideButton.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
+import styles from "./SlideButton.module.css";
 
 interface SlideButtonProps {
   text: string;
@@ -45,10 +45,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({
       >
         <div className={styles.color} style={{ backgroundColor: color }}></div>
         <span>{text}</span>
-        <FontAwesomeIcon
-          icon={faArrowRight}
-          className="w-8 z-10 ml-2"
-        />
+        <FontAwesomeIcon icon={faArrowRight} className="w-8 z-10 ml-2" />
       </a>
     </div>
   );

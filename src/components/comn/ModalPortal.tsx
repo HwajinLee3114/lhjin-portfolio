@@ -7,7 +7,9 @@ interface ModalPortalProps {
 
 const ModalPortal: React.FC<ModalPortalProps> = ({ children }) => {
   const modalRoot =
-    typeof document === "undefined" ? null : document.getElementById("modalTmp");
+    typeof document === "undefined"
+      ? null
+      : document.getElementById("modalTmp");
 
   return modalRoot ? createPortal(children, modalRoot) : null;
 };

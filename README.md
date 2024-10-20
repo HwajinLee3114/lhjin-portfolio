@@ -1,6 +1,7 @@
 ## 프론트엔드 개발자 이화진 포트폴리오
 
-### merge comment 
+### merge comment
+
 ```
 MMdd.HH:mm merge
 ```
@@ -9,7 +10,8 @@ MMdd.HH:mm merge
 npm run dev
 ```
 
-### Tech 
+### Tech
+
 NEXT.js
 TypeScript
 TailwindCSS

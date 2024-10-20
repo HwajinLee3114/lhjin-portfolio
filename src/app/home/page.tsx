@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+
 import ScrollDownBtn from "@/components/button/ScrollDownBtn";
 
 export default function HomeSec() {

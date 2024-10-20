@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
+
 import { ProjectDetailModal } from "./detail/ProjectDetailModal";
 import ModalPortal from "../comn/ModalPortal";
 
@@ -54,8 +55,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   filter,
   period,
-  feature,
-  link,
+  // feature,
+  // link,
   imageSrc,
   skillItem,
   description,
@@ -129,14 +130,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div> */}
         <div className="flex flex-row gap-1 items-center mb-2">
           {skillItem &&
-            skillItem.map((skillI) => skillI.url && (
-              <img
-                key={`${id}_skill_${skillI.id}`}
-                src={`/images/tech/${skillI.url}`}
-                className="w-7"
-                alt={skillI.name}
-              />
-            ))}
+            skillItem.map(
+              (skillI) =>
+                skillI.url && (
+                  <img
+                    key={`${id}_skill_${skillI.id}`}
+                    src={`/images/tech/${skillI.url}`}
+                    className="w-7"
+                    alt={skillI.name}
+                  />
+                ),
+            )}
         </div>
         {id && (
           <div className="flex justify-end">
@@ -155,7 +159,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {isOpen && (
         <ModalPortal>
           <ModalWrapper
-            onClick={(e) => {
+            onClick={() => {
               setIsOpen(false);
               setActiveId("");
             }}
