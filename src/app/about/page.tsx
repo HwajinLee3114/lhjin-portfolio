@@ -3,7 +3,6 @@ import ProfileCircle from "@/components/about/ProfileCircle";
 import HoverAMenu from "@/components/comn/HoverAMenu";
 import React from "react";
 
-
 export default function About() {
   return (
     <section
@@ -13,7 +12,9 @@ export default function About() {
       <div className="w-full md:w-96 text-center mb-5">
         <h2 className="text-2xl text-white g_titleEngFontBlack">About Me</h2>
         <p className="text-lg text-gray-300">
-          개발자로서의 여정을<br/>나누고 싶습니다
+          개발자로서의 여정을
+          <br />
+          나누고 싶습니다
         </p>
       </div>
 

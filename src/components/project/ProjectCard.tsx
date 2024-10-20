@@ -129,14 +129,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div> */}
         <div className="flex flex-row gap-1 items-center mb-2">
           {skillItem &&
-            skillItem.map((skillI) => skillI.url && (
-              <img
-                key={`${id}_skill_${skillI.id}`}
-                src={`/images/tech/${skillI.url}`}
-                className="w-7"
-                alt={skillI.name}
-              />
-            ))}
+            skillItem.map(
+              (skillI) =>
+                skillI.url && (
+                  <img
+                    key={`${id}_skill_${skillI.id}`}
+                    src={`/images/tech/${skillI.url}`}
+                    className="w-7"
+                    alt={skillI.name}
+                  />
+                ),
+            )}
         </div>
         {id && (
           <div className="flex justify-end">

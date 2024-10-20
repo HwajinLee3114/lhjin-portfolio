@@ -21,7 +21,7 @@ const QuoteDiv = tw.div`
 export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
   const project = activeId ? getProjectById(activeId) : null;
   const [previewImgUrl, setPreviewImgUrl] = useState<string | undefined>(
-    undefined
+    undefined,
   );
 
   if (!project) {
@@ -73,7 +73,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                 </div>
 
                 <div className="items-center py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
-                  {project.skillItem.map(item => item.name).join(', ')}
+                  {project.skillItem.map((item) => item.name).join(", ")}
                 </div>
 
                 {/* <div className="flex flex-row items-center mb-2">

@@ -45,10 +45,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({
       >
         <div className={styles.color} style={{ backgroundColor: color }}></div>
         <span>{text}</span>
-        <FontAwesomeIcon
-          icon={faArrowRight}
-          className="w-8 z-10 ml-2"
-        />
+        <FontAwesomeIcon icon={faArrowRight} className="w-8 z-10 ml-2" />
       </a>
     </div>
   );

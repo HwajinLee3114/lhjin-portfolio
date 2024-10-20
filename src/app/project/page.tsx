@@ -19,12 +19,15 @@ import { projects } from "@/data/projects";
 export default function Projects() {
   const [filter, setFilter] = useState<string>("all");
 
-  const filteredPj = projects.filter((project) => {
-    if (filter === "personal")
-      return project.filter.some((f) => f.name === "personal");
-    if (filter === "team") return project.filter.some((f) => f.name === "team");
-    return true;
-  }).sort((a, b) => Number(b.id) - Number(a.id));
+  const filteredPj = projects
+    .filter((project) => {
+      if (filter === "personal")
+        return project.filter.some((f) => f.name === "personal");
+      if (filter === "team")
+        return project.filter.some((f) => f.name === "team");
+      return true;
+    })
+    .sort((a, b) => Number(b.id) - Number(a.id));
   return (
     <section
       id="projects"

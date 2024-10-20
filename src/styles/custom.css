@@ -1,13 +1,13 @@
 .g_titleEngFontBlack {
-  font-family: 'TitleEngFontBlack', serif;
+  font-family: "TitleEngFontBlack", serif;
 }
 
 .g_titleEngFontOutline {
-  font-family: 'TitleEngFontOutline', serif;
+  font-family: "TitleEngFontOutline", serif;
 }
 
 .g_RiaSansFont {
-  font-family: 'RiaSansFont', serif;
+  font-family: "RiaSansFont", serif;
 }
 
 section {
@@ -19,8 +19,8 @@ section {
   position: absolute;
   width: 1px;
   height: 2.4rem;
-  margin-left: .1rem;
-  border-right: .05em solid #464545;
+  margin-left: 0.1rem;
+  border-right: 0.05em solid #464545;
   animation: blink 0.7s infinite ease;
   animation-delay: 0.4s;
   opacity: 0;
@@ -46,7 +46,7 @@ section {
 .l_menu_tab.active {
   font-weight: bold;
   color: #3b82f6;
-  box-shadow: inset 0 -4px 0 #FAAD1A;
+  box-shadow: inset 0 -4px 0 #faad1a;
 }
 
 /* 사이드메뉴 햄버거 버튼 S */
@@ -57,14 +57,14 @@ section {
   height: 8px; /* 바의 높이 */
   border-radius: 2px; /* 바의 테두리 */
   opacity: 0.8;
-  background: #FAAD1A; /* 바의 색상 */
+  background: #faad1a; /* 바의 색상 */
 }
 
 .l_hamburger_menu {
   z-index: 100;
   position: absolute;
-  top: -.4rem;
-  right: .5rem;
+  top: -0.4rem;
+  right: 0.5rem;
   margin: 30px;
   transition: all 300ms;
 }
@@ -103,15 +103,19 @@ section {
 
 /* 프로젝트 필터 */
 .l_pjfilter {
-  color: #F6F1E3;
+  color: #f6f1e3;
 }
 .l_pjfilter .selected {
-  color: #FAAD1A;
+  color: #faad1a;
 }
 
 @keyframes blink {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -120,7 +124,7 @@ section {
   }
 
   .l_search_div {
-    padding: .8rem 4rem;
+    padding: 0.8rem 4rem;
     width: 400px;
     height: 60px;
     line-height: 60px;
@@ -133,7 +137,7 @@ section {
   }
 
   .l_search_div {
-    padding: .5rem 2.5rem;
+    padding: 0.5rem 2.5rem;
     width: 300px;
     height: 45px;
     line-height: 45px;

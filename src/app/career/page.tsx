@@ -76,7 +76,7 @@ export default function Career() {
                         </div>
                         <div>{pj.description}</div>
                       </section>
-                    )
+                    ),
                 )}
             </li>
           ))}
