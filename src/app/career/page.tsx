@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
+
 import { career } from "@/data/career";
 import { projects } from "@/data/projects";
-import { motion } from "framer-motion";
 
 const careerWithProjects = career.map((c) => ({
   ...c,
@@ -13,8 +13,10 @@ const careerWithProjects = career.map((c) => ({
 
 export default function Career() {
   const sortedCareer = useMemo(() => {
-    return careerWithProjects.sort((a, b) => parseInt(b.id) - parseInt(a.id));
-  }, [careerWithProjects]);
+    return [...careerWithProjects].sort(
+      (a, b) => parseInt(b.id) - parseInt(a.id),
+    );
+  }, []);
 
   return (
     <section

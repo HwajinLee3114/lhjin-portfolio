@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 interface HeaderProps {
   activeSection: string;
@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
     setIsOpen(!isOpen);
   };
 
-  const lf_handleScroll = () => {
+  const lf_handleScroll = useCallback(() => {
     const sections = ["home", "about", "skills", "projects", "career"];
     const scrollY = window.scrollY;
 
@@ -28,14 +28,14 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         }
       }
     });
-  };
+  }, [setActiveSection]);
 
   useEffect(() => {
     window.addEventListener("scroll", lf_handleScroll);
     return () => {
       window.removeEventListener("scroll", lf_handleScroll);
     };
-  }, []);
+  }, [lf_handleScroll]);
 
   const lf_scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         onClick={() => lf_scrollToSection("home")}
         className="flex gap-2 text-lg md:text-2xl text-themacolor4"
       >
-        <div className="g_titleEngFontBlack">lhjin's</div>
+        <div className="g_titleEngFontBlack">lhjin&apos;s</div>
         <div className="g_titleEngFontOutline">Portfolio</div>
       </button>
       {/* 모바일 햄버거 버튼 */}
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           }
           `}
         >
-          It's ME
+          It&apos;s ME
         </button>
         <button
           onClick={() => lf_scrollToSection("skills")}
@@ -112,7 +112,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           }
           `}
         >
-          It's ME
+          It&apos;s ME
         </button>
         <button
           onClick={() => lf_scrollToSection("skills")}

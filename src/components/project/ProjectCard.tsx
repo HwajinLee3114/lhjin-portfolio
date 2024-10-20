@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
+
 import { ProjectDetailModal } from "./detail/ProjectDetailModal";
 import ModalPortal from "../comn/ModalPortal";
 
@@ -54,8 +55,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   filter,
   period,
-  feature,
-  link,
+  // feature,
+  // link,
   imageSrc,
   skillItem,
   description,
@@ -158,7 +159,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {isOpen && (
         <ModalPortal>
           <ModalWrapper
-            onClick={(e) => {
+            onClick={() => {
               setIsOpen(false);
               setActiveId("");
             }}

@@ -1,6 +1,7 @@
+import React from "react";
+
 import SkillItem from "@/components/skill/SkillItem";
 import { skills } from "@/data/skills";
-import React from "react";
 
 export default function Skills() {
   return (

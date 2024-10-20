@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import tw from "tailwind-styled-components";
+
 import { getProjectById } from "@/data/projects";
 import { ImagePreviewModal } from "@/components/comn/ImagePreviewModal";
 
@@ -30,12 +31,12 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
 
   const lf_showImgPreview = (imgUrl: string) => {
     // const img = project.images.find((image) => image.id === imgId);
-    // if (img) {
-    imgUrl && setPreviewImgUrl(`/images/project/${imgUrl}`);
-    // }
+    if (imgUrl) {
+      setPreviewImgUrl(`/images/project/${imgUrl}`);
+    }
   };
 
-  const closePreview = (e: React.MouseEvent) => {
+  const closePreview = () => {
     setPreviewImgUrl(undefined);
   };
 
@@ -46,7 +47,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
         imageUrl={previewImgUrl}
         onClose={(e) => {
           e.stopPropagation();
-          closePreview(e);
+          closePreview();
         }}
       />
       <AnimatePresence>
@@ -147,7 +148,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                       <div>기여 부분</div>
                     </div>
                     <ul className="list-disc text-left">
-                      {project.contribution.map((contri, index) => (
+                      {project.contribution.map((contri) => (
                         <div
                           key={`${project.id}_contri_${contri.id}`}
                           className="mb-5"

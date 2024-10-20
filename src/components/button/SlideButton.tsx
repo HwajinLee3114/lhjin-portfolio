@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
-import styles from "./SlideButton.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
+import styles from "./SlideButton.module.css";
 
 interface SlideButtonProps {
   text: string;

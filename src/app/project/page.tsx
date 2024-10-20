@@ -1,9 +1,10 @@
 "use client";
 
-import ProjectCard from "@/components/project/ProjectCard";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+
 import { projects } from "@/data/projects";
+import ProjectCard from "@/components/project/ProjectCard";
 
 /*
   - 필터(전체/개인/팀), 주요 프로젝트만 보기(체크)

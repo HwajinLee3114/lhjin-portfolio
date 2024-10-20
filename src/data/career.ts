@@ -1,5 +1,3 @@
-import { projects } from "./projects";
-
 export interface Career {
   id: string;
   company: string;
