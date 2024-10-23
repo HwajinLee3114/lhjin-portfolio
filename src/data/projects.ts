@@ -298,7 +298,7 @@ export const projects: Project[] = [
   {
     id: "6",
     title: "포켓데이터",
-    period: "2022.02 ~ 2022.04",
+    period: "2022.06 ~ 2022.09",
     git: "",
     site: "",
     filter: [
@@ -459,7 +459,7 @@ export const projects: Project[] = [
   {
     id: "9",
     title: "WE 돌봄이",
-    period: "2023.08 ~ 2024.03",
+    period: "2024.03 ~ 2024.05",
     git: "",
     site: "http://we.cookplay.net",
     filter: [
