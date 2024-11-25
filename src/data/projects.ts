@@ -582,7 +582,7 @@ export const projects: Project[] = [
     id: "11",
     title: "Portfolio",
     period: "2024.10 ~",
-    git: "",
+    git: "https://github.com/HwajinLee3114/lhjin-portfolio",
     site: "https://lhjin-portfolio.vercel.app/",
     filter: [
       { name: "personal", color: "hotpink" },
@@ -619,6 +619,83 @@ export const projects: Project[] = [
       { id: "3", url: "11_3.png", name: "skills" },
       { id: "4", url: "11_4.png", name: "projects" },
       { id: "5", url: "11_5.png", name: "career" },
+    ],
+  },
+  {
+    id: "12",
+    title: "Blog",
+    period: "2024.10 ~",
+    git: "https://github.com/HwajinLee3114/lhjin-blog",
+    site: "https://lhjin-blog.vercel.app/",
+    filter: [
+      { name: "personal", color: "hotpink" },
+      { name: "FE", color: "lightgreen" },
+    ],
+
+    description:
+      "Next.js, TypeScript를 활용하여 개인 블로그를 구현하고 있습니다.",
+    feature: [
+      "React v18, Next.js v14 적용",
+      "Styled-Component의 ThemeProvider를 이용하여 다크/라이트/커스텀 모드 구현",
+      "TailwindCSS를 사용하여 간결하고 일관된 스타일링 코드를 구현하고 반응형 적용",
+      "Vercel 배포를 통한 CI/CD 자동화",
+      "GitHub Actions를 통해 master merge 시 ESLint 확인",
+      "zustand로 블로그에 필요한 정보  관리",
+    ],
+    contribution: [
+      // {
+      //   id: '1',
+      //   title: '',
+      //   desc: [
+      //     '',
+      //   ]
+      // },
+    ],
+    skillItem: [
+      { id: "1", name: "Next.js", url: "next-100.png" },
+      { id: "2", name: "TypeScript", url: "typescript-100.png" },
+      { id: "3", name: "TailwindCSS", url: "tailwind-100.png" },
+      { id: "4", name: "Vercel", url: "vercel-100.png" },
+      { id: "5", name: "Styled-Components", url: "styled-components.png" },
+      { id: "6", name: "zustand", url: "zustand.svg" },
+    ],
+    thumb: "pj12.png",
+    images: [
+      { id: "1", url: "12_1.png", name: "blog_light" },
+      { id: "2", url: "12_2.png", name: "blog_custom" },
+    ],
+  },
+  {
+    id: "13",
+    title: "MyPlanIt",
+    period: "2024.11.24 ~",
+    git: "https://github.com/HwajinLee3114/myit",
+    site: "https://myit-lhjins-projects.vercel.app/",
+    filter: [
+      { name: "personal", color: "hotpink" },
+      { name: "FE", color: "lightgreen" },
+    ],
+
+    description:
+      "React.js, TypeScript를 활용하여 오늘 하루 일정을 정리하여 이미지로 내보낼 수 있습니다.",
+    feature: [
+      "html2canvas를 사용하여 간편한 이미지 내보내기 기능 구현",
+      "TailwindCSS를 사용하여 간결하고 일관된 스타일링 코드를 구현하고 반응형 적용",
+      "Vercel 배포를 통한 CI/CD 자동화",
+    ],
+    contribution: [],
+    skillItem: [
+      { id: "1", name: "React.js", url: "react-100.png" },
+      { id: "2", name: "TypeScript", url: "typescript-100.png" },
+      { id: "3", name: "TailwindCSS", url: "tailwind-100.png" },
+      { id: "4", name: "Vercel", url: "vercel-100.png" },
+    ],
+    thumb: "pj13.png",
+    images: [
+      { id: "1", url: "13_1.png", name: "main" },
+      { id: "2", url: "13_2.png", name: "creat_todo" },
+      { id: "3", url: "13_3.png", name: "todo_list" },
+      { id: "4", url: "13_4.png", name: "export_image" },
     ],
   },
 ];
