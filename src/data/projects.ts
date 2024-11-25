@@ -657,12 +657,45 @@ export const projects: Project[] = [
       { id: "3", name: "TailwindCSS", url: "tailwind-100.png" },
       { id: "4", name: "Vercel", url: "vercel-100.png" },
       { id: "5", name: "Styled-Components", url: "styled-components.png" },
-      { id: "5", name: "zustand", url: "zustand.svg" },
+      { id: "6", name: "zustand", url: "zustand.svg" },
     ],
     thumb: "pj12.png",
     images: [
       { id: "1", url: "12_1.png", name: "blog_light" },
       { id: "2", url: "12_2.png", name: "blog_custom" },
+    ],
+  },
+  {
+    id: "13",
+    title: "MyPlanIt",
+    period: "2024.11.24 ~",
+    git: "https://github.com/HwajinLee3114/myit",
+    site: "https://myit-lhjins-projects.vercel.app/",
+    filter: [
+      { name: "personal", color: "hotpink" },
+      { name: "FE", color: "lightgreen" },
+    ],
+
+    description:
+      "React.js, TypeScript를 활용하여 오늘 하루 일정을 정리하여 이미지로 내보낼 수 있습니다.",
+    feature: [
+      "html2canvas를 사용하여 간편한 이미지 내보내기 기능 구현",
+      "TailwindCSS를 사용하여 간결하고 일관된 스타일링 코드를 구현하고 반응형 적용",
+      "Vercel 배포를 통한 CI/CD 자동화",
+    ],
+    contribution: [],
+    skillItem: [
+      { id: "1", name: "React.js", url: "react-100.png" },
+      { id: "2", name: "TypeScript", url: "typescript-100.png" },
+      { id: "3", name: "TailwindCSS", url: "tailwind-100.png" },
+      { id: "4", name: "Vercel", url: "vercel-100.png" },
+    ],
+    thumb: "pj13.png",
+    images: [
+      { id: "1", url: "13_1.png", name: "main" },
+      { id: "2", url: "13_2.png", name: "creat_todo" },
+      { id: "3", url: "13_3.png", name: "todo_list" },
+      { id: "4", url: "13_4.png", name: "export_image" },
     ],
   },
 ];
