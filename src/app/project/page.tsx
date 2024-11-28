@@ -18,7 +18,7 @@ import ProjectCard from "@/components/project/ProjectCard";
   - hover 이벤트 / 스크롤되어 내려올 때 카드 슉슉 뜨는 
 */
 export default function Projects() {
-  const [filter, setFilter] = useState<string>("all");
+  const [filter, setFilter] = useState<string>("feature");
 
   const filteredPj = projects
     .filter((project) => {
@@ -26,6 +26,8 @@ export default function Projects() {
         return project.filter.some((f) => f.name === "personal");
       if (filter === "team")
         return project.filter.some((f) => f.name === "team");
+      if (filter === "feature")
+        return project.filter.some((f) => f.name === "feature");
       return true;
     })
     .sort((a, b) => Number(b.id) - Number(a.id));
@@ -46,6 +48,14 @@ export default function Projects() {
           onClick={() => setFilter("all")}
         >
           All
+        </li>
+        <li
+          className={`cursor-pointer g_RiaSansFont ${
+            filter === "feature" ? "selected" : ""
+          }`}
+          onClick={() => setFilter("feature")}
+        >
+          Feature
         </li>
         <li
           className={`cursor-pointer g_RiaSansFont ${

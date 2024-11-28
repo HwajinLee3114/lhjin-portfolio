@@ -89,7 +89,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
             <h2 className="text-base font-bold">{title}</h2>
             {filter && (
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
                 {filter.map((fil, idx) => (
                   <p
                     key={`projectfilter${idx}`}
@@ -128,7 +128,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* <div className="self-start py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
           {skillItem.map(item => item.name).join(', ')}
         </div> */}
-        <div className="flex flex-row gap-1 items-center mb-2">
+        <div className="flex flex-row gap-1 items-center mb-2 flex-wrap">
           {skillItem &&
             skillItem.map(
               (skillI) =>
