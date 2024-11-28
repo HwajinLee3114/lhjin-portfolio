@@ -51,8 +51,7 @@ export const projects: Project[] = [
         title:
           "VR 계열사 및 관리자 콘텐츠 관리 사이트 유지보수 및 신규 페이지 개발",
         desc: [
-          "콘텐츠 관리 페이지 유지보수 및 신규 기능 추가",
-          "검색 키워드 관리 및 앱 버전 관리 신규 개발",
+          "VR 계열사 및 관리자 콘텐츠 관리 사이트의 UI/UX를 리뉴얼하여 사용자 만족도를 크게 높였고, 웹사이트 접근성을 개선하였습니다.",
         ],
       },
     ],
@@ -188,11 +187,12 @@ export const projects: Project[] = [
   {
     id: "4",
     title: "Digital Real Trip(DRT)",
-    period: "2021.10 ~ 2021.12, 2022.04 ~ 2022.09",
+    period: "2021.10 ~ 2022.09",
     git: "",
     site: "https://www.djes.co.kr",
     filter: [
       { name: "team", color: "cornflowerblue" },
+      { name: "feature", color: "gold" },
       { name: "FE", color: "lightgreen" },
       { name: "BE", color: "coral" },
     ],
@@ -206,22 +206,30 @@ export const projects: Project[] = [
     contribution: [
       {
         id: "1",
-        title: "사용자 페이지 프론트엔드 리뉴얼 및 백엔드 유지보수",
+        title: "사용자 페이지의 UI와 기능 개선",
         desc: [
-          "카카오, 네이버 SNS 로그인 구현",
-          "SMS 및 LMS 이미지 발송 기능 구현",
-          "게임별 템플릿 분기 처리",
-          "게임별 BGM 및 영상 제어",
-          "플레이 시간 기록 및 랭킹 출력 구현",
-          "커뮤니티 게시판 구현",
+          "사용자 페이지의 UI와 기능을 전체적으로 개선하면서 이전 버전에 비해 사용자 수가 20% 중가하였습니다.",
         ],
       },
       {
         id: "2",
-        title: "관리자 페이지 유지보수 및 신규 개발",
+        title: "스토리 기반 게임에 BGM 추가, LMS 발송",
         desc: [
-          "게임 템플릿 관리 기능 내 BGM, 썸네일 관리 신규 구현",
-          "실시간 오류 대응 및 처리",
+          "스토리 기반 게임에 BGM을 추가하고 체험 관련 이미지를 LMS로 발송하여 스토리 진행 이탈률을 50% → 20%로 개선했습니다.",
+        ],
+      },
+      {
+        id: "3",
+        title: "카카오, 네이버 SNS 로그인 추가",
+        desc: [
+          "카카오, 네이버 SNS 로그인을 추가하여 사용자 접근성 및 편의성을 크게 향상시켰습니다.",
+        ],
+      },
+      {
+        id: "4",
+        title: "관리자 페이지에 스토리 템플릿 관리 기능을 구현",
+        desc: [
+          "관리자 페이지에 스토리 템플릿 관리 기능을 구현하여 클라이언트 코드에 하드코딩되어 있던 코드 중복을 줄여 코드 가독성을 높이고, 페이지 로딩 시간을 단축시켜 성능을 개선했습니다.",
         ],
       },
     ],
@@ -247,11 +255,12 @@ export const projects: Project[] = [
   {
     id: "5",
     title: "너의 운동은",
-    period: "2022.02 ~ 2022.04",
+    period: "2022.02 ~ 2022.05",
     git: "",
     site: "",
     filter: [
       { name: "team", color: "cornflowerblue" },
+      { name: "feature", color: "gold" },
       { name: "FE", color: "lightgreen" },
       { name: "BE", color: "coral" },
     ],
@@ -265,14 +274,16 @@ export const projects: Project[] = [
     contribution: [
       {
         id: "1",
-        title:
-          "전체 페이지 프론트엔드 화면 및 기능 구현과 백엔드 오류 유지보수",
+        title: "Reduct 비동기 데이터 처리",
         desc: [
-          'Cookie를 이용한 메인 팝업 "오늘 그만 보기" 기능 처리',
-          "카카오 및 네이버 SNS 로그인 처리",
-          "신체 정보 요약 출력 (BMI, 체지방률)",
-          "운동별 커뮤니티 글쓰기 및 댓글 기능 구현",
-          "운동 관련 설문조사 및 체력 측정 데이터 차트 캘린더 출력",
+          "비동기 데이터 처리에 Redux를 적용하여 데이터 흐름 관리의 효율성을 높였습니다.",
+        ],
+      },
+      {
+        id: "2",
+        title: "공통 컴포넌트 구현 및 폴더 구조를 개선",
+        desc: [
+          "공통 컴포넌트 구현 및 폴더 구조를 개선으로 유지보수성 및 확장성을 향상시켰고, 이후 추가 기능 구현 및 다른 작업자와의 업무 효율을 개선하였습니다.",
         ],
       },
     ],
@@ -298,11 +309,12 @@ export const projects: Project[] = [
   {
     id: "6",
     title: "포켓데이터",
-    period: "2022.06 ~ 2022.09",
+    period: "2022.06 ~ 2022.10",
     git: "",
     site: "",
     filter: [
       { name: "team", color: "cornflowerblue" },
+      { name: "feature", color: "gold" },
       { name: "FE", color: "lightgreen" },
     ],
     description:
@@ -315,14 +327,9 @@ export const projects: Project[] = [
     contribution: [
       {
         id: "1",
-        title: "전체 프론트엔드 화면 및 기능 구현",
+        title: "기존 jQuery 기반 프로젝트를 React로 리팩토링",
         desc: [
-          "로그인 여부에 따른 페이지 출력 정보 분기 처리",
-          "Slider 라이브러리를 이용한 배너 구현",
-          "소셜 링크 공유 기능 처리",
-          "카카오톡 및 네이버 SNS 로그인 처리",
-          "회원 정보, 문의하기, 공지사항 페이지 작업 및 공공 데이터 연동",
-          "설정한 검색 조건, 맞춤 알림 조건별 데이터 출력 및 알림 발송 기능 처리",
+          "기존 jQuery 기반의 프로젝트를 서버와 클라이언트로 분리한 후 React로 리팩토링하여, 상태 관리 및 코드 가독성 및 재사용성을 크게 향상시켰습니다. 또한 불필요한 렌더링을 최소화하여 성능을 최적화하고, 사용자 편의성을 크게 향상시켰습니다.",
         ],
       },
     ],
@@ -396,6 +403,7 @@ export const projects: Project[] = [
     site: "",
     filter: [
       { name: "team", color: "cornflowerblue" },
+      { name: "feature", color: "gold" },
       { name: "FE", color: "lightgreen" },
     ],
     description:
@@ -409,24 +417,23 @@ export const projects: Project[] = [
     contribution: [
       {
         id: "1",
-        title: "전체 관리자 페이지 화면 및 기능 구현",
-        desc: [
-          "사업자 등록 번호 공공 API 연동을 통한 유효성 체크 처리",
-          "점포 및 점포별 직원 관리 기능 구현",
-          "판매 링크 및 판매 링크별 주문서 관리 기능 구현",
-          "카카오맵 API 연동을 통한 우편번호 검색 및 지도에 배송지 표시 기능 구현",
-          "판매 링크 내 상품 관리 시 SessionStorage 활용으로 페이지 이동 중 입력 중 정보 유지",
-          "점포 승인 및 직원 입사 관리, 판매 링크 관리, 배달 준비 및 배송 페이지 구현",
-        ],
+        title:
+          "공유 링크를 통한 구매 페이지 접속으로 구매자의 접근성을 높였습니다.",
+        desc: [],
       },
       {
         id: "2",
-        title: "사용자 페이지 유지보수 및 신규 개발",
+        title: "장바구니 기능 추가",
         desc: [
-          "카카오, 네이버 SNS 로그인 구현",
-          "문자 발송 시스템 연동을 통한 인증번호 기능 구현",
-          "장바구니 화면 및 SessionStorage 활용한 기능 구현",
-          "결제 시스템 연동을 통한 주문 기능 구현",
+          "기존 댓글 주문 방식에서 장바구니 기능으로 변경하여 UI를 개선하고, 구매 전환율을 15% 증가시켰으며, 사용자 편의성을 향상시켰습니다.",
+          "세션 기반 장바구니 기능을 구현하여 페이지 로딩 시간을 50% 단축시키고, 실시간 상품 수량을 표시하여 장바구니 이탈률을 감소시켰습니다.",
+        ],
+      },
+      {
+        id: "3",
+        title: "점포 등록 및 직원 관리 프로세스 개선",
+        desc: [
+          "점포 등록 및 직원 관리 프로세스를 개선하여 운영 효율성 및 배송 처리 속도를 20% 향상시켰습니다.",
         ],
       },
     ],
@@ -517,6 +524,7 @@ export const projects: Project[] = [
     site: "https://lmedrp.com",
     filter: [
       { name: "team", color: "cornflowerblue" },
+      { name: "feature", color: "gold" },
       { name: "FE", color: "lightgreen" },
     ],
     description: "스튜디오 스케줄 및 촬영 관리 EDRP 시스템입니다.",
@@ -586,6 +594,7 @@ export const projects: Project[] = [
     site: "https://lhjin-portfolio.vercel.app/",
     filter: [
       { name: "personal", color: "hotpink" },
+      { name: "feature", color: "gold" },
       { name: "FE", color: "lightgreen" },
     ],
 
@@ -633,7 +642,7 @@ export const projects: Project[] = [
     ],
 
     description:
-      "Next.js, TypeScript를 활용하여 개인 블로그를 구현하고 있습니다.",
+      "Next.js, TypeScript를 활용하여 개인 블로그를 구현하고 있습니다.\n기술 학습 및 아카이빙 용도의 개인 블로그",
     feature: [
       "React v18, Next.js v14 적용",
       "Styled-Component의 ThemeProvider를 이용하여 다크/라이트/커스텀 모드 구현",
@@ -673,6 +682,7 @@ export const projects: Project[] = [
     site: "https://myit-lhjins-projects.vercel.app/",
     filter: [
       { name: "personal", color: "hotpink" },
+      { name: "feature", color: "gold" },
       { name: "FE", color: "lightgreen" },
     ],
 
