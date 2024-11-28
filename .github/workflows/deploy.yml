@@ -32,4 +32,4 @@ jobs:
 
       - name: Deploy to Vercel
         if: success() && github.event_name == 'push'
-        run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
