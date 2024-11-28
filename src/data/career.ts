@@ -72,4 +72,14 @@ export const career: Career[] = [
     tag: ["프론트엔드 개발", "JavaScript", "JSP", "MySQL"],
     projects: ["10"],
   },
+  {
+    id: "5",
+    company: "유데미 러닝크루 리더 1기",
+    period: "2024.11 - 진행중", // 2025.01 (3개월)
+    role: "",
+    companyInfo:
+      "유데미 러닝크루 리더 1기 활동을 하며 TypeScript, NextJS 스터디 리더를 맡아 활동하고 있습니다.",
+    tag: ["Udemy", "유데미", "러닝크루", "TypeScript", "Next"],
+    projects: [],
+  },
 ];
