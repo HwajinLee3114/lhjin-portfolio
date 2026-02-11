@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import ThemeToggle from './ThemeToggle'
 import { focusRing } from '@/styles/ui'
 
@@ -119,9 +120,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           <button
             key={`mobile_${item.id}`}
             onClick={() => lf_scrollToSection(item.id)}
-          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === item.id ? 'active' : ''
-          }
+            className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
+              activeSection === item.id ? 'active' : ''
+            }
             ${focusRing} focus-visible:rounded-sm
             `}
           >

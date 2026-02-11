@@ -32,10 +32,6 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
   const [activeTab, setActiveTab] = useState<string>('pj-info')
   const containerRef = useRef<HTMLDivElement | null>(null)
 
-  if (!project) {
-    return null
-  }
-
   const lf_showImgPreview = (imgUrl: string) => {
     // const img = project.images.find((image) => image.id === imgId);
     if (imgUrl) {
@@ -48,7 +44,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
   }
 
   useEffect(() => {
-    if (!isOpen || !containerRef.current) return
+    if (!project || !isOpen || !containerRef.current) return
     const targets = ['pj-info', 'pj-feature', 'pj-contrib', 'pj-images']
       .map((id) => containerRef.current?.querySelector(`#${id}`))
       .filter(Boolean) as HTMLElement[]
@@ -67,15 +63,15 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
 
     targets.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [isOpen, activeId])
+  }, [isOpen, activeId, project])
+
+  if (!project) {
+    return null
+  }
 
   return (
     <>
-      <ImagePreviewModal
-        isOpen={!!previewImgUrl}
-        imageUrl={previewImgUrl}
-        onClose={closePreview}
-      />
+      <ImagePreviewModal isOpen={!!previewImgUrl} imageUrl={previewImgUrl} onClose={closePreview} />
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -102,7 +98,9 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
               <div className="sticky top-0 z-10 w-full bg-themacolor1/80 dark:bg-[#273038]/80 backdrop-blur border-b border-black/10 dark:border-white/10">
                 <div className="flex gap-1.5 justify-center text-xs md:text-sm py-2 pr-12">
                   <button
-                    onClick={() => document.getElementById('pj-info')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() =>
+                      document.getElementById('pj-info')?.scrollIntoView({ behavior: 'smooth' })
+                    }
                     className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
                       activeTab === 'pj-info'
                         ? 'bg-themacolor4 text-white'
@@ -112,7 +110,9 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     정보
                   </button>
                   <button
-                    onClick={() => document.getElementById('pj-feature')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() =>
+                      document.getElementById('pj-feature')?.scrollIntoView({ behavior: 'smooth' })
+                    }
                     className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
                       activeTab === 'pj-feature'
                         ? 'bg-themacolor4 text-white'
@@ -122,7 +122,9 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     기능
                   </button>
                   <button
-                    onClick={() => document.getElementById('pj-contrib')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() =>
+                      document.getElementById('pj-contrib')?.scrollIntoView({ behavior: 'smooth' })
+                    }
                     className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
                       activeTab === 'pj-contrib'
                         ? 'bg-themacolor4 text-white'
@@ -132,7 +134,9 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     기여
                   </button>
                   <button
-                    onClick={() => document.getElementById('pj-images')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() =>
+                      document.getElementById('pj-images')?.scrollIntoView({ behavior: 'smooth' })
+                    }
                     className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
                       activeTab === 'pj-images'
                         ? 'bg-themacolor4 text-white'
@@ -192,7 +196,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 </div>
               </div>
 
-                <div className="w-full flex flex-col gap-3 items-center px-4 sm:px-6 md:px-10 py-3">
+              <div className="w-full flex flex-col gap-3 items-center px-4 sm:px-6 md:px-10 py-3">
                 {project.feature && project.feature.length > 0 && (
                   <section id="pj-feature" className="w-full h-full">
                     <div className="flex gap-2 text-xl font-bold text-left mb-5">
@@ -201,7 +205,10 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     </div>
                     <ul className="list-disc text-left">
                       {project.feature.map((feat, idx) => (
-                        <li key={`${project.id}_feat_${idx}`} className="text-gray-700 dark:text-darkfg/80 text-base">
+                        <li
+                          key={`${project.id}_feat_${idx}`}
+                          className="text-gray-700 dark:text-darkfg/80 text-base"
+                        >
                           {feat}
                         </li>
                       ))}

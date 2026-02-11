@@ -12,13 +12,7 @@
     "prettier/prettier": "error", // Prettier 규칙을 오류로 설정
     "prefer-const": "warn",
     "no-undef": "off",
-    "import/order": [
-      "warn",
-      {
-        "groups": ["builtin", "external", ["parent", "sibling"], "index"],
-        "newlines-between": "always"
-      }
-    ],
+    "import/order": "off",
     "@typescript-eslint/no-unnecessary-type-constraint": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "@next/next/no-img-element": "off",

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from 'react'
 
 import SkillItem from '@/components/skill/SkillItem'
@@ -23,12 +25,18 @@ export default function Skills() {
         {loading ? (
           <div className="flex flex-col gap-4">
             {Array.from({ length: 4 }).map((_, idx) => (
-              <div key={`skill_skeleton_${idx}`} className="flex flex-col md:flex-row gap-5 items-center">
+              <div
+                key={`skill_skeleton_${idx}`}
+                className="flex flex-col md:flex-row gap-5 items-center"
+              >
                 <div className="skeleton w-14 h-14 rounded-full" />
                 <div className="skeleton h-5 w-24" />
                 <div className="flex gap-3 flex-wrap">
                   {Array.from({ length: 6 }).map((__, j) => (
-                    <div key={`skill_skeleton_tag_${idx}_${j}`} className="skeleton h-6 w-16 rounded-full" />
+                    <div
+                      key={`skill_skeleton_tag_${idx}_${j}`}
+                      className="skeleton h-6 w-16 rounded-full"
+                    />
                   ))}
                 </div>
               </div>
