@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 
-import ScrollDownBtn from "@/components/button/ScrollDownBtn";
+import ScrollDownBtn from '@/components/button/ScrollDownBtn'
 
 export default function HomeSec() {
-  const content = "프론트엔드 개발자 이화진 입니다";
-  const [title, setTitle] = useState<string>("");
-  const [index, setIndex] = useState<number>(0);
+  const content = '프론트엔드 개발자 이화진 입니다'
+  const [title, setTitle] = useState<string>('')
+  const [index, setIndex] = useState<number>(0)
 
   useEffect(() => {
     const lf_typing = () => {
       if (index < content.length) {
-        setTitle((prev) => prev + content[index]);
-        setIndex((prev) => prev + 1);
+        setTitle((prev) => prev + content[index])
+        setIndex((prev) => prev + 1)
       }
-    };
+    }
 
-    const interval = setInterval(lf_typing, 100);
-    return () => clearInterval(interval);
-  }, [index, content]);
+    const interval = setInterval(lf_typing, 100)
+    return () => clearInterval(interval)
+  }, [index, content])
 
   return (
     <section
       id="home"
-      className="flex flex-col items-center justify-center min-h-35 h-full bg-white"
+      className="flex flex-col items-center justify-center min-h-35 h-full bg-white dark:bg-[#1f262e] dark:text-darkfg"
     >
       <div className="l_search_div flex relative">
         <img
@@ -39,5 +39,5 @@ export default function HomeSec() {
 
       <ScrollDownBtn />
     </section>
-  );
+  )
 }

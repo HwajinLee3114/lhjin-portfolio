@@ -1,13 +1,13 @@
 .g_titleEngFontBlack {
-  font-family: "TitleEngFontBlack", serif;
+  font-family: 'TitleEngFontBlack', serif;
 }
 
 .g_titleEngFontOutline {
-  font-family: "TitleEngFontOutline", serif;
+  font-family: 'TitleEngFontOutline', serif;
 }
 
 .g_RiaSansFont {
-  font-family: "RiaSansFont", serif;
+  font-family: 'RiaSansFont', serif;
 }
 
 section {
@@ -15,7 +15,7 @@ section {
 }
 
 .l_main_title::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 1px;
   height: 2.4rem;
@@ -75,7 +75,7 @@ section {
 
 .l_hamburger_menu:before,
 .l_hamburger_menu:after {
-  content: ""; /* 바의 내용 */
+  content: ''; /* 바의 내용 */
   position: absolute;
   width: 100%; /* 바의 너비 */
   height: 100%; /* 바의 높이 */
@@ -107,6 +107,45 @@ section {
 }
 .l_pjfilter .selected {
   color: #faad1a;
+}
+
+.dark .l_menu_tab {
+  color: #a8b3c7;
+}
+
+.dark .l_menu_tab.active {
+  color: #faad1a;
+  box-shadow: inset 0 -4px 0 #faad1a;
+}
+
+.dark .l_pjfilter {
+  color: #cbd5e1;
+}
+
+.dark .l_search_div {
+  background: #273038;
+  border-color: #343c44;
+  box-shadow: none;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.12) 37%, rgba(0, 0, 0, 0.06) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.2s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 25%, rgba(255, 255, 255, 0.12) 37%, rgba(255, 255, 255, 0.06) 63%);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 @keyframes blink {

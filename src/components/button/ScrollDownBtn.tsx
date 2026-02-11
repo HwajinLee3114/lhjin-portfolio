@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import React from "react";
+import React from 'react'
 
-import styles from "./ScrollDownBtn.module.css";
+import styles from './ScrollDownBtn.module.css'
 export default function ScrollDownBtn() {
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -12,5 +12,5 @@ export default function ScrollDownBtn() {
         <span className="animation-delay-400"></span>
       </div>
     </div>
-  );
+  )
 }

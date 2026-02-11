@@ -1,89 +1,67 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
-import tw from "tailwind-styled-components";
-
-import { ProjectDetailModal } from "./detail/ProjectDetailModal";
-import ModalPortal from "../comn/ModalPortal";
-
-interface Tag {
-  name: string;
-  color: string;
-  txtcolor?: string;
-}
-export interface SkillItem {
-  id: string;
-  name: string;
-  url: string;
-}
+import React, { useState } from 'react'
+import { ProjectDetailModal } from './detail/ProjectDetailModal'
+import ModalPortal from '../comn/ModalPortal'
+import ModalOverlay from '../comn/ModalOverlay'
+import { formatPeriod } from '@/lib/period'
+import type { FilterTag, SkillItem } from '@/data/projects'
+import useBodyScrollLock from '@/hooks/useBodyScrollLock'
+import useEscapeKey from '@/hooks/useEscapeKey'
+import { focusRing } from '@/styles/ui'
+import TagBadge from '../comn/TagBadge'
 
 interface ProjectCardProps {
-  id?: string;
-  title?: string;
-  filter?: Tag[];
-  period?: string;
-  feature?: string[];
-  link?: string;
-  imageSrc?: string;
-  skillItem: SkillItem[];
-  description: string;
+  id?: string
+  title?: string
+  filter?: FilterTag[]
+  periodStart?: string
+  periodEnd?: string
+  feature?: string[]
+  link?: string
+  imageSrc?: string
+  skillItem: SkillItem[]
+  description: string
 }
-
-const TxtButton = tw.button`
-  px-3 
-  py-1 
-  border 
-  border-gray-300 
-  rounded 
-  font-medium 
-  text-sm 
-  outline-none 
-  cursor-pointer 
-  hover:bg-yellow-400 
-  hover:text-white 
-  hover:border-yellow-400
-`;
-
-const ModalWrapper = tw.div`
-fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center items-center bg-black bg-opacity-60 z-40 
-overflow-y-auto
-scrollbar-hide
-`;
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   id,
   title,
   filter,
-  period,
+  periodStart,
+  periodEnd,
   // feature,
   // link,
   imageSrc,
   skillItem,
   description,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [activeId, setActiveId] = useState<string>(""); // 상세 프로젝트
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [activeId, setActiveId] = useState<string>('') // 상세 프로젝트
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  useBodyScrollLock(isOpen)
+
+  const closeModal = () => {
+    setIsOpen(false)
+    setActiveId('')
+  }
+
+  useEscapeKey(isOpen, closeModal)
 
   return (
     <>
-      <div className="max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
+      <div className="group relative w-full max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
         <div className="flex justify-center">
           <img
             className="w-full h-48 object-cover"
             src={`/images/thumb/${imageSrc}`}
             alt={title}
+            loading="lazy"
           />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-3 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity">
+          {description}
         </div>
         <div className="py-2">
           <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
@@ -91,23 +69,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {filter && (
               <div className="flex gap-2 flex-wrap">
                 {filter.map((fil, idx) => (
-                  <p
-                    key={`projectfilter${idx}`}
-                    className="text-xs px-2 py-0.5 rounded-lg"
-                    style={{
-                      backgroundColor: fil.color,
-                      color: fil.txtcolor ? fil.txtcolor : "#ffffff",
-                    }}
-                  >
-                    {fil.name}
-                  </p>
+                  <TagBadge key={`projectfilter${idx}`} name={fil.name} color={fil.color} />
                 ))}
               </div>
             )}
           </div>
 
-          {period && (
-            <p className="text-gray-600 text-base md:text-sm">{period}</p>
+          {(periodStart || periodEnd) && (
+            <p className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm">
+              {formatPeriod(periodStart, periodEnd)}
+            </p>
           )}
 
           {/* {feature && (
@@ -121,7 +92,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               ))}
             </ul>
           )} */}
-          <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
+          <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs dark:text-darkfg/90">
             {description}
           </span>
         </div>
@@ -144,32 +115,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         {id && (
           <div className="flex justify-end">
-            <TxtButton
+            <button
+              className={`px-3 py-1 border border-gray-300 rounded font-medium text-sm outline-none cursor-pointer hover:bg-yellow-400 hover:text-white hover:border-yellow-400 ${focusRing} focus-visible:ring-yellow-400 focus-visible:ring-offset-2`}
               onClick={() => {
-                setIsOpen(true);
-                setActiveId(id);
+                setIsOpen(true)
+                setActiveId(id)
               }}
             >
               DETAIL
-            </TxtButton>
+            </button>
           </div>
         )}
       </div>
 
       {isOpen && (
         <ModalPortal>
-          <ModalWrapper
-            onClick={() => {
-              setIsOpen(false);
-              setActiveId("");
-            }}
-          >
-            <ProjectDetailModal isOpen={isOpen} activeId={activeId} />
-          </ModalWrapper>
+          <ModalOverlay onClose={closeModal}>
+            <ProjectDetailModal isOpen={isOpen} activeId={activeId} onClose={closeModal} />
+          </ModalOverlay>
         </ModalPortal>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ProjectCard;
+export default ProjectCard

@@ -1,149 +1,136 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react'
+import ThemeToggle from './ThemeToggle'
+import { focusRing } from '@/styles/ui'
 
 interface HeaderProps {
-  activeSection: string;
-  setActiveSection: (section: string) => void;
+  activeSection: string
+  setActiveSection: (section: string) => void
 }
 
+const NAV_ITEMS = [
+  { id: 'about', label: "It's ME" },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'career', label: 'Career' },
+] as const
+
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isHidden, setIsHidden] = useState<boolean>(false)
+  const [scrollTimer, setScrollTimer] = useState<number | null>(null)
 
   const lf_toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const lf_handleScroll = useCallback(() => {
-    const sections = ["home", "about", "skills", "projects", "career"];
-    const scrollY = window.scrollY;
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section);
-      if (element) {
-        const { offsetTop, clientHeight } = element;
-
-        if (scrollY >= offsetTop - 200 && scrollY < offsetTop + clientHeight) {
-          setActiveSection(section);
-        }
-      }
-    });
-  }, [setActiveSection]);
+    setIsOpen(!isOpen)
+  }
 
   useEffect(() => {
-    window.addEventListener("scroll", lf_handleScroll);
+    const sections = ['home', 'about', 'skills', 'projects', 'career']
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+    sections.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [setActiveSection])
+
+  useEffect(() => {
+    const handleScrollState = () => {
+      setIsHidden(true)
+      if (scrollTimer) window.clearTimeout(scrollTimer)
+      const timer = window.setTimeout(() => setIsHidden(false), 180)
+      setScrollTimer(timer)
+    }
+    window.addEventListener('scroll', handleScrollState)
     return () => {
-      window.removeEventListener("scroll", lf_handleScroll);
-    };
-  }, [lf_handleScroll]);
+      window.removeEventListener('scroll', handleScrollState)
+      if (scrollTimer) window.clearTimeout(scrollTimer)
+    }
+  }, [scrollTimer])
 
   const lf_scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
+    const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(id);
+      element.scrollIntoView({ behavior: 'smooth' })
+      setActiveSection(id)
     }
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   return (
-    <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
+    <header
+      className={`flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50 bg-white/70 dark:bg-[#232830]/80 transition-transform duration-200 ${
+        isHidden ? '-translate-y-full' : 'translate-y-0'
+      }`}
+    >
       <button
-        onClick={() => lf_scrollToSection("home")}
-        className="flex gap-2 text-lg md:text-2xl text-themacolor4"
+        onClick={() => lf_scrollToSection('home')}
+        className={`flex gap-2 text-lg md:text-2xl text-themacolor4 ${focusRing} rounded`}
       >
         <div className="g_titleEngFontBlack">lhjin&apos;s</div>
         <div className="g_titleEngFontOutline">Portfolio</div>
       </button>
-      {/* 모바일 햄버거 버튼 */}
-      <button onClick={lf_toggleMenu} className="md:hidden">
-        <div className={`l_hamburger_menu ${isOpen ? "animate" : ""}`}></div>
-      </button>
-      {/* PC 메뉴 */}
-      <nav className="hidden md:flex space-x-4">
+      <div className="flex items-center gap-3">
+        {/* PC 메뉴 */}
+        <nav className="hidden md:flex space-x-4">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => lf_scrollToSection(item.id)}
+              className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === item.id ? 'active' : ''}
+              ${focusRing} focus-visible:rounded-sm
+              `}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+        <div className="hidden md:block">
+          <ThemeToggle />
+        </div>
+        {/* 모바일 햄버거 버튼 */}
         <button
-          onClick={() => lf_scrollToSection("about")}
-          className={`p-2 l_menu_tab g_RiaSansFont ${
-            activeSection === "about" ? "active" : ""
-          }
-          `}
+          onClick={lf_toggleMenu}
+          className={`md:hidden ${focusRing} rounded`}
+          aria-label="메뉴 열기"
         >
-          It&apos;s ME
+          <div className={`l_hamburger_menu ${isOpen ? 'animate' : ''}`}></div>
         </button>
-        <button
-          onClick={() => lf_scrollToSection("skills")}
-          className={`p-2 l_menu_tab g_RiaSansFont ${
-            activeSection === "skills" ? "active" : ""
-          }
-          `}
-        >
-          Skills
-        </button>
-        <button
-          onClick={() => lf_scrollToSection("projects")}
-          className={`p-2 l_menu_tab g_RiaSansFont ${
-            activeSection === "projects" ? "active" : ""
-          }
-          `}
-        >
-          Projects
-        </button>
-        <button
-          onClick={() => lf_scrollToSection("career")}
-          className={`p-2 l_menu_tab g_RiaSansFont ${
-            activeSection === "career" ? "active" : ""
-          }
-          `}
-        >
-          Career
-        </button>
-      </nav>
+      </div>
       {/* 모바일 사이드 메뉴 */}
       <nav
         className={`shadow-md fixed top-0 right-0 bg-themacolor1 h-screen w-3/4 md:hidden transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isOpen ? 'translate-x-0' : 'translate-x-full'
         } z-50`}
       >
         <div className="h-12"></div>
-        <button
-          onClick={() => lf_scrollToSection("about")}
+        <div className="px-4 py-3">
+          <ThemeToggle />
+        </div>
+        {NAV_ITEMS.map((item) => (
+          <button
+            key={`mobile_${item.id}`}
+            onClick={() => lf_scrollToSection(item.id)}
           className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === "about" ? "active" : ""
+            activeSection === item.id ? 'active' : ''
           }
-          `}
-        >
-          It&apos;s ME
-        </button>
-        <button
-          onClick={() => lf_scrollToSection("skills")}
-          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === "skills" ? "active" : ""
-          }
-          `}
-        >
-          Skills
-        </button>
-        <button
-          onClick={() => lf_scrollToSection("projects")}
-          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === "projects" ? "active" : ""
-          }
-          `}
-        >
-          Projects
-        </button>
-        <button
-          onClick={() => lf_scrollToSection("career")}
-          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === "career" ? "active" : ""
-          }
-          `}
-        >
-          Career
-        </button>
+            ${focusRing} focus-visible:rounded-sm
+            `}
+          >
+            {item.label}
+          </button>
+        ))}
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
