@@ -66,31 +66,31 @@ export default function Projects() {
 
       <div className="flex flex-col items-center gap-4 mt-10">
         <ul className="l_pjfilter flex gap-3 cursor-pointer justify-center">
-        <img src="/images/filterYellow-100.png" className="w-6" alt="filter" />
-        <li
-          className={`cursor-pointer g_RiaSansFont ${filter === 'all' ? 'selected' : ''}`}
-          onClick={() => setFilter('all')}
-        >
-          All
-        </li>
-        <li
-          className={`cursor-pointer g_RiaSansFont ${filter === 'feature' ? 'selected' : ''}`}
-          onClick={() => setFilter('feature')}
-        >
-          Feature
-        </li>
-        <li
-          className={`cursor-pointer g_RiaSansFont ${filter === 'personal' ? 'selected' : ''}`}
-          onClick={() => setFilter('personal')}
-        >
-          Personal
-        </li>
-        <li
-          className={`cursor-pointer g_RiaSansFont ${filter === 'team' ? 'selected' : ''}`}
-          onClick={() => setFilter('team')}
-        >
-          Team
-        </li>
+          <img src="/images/filterYellow-100.png" className="w-6" alt="filter" />
+          <li
+            className={`cursor-pointer g_RiaSansFont ${filter === 'all' ? 'selected' : ''}`}
+            onClick={() => setFilter('all')}
+          >
+            All
+          </li>
+          <li
+            className={`cursor-pointer g_RiaSansFont ${filter === 'feature' ? 'selected' : ''}`}
+            onClick={() => setFilter('feature')}
+          >
+            Feature
+          </li>
+          <li
+            className={`cursor-pointer g_RiaSansFont ${filter === 'personal' ? 'selected' : ''}`}
+            onClick={() => setFilter('personal')}
+          >
+            Personal
+          </li>
+          <li
+            className={`cursor-pointer g_RiaSansFont ${filter === 'team' ? 'selected' : ''}`}
+            onClick={() => setFilter('team')}
+          >
+            Team
+          </li>
         </ul>
         <input
           value={query}
@@ -122,6 +122,7 @@ export default function Projects() {
             : filteredPj.map((project, index) => (
                 <motion.li
                   key={`project_${project.id}`}
+                  className="w-full"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{

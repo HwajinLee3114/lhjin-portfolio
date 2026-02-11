@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      <div className="group relative w-full max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
+      <div className="group relative w-full h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
         <div className="flex justify-center">
           <img
             className="w-full h-48 object-cover"

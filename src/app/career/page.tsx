@@ -14,6 +14,7 @@ const careerWithProjects = career.map((c) => ({
 
 export default function Career() {
   const [loading, setLoading] = useState(true)
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 250)
@@ -53,7 +54,7 @@ export default function Career() {
             : sortedCareer.map((item, index) => (
                 <li
                   key={`career_${index}`}
-                  className="relative bg-white/90 dark:bg-[#273038] rounded-xl shadow-md p-5 hover:shadow-xl"
+                  className="relative bg-white/90 dark:bg-[#273038] rounded-xl shadow-md p-5 hover:shadow-xl transition-shadow"
                   // initial={{ opacity: 0, y: 20 }}
                   // whileInView={{ opacity: 1, y: 0 }}
                   // transition={{
@@ -90,24 +91,56 @@ export default function Career() {
                     ))}
                   </div>
 
-                  {item.projectDetails &&
-                    item.projectDetails.map(
-                      (pj, idx) =>
-                        pj && (
-                          <section
-                            className="mt-3 rounded-lg bg-black/5 dark:bg-white/5 p-3"
-                            key={`${pj.id}_career_${idx}`}
-                          >
-                            <div className="py-1 pl-3 mb-2 border-l-2 border-gray-600 dark:border-darkfg/40 text-gray-600 dark:text-darkfg/80 bg-quotecolor/60 dark:bg-[#273038]/60">
-                              {pj.title}
-                            </div>
-                            <div className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm mb-1">
-                              {formatPeriod(pj.periodStart, pj.periodEnd)}
-                            </div>
-                            <div>{pj.description}</div>
-                          </section>
-                        ),
-                    )}
+                  {item.projectDetails && item.projectDetails.length > 0 && (
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        className="text-sm font-semibold text-themacolor4 hover:text-themacolor4/80 inline-flex items-center gap-2"
+                        onClick={() =>
+                          setOpenItems((prev) => ({
+                            ...prev,
+                            [item.id]: !prev[item.id],
+                          }))
+                        }
+                        aria-expanded={!!openItems[item.id]}
+                        aria-controls={`career-details-${item.id}`}
+                      >
+                        자세히 보기
+                        <span
+                          className={`transition-transform ${openItems[item.id] ? 'rotate-180' : 'rotate-0'}`}
+                        >
+                          ▾
+                        </span>
+                      </button>
+
+                      <div
+                        id={`career-details-${item.id}`}
+                        className={`transition-all duration-300 ease-out overflow-hidden ${
+                          openItems[item.id] ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'
+                        }`}
+                      >
+                        <div className="mt-3 space-y-3 rounded-xl bg-black/5 dark:bg-white/5 p-3 ring-1 ring-black/5 dark:ring-white/5">
+                          {item.projectDetails.map(
+                            (pj, idx) =>
+                              pj && (
+                                <section
+                                  className="rounded-lg bg-white/60 dark:bg-[#212931]/60 p-3"
+                                  key={`${pj.id}_career_${idx}`}
+                                >
+                                  <div className="py-1 pl-3 mb-2 border-l-2 border-gray-600/70 dark:border-darkfg/40 text-gray-700 dark:text-darkfg/80 bg-quotecolor/40 dark:bg-[#273038]/40">
+                                    {pj.title}
+                                  </div>
+                                  <div className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm mb-1">
+                                    {formatPeriod(pj.periodStart, pj.periodEnd)}
+                                  </div>
+                                  <div>{pj.description}</div>
+                                </section>
+                              ),
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </li>
               ))}
         </ul>
