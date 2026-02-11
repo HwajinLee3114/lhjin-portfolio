@@ -119,21 +119,32 @@ export default function Career() {
                           openItems[item.id] ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'
                         }`}
                       >
-                        <div className="mt-3 space-y-3 rounded-xl bg-black/5 dark:bg-white/5 p-3 ring-1 ring-black/5 dark:ring-white/5">
+                        <div className="mt-3 space-y-3 rounded-xl bg-gradient-to-br from-black/5 via-black/0 to-black/5 dark:from-white/5 dark:via-white/0 dark:to-white/5 p-4 ring-1 ring-black/5 dark:ring-white/5">
                           {item.projectDetails.map(
                             (pj, idx) =>
                               pj && (
                                 <section
-                                  className="rounded-lg bg-white/60 dark:bg-[#212931]/60 p-3"
+                                  className="rounded-lg bg-white/70 dark:bg-[#1f272e]/70 p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/5"
                                   key={`${pj.id}_career_${idx}`}
                                 >
-                                  <div className="py-1 pl-3 mb-2 border-l-2 border-gray-600/70 dark:border-darkfg/40 text-gray-700 dark:text-darkfg/80 bg-quotecolor/40 dark:bg-[#273038]/40">
-                                    {pj.title}
+                                  <div className="flex items-start justify-between gap-3 mb-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="h-2 w-2 rounded-full bg-themacolor4 shadow-[0_0_12px_rgba(80,160,255,0.5)]" />
+                                      <h3 className="text-sm md:text-base font-semibold text-gray-800 dark:text-darkfg">
+                                        {pj.title}
+                                      </h3>
+                                    </div>
+                                    <div className="text-xs md:text-sm text-gray-500 dark:text-darkfg/70">
+                                      {formatPeriod(pj.periodStart, pj.periodEnd)}
+                                    </div>
                                   </div>
-                                  <div className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm mb-1">
+                                  <div className="h-px w-full bg-black/5 dark:bg-white/5 mb-2" />
+                                  <div className="text-gray-700 dark:text-darkfg/90 leading-relaxed text-sm md:text-base">
+                                    {pj.description}
+                                  </div>
+                                  <div className="mt-2 text-xs text-gray-500 dark:text-darkfg/60">
                                     {formatPeriod(pj.periodStart, pj.periodEnd)}
                                   </div>
-                                  <div>{pj.description}</div>
                                 </section>
                               ),
                           )}

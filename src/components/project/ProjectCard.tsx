@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      <div className="group relative w-full h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
+      <div className="group relative w-full h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-[1.02] p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
         <div className="flex justify-center">
           <img
             className="w-full h-48 object-cover"
@@ -59,9 +59,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             loading="lazy"
           />
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-3 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity">
-          {description}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="pointer-events-none absolute bottom-3 left-3 right-3">
+          <div className="rounded-md bg-white/85 dark:bg-[#1f272e]/85 backdrop-blur-md px-3 py-2 text-xs text-gray-800 dark:text-darkfg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+            {description}
+          </div>
         </div>
         <div className="py-2">
           <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
