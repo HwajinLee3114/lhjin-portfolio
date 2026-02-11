@@ -4,6 +4,7 @@ import tw from 'tailwind-styled-components'
 
 import { getProjectById } from '@/data/projects'
 import { ImagePreviewModal } from '@/components/comn/ImagePreviewModal'
+import { formatPeriod } from '@/lib/period'
 
 interface ModalProps {
   isOpen: boolean
@@ -18,6 +19,9 @@ const QuoteDiv = tw.div`
   border-l-4 border-gray-600
   text-gray-600
   bg-quotecolor
+  dark:border-darkfg/40
+  dark:text-darkfg/80
+  dark:bg-[#273038]
 `
 
 export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) => {
@@ -57,7 +61,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="text-center w-[92vw] sm:w-[85vw] lg:w-[75vw] max-w-5xl h-[85vh] sm:h-[80vh] overflow-y-auto rounded-md shadow-md bg-themacolor1"
+            className="text-center w-[92vw] sm:w-[85vw] lg:w-[75vw] max-w-5xl h-[85vh] sm:h-[80vh] overflow-y-auto rounded-md shadow-md bg-themacolor1 dark:bg-[#273038] dark:text-darkfg"
             onClick={(e) => e.stopPropagation()} // 모달 클릭 시 이벤트 전파 막기
             role="dialog"
             aria-modal="true"
@@ -73,11 +77,11 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
             <section className="h-full flex flex-col items-center px-4 sm:px-6 md:px-10">
               <div className="border-b-2 w-full flex flex-col items-center px-4 sm:px-6 md:px-10 py-3">
                 <div className="text-2xl font-bold pb-2 text-center">{project.title}</div>
-                <div className="text-gray-600 text-sm md:text-base mb-1 text-center">
-                  {project.period}
+                <div className="text-gray-600 dark:text-darkfg/80 text-sm md:text-base mb-1 text-center">
+                  {formatPeriod(project.periodStart, project.periodEnd)}
                 </div>
 
-                <div className="items-center py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
+                <div className="items-center py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm dark:bg-[#1f262e] dark:border-darkfg/30">
                   {project.skillItem.map((item) => item.name).join(', ')}
                 </div>
 
@@ -98,14 +102,14 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 <div className="flex flex-col md:flex-row items-center gap-3 py-3">
                   {project.git && (
                     <a href={project.git} target="_blank" rel="noreferrer noopener" aria-label="GitHub 열기">
-                      <div className="bg-white rounded-full p-2 hover:shadow-md">
+                      <div className="bg-white dark:bg-[#1f262e] rounded-full p-2 hover:shadow-md">
                         <img src="/images/tech/github-100.png" className="w-7" alt="GitHub" />
                       </div>
                     </a>
                   )}
                   {project.site && (
                     <a href={project.site} target="_blank" rel="noreferrer noopener" aria-label="프로젝트 사이트 열기">
-                      <div className="bg-white rounded-full p-2.5 shadow-md hover:shadow-lg">
+                      <div className="bg-white dark:bg-[#1f262e] rounded-full p-2.5 shadow-md hover:shadow-lg">
                         <img src="/images/link-100.png" className="w-6" alt="사이트 링크" />
                       </div>
                     </a>
@@ -122,7 +126,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     </div>
                     <ul className="list-disc text-left">
                       {project.feature.map((feat, idx) => (
-                        <li key={`${project.id}_feat_${idx}`} className="text-gray-700 text-base">
+                        <li key={`${project.id}_feat_${idx}`} className="text-gray-700 dark:text-darkfg/80 text-base">
                           {feat}
                         </li>
                       ))}
@@ -143,7 +147,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                           {contri.desc.map((condesc, idx) => (
                             <li
                               key={`${contri.id}_contrili_${idx}`}
-                              className="text-gray-700 text-base"
+                              className="text-gray-700 dark:text-darkfg/80 text-base"
                             >
                               {condesc}
                             </li>
@@ -165,7 +169,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                       {project.images.map((img) => (
                         <div
                           key={`${project.id}_detailImg_${img.url}`}
-                          className="relative bg-yellow-50 shadow-md rounded-md hover:border-2 border-themacolor4
+                          className="relative bg-yellow-50 dark:bg-[#26303a] shadow-md rounded-md hover:border-2 border-themacolor4
                           w-full max-w-[320px] aspect-[4/3]"
                           onClick={() => lf_showImgPreview(img.url)}
                         >
@@ -173,6 +177,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                             src={`/images/project/${img.url}`}
                             className="absolute w-full h-full text-transparent object-contain border-stone-400"
                             alt={img.name}
+                            loading="lazy"
                           />
                         </div>
                       ))}

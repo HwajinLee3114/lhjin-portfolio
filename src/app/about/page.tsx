@@ -8,11 +8,11 @@ export default function About() {
   return (
     <section
       id="about"
-      className="flex flex-col md:flex-row items-center gap-5 justify-around h-50 md:h-43 bg-themacolor3"
+      className="flex flex-col md:flex-row items-center gap-5 justify-around min-h-50 md:min-h-43 bg-themacolor3 dark:bg-[#202a24] dark:text-darkfg"
     >
       <div className="w-full md:w-96 text-center mb-5">
         <h2 className="text-2xl text-white g_titleEngFontBlack">About Me</h2>
-        <p className="text-lg text-gray-300">
+        <p className="text-lg text-gray-300 dark:text-darkfg/80">
           개발자로서의 여정을
           <br />
           나누고 싶습니다

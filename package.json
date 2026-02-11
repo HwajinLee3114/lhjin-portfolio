@@ -10,7 +10,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "format": "prettier --config .prettierrc --write .",
-    "format:check": "prettier --config .prettierrc --check ."
+    "format:check": "prettier --config .prettierrc --check .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

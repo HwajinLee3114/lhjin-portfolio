@@ -109,6 +109,25 @@ section {
   color: #faad1a;
 }
 
+.dark .l_menu_tab {
+  color: #a8b3c7;
+}
+
+.dark .l_menu_tab.active {
+  color: #faad1a;
+  box-shadow: inset 0 -4px 0 #faad1a;
+}
+
+.dark .l_pjfilter {
+  color: #cbd5e1;
+}
+
+.dark .l_search_div {
+  background: #273038;
+  border-color: #343c44;
+  box-shadow: none;
+}
+
 @keyframes blink {
   0% {
     opacity: 0;

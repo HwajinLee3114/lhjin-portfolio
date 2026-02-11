@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 
 import { career } from '@/data/career'
 import { projects } from '@/data/projects'
+import { formatPeriod } from '@/lib/period'
 
 const careerWithProjects = career.map((c) => ({
   ...c,
@@ -19,7 +20,7 @@ export default function Career() {
   return (
     <section
       id="career"
-      className="flex flex-col items-center justify-center min-h-screen bg-themacolor1"
+      className="flex flex-col items-center justify-center min-h-screen bg-themacolor1 dark:bg-[#1f262e] dark:text-darkfg"
     >
       <h2 className="text-3xl g_titleEngFontBlack mt-3">Career</h2>
       <p className="my-4"></p>
@@ -29,7 +30,7 @@ export default function Career() {
           {sortedCareer.map((item, index) => (
             <li
               key={`career_${index}`}
-              className="bg-white rounded-lg shadow-md p-4 hover:shadow-xl"
+              className="bg-white dark:bg-[#273038] rounded-lg shadow-md p-4 hover:shadow-xl"
               // initial={{ opacity: 0, y: 20 }}
               // whileInView={{ opacity: 1, y: 0 }}
               // transition={{
@@ -41,9 +42,19 @@ export default function Career() {
             >
               <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
                 <h2 className="text-lg font-bold">{item.company}</h2>
-                <div className="text-gray-600 text-base md:text-sm">{item.period}</div>
               </div>
-              <div className="text-gray-600 text-base md:text-sm mb-1">{item.role}</div>
+              <div className="flex flex-col gap-1 mb-1">
+                {item.roles.map((roleItem, roleIndex) => (
+                  <div
+                    key={`${item.id}_role_${roleIndex}`}
+                    className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm"
+                  >
+                    {roleItem.role}{' '}
+                    {roleItem.role ? '· ' : ''}
+                    {formatPeriod(roleItem.periodStart, roleItem.periodEnd)}
+                  </div>
+                ))}
+              </div>
               <div className="my-2">{item.companyInfo}</div>
               <div className="flex gap-2 mt-2 flex-wrap">
                 {item.tag.map((t, idx) => (
@@ -61,10 +72,12 @@ export default function Career() {
                   (pj, idx) =>
                     pj && (
                       <section className="py-3.5 px-0 md:p-4" key={`${pj.id}_career_${idx}`}>
-                        <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 text-gray-600 bg-quotecolor">
+                        <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 dark:border-darkfg/40 text-gray-600 dark:text-darkfg/80 bg-quotecolor dark:bg-[#273038]">
                           {pj.title}
                         </div>
-                        <div className="text-gray-600 text-base md:text-sm mb-1">{pj.period}</div>
+                        <div className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm mb-1">
+                          {formatPeriod(pj.periodStart, pj.periodEnd)}
+                        </div>
                         <div>{pj.description}</div>
                       </section>
                     ),

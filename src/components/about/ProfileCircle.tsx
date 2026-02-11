@@ -28,7 +28,7 @@ const ProfileCircle: React.FC = () => {
             fontFamily="none"
             fontWeight="none"
             fontSize="none"
-            textAnchor="none"
+            textAnchor="inherit"
           >
             <g transform="scale(2,2)">
               <path

@@ -5,6 +5,7 @@ import tw from 'tailwind-styled-components'
 
 import { ProjectDetailModal } from './detail/ProjectDetailModal'
 import ModalPortal from '../comn/ModalPortal'
+import { formatPeriod } from '@/lib/period'
 
 interface Tag {
   name: string
@@ -14,14 +15,15 @@ interface Tag {
 export interface SkillItem {
   id: string
   name: string
-  url: string
+  url?: string
 }
 
 interface ProjectCardProps {
   id?: string
   title?: string
   filter?: Tag[]
-  period?: string
+  periodStart?: string
+  periodEnd?: string
   feature?: string[]
   link?: string
   imageSrc?: string
@@ -49,7 +51,7 @@ const TxtButton = tw.button`
 `
 
 const ModalWrapper = tw.div`
-fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center items-center bg-black bg-opacity-60 z-40 
+fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-60 z-40 
 overflow-y-auto
 scrollbar-hide
 `
@@ -58,7 +60,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   id,
   title,
   filter,
-  period,
+  periodStart,
+  periodEnd,
   // feature,
   // link,
   imageSrc,
@@ -95,7 +98,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      <div className="w-full max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer transition-transform">
+      <div className="w-full max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
         <div className="flex justify-center">
           <img
             className="w-full h-48 object-cover"
@@ -125,7 +128,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             )}
           </div>
 
-          {period && <p className="text-gray-600 text-base md:text-sm">{period}</p>}
+          {(periodStart || periodEnd) && (
+            <p className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm">
+              {formatPeriod(periodStart, periodEnd)}
+            </p>
+          )}
 
           {/* {feature && (
             <ul className="list-disc pl-3">
@@ -138,7 +145,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               ))}
             </ul>
           )} */}
-          <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
+          <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs dark:text-darkfg/90">
             {description}
           </span>
         </div>

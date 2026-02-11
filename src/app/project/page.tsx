@@ -29,8 +29,8 @@ export default function Projects() {
     })
     .sort((a, b) => Number(b.id) - Number(a.id))
   return (
-    <section id="projects" className="flex flex-col min-h-screen bg-themacolor3">
-      <div className="text-center text-white">
+    <section id="projects" className="flex flex-col min-h-screen bg-themacolor3 dark:bg-[#202a24]">
+      <div className="text-center text-white dark:text-darkfg">
         <h2 className="text-3xl g_titleEngFontOutline mt-5">Projects</h2>
         {/* <p className="mt-4">다양한 프로젝트 경험을 통해</p> */}
       </div>
@@ -68,7 +68,7 @@ export default function Projects() {
         whileInView: 뷰 진입 시. opacity, 위치 지정
         transition: 전환 효과 / ease: 속도 조절 함수. duration: 지속 시간. delay: 지연. 
       */}
-      <div className="w-full h-full flex-grow shadow-md mt-5 mb-5 rounded-lg bg-themacolor1 p-5 md:p-10">
+      <div className="w-full h-full flex-grow shadow-md mt-5 mb-5 rounded-lg bg-themacolor1 dark:bg-[#273038] p-5 md:p-10">
         <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-14 font-scoreRegular">
           {filteredPj.map((project, index) => (
             <motion.li
@@ -84,7 +84,8 @@ export default function Projects() {
               <ProjectCard
                 id={project.id}
                 title={project.title}
-                period={project.period}
+                periodStart={project.periodStart}
+                periodEnd={project.periodEnd}
                 skillItem={project.skillItem}
                 filter={project.filter}
                 imageSrc={project.thumb}

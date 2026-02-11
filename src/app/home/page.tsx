@@ -24,7 +24,7 @@ export default function HomeSec() {
   return (
     <section
       id="home"
-      className="flex flex-col items-center justify-center min-h-35 h-full bg-white"
+      className="flex flex-col items-center justify-center min-h-35 h-full bg-white dark:bg-[#1f262e] dark:text-darkfg"
     >
       <div className="l_search_div flex relative">
         <img

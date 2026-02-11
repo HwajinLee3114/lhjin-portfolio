@@ -7,7 +7,7 @@ export interface Image {
 export interface SkillItem {
   id: string
   name: string
-  url: string
+  url?: string
 }
 
 export interface Contribution {
@@ -19,10 +19,11 @@ export interface Contribution {
 export interface Project {
   id: string
   title: string
-  period: string
-  git: string
-  site: string
-  filter: { name: string; color: string }[]
+  periodStart?: string
+  periodEnd?: string
+  git?: string
+  site?: string
+  filter: { name: FilterName; color: string }[]
   description: string
   feature: string[]
   contribution: Contribution[]
@@ -31,16 +32,30 @@ export interface Project {
   images: Image[]
 }
 
+type FilterName = 'team' | 'personal' | 'feature' | 'FE' | 'BE' | '풀스택'
+
+const FILTER_COLORS: Record<FilterName, string> = {
+  team: 'cornflowerblue',
+  personal: 'indianred',
+  feature: 'gold',
+  FE: 'lightgreen',
+  BE: 'coral',
+  풀스택: 'tomato',
+}
+
+const tag = (name: FilterName) => ({ name, color: FILTER_COLORS[name] })
+
 export const projects: Project[] = [
   {
     id: '1',
     title: 'KT GiGA Live CMS',
-    period: '2024.10 ~ 2024.11',
-    git: '',
-    site: '',
+    periodStart: '2024-10',
+    periodEnd: '2024-11',
+    git: undefined,
+    site: undefined,
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: '풀스택', color: 'tomato' },
+      tag('team'),
+      tag('풀스택'),
     ],
     description: 'VR 계열사 및 관리자가 콘텐츠와 서비스를 효율적으로 관리할 수 있는 CMS입니다.',
     feature: ['VR 카테고리 및 카테고리별 콘텐츠 관리', 'VR 제공 계열사 관리'],
@@ -54,11 +69,11 @@ export const projects: Project[] = [
       },
     ],
     skillItem: [
-      { id: '0', name: '전자정부프레임워크', url: '' },
+      { id: '0', name: '전자정부프레임워크', url: undefined },
       { id: '1', name: 'Java', url: 'java-100.png' },
       { id: '2', name: 'Spring', url: 'spring-100.png' },
       { id: '3', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '4', name: 'PostgreSQL', url: 'postgreesql-100.png' },
     ],
     thumb: 'pj1.png',
@@ -67,12 +82,13 @@ export const projects: Project[] = [
   {
     id: '2',
     title: '분양이부장',
-    period: '2021.05 ~ 2022.05',
-    git: '',
-    site: '',
+    periodStart: '2021-05',
+    periodEnd: '2022-05',
+    git: undefined,
+    site: undefined,
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: '풀스택', color: 'tomato' },
+      tag('team'),
+      tag('풀스택'),
     ],
     description:
       '전국 아파트 분양 정보를 제공하며, 지역별 분양 정보를 등록하고 홍보 및 구인 활동을 원하는 사용자와 관계자를 위한 반응형 플랫폼입니다.',
@@ -100,7 +116,7 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: '1', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '2', name: 'Java', url: 'java-100.png' },
       { id: '3', name: 'Spring', url: 'spring-100.png' },
       { id: '4', name: 'MySQL', url: 'mysql-100.png' },
@@ -126,12 +142,13 @@ export const projects: Project[] = [
   {
     id: '3',
     title: 'Pleisure',
-    period: '2021.05 ~ 2022.02',
-    git: '',
-    site: '',
+    periodStart: '2021-05',
+    periodEnd: '2022-02',
+    git: undefined,
+    site: undefined,
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('team'),
+      tag('FE'),
     ],
     description: '간편한 스포츠 레슨 예약 서비스를 제공하는 플랫폼입니다.',
     feature: [
@@ -158,7 +175,7 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: '1', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '2', name: 'Java', url: 'java-100.png' },
       { id: '3', name: 'Spring', url: 'spring-100.png' },
       { id: '4', name: 'MySQL', url: 'mysql-100.png' },
@@ -181,14 +198,15 @@ export const projects: Project[] = [
   {
     id: '4',
     title: 'Digital Real Trip(DRT)',
-    period: '2021.10 ~ 2022.09',
-    git: '',
+    periodStart: '2021-10',
+    periodEnd: '2022-09',
+    git: undefined,
     site: 'https://www.djes.co.kr',
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-      { name: 'BE', color: 'coral' },
+      tag('team'),
+      tag('feature'),
+      tag('FE'),
+      tag('BE'),
     ],
     description: '대전 체험형 게임 플랫폼으로, 다양한 체험형 프로그램을 제공합니다.',
     feature: [
@@ -228,7 +246,7 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: '1', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '2', name: 'Java', url: 'java-100.png' },
       { id: '3', name: 'Spring', url: 'spring-100.png' },
       { id: '4', name: 'MySQL', url: 'mysql-100.png' },
@@ -248,14 +266,15 @@ export const projects: Project[] = [
   {
     id: '5',
     title: '너의 운동은',
-    period: '2022.02 ~ 2022.05',
-    git: '',
-    site: '',
+    periodStart: '2022-02',
+    periodEnd: '2022-05',
+    git: undefined,
+    site: undefined,
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-      { name: 'BE', color: 'coral' },
+      tag('team'),
+      tag('feature'),
+      tag('FE'),
+      tag('BE'),
     ],
     description: '운동 관리 커뮤니티 반응형 플랫폼입니다.',
     feature: [
@@ -300,13 +319,14 @@ export const projects: Project[] = [
   {
     id: '6',
     title: '포켓데이터',
-    period: '2022.06 ~ 2022.10',
-    git: '',
-    site: '',
+    periodStart: '2022-06',
+    periodEnd: '2022-10',
+    git: undefined,
+    site: undefined,
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('team'),
+      tag('feature'),
+      tag('FE'),
     ],
     description: '입찰 정보, 지원 사업, 스타트업 정보를 조회할 수 있는 사이트입니다.',
     feature: [
@@ -341,12 +361,13 @@ export const projects: Project[] = [
   {
     id: '7',
     title: '면세점 사이트',
-    period: '2022.09 ~ 2023.07',
-    git: '',
-    site: '',
+    periodStart: '2022-09',
+    periodEnd: '2023-07',
+    git: undefined,
+    site: undefined,
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: '풀스택', color: 'tomato' },
+      tag('team'),
+      tag('풀스택'),
     ],
     description: '면세 상품 및 점포 관리 사이트입니다.',
     feature: [
@@ -374,7 +395,7 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: '1', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '2', name: 'React', url: 'react-100.png' },
       { id: '3', name: 'Java', url: 'java-100.png' },
       { id: '4', name: 'Spring', url: 'spring-100.png' },
@@ -388,13 +409,14 @@ export const projects: Project[] = [
   {
     id: '8',
     title: '링크오더',
-    period: '2023.08 ~ 2024.03',
-    git: '',
-    site: '',
+    periodStart: '2023-08',
+    periodEnd: '2024-03',
+    git: undefined,
+    site: undefined,
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('team'),
+      tag('feature'),
+      tag('FE'),
     ],
     description: '지역 소상공인을 위한 상품 판매 및 배송 관리 반응형 플랫폼입니다.',
     feature: [
@@ -427,7 +449,7 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: '1', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '2', name: 'Java', url: 'java-100.png' },
       { id: '3', name: 'Spring', url: 'spring-100.png' },
       { id: '4', name: 'MariaDB', url: 'maria-100.png' },
@@ -454,12 +476,13 @@ export const projects: Project[] = [
   {
     id: '9',
     title: 'WE 돌봄이',
-    period: '2024.03 ~ 2024.05',
-    git: '',
+    periodStart: '2024-03',
+    periodEnd: '2024-05',
+    git: undefined,
     site: 'http://we.cookplay.net',
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('team'),
+      tag('FE'),
     ],
     description: '암센터 환자 습관 관리 플랫폼입니다.',
     feature: [
@@ -482,7 +505,7 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: '1', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '2', name: 'Java', url: 'java-100.png' },
       { id: '3', name: 'Spring', url: 'spring-100.png' },
       { id: '4', name: 'MariaDB', url: 'maria-100.png' },
@@ -507,13 +530,14 @@ export const projects: Project[] = [
   {
     id: '10',
     title: 'LMEDRP',
-    period: '2024.06 ~ 2024.08',
-    git: '',
+    periodStart: '2024-06',
+    periodEnd: '2024-08',
+    git: undefined,
     site: 'https://lmedrp.com',
     filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('team'),
+      tag('feature'),
+      tag('FE'),
     ],
     description: '스튜디오 스케줄 및 촬영 관리 EDRP 시스템입니다.',
     feature: [
@@ -561,7 +585,7 @@ export const projects: Project[] = [
     ],
     skillItem: [
       { id: '1', name: 'JavaScript', url: 'js-100.png' },
-      { id: '00', name: 'JSP', url: '' },
+      { id: '00', name: 'JSP', url: undefined },
       { id: '2', name: 'Django', url: 'django-100.png' },
       { id: '3', name: 'MySQL', url: 'mysql-100.png' },
     ],
@@ -577,13 +601,13 @@ export const projects: Project[] = [
   {
     id: '11',
     title: 'Portfolio',
-    period: '2024.10 ~',
+    periodStart: '2024-10',
     git: 'https://github.com/HwajinLee3114/lhjin-portfolio',
     site: 'https://lhjin-portfolio.vercel.app/',
     filter: [
-      { name: 'personal', color: 'hotpink' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('personal'),
+      tag('feature'),
+      tag('FE'),
     ],
 
     description:
@@ -621,12 +645,12 @@ export const projects: Project[] = [
   {
     id: '12',
     title: 'Blog',
-    period: '2024.10 ~',
+    periodStart: '2024-10',
     git: 'https://github.com/HwajinLee3114/lhjin-blog',
     site: 'https://lhjin-blog.vercel.app/',
     filter: [
-      { name: 'personal', color: 'hotpink' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('personal'),
+      tag('FE'),
     ],
 
     description:
@@ -665,13 +689,13 @@ export const projects: Project[] = [
   {
     id: '13',
     title: 'MyPlanIt',
-    period: '2024.11.24 ~',
+    periodStart: '2024-11',
     git: 'https://github.com/HwajinLee3114/myit',
     site: 'https://myit-lhjins-projects.vercel.app/',
     filter: [
-      { name: 'personal', color: 'hotpink' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
+      tag('personal'),
+      tag('feature'),
+      tag('FE'),
     ],
 
     description:

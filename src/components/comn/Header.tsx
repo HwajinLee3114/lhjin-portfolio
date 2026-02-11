@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   }
 
   return (
-    <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
+    <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50 bg-white/70 dark:bg-[#232830]/80">
       <button
         onClick={() => lf_scrollToSection('home')}
         className="flex gap-2 text-lg md:text-2xl text-themacolor4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded"
@@ -92,7 +92,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
             Career
           </button>
         </nav>
-        <ThemeToggle />
+        <div className="hidden md:block">
+          <ThemeToggle />
+        </div>
         {/* 모바일 햄버거 버튼 */}
         <button
           onClick={lf_toggleMenu}
@@ -109,6 +111,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         } z-50`}
       >
         <div className="h-12"></div>
+        <div className="px-4 py-3">
+          <ThemeToggle />
+        </div>
         <button
           onClick={() => lf_scrollToSection('about')}
           className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
