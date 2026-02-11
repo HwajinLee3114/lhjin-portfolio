@@ -35,7 +35,10 @@ export default function Career() {
         <ul className="relative flex flex-col gap-6 pl-6 border-l border-black/10 dark:border-white/10">
           {loading
             ? Array.from({ length: 3 }).map((_, idx) => (
-                <li key={`career_skeleton_${idx}`} className="relative bg-white/80 dark:bg-[#273038] rounded-xl shadow-md p-4">
+                <li
+                  key={`career_skeleton_${idx}`}
+                  className="relative bg-white/80 dark:bg-[#273038] rounded-xl shadow-md p-4"
+                >
                   <span className="absolute left-[-1.9rem] top-6 h-3 w-3 rounded-full bg-themacolor4 shadow ring-4 ring-themacolor1 dark:ring-[#1f262e]" />
                   <div className="skeleton h-5 w-40 mb-2" />
                   <div className="skeleton h-4 w-56 mb-3" />
@@ -91,7 +94,10 @@ export default function Career() {
                     item.projectDetails.map(
                       (pj, idx) =>
                         pj && (
-                          <section className="mt-3 rounded-lg bg-black/5 dark:bg-white/5 p-3" key={`${pj.id}_career_${idx}`}>
+                          <section
+                            className="mt-3 rounded-lg bg-black/5 dark:bg-white/5 p-3"
+                            key={`${pj.id}_career_${idx}`}
+                          >
                             <div className="py-1 pl-3 mb-2 border-l-2 border-gray-600 dark:border-darkfg/40 text-gray-600 dark:text-darkfg/80 bg-quotecolor/60 dark:bg-[#273038]/60">
                               {pj.title}
                             </div>
