@@ -21,8 +21,14 @@ import ProjectCard from '@/components/project/ProjectCard'
 export default function Projects() {
   const [filter, setFilter] = useState<string>('feature')
   const [query, setQuery] = useState<string>('')
+  const [loading, setLoading] = useState(true)
   const searchParams = useSearchParams()
   const router = useRouter()
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 250)
+    return () => clearTimeout(t)
+  }, [])
 
   useEffect(() => {
     const q = searchParams.get('filter')
@@ -101,30 +107,42 @@ export default function Projects() {
       */}
       <div className="w-full h-full flex-grow shadow-md mt-5 mb-5 rounded-lg bg-themacolor1 dark:bg-[#273038] p-5 md:p-10">
         <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-14 font-scoreRegular">
-          {filteredPj.map((project, index) => (
-            <motion.li
-              key={`project_${project.id}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                ease: 'easeInOut',
-                duration: 0.3,
-                delay: index * 0.1,
-              }}
-            >
-              <ProjectCard
-                id={project.id}
-                title={project.title}
-                periodStart={project.periodStart}
-                periodEnd={project.periodEnd}
-                skillItem={project.skillItem}
-                filter={project.filter}
-                imageSrc={project.thumb}
-                feature={project.feature}
-                description={project.description}
-              />
-            </motion.li>
-          ))}
+          {loading
+            ? Array.from({ length: 6 }).map((_, idx) => (
+                <li key={`project_skeleton_${idx}`} className="w-full max-w-sm">
+                  <div className="skeleton w-full h-48 mb-3" />
+                  <div className="skeleton h-5 w-2/3 mb-2" />
+                  <div className="skeleton h-4 w-1/2 mb-3" />
+                  <div className="flex gap-2">
+                    <div className="skeleton h-6 w-16 rounded-full" />
+                    <div className="skeleton h-6 w-16 rounded-full" />
+                  </div>
+                </li>
+              ))
+            : filteredPj.map((project, index) => (
+                <motion.li
+                  key={`project_${project.id}`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    ease: 'easeInOut',
+                    duration: 0.3,
+                    delay: index * 0.1,
+                  }}
+                >
+                  <ProjectCard
+                    id={project.id}
+                    title={project.title}
+                    periodStart={project.periodStart}
+                    periodEnd={project.periodEnd}
+                    skillItem={project.skillItem}
+                    filter={project.filter}
+                    imageSrc={project.thumb}
+                    feature={project.feature}
+                    description={project.description}
+                  />
+                </motion.li>
+              ))}
         </ul>
       </div>
     </section>

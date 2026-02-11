@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { career } from '@/data/career'
 import { projects } from '@/data/projects'
@@ -13,6 +13,12 @@ const careerWithProjects = career.map((c) => ({
 }))
 
 export default function Career() {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 250)
+    return () => clearTimeout(t)
+  }, [])
   const sortedCareer = useMemo(() => {
     return [...careerWithProjects].sort((a, b) => parseInt(b.id) - parseInt(a.id))
   }, [])
@@ -27,63 +33,75 @@ export default function Career() {
 
       <div className="max-w-2xl w-full">
         <ul className="flex flex-col gap-5">
-          {sortedCareer.map((item, index) => (
-            <li
-              key={`career_${index}`}
-              className="bg-white dark:bg-[#273038] rounded-lg shadow-md p-4 hover:shadow-xl"
-              // initial={{ opacity: 0, y: 20 }}
-              // whileInView={{ opacity: 1, y: 0 }}
-              // transition={{
-              //   ease: "easeInOut",
-              //   duration: 0.5,
-              //   delay: sortedCareer.indexOf(item) * 0.1,
-              //   y: { duration: 0.5 },
-              // }}
-            >
-              <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                <h2 className="text-lg font-bold">{item.company}</h2>
-              </div>
-              <div className="flex flex-col gap-1 mb-1">
-                {item.roles.map((roleItem, roleIndex) => (
-                  <div
-                    key={`${item.id}_role_${roleIndex}`}
-                    className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm"
-                  >
-                    {roleItem.role}{' '}
-                    {roleItem.role ? '· ' : ''}
-                    {formatPeriod(roleItem.periodStart, roleItem.periodEnd)}
+          {loading
+            ? Array.from({ length: 3 }).map((_, idx) => (
+                <li key={`career_skeleton_${idx}`} className="bg-white dark:bg-[#273038] rounded-lg shadow-md p-4">
+                  <div className="skeleton h-5 w-40 mb-2" />
+                  <div className="skeleton h-4 w-56 mb-3" />
+                  <div className="skeleton h-4 w-full mb-3" />
+                  <div className="flex gap-2">
+                    <div className="skeleton h-6 w-16 rounded-full" />
+                    <div className="skeleton h-6 w-20 rounded-full" />
+                    <div className="skeleton h-6 w-14 rounded-full" />
                   </div>
-                ))}
-              </div>
-              <div className="my-2">{item.companyInfo}</div>
-              <div className="flex gap-2 mt-2 flex-wrap">
-                {item.tag.map((t, idx) => (
-                  <p
-                    key={`carrerTag_${idx}`}
-                    className="text-xs px-2 py-0.5 rounded-lg bg-black text-white"
-                  >
-                    {t}
-                  </p>
-                ))}
-              </div>
+                </li>
+              ))
+            : sortedCareer.map((item, index) => (
+                <li
+                  key={`career_${index}`}
+                  className="bg-white dark:bg-[#273038] rounded-lg shadow-md p-4 hover:shadow-xl"
+                  // initial={{ opacity: 0, y: 20 }}
+                  // whileInView={{ opacity: 1, y: 0 }}
+                  // transition={{
+                  //   ease: "easeInOut",
+                  //   duration: 0.5,
+                  //   delay: sortedCareer.indexOf(item) * 0.1,
+                  //   y: { duration: 0.5 },
+                  // }}
+                >
+                  <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+                    <h2 className="text-lg font-bold">{item.company}</h2>
+                  </div>
+                  <div className="flex flex-col gap-1 mb-1">
+                    {item.roles.map((roleItem, roleIndex) => (
+                      <div
+                        key={`${item.id}_role_${roleIndex}`}
+                        className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm"
+                      >
+                        {roleItem.role} {roleItem.role ? '· ' : ''}
+                        {formatPeriod(roleItem.periodStart, roleItem.periodEnd)}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="my-2">{item.companyInfo}</div>
+                  <div className="flex gap-2 mt-2 flex-wrap">
+                    {item.tag.map((t, idx) => (
+                      <p
+                        key={`carrerTag_${idx}`}
+                        className="text-xs px-2 py-0.5 rounded-lg bg-black text-white"
+                      >
+                        {t}
+                      </p>
+                    ))}
+                  </div>
 
-              {item.projectDetails &&
-                item.projectDetails.map(
-                  (pj, idx) =>
-                    pj && (
-                      <section className="py-3.5 px-0 md:p-4" key={`${pj.id}_career_${idx}`}>
-                        <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 dark:border-darkfg/40 text-gray-600 dark:text-darkfg/80 bg-quotecolor dark:bg-[#273038]">
-                          {pj.title}
-                        </div>
-                        <div className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm mb-1">
-                          {formatPeriod(pj.periodStart, pj.periodEnd)}
-                        </div>
-                        <div>{pj.description}</div>
-                      </section>
-                    ),
-                )}
-            </li>
-          ))}
+                  {item.projectDetails &&
+                    item.projectDetails.map(
+                      (pj, idx) =>
+                        pj && (
+                          <section className="py-3.5 px-0 md:p-4" key={`${pj.id}_career_${idx}`}>
+                            <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 dark:border-darkfg/40 text-gray-600 dark:text-darkfg/80 bg-quotecolor dark:bg-[#273038]">
+                              {pj.title}
+                            </div>
+                            <div className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm mb-1">
+                              {formatPeriod(pj.periodStart, pj.periodEnd)}
+                            </div>
+                            <div>{pj.description}</div>
+                          </section>
+                        ),
+                    )}
+                </li>
+              ))}
         </ul>
       </div>
     </section>
