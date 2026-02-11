@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import tw from 'tailwind-styled-components'
 
@@ -29,6 +29,8 @@ const QuoteDiv = tw.div`
 export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) => {
   const project = activeId ? getProjectById(activeId) : null
   const [previewImgUrl, setPreviewImgUrl] = useState<string | undefined>(undefined)
+  const [activeTab, setActiveTab] = useState<string>('pj-info')
+  const containerRef = useRef<HTMLDivElement | null>(null)
 
   if (!project) {
     return null
@@ -45,6 +47,28 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
     setPreviewImgUrl(undefined)
   }
 
+  useEffect(() => {
+    if (!isOpen || !containerRef.current) return
+    const targets = ['pj-info', 'pj-feature', 'pj-contrib', 'pj-images']
+      .map((id) => containerRef.current?.querySelector(`#${id}`))
+      .filter(Boolean) as HTMLElement[]
+
+    if (targets.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (visible[0]) setActiveTab(visible[0].target.id)
+      },
+      { root: containerRef.current, threshold: [0.2, 0.5, 0.8] },
+    )
+
+    targets.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [isOpen, activeId])
+
   return (
     <>
       <ImagePreviewModal
@@ -55,6 +79,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            ref={containerRef}
             key="projectDetailModal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -78,25 +103,41 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 <div className="flex gap-1.5 justify-center text-xs md:text-sm py-2 pr-12">
                   <button
                     onClick={() => document.getElementById('pj-info')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                    className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
+                      activeTab === 'pj-info'
+                        ? 'bg-themacolor4 text-white'
+                        : 'bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10'
+                    }`}
                   >
                     정보
                   </button>
                   <button
                     onClick={() => document.getElementById('pj-feature')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                    className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
+                      activeTab === 'pj-feature'
+                        ? 'bg-themacolor4 text-white'
+                        : 'bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10'
+                    }`}
                   >
                     기능
                   </button>
                   <button
                     onClick={() => document.getElementById('pj-contrib')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                    className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
+                      activeTab === 'pj-contrib'
+                        ? 'bg-themacolor4 text-white'
+                        : 'bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10'
+                    }`}
                   >
                     기여
                   </button>
                   <button
                     onClick={() => document.getElementById('pj-images')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                    className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
+                      activeTab === 'pj-images'
+                        ? 'bg-themacolor4 text-white'
+                        : 'bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10'
+                    }`}
                   >
                     이미지
                   </button>
