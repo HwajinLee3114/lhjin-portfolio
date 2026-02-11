@@ -16,6 +16,11 @@ export interface Contribution {
   desc: string[]
 }
 
+export interface FilterTag {
+  name: FilterName
+  color: string
+}
+
 export interface Project {
   id: string
   title: string
@@ -23,7 +28,7 @@ export interface Project {
   periodEnd?: string
   git?: string
   site?: string
-  filter: { name: FilterName; color: string }[]
+  filter: FilterTag[]
   description: string
   feature: string[]
   contribution: Contribution[]

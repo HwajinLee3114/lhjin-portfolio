@@ -2,11 +2,19 @@
 
 import React, { useState, useEffect, useCallback } from 'react'
 import ThemeToggle from './ThemeToggle'
+import { focusRing } from '@/styles/ui'
 
 interface HeaderProps {
   activeSection: string
   setActiveSection: (section: string) => void
 }
+
+const NAV_ITEMS = [
+  { id: 'about', label: "It's ME" },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'career', label: 'Career' },
+] as const
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -51,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
     <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50 bg-white/70 dark:bg-[#232830]/80">
       <button
         onClick={() => lf_scrollToSection('home')}
-        className="flex gap-2 text-lg md:text-2xl text-themacolor4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded"
+        className={`flex gap-2 text-lg md:text-2xl text-themacolor4 ${focusRing} rounded`}
       >
         <div className="g_titleEngFontBlack">lhjin&apos;s</div>
         <div className="g_titleEngFontOutline">Portfolio</div>
@@ -59,38 +67,17 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
       <div className="flex items-center gap-3">
         {/* PC 메뉴 */}
         <nav className="hidden md:flex space-x-4">
-          <button
-            onClick={() => lf_scrollToSection('about')}
-            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'about' ? 'active' : ''}
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-          >
-            It&apos;s ME
-          </button>
-          <button
-            onClick={() => lf_scrollToSection('skills')}
-            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'skills' ? 'active' : ''}
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-          >
-            Skills
-          </button>
-          <button
-            onClick={() => lf_scrollToSection('projects')}
-            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'projects' ? 'active' : ''}
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-          >
-            Projects
-          </button>
-          <button
-            onClick={() => lf_scrollToSection('career')}
-            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'career' ? 'active' : ''}
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-          >
-            Career
-          </button>
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => lf_scrollToSection(item.id)}
+              className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === item.id ? 'active' : ''}
+              ${focusRing} focus-visible:rounded-sm
+              `}
+            >
+              {item.label}
+            </button>
+          ))}
         </nav>
         <div className="hidden md:block">
           <ThemeToggle />
@@ -98,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         {/* 모바일 햄버거 버튼 */}
         <button
           onClick={lf_toggleMenu}
-          className="md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded"
+          className={`md:hidden ${focusRing} rounded`}
           aria-label="메뉴 열기"
         >
           <div className={`l_hamburger_menu ${isOpen ? 'animate' : ''}`}></div>
@@ -114,46 +101,19 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="px-4 py-3">
           <ThemeToggle />
         </div>
-        <button
-          onClick={() => lf_scrollToSection('about')}
+        {NAV_ITEMS.map((item) => (
+          <button
+            key={`mobile_${item.id}`}
+            onClick={() => lf_scrollToSection(item.id)}
           className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === 'about' ? 'active' : ''
+            activeSection === item.id ? 'active' : ''
           }
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-        >
-          It&apos;s ME
-        </button>
-        <button
-          onClick={() => lf_scrollToSection('skills')}
-          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === 'skills' ? 'active' : ''
-          }
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-        >
-          Skills
-        </button>
-        <button
-          onClick={() => lf_scrollToSection('projects')}
-          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === 'projects' ? 'active' : ''
-          }
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-        >
-          Projects
-        </button>
-        <button
-          onClick={() => lf_scrollToSection('career')}
-          className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
-            activeSection === 'career' ? 'active' : ''
-          }
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
-          `}
-        >
-          Career
-        </button>
+            ${focusRing} focus-visible:rounded-sm
+            `}
+          >
+            {item.label}
+          </button>
+        ))}
       </nav>
     </header>
   )

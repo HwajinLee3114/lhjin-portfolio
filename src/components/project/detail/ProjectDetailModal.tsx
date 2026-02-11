@@ -5,6 +5,8 @@ import tw from 'tailwind-styled-components'
 import { getProjectById } from '@/data/projects'
 import { ImagePreviewModal } from '@/components/comn/ImagePreviewModal'
 import { formatPeriod } from '@/lib/period'
+import IconCircleButton from '@/components/comn/IconCircleButton'
+import IconButton from '@/components/comn/IconButton'
 
 interface ModalProps {
   isOpen: boolean
@@ -48,10 +50,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
       <ImagePreviewModal
         isOpen={!!previewImgUrl}
         imageUrl={previewImgUrl}
-        onClose={(e) => {
-          e.stopPropagation()
-          closePreview()
-        }}
+        onClose={closePreview}
       />
       <AnimatePresence>
         {isOpen && (
@@ -66,14 +65,14 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
             role="dialog"
             aria-modal="true"
           >
-            <button
-              type="button"
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10"
+            <IconButton
               onClick={onClose}
-              aria-label="모달 닫기"
-            >
-              <img src="/images/b2close-100.png" className="w-8" alt="닫기" />
-            </button>
+              ariaLabel="모달 닫기"
+              imgSrc="/images/b2close-100.png"
+              imgAlt="닫기"
+              imgClassName="w-8"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 rounded-full bg-white/90 dark:bg-[#1f262e]/90 p-2 shadow-md"
+            />
             <section className="h-full flex flex-col items-center px-4 sm:px-6 md:px-10">
               <div className="border-b-2 w-full flex flex-col items-center px-4 sm:px-6 md:px-10 py-3">
                 <div className="text-2xl font-bold pb-2 text-center">{project.title}</div>
@@ -101,18 +100,24 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
 
                 <div className="flex flex-col md:flex-row items-center gap-3 py-3">
                   {project.git && (
-                    <a href={project.git} target="_blank" rel="noreferrer noopener" aria-label="GitHub 열기">
-                      <div className="bg-white dark:bg-[#1f262e] rounded-full p-2 hover:shadow-md">
-                        <img src="/images/tech/github-100.png" className="w-7" alt="GitHub" />
-                      </div>
-                    </a>
+                    <IconCircleButton
+                      href={project.git}
+                      ariaLabel="GitHub 열기"
+                      imgSrc="/images/tech/github-100.png"
+                      imgAlt="GitHub"
+                      imgClassName="w-7"
+                      className="p-2"
+                    />
                   )}
                   {project.site && (
-                    <a href={project.site} target="_blank" rel="noreferrer noopener" aria-label="프로젝트 사이트 열기">
-                      <div className="bg-white dark:bg-[#1f262e] rounded-full p-2.5 shadow-md hover:shadow-lg">
-                        <img src="/images/link-100.png" className="w-6" alt="사이트 링크" />
-                      </div>
-                    </a>
+                    <IconCircleButton
+                      href={project.site}
+                      ariaLabel="프로젝트 사이트 열기"
+                      imgSrc="/images/link-100.png"
+                      imgAlt="사이트 링크"
+                      imgClassName="w-6"
+                      className="p-2.5"
+                    />
                   )}
                 </div>
               </div>

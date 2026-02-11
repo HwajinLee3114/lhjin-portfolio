@@ -1,27 +1,20 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import tw from 'tailwind-styled-components'
-
+import React, { useState } from 'react'
 import { ProjectDetailModal } from './detail/ProjectDetailModal'
 import ModalPortal from '../comn/ModalPortal'
+import ModalOverlay from '../comn/ModalOverlay'
 import { formatPeriod } from '@/lib/period'
-
-interface Tag {
-  name: string
-  color: string
-  txtcolor?: string
-}
-export interface SkillItem {
-  id: string
-  name: string
-  url?: string
-}
+import type { FilterTag, SkillItem } from '@/data/projects'
+import useBodyScrollLock from '@/hooks/useBodyScrollLock'
+import useEscapeKey from '@/hooks/useEscapeKey'
+import { focusRing } from '@/styles/ui'
+import TagBadge from '../comn/TagBadge'
 
 interface ProjectCardProps {
   id?: string
   title?: string
-  filter?: Tag[]
+  filter?: FilterTag[]
   periodStart?: string
   periodEnd?: string
   feature?: string[]
@@ -30,31 +23,6 @@ interface ProjectCardProps {
   skillItem: SkillItem[]
   description: string
 }
-
-const TxtButton = tw.button`
-  px-3 
-  py-1 
-  border 
-  border-gray-300 
-  rounded 
-  font-medium 
-  text-sm 
-  outline-none 
-  cursor-pointer 
-  hover:bg-yellow-400 
-  hover:text-white 
-  hover:border-yellow-400
-  focus-visible:outline-none
-  focus-visible:ring-2
-  focus-visible:ring-yellow-400
-  focus-visible:ring-offset-2
-`
-
-const ModalWrapper = tw.div`
-fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-60 z-40 
-overflow-y-auto
-scrollbar-hide
-`
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   id,
@@ -71,30 +39,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [activeId, setActiveId] = useState<string>('') // 상세 프로젝트
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
+  useBodyScrollLock(isOpen)
 
   const closeModal = () => {
     setIsOpen(false)
     setActiveId('')
   }
 
-  useEffect(() => {
-    if (!isOpen) return
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeModal()
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen])
+  useEscapeKey(isOpen, closeModal)
 
   return (
     <>
@@ -113,16 +65,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {filter && (
               <div className="flex gap-2 flex-wrap">
                 {filter.map((fil, idx) => (
-                  <p
-                    key={`projectfilter${idx}`}
-                    className="text-xs px-2 py-0.5 rounded-lg"
-                    style={{
-                      backgroundColor: fil.color,
-                      color: fil.txtcolor ? fil.txtcolor : '#ffffff',
-                    }}
-                  >
-                    {fil.name}
-                  </p>
+                  <TagBadge key={`projectfilter${idx}`} name={fil.name} color={fil.color} />
                 ))}
               </div>
             )}
@@ -168,30 +111,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         {id && (
           <div className="flex justify-end">
-            <TxtButton
+            <button
+              className={`px-3 py-1 border border-gray-300 rounded font-medium text-sm outline-none cursor-pointer hover:bg-yellow-400 hover:text-white hover:border-yellow-400 ${focusRing} focus-visible:ring-yellow-400 focus-visible:ring-offset-2`}
               onClick={() => {
                 setIsOpen(true)
                 setActiveId(id)
               }}
             >
               DETAIL
-            </TxtButton>
+            </button>
           </div>
         )}
       </div>
 
       {isOpen && (
         <ModalPortal>
-          <ModalWrapper
-            onClick={closeModal}
-            onKeyDown={(e) => {
-              if (e.key === 'Escape') closeModal()
-            }}
-            role="presentation"
-            tabIndex={-1}
-          >
+          <ModalOverlay onClose={closeModal}>
             <ProjectDetailModal isOpen={isOpen} activeId={activeId} onClose={closeModal} />
-          </ModalWrapper>
+          </ModalOverlay>
         </ModalPortal>
       )}
     </>
