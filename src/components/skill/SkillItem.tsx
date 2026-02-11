@@ -21,7 +21,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ title, skills, img }) => {
         {skills.map((skill, index) => (
           <li
             key={`skillsItem_${index}`}
-            className="rounded-md px-2 py-1 font-bold text-sm"
+            className="rounded-full px-3 py-1 text-xs font-semibold tracking-wide shadow-sm ring-1 ring-black/10"
             style={{
               backgroundColor: skill.color,
               color: skill.txtcolor ? skill.txtcolor : '#ffffff',
