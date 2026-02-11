@@ -15,13 +15,15 @@ const config: Config = {
         maincolor: '#6893b7',
         quotecolor: '#e2e4e4',
 
-        themacolor1: '#F6F1E3', // 연노랑
-        themacolor15: '#F5E8B6',
-        themacolor2: '#FAAD1A', // 진노랑
-        themacolor3: '#344C36', // 진녹색
-        themacolor4: '#3b82f6', // 파란색
-        darkbg: '#22272e',
-        darkfg: '#e2e4e4',
+        themacolor1: 'var(--theme-1)', // base surface
+        themacolor15: 'var(--theme-1-5)',
+        themacolor2: 'var(--theme-2)', // accent
+        themacolor3: 'var(--theme-3)', // deep surface
+        themacolor4: 'var(--theme-4)', // primary
+        darkbg: 'var(--theme-bg)',
+        darkfg: 'var(--theme-fg)',
+        custombg: 'var(--custom-bg)',
+        customfg: 'var(--custom-fg)',
       },
       height: {
         '43': '43rem',

@@ -33,3 +33,39 @@
 body {
   font-family: 'CommonFont', sans-serif;
 }
+
+:root {
+  --theme-1: #f6f1e3;
+  --theme-1-5: #f5e8b6;
+  --theme-2: #faad1a;
+  --theme-3: #344c36;
+  --theme-4: #3b82f6;
+  --theme-bg: #ffffff;
+  --theme-fg: #1f2937;
+
+  --custom-bg: #f5efe6;
+  --custom-fg: #2e2a26;
+}
+
+.dark {
+  --theme-1: #1f262e;
+  --theme-1-5: #273038;
+  --theme-2: #e3a01c;
+  --theme-3: #202a24;
+  --theme-4: #7aa6ff;
+  --theme-bg: #1f262e;
+  --theme-fg: #e2e4e4;
+}
+
+.theme-custom {
+  --theme-1: #f7f1ff;
+  --theme-1-5: #ece3ff;
+  --theme-2: #ffd7a8;
+  --theme-3: #9fb7ff;
+  --theme-4: #c78cff;
+  --theme-bg: #f7f1ff;
+  --theme-fg: #2b2633;
+
+  --custom-bg: #f7f1ff;
+  --custom-fg: #2b2633;
+}
