@@ -9,6 +9,7 @@ import Skills from './skills/page'
 
 import Footer from '@/components/comn/Footer'
 import Header from '@/components/comn/Header'
+import ScrollTopButton from '@/components/comn/ScrollTopButton'
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>('')
@@ -24,6 +25,7 @@ export default function Home() {
       </main>
       <Footer />
       <div id="modalTmp"></div>
+      <ScrollTopButton />
     </div>
   )
 }

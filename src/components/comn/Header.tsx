@@ -18,6 +18,8 @@ const NAV_ITEMS = [
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isHidden, setIsHidden] = useState<boolean>(false)
+  const [scrollTimer, setScrollTimer] = useState<number | null>(null)
 
   const lf_toggleMenu = () => {
     setIsOpen(!isOpen)
@@ -46,6 +48,20 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
     }
   }, [lf_handleScroll])
 
+  useEffect(() => {
+    const handleScrollState = () => {
+      setIsHidden(true)
+      if (scrollTimer) window.clearTimeout(scrollTimer)
+      const timer = window.setTimeout(() => setIsHidden(false), 180)
+      setScrollTimer(timer)
+    }
+    window.addEventListener('scroll', handleScrollState)
+    return () => {
+      window.removeEventListener('scroll', handleScrollState)
+      if (scrollTimer) window.clearTimeout(scrollTimer)
+    }
+  }, [scrollTimer])
+
   const lf_scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -56,7 +72,11 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   }
 
   return (
-    <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50 bg-white/70 dark:bg-[#232830]/80">
+    <header
+      className={`flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50 bg-white/70 dark:bg-[#232830]/80 transition-transform duration-200 ${
+        isHidden ? '-translate-y-full' : 'translate-y-0'
+      }`}
+    >
       <button
         onClick={() => lf_scrollToSection('home')}
         className={`flex gap-2 text-lg md:text-2xl text-themacolor4 ${focusRing} rounded`}

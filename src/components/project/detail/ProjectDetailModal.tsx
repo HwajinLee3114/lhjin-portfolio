@@ -65,15 +65,15 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
             role="dialog"
             aria-modal="true"
           >
-            <IconButton
-              onClick={onClose}
-              ariaLabel="모달 닫기"
-              imgSrc="/images/b2close-100.png"
-              imgAlt="닫기"
-              imgClassName="w-8"
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 rounded-full bg-white/90 dark:bg-[#1f262e]/90 p-2 shadow-md"
-            />
-            <section className="h-full flex flex-col items-center px-4 sm:px-6 md:px-10">
+            <section className="relative h-full flex flex-col items-center px-4 sm:px-6 md:px-10">
+              <IconButton
+                onClick={onClose}
+                ariaLabel="모달 닫기"
+                imgSrc="/images/b2close-100.png"
+                imgAlt="닫기"
+                imgClassName="w-8"
+                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 p-1 rounded-full bg-white/80 dark:bg-[#1f262e]/80 shadow-md"
+              />
               <div className="border-b-2 w-full flex flex-col items-center px-4 sm:px-6 md:px-10 py-3">
                 <div className="text-2xl font-bold pb-2 text-center">{project.title}</div>
                 <div className="text-gray-600 dark:text-darkfg/80 text-sm md:text-base mb-1 text-center">
