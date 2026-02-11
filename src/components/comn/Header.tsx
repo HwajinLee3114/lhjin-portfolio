@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
+import ThemeToggle from './ThemeToggle'
 
 interface HeaderProps {
   activeSection: string
@@ -50,46 +51,57 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
     <header className="flex items-center justify-between fixed top-0 w-full p-4 backdrop-blur-sm shadow-md z-50">
       <button
         onClick={() => lf_scrollToSection('home')}
-        className="flex gap-2 text-lg md:text-2xl text-themacolor4"
+        className="flex gap-2 text-lg md:text-2xl text-themacolor4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded"
       >
         <div className="g_titleEngFontBlack">lhjin&apos;s</div>
         <div className="g_titleEngFontOutline">Portfolio</div>
       </button>
-      {/* 모바일 햄버거 버튼 */}
-      <button onClick={lf_toggleMenu} className="md:hidden">
-        <div className={`l_hamburger_menu ${isOpen ? 'animate' : ''}`}></div>
-      </button>
-      {/* PC 메뉴 */}
-      <nav className="hidden md:flex space-x-4">
-        <button
-          onClick={() => lf_scrollToSection('about')}
-          className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'about' ? 'active' : ''}
+      <div className="flex items-center gap-3">
+        {/* PC 메뉴 */}
+        <nav className="hidden md:flex space-x-4">
+          <button
+            onClick={() => lf_scrollToSection('about')}
+            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'about' ? 'active' : ''}
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
-        >
-          It&apos;s ME
-        </button>
-        <button
-          onClick={() => lf_scrollToSection('skills')}
-          className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'skills' ? 'active' : ''}
+          >
+            It&apos;s ME
+          </button>
+          <button
+            onClick={() => lf_scrollToSection('skills')}
+            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'skills' ? 'active' : ''}
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
-        >
-          Skills
-        </button>
-        <button
-          onClick={() => lf_scrollToSection('projects')}
-          className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'projects' ? 'active' : ''}
+          >
+            Skills
+          </button>
+          <button
+            onClick={() => lf_scrollToSection('projects')}
+            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'projects' ? 'active' : ''}
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
-        >
-          Projects
-        </button>
-        <button
-          onClick={() => lf_scrollToSection('career')}
-          className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'career' ? 'active' : ''}
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => lf_scrollToSection('career')}
+            className={`p-2 l_menu_tab g_RiaSansFont ${activeSection === 'career' ? 'active' : ''}
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
+          >
+            Career
+          </button>
+        </nav>
+        <ThemeToggle />
+        {/* 모바일 햄버거 버튼 */}
+        <button
+          onClick={lf_toggleMenu}
+          className="md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded"
+          aria-label="메뉴 열기"
         >
-          Career
+          <div className={`l_hamburger_menu ${isOpen ? 'animate' : ''}`}></div>
         </button>
-      </nav>
+      </div>
       {/* 모바일 사이드 메뉴 */}
       <nav
         className={`shadow-md fixed top-0 right-0 bg-themacolor1 h-screen w-3/4 md:hidden transition-transform duration-300 ${
@@ -102,6 +114,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === 'about' ? 'active' : ''
           }
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
         >
           It&apos;s ME
@@ -111,6 +124,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === 'skills' ? 'active' : ''
           }
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
         >
           Skills
@@ -120,6 +134,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === 'projects' ? 'active' : ''
           }
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
         >
           Projects
@@ -129,6 +144,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           className={`block p-4 w-full l_menu_tab g_RiaSansFont ${
             activeSection === 'career' ? 'active' : ''
           }
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2 rounded
           `}
         >
           Career

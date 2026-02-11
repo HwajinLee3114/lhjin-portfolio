@@ -42,6 +42,10 @@ const TxtButton = tw.button`
   hover:bg-yellow-400 
   hover:text-white 
   hover:border-yellow-400
+  focus-visible:outline-none
+  focus-visible:ring-2
+  focus-visible:ring-yellow-400
+  focus-visible:ring-offset-2
 `
 
 const ModalWrapper = tw.div`
@@ -75,11 +79,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   }, [isOpen])
 
+  const closeModal = () => {
+    setIsOpen(false)
+    setActiveId('')
+  }
+
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
+
   return (
     <>
-      <div className="max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
+      <div className="w-full max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer transition-transform">
         <div className="flex justify-center">
-          <img className="w-full h-48 object-cover" src={`/images/thumb/${imageSrc}`} alt={title} />
+          <img
+            className="w-full h-48 object-cover"
+            src={`/images/thumb/${imageSrc}`}
+            alt={title}
+            loading="lazy"
+          />
         </div>
         <div className="py-2">
           <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
@@ -153,12 +176,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {isOpen && (
         <ModalPortal>
           <ModalWrapper
-            onClick={() => {
-              setIsOpen(false)
-              setActiveId('')
+            onClick={closeModal}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') closeModal()
             }}
+            role="presentation"
+            tabIndex={-1}
           >
-            <ProjectDetailModal isOpen={isOpen} activeId={activeId} />
+            <ProjectDetailModal isOpen={isOpen} activeId={activeId} onClose={closeModal} />
           </ModalWrapper>
         </ModalPortal>
       )}
