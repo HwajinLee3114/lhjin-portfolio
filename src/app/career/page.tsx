@@ -32,10 +32,11 @@ export default function Career() {
       <p className="my-4"></p>
 
       <div className="max-w-2xl w-full">
-        <ul className="flex flex-col gap-5">
+        <ul className="relative flex flex-col gap-6 pl-6 border-l border-black/10 dark:border-white/10">
           {loading
             ? Array.from({ length: 3 }).map((_, idx) => (
-                <li key={`career_skeleton_${idx}`} className="bg-white dark:bg-[#273038] rounded-lg shadow-md p-4">
+                <li key={`career_skeleton_${idx}`} className="relative bg-white/80 dark:bg-[#273038] rounded-xl shadow-md p-4">
+                  <span className="absolute left-[-1.9rem] top-6 h-3 w-3 rounded-full bg-themacolor4 shadow ring-4 ring-themacolor1 dark:ring-[#1f262e]" />
                   <div className="skeleton h-5 w-40 mb-2" />
                   <div className="skeleton h-4 w-56 mb-3" />
                   <div className="skeleton h-4 w-full mb-3" />
@@ -49,7 +50,7 @@ export default function Career() {
             : sortedCareer.map((item, index) => (
                 <li
                   key={`career_${index}`}
-                  className="bg-white dark:bg-[#273038] rounded-lg shadow-md p-4 hover:shadow-xl"
+                  className="relative bg-white/90 dark:bg-[#273038] rounded-xl shadow-md p-5 hover:shadow-xl"
                   // initial={{ opacity: 0, y: 20 }}
                   // whileInView={{ opacity: 1, y: 0 }}
                   // transition={{
@@ -59,6 +60,7 @@ export default function Career() {
                   //   y: { duration: 0.5 },
                   // }}
                 >
+                  <span className="absolute left-[-1.9rem] top-6 h-3 w-3 rounded-full bg-themacolor4 shadow ring-4 ring-themacolor1 dark:ring-[#1f262e]" />
                   <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
                     <h2 className="text-lg font-bold">{item.company}</h2>
                   </div>
@@ -66,7 +68,7 @@ export default function Career() {
                     {item.roles.map((roleItem, roleIndex) => (
                       <div
                         key={`${item.id}_role_${roleIndex}`}
-                        className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm"
+                        className="text-gray-600 dark:text-darkfg/80 text-sm md:text-base"
                       >
                         {roleItem.role} {roleItem.role ? '· ' : ''}
                         {formatPeriod(roleItem.periodStart, roleItem.periodEnd)}
@@ -78,7 +80,7 @@ export default function Career() {
                     {item.tag.map((t, idx) => (
                       <p
                         key={`carrerTag_${idx}`}
-                        className="text-xs px-2 py-0.5 rounded-lg bg-black text-white"
+                        className="text-xs px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 text-black/80 dark:text-white/80"
                       >
                         {t}
                       </p>
@@ -89,8 +91,8 @@ export default function Career() {
                     item.projectDetails.map(
                       (pj, idx) =>
                         pj && (
-                          <section className="py-3.5 px-0 md:p-4" key={`${pj.id}_career_${idx}`}>
-                            <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 dark:border-darkfg/40 text-gray-600 dark:text-darkfg/80 bg-quotecolor dark:bg-[#273038]">
+                          <section className="mt-3 rounded-lg bg-black/5 dark:bg-white/5 p-3" key={`${pj.id}_career_${idx}`}>
+                            <div className="py-1 pl-3 mb-2 border-l-2 border-gray-600 dark:border-darkfg/40 text-gray-600 dark:text-darkfg/80 bg-quotecolor/60 dark:bg-[#273038]/60">
                               {pj.title}
                             </div>
                             <div className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm mb-1">
