@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useSearchParams, useRouter } from 'next/navigation'
 
 import { projects } from '@/data/projects'
 import ProjectCard from '@/components/project/ProjectCard'
@@ -19,6 +20,20 @@ import ProjectCard from '@/components/project/ProjectCard'
 */
 export default function Projects() {
   const [filter, setFilter] = useState<string>('feature')
+  const [query, setQuery] = useState<string>('')
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  useEffect(() => {
+    const q = searchParams.get('filter')
+    if (q && q !== filter) setFilter(q)
+  }, [searchParams])
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('filter', filter)
+    router.replace(`?${params.toString()}`, { scroll: false })
+  }, [filter])
 
   const filteredPj = projects
     .filter((project) => {
@@ -26,6 +41,14 @@ export default function Projects() {
       if (filter === 'team') return project.filter.some((f) => f.name === 'team')
       if (filter === 'feature') return project.filter.some((f) => f.name === 'feature')
       return true
+    })
+    .filter((project) => {
+      if (!query.trim()) return true
+      const q = query.toLowerCase()
+      const inTitle = project.title.toLowerCase().includes(q)
+      const inDesc = project.description.toLowerCase().includes(q)
+      const inSkill = project.skillItem.some((s) => s.name.toLowerCase().includes(q))
+      return inTitle || inDesc || inSkill
     })
     .sort((a, b) => Number(b.id) - Number(a.id))
   return (
@@ -35,7 +58,8 @@ export default function Projects() {
         {/* <p className="mt-4">다양한 프로젝트 경험을 통해</p> */}
       </div>
 
-      <ul className="l_pjfilter flex gap-3 cursor-pointer mt-10 justify-center">
+      <div className="flex flex-col items-center gap-4 mt-10">
+        <ul className="l_pjfilter flex gap-3 cursor-pointer justify-center">
         <img src="/images/filterYellow-100.png" className="w-6" alt="filter" />
         <li
           className={`cursor-pointer g_RiaSansFont ${filter === 'all' ? 'selected' : ''}`}
@@ -61,7 +85,14 @@ export default function Projects() {
         >
           Team
         </li>
-      </ul>
+        </ul>
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="프로젝트 검색 (제목/설명/스택)"
+          className="w-full max-w-md px-4 py-2 rounded-full border border-black/10 bg-white/80 dark:bg-[#273038] dark:text-darkfg"
+        />
+      </div>
       {/* link, imageSrc */}
       {/* 
         initial: 시작 상태. opacity, 위치 지정

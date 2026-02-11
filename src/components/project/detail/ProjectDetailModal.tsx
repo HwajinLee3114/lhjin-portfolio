@@ -71,10 +71,39 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 ariaLabel="모달 닫기"
                 imgSrc="/images/b2close-100.png"
                 imgAlt="닫기"
-                imgClassName="w-8"
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 p-1 rounded-full bg-white/80 dark:bg-[#1f262e]/80 shadow-md"
+                imgClassName="w-6"
+                className="sticky top-2 self-end z-20 p-1.5 rounded-full bg-white/90 dark:bg-[#1f262e]/90 shadow-md"
               />
+              <div className="sticky top-0 z-10 w-full bg-themacolor1/80 dark:bg-[#273038]/80 backdrop-blur border-b border-black/10 dark:border-white/10">
+                <div className="flex gap-1.5 justify-center text-xs md:text-sm py-2 pr-12">
+                  <button
+                    onClick={() => document.getElementById('pj-info')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                  >
+                    정보
+                  </button>
+                  <button
+                    onClick={() => document.getElementById('pj-feature')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                  >
+                    기능
+                  </button>
+                  <button
+                    onClick={() => document.getElementById('pj-contrib')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                  >
+                    기여
+                  </button>
+                  <button
+                    onClick={() => document.getElementById('pj-images')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10 transition-colors"
+                  >
+                    이미지
+                  </button>
+                </div>
+              </div>
               <div className="border-b-2 w-full flex flex-col items-center px-4 sm:px-6 md:px-10 py-3">
+                <div id="pj-info" />
                 <div className="text-2xl font-bold pb-2 text-center">{project.title}</div>
                 <div className="text-gray-600 dark:text-darkfg/80 text-sm md:text-base mb-1 text-center">
                   {formatPeriod(project.periodStart, project.periodEnd)}
@@ -122,9 +151,9 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 </div>
               </div>
 
-              <div className="w-full flex flex-col gap-3 items-center px-4 sm:px-6 md:px-10 py-3">
+                <div className="w-full flex flex-col gap-3 items-center px-4 sm:px-6 md:px-10 py-3">
                 {project.feature && project.feature.length > 0 && (
-                  <section className="w-full h-full">
+                  <section id="pj-feature" className="w-full h-full">
                     <div className="flex gap-2 text-xl font-bold text-left mb-5">
                       <img src="/images/popular-100.png" className="w-7" alt="주요 기능" />
                       <div>주요 기능</div>
@@ -140,7 +169,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 )}
 
                 {project.contribution && project.contribution.length > 0 && (
-                  <section className="w-full h-full">
+                  <section id="pj-contrib" className="w-full h-full">
                     <div className="flex gap-2 text-xl font-bold text-left mb-5">
                       <img src="/images/hand-100.png" className="w-7" alt="기여 부분" />
                       <div>기여 부분</div>
@@ -164,7 +193,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 )}
 
                 {project.images && project.images.length > 0 && (
-                  <section className="w-full h-full">
+                  <section id="pj-images" className="w-full h-full">
                     <div className="flex gap-2 text-xl font-bold text-left mb-5">
                       <img src="/images/monitor-100.png" className="w-7" alt="작업 화면" />
                       <div>작업 화면</div>

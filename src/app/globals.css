@@ -34,6 +34,11 @@ body {
   font-family: 'CommonFont', sans-serif;
 }
 
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-duration: 200ms;
+}
+
 :root {
   --theme-1: #f6f1e3;
   --theme-1-5: #f5e8b6;

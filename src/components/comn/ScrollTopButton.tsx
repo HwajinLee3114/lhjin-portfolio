@@ -14,14 +14,14 @@ const ScrollTopButton: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  if (!visible) return null
-
   return (
     <button
       type="button"
       aria-label="맨 위로 이동"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-themacolor4 text-white shadow-lg hover:shadow-xl transition-all"
+      className={`fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-themacolor4 text-white shadow-lg hover:shadow-xl transition-all ${
+        visible ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
+      }`}
     >
       ↑
     </button>

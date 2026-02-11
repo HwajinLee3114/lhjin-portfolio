@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      <div className="w-full max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
+      <div className="group relative w-full max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
         <div className="flex justify-center">
           <img
             className="w-full h-48 object-cover"
@@ -58,6 +58,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             alt={title}
             loading="lazy"
           />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-3 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity">
+          {description}
         </div>
         <div className="py-2">
           <div className="flex flex-row flex-wrap gap-2 justify-between items-center">

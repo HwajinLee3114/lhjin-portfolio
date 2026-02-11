@@ -25,28 +25,22 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
     setIsOpen(!isOpen)
   }
 
-  const lf_handleScroll = useCallback(() => {
-    const sections = ['home', 'about', 'skills', 'projects', 'career']
-    const scrollY = window.scrollY
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section)
-      if (element) {
-        const { offsetTop, clientHeight } = element
-
-        if (scrollY >= offsetTop - 200 && scrollY < offsetTop + clientHeight) {
-          setActiveSection(section)
-        }
-      }
-    })
-  }, [setActiveSection])
-
   useEffect(() => {
-    window.addEventListener('scroll', lf_handleScroll)
-    return () => {
-      window.removeEventListener('scroll', lf_handleScroll)
-    }
-  }, [lf_handleScroll])
+    const sections = ['home', 'about', 'skills', 'projects', 'career']
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+    sections.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [setActiveSection])
 
   useEffect(() => {
     const handleScrollState = () => {
