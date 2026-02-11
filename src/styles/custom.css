@@ -1,13 +1,13 @@
 .g_titleEngFontBlack {
-  font-family: "TitleEngFontBlack", serif;
+  font-family: 'TitleEngFontBlack', serif;
 }
 
 .g_titleEngFontOutline {
-  font-family: "TitleEngFontOutline", serif;
+  font-family: 'TitleEngFontOutline', serif;
 }
 
 .g_RiaSansFont {
-  font-family: "RiaSansFont", serif;
+  font-family: 'RiaSansFont', serif;
 }
 
 section {
@@ -15,7 +15,7 @@ section {
 }
 
 .l_main_title::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 1px;
   height: 2.4rem;
@@ -75,7 +75,7 @@ section {
 
 .l_hamburger_menu:before,
 .l_hamburger_menu:after {
-  content: ""; /* 바의 내용 */
+  content: ''; /* 바의 내용 */
   position: absolute;
   width: 100%; /* 바의 너비 */
   height: 100%; /* 바의 높이 */

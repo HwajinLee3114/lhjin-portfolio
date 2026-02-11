@@ -1,17 +1,13 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface ImagePreviewModalProps {
-  isOpen: boolean;
-  imageUrl?: string;
-  onClose: (e: React.MouseEvent) => void;
+  isOpen: boolean
+  imageUrl?: string
+  onClose: (e: React.MouseEvent) => void
 }
 
-export const ImagePreviewModal = ({
-  isOpen,
-  imageUrl,
-  onClose,
-}: ImagePreviewModalProps) => {
+export const ImagePreviewModal = ({ isOpen, imageUrl, onClose }: ImagePreviewModalProps) => {
   return (
     <AnimatePresence>
       {isOpen && imageUrl && (
@@ -31,5 +27,5 @@ export const ImagePreviewModal = ({
         </div>
       )}
     </AnimatePresence>
-  );
-};
+  )
+}

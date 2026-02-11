@@ -1,32 +1,32 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
-import tw from "tailwind-styled-components";
+import React, { useEffect, useState } from 'react'
+import tw from 'tailwind-styled-components'
 
-import { ProjectDetailModal } from "./detail/ProjectDetailModal";
-import ModalPortal from "../comn/ModalPortal";
+import { ProjectDetailModal } from './detail/ProjectDetailModal'
+import ModalPortal from '../comn/ModalPortal'
 
 interface Tag {
-  name: string;
-  color: string;
-  txtcolor?: string;
+  name: string
+  color: string
+  txtcolor?: string
 }
 export interface SkillItem {
-  id: string;
-  name: string;
-  url: string;
+  id: string
+  name: string
+  url: string
 }
 
 interface ProjectCardProps {
-  id?: string;
-  title?: string;
-  filter?: Tag[];
-  period?: string;
-  feature?: string[];
-  link?: string;
-  imageSrc?: string;
-  skillItem: SkillItem[];
-  description: string;
+  id?: string
+  title?: string
+  filter?: Tag[]
+  period?: string
+  feature?: string[]
+  link?: string
+  imageSrc?: string
+  skillItem: SkillItem[]
+  description: string
 }
 
 const TxtButton = tw.button`
@@ -42,13 +42,13 @@ const TxtButton = tw.button`
   hover:bg-yellow-400 
   hover:text-white 
   hover:border-yellow-400
-`;
+`
 
 const ModalWrapper = tw.div`
 fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center items-center bg-black bg-opacity-60 z-40 
 overflow-y-auto
 scrollbar-hide
-`;
+`
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   id,
@@ -61,29 +61,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   skillItem,
   description,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [activeId, setActiveId] = useState<string>(""); // 상세 프로젝트
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [activeId, setActiveId] = useState<string>('') // 상세 프로젝트
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = ''
     }
     return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   return (
     <>
       <div className="max-w-sm h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 p-4 bg-white cursor-pointer">
         <div className="flex justify-center">
-          <img
-            className="w-full h-48 object-cover"
-            src={`/images/thumb/${imageSrc}`}
-            alt={title}
-          />
+          <img className="w-full h-48 object-cover" src={`/images/thumb/${imageSrc}`} alt={title} />
         </div>
         <div className="py-2">
           <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
@@ -96,7 +92,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                     className="text-xs px-2 py-0.5 rounded-lg"
                     style={{
                       backgroundColor: fil.color,
-                      color: fil.txtcolor ? fil.txtcolor : "#ffffff",
+                      color: fil.txtcolor ? fil.txtcolor : '#ffffff',
                     }}
                   >
                     {fil.name}
@@ -106,9 +102,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             )}
           </div>
 
-          {period && (
-            <p className="text-gray-600 text-base md:text-sm">{period}</p>
-          )}
+          {period && <p className="text-gray-600 text-base md:text-sm">{period}</p>}
 
           {/* {feature && (
             <ul className="list-disc pl-3">
@@ -146,8 +140,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="flex justify-end">
             <TxtButton
               onClick={() => {
-                setIsOpen(true);
-                setActiveId(id);
+                setIsOpen(true)
+                setActiveId(id)
               }}
             >
               DETAIL
@@ -160,8 +154,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <ModalPortal>
           <ModalWrapper
             onClick={() => {
-              setIsOpen(false);
-              setActiveId("");
+              setIsOpen(false)
+              setActiveId('')
             }}
           >
             <ProjectDetailModal isOpen={isOpen} activeId={activeId} />
@@ -169,7 +163,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </ModalPortal>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ProjectCard;
+export default ProjectCard

@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react'
 
-import { career } from "@/data/career";
-import { projects } from "@/data/projects";
+import { career } from '@/data/career'
+import { projects } from '@/data/projects'
 
 const careerWithProjects = career.map((c) => ({
   ...c,
@@ -9,14 +9,12 @@ const careerWithProjects = career.map((c) => ({
     .map((projectId) => projects.find((p) => p.id === projectId))
     .filter(Boolean)
     .reverse(),
-}));
+}))
 
 export default function Career() {
   const sortedCareer = useMemo(() => {
-    return [...careerWithProjects].sort(
-      (a, b) => parseInt(b.id) - parseInt(a.id),
-    );
-  }, []);
+    return [...careerWithProjects].sort((a, b) => parseInt(b.id) - parseInt(a.id))
+  }, [])
 
   return (
     <section
@@ -43,13 +41,9 @@ export default function Career() {
             >
               <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
                 <h2 className="text-lg font-bold">{item.company}</h2>
-                <div className="text-gray-600 text-base md:text-sm">
-                  {item.period}
-                </div>
+                <div className="text-gray-600 text-base md:text-sm">{item.period}</div>
               </div>
-              <div className="text-gray-600 text-base md:text-sm mb-1">
-                {item.role}
-              </div>
+              <div className="text-gray-600 text-base md:text-sm mb-1">{item.role}</div>
               <div className="my-2">{item.companyInfo}</div>
               <div className="flex gap-2 mt-2 flex-wrap">
                 {item.tag.map((t, idx) => (
@@ -66,16 +60,11 @@ export default function Career() {
                 item.projectDetails.map(
                   (pj, idx) =>
                     pj && (
-                      <section
-                        className="py-3.5 px-0 md:p-4"
-                        key={`${pj.id}_career_${idx}`}
-                      >
+                      <section className="py-3.5 px-0 md:p-4" key={`${pj.id}_career_${idx}`}>
                         <div className="py-1 pl-4 mb-2 border-l-4 border-gray-600 text-gray-600 bg-quotecolor">
                           {pj.title}
                         </div>
-                        <div className="text-gray-600 text-base md:text-sm mb-1">
-                          {pj.period}
-                        </div>
+                        <div className="text-gray-600 text-base md:text-sm mb-1">{pj.period}</div>
                         <div>{pj.description}</div>
                       </section>
                     ),
@@ -85,5 +74,5 @@ export default function Career() {
         </ul>
       </div>
     </section>
-  );
+  )
 }

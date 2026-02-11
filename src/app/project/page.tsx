@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
-import { projects } from "@/data/projects";
-import ProjectCard from "@/components/project/ProjectCard";
+import { projects } from '@/data/projects'
+import ProjectCard from '@/components/project/ProjectCard'
 
 /*
   - 필터(전체/개인/팀), 주요 프로젝트만 보기(체크)
@@ -18,24 +18,18 @@ import ProjectCard from "@/components/project/ProjectCard";
   - hover 이벤트 / 스크롤되어 내려올 때 카드 슉슉 뜨는 
 */
 export default function Projects() {
-  const [filter, setFilter] = useState<string>("feature");
+  const [filter, setFilter] = useState<string>('feature')
 
   const filteredPj = projects
     .filter((project) => {
-      if (filter === "personal")
-        return project.filter.some((f) => f.name === "personal");
-      if (filter === "team")
-        return project.filter.some((f) => f.name === "team");
-      if (filter === "feature")
-        return project.filter.some((f) => f.name === "feature");
-      return true;
+      if (filter === 'personal') return project.filter.some((f) => f.name === 'personal')
+      if (filter === 'team') return project.filter.some((f) => f.name === 'team')
+      if (filter === 'feature') return project.filter.some((f) => f.name === 'feature')
+      return true
     })
-    .sort((a, b) => Number(b.id) - Number(a.id));
+    .sort((a, b) => Number(b.id) - Number(a.id))
   return (
-    <section
-      id="projects"
-      className="flex flex-col min-h-screen bg-themacolor3"
-    >
+    <section id="projects" className="flex flex-col min-h-screen bg-themacolor3">
       <div className="text-center text-white">
         <h2 className="text-3xl g_titleEngFontOutline mt-5">Projects</h2>
         {/* <p className="mt-4">다양한 프로젝트 경험을 통해</p> */}
@@ -44,30 +38,26 @@ export default function Projects() {
       <ul className="l_pjfilter flex gap-3 cursor-pointer mt-10 justify-center">
         <img src="/images/filterYellow-100.png" className="w-6" alt="filter" />
         <li
-          className={`cursor-pointer g_RiaSansFont ${filter === "all" ? "selected" : ""}`}
-          onClick={() => setFilter("all")}
+          className={`cursor-pointer g_RiaSansFont ${filter === 'all' ? 'selected' : ''}`}
+          onClick={() => setFilter('all')}
         >
           All
         </li>
         <li
-          className={`cursor-pointer g_RiaSansFont ${
-            filter === "feature" ? "selected" : ""
-          }`}
-          onClick={() => setFilter("feature")}
+          className={`cursor-pointer g_RiaSansFont ${filter === 'feature' ? 'selected' : ''}`}
+          onClick={() => setFilter('feature')}
         >
           Feature
         </li>
         <li
-          className={`cursor-pointer g_RiaSansFont ${
-            filter === "personal" ? "selected" : ""
-          }`}
-          onClick={() => setFilter("personal")}
+          className={`cursor-pointer g_RiaSansFont ${filter === 'personal' ? 'selected' : ''}`}
+          onClick={() => setFilter('personal')}
         >
           Personal
         </li>
         <li
-          className={`cursor-pointer g_RiaSansFont ${filter === "team" ? "selected" : ""}`}
-          onClick={() => setFilter("team")}
+          className={`cursor-pointer g_RiaSansFont ${filter === 'team' ? 'selected' : ''}`}
+          onClick={() => setFilter('team')}
         >
           Team
         </li>
@@ -86,7 +76,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                ease: "easeInOut",
+                ease: 'easeInOut',
                 duration: 0.3,
                 delay: index * 0.1,
               }}
@@ -106,5 +96,5 @@ export default function Projects() {
         </ul>
       </div>
     </section>
-  );
+  )
 }

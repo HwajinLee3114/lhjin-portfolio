@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const ProfileCircle: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const ProfileCircle: React.FC = () => {
           height="80"
           viewBox="0,0,300,150"
           className="absolute"
-          style={{ top: "70%", left: "65%" }}
+          style={{ top: '70%', left: '65%' }}
         >
           <g
             fill="none"
@@ -69,7 +69,7 @@ const ProfileCircle: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProfileCircle;
+export default ProfileCircle

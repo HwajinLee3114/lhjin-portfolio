@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import tw from "tailwind-styled-components";
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import tw from 'tailwind-styled-components'
 
-import { getProjectById } from "@/data/projects";
-import { ImagePreviewModal } from "@/components/comn/ImagePreviewModal";
+import { getProjectById } from '@/data/projects'
+import { ImagePreviewModal } from '@/components/comn/ImagePreviewModal'
 
 interface ModalProps {
-  isOpen: boolean;
-  activeId?: string;
+  isOpen: boolean
+  activeId?: string
 }
 
 const QuoteDiv = tw.div`
@@ -17,28 +17,26 @@ const QuoteDiv = tw.div`
   border-l-4 border-gray-600
   text-gray-600
   bg-quotecolor
-`;
+`
 
 export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
-  const project = activeId ? getProjectById(activeId) : null;
-  const [previewImgUrl, setPreviewImgUrl] = useState<string | undefined>(
-    undefined,
-  );
+  const project = activeId ? getProjectById(activeId) : null
+  const [previewImgUrl, setPreviewImgUrl] = useState<string | undefined>(undefined)
 
   if (!project) {
-    return null;
+    return null
   }
 
   const lf_showImgPreview = (imgUrl: string) => {
     // const img = project.images.find((image) => image.id === imgId);
     if (imgUrl) {
-      setPreviewImgUrl(`/images/project/${imgUrl}`);
+      setPreviewImgUrl(`/images/project/${imgUrl}`)
     }
-  };
+  }
 
   const closePreview = () => {
-    setPreviewImgUrl(undefined);
-  };
+    setPreviewImgUrl(undefined)
+  }
 
   return (
     <>
@@ -46,8 +44,8 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
         isOpen={!!previewImgUrl}
         imageUrl={previewImgUrl}
         onClose={(e) => {
-          e.stopPropagation();
-          closePreview();
+          e.stopPropagation()
+          closePreview()
         }}
       />
       <AnimatePresence>
@@ -60,21 +58,19 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="text-center w-4/5 h-4/5 overflow-y-auto rounded-md shadow-md bg-themacolor1"
             onClick={(e) => e.stopPropagation()} // 모달 클릭 시 이벤트 전파 막기
           >
             <section className="h-full flex flex-col items-center px-10">
               <div className="border-b-2 w-full flex flex-col items-center px-10 py-3">
-                <div className="text-2xl font-bold pb-2 text-center">
-                  {project.title}
-                </div>
+                <div className="text-2xl font-bold pb-2 text-center">{project.title}</div>
                 <div className="text-gray-600 text-sm md:text-base mb-1 text-center">
                   {project.period}
                 </div>
 
                 <div className="items-center py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
-                  {project.skillItem.map((item) => item.name).join(", ")}
+                  {project.skillItem.map((item) => item.name).join(', ')}
                 </div>
 
                 {/* <div className="flex flex-row items-center mb-2">
@@ -95,22 +91,14 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                   {project.git && (
                     <a href={project.git} target="_blank">
                       <div className="bg-white rounded-full p-2 hover:shadow-md">
-                        <img
-                          src="/images/tech/github-100.png"
-                          className="w-7"
-                          alt=""
-                        />
+                        <img src="/images/tech/github-100.png" className="w-7" alt="" />
                       </div>
                     </a>
                   )}
                   {project.site && (
                     <a href={project.site} target="_blank">
                       <div className="bg-white rounded-full p-2.5 shadow-md hover:shadow-lg">
-                        <img
-                          src="/images/link-100.png"
-                          className="w-6"
-                          alt=""
-                        />
+                        <img src="/images/link-100.png" className="w-6" alt="" />
                       </div>
                     </a>
                   )}
@@ -121,19 +109,12 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                 {project.feature && project.feature.length > 0 && (
                   <section className="w-full h-full">
                     <div className="flex gap-2 text-xl font-bold text-left mb-5">
-                      <img
-                        src="/images/popular-100.png"
-                        className="w-7"
-                        alt=""
-                      />
+                      <img src="/images/popular-100.png" className="w-7" alt="" />
                       <div>주요 기능</div>
                     </div>
                     <ul className="list-disc text-left">
                       {project.feature.map((feat, idx) => (
-                        <li
-                          key={`${project.id}_feat_${idx}`}
-                          className="text-gray-700 text-base"
-                        >
+                        <li key={`${project.id}_feat_${idx}`} className="text-gray-700 text-base">
                           {feat}
                         </li>
                       ))}
@@ -149,10 +130,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                     </div>
                     <ul className="list-disc text-left">
                       {project.contribution.map((contri) => (
-                        <div
-                          key={`${project.id}_contri_${contri.id}`}
-                          className="mb-5"
-                        >
+                        <div key={`${project.id}_contri_${contri.id}`} className="mb-5">
                           {contri?.title && <QuoteDiv>{contri.title}</QuoteDiv>}
                           {contri.desc.map((condesc, idx) => (
                             <li
@@ -171,11 +149,7 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
                 {project.images && project.images.length > 0 && (
                   <section className="w-full h-full">
                     <div className="flex gap-2 text-xl font-bold text-left mb-5">
-                      <img
-                        src="/images/monitor-100.png"
-                        className="w-7"
-                        alt=""
-                      />
+                      <img src="/images/monitor-100.png" className="w-7" alt="" />
                       <div>작업 화면</div>
                     </div>
 
@@ -203,5 +177,5 @@ export const ProjectDetailModal = ({ isOpen, activeId }: ModalProps) => {
         )}
       </AnimatePresence>
     </>
-  );
-};
+  )
+}
