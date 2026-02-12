@@ -1352,5 +1352,73 @@
         "name": "export_image"
       }
     ]
+  },
+  {
+    "id": "14",
+    "title": "DUMMY CASE STUDY",
+    "periodStart": "2025-01",
+    "periodEnd": "2025-03",
+    "role": "프론트엔드 개발",
+    "featured": true,
+    "impact": [
+      "지표 A 00% 개선",
+      "지표 B 00% 단축",
+      "지표 C 00% 감소"
+    ],
+    "caseStudy": {
+      "problem": "기존 플로우의 병목으로 전환 이탈이 발생했습니다.",
+      "solution": [
+        "핵심 플로우 단축",
+        "상태 관리 최적화",
+        "UI 피드백 강화"
+      ],
+      "result": [
+        "전환율 00% 개선",
+        "로딩 시간 00% 단축",
+        "이탈률 00% 감소"
+      ]
+    },
+    "filter": [
+      {
+        "name": "personal",
+        "color": "indianred"
+      },
+      {
+        "name": "feature",
+        "color": "gold"
+      },
+      {
+        "name": "FE",
+        "color": "lightgreen"
+      }
+    ],
+    "description": "변경사항 확인용 더미 프로젝트입니다.",
+    "feature": [
+      "더미 기능 1",
+      "더미 기능 2"
+    ],
+    "contribution": [
+      {
+        "id": "1",
+        "title": "더미 기여",
+        "desc": [
+          "더미 기여 내용입니다."
+        ]
+      }
+    ],
+    "skillItem": [
+      {
+        "id": "1",
+        "name": "Next.js",
+        "url": "next-100.png"
+      },
+      {
+        "id": "2",
+        "name": "TypeScript",
+        "url": "typescript-100.png"
+      }
+    ],
+    "thumb": "pj11.png",
+    "images": []
   }
 ]

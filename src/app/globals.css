@@ -40,37 +40,37 @@ body {
 }
 
 :root {
-  --theme-1: #f6f1e3;
-  --theme-1-5: #f5e8b6;
-  --theme-2: #faad1a;
-  --theme-3: #344c36;
-  --theme-4: #3b82f6;
+  --theme-1: #f7f4ed;
+  --theme-1-5: #efe2c6;
+  --theme-2: #f59e0b;
+  --theme-3: #1f2a24;
+  --theme-4: #2563eb;
   --theme-bg: #ffffff;
-  --theme-fg: #1f2937;
+  --theme-fg: #111827;
 
   --custom-bg: #f5efe6;
   --custom-fg: #2e2a26;
 }
 
 .dark {
-  --theme-1: #1f262e;
-  --theme-1-5: #273038;
-  --theme-2: #e3a01c;
-  --theme-3: #202a24;
+  --theme-1: #1b232b;
+  --theme-1-5: #222d36;
+  --theme-2: #f4b05e;
+  --theme-3: #141c21;
   --theme-4: #7aa6ff;
-  --theme-bg: #1f262e;
-  --theme-fg: #e2e4e4;
+  --theme-bg: #1b232b;
+  --theme-fg: #e6edf3;
 }
 
 .theme-custom {
-  --theme-1: #f7f1ff;
-  --theme-1-5: #ece3ff;
-  --theme-2: #ffd7a8;
-  --theme-3: #9fb7ff;
-  --theme-4: #c78cff;
-  --theme-bg: #f7f1ff;
-  --theme-fg: #2b2633;
+  --theme-1: #f1f5ff;
+  --theme-1-5: #e0e7ff;
+  --theme-2: #ffb86b;
+  --theme-3: #2a2f45;
+  --theme-4: #8b5cf6;
+  --theme-bg: #f1f5ff;
+  --theme-fg: #1f1a2a;
 
-  --custom-bg: #f7f1ff;
-  --custom-fg: #2b2633;
+  --custom-bg: #f1f5ff;
+  --custom-fg: #1f1a2a;
 }

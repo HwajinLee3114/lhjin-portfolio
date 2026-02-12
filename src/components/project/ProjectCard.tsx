@@ -20,6 +20,10 @@ interface ProjectCardProps {
   feature?: string[]
   link?: string
   imageSrc?: string
+  role?: string
+  impact?: string[]
+  git?: string
+  site?: string
   skillItem: SkillItem[]
   description: string
 }
@@ -33,6 +37,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   // feature,
   // link,
   imageSrc,
+  role,
+  impact,
+  git,
+  site,
   skillItem,
   description,
 }) => {
@@ -76,6 +84,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
             )}
           </div>
+          {role && <p className="text-xs text-gray-500 dark:text-darkfg/70 mt-1">{role}</p>}
 
           {(periodStart || periodEnd) && (
             <p className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm">
@@ -115,8 +124,44 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                 ),
             )}
         </div>
+        {impact && impact.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-2">
+            {impact.slice(0, 2).map((item, idx) => (
+              <span
+                key={`${id}_impact_${idx}`}
+                className="text-xs px-2 py-0.5 rounded-full bg-themacolor15 text-gray-800 dark:bg-[#1f262e] dark:text-darkfg/90"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        )}
         {id && (
-          <div className="flex justify-end">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              {git && (
+                <a
+                  href={git}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-1.5 rounded-full bg-white/80 dark:bg-[#1f262e] shadow hover:shadow-md"
+                  aria-label="GitHub 열기"
+                >
+                  <img src="/images/tech/github-100.png" alt="GitHub" className="w-4 h-4" />
+                </a>
+              )}
+              {site && (
+                <a
+                  href={site}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-1.5 rounded-full bg-white/80 dark:bg-[#1f262e] shadow hover:shadow-md"
+                  aria-label="프로젝트 사이트 열기"
+                >
+                  <img src="/images/link-100.png" alt="Site" className="w-4 h-4" />
+                </a>
+              )}
+            </div>
             <button
               className={`px-3 py-1 border border-gray-300 rounded font-medium text-sm outline-none cursor-pointer hover:bg-yellow-400 hover:text-white hover:border-yellow-400 ${focusRing} focus-visible:ring-yellow-400 focus-visible:ring-offset-2`}
               onClick={() => {

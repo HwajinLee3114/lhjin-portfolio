@@ -30,6 +30,14 @@ export interface Project {
   periodEnd?: string
   git?: string
   site?: string
+  role?: string
+  impact?: string[]
+  featured?: boolean
+  caseStudy?: {
+    problem: string
+    solution: string[]
+    result: string[]
+  }
   filter: FilterTag[]
   description: string
   feature: string[]

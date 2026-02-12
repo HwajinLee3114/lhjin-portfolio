@@ -45,7 +45,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
 
   useEffect(() => {
     if (!project || !isOpen || !containerRef.current) return
-    const targets = ['pj-info', 'pj-feature', 'pj-contrib', 'pj-images']
+    const targets = ['pj-info', 'pj-case', 'pj-feature', 'pj-contrib', 'pj-images']
       .map((id) => containerRef.current?.querySelector(`#${id}`))
       .filter(Boolean) as HTMLElement[]
 
@@ -109,6 +109,20 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                   >
                     정보
                   </button>
+                  {project.caseStudy && (
+                    <button
+                      onClick={() =>
+                        document.getElementById('pj-case')?.scrollIntoView({ behavior: 'smooth' })
+                      }
+                      className={`px-3 py-1 rounded-full border border-black/10 dark:border-white/10 transition-colors ${
+                        activeTab === 'pj-case'
+                          ? 'bg-themacolor4 text-white'
+                          : 'bg-white/70 dark:bg-white/5 hover:bg-white/90 dark:hover:bg-white/10'
+                      }`}
+                    >
+                      케이스
+                    </button>
+                  )}
                   <button
                     onClick={() =>
                       document.getElementById('pj-feature')?.scrollIntoView({ behavior: 'smooth' })
@@ -171,6 +185,18 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 </div> */}
 
                 <div className="whitespace-pre-line">{project.description}</div>
+                {project.impact && project.impact.length > 0 && (
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    {project.impact.map((item, idx) => (
+                      <span
+                        key={`${project.id}_impact_${idx}`}
+                        className="text-xs px-2.5 py-1 rounded-full bg-themacolor15 text-gray-800 dark:bg-[#1f262e] dark:text-darkfg/90"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 <div className="flex flex-col md:flex-row items-center gap-3 py-3">
                   {project.git && (
@@ -197,6 +223,44 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
               </div>
 
               <div className="w-full flex flex-col gap-3 items-center px-4 sm:px-6 md:px-10 py-3">
+                {project.caseStudy && (
+                  <section id="pj-case" className="w-full h-full">
+                    <div className="flex gap-2 text-xl font-bold text-left mb-5">
+                      <img src="/images/dev-100.png" className="w-7" alt="케이스 스터디" />
+                      <div>Case Study</div>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-3">
+                      <div className="rounded-lg bg-white/70 dark:bg-[#1f272e]/70 p-4 ring-1 ring-black/5 dark:ring-white/5">
+                        <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-darkfg/70">
+                          Problem
+                        </div>
+                        <div className="mt-1 text-sm text-gray-700 dark:text-darkfg/90">
+                          {project.caseStudy.problem}
+                        </div>
+                      </div>
+                      <div className="rounded-lg bg-white/70 dark:bg-[#1f272e]/70 p-4 ring-1 ring-black/5 dark:ring-white/5">
+                        <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-darkfg/70">
+                          Solution
+                        </div>
+                        <ul className="mt-1 text-sm text-gray-700 dark:text-darkfg/90 list-disc pl-5">
+                          {project.caseStudy.solution.map((item, idx) => (
+                            <li key={`${project.id}_solution_${idx}`}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="rounded-lg bg-white/70 dark:bg-[#1f272e]/70 p-4 ring-1 ring-black/5 dark:ring-white/5">
+                        <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-darkfg/70">
+                          Result
+                        </div>
+                        <ul className="mt-1 text-sm text-gray-700 dark:text-darkfg/90 list-disc pl-5">
+                          {project.caseStudy.result.map((item, idx) => (
+                            <li key={`${project.id}_result_${idx}`}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+                )}
                 {project.feature && project.feature.length > 0 && (
                   <section id="pj-feature" className="w-full h-full">
                     <div className="flex gap-2 text-xl font-bold text-left mb-5">
