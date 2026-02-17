@@ -63,14 +63,14 @@ body {
 }
 
 .theme-custom {
-  --theme-1: #f7f1ff;
-  --theme-1-5: #ece3ff;
-  --theme-2: #ffd7a8;
-  --theme-3: #9fb7ff;
-  --theme-4: #c78cff;
-  --theme-bg: #f7f1ff;
-  --theme-fg: #2b2633;
+  --theme-1: #faf8f4;
+  --theme-1-5: #e8e4db;
+  --theme-2: #eecd9e;
+  --theme-3: #78716c;
+  --theme-4: #1e6f53;
+  --theme-bg: #f9f7f5;
+  --theme-fg: #2d2926;
 
-  --custom-bg: #f7f1ff;
-  --custom-fg: #2b2633;
+  --custom-bg: #f9f7f5;
+  --custom-fg: #2d2926;
 }

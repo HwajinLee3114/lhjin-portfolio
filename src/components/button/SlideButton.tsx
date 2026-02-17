@@ -30,7 +30,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({ text, href, color, isDown, ur
   }
 
   return (
-    <div className={`${styles.wrapper} cursor-pointer`}>
+    <div className={`${styles.wrapper} cursor-pointer g_RiaSansFont`}>
       <a
         className={`${styles.link} flex items-center`}
         href={href}

@@ -26,7 +26,7 @@ export default function HomeSec() {
       id="home"
       className="flex flex-col items-center justify-center min-h-35 h-full bg-white dark:bg-[#1f262e] dark:text-darkfg"
     >
-      <div className="l_search_div flex relative">
+      <div className="l_search_div flex relative items-center">
         <img
           src="/images/search-240.svg"
           alt="icon"
