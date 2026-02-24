@@ -11,13 +11,19 @@ interface DesktopIconProps {
 }
 
 export function DesktopIcon({ id, title, icon: Icon }: DesktopIconProps) {
-  const { openWindow, focusWindow, windows } = useWindowStore()
+  const { openWindow, closeWindow, focusWindow, windows } = useWindowStore()
 
   const handleOpen = () => {
-    if (windows[id]?.isOpen) {
-      focusWindow(id)
+    const windowState = windows[id]
+    const isOpen = windowState?.isOpen
+
+    if (isOpen) {
+      // 이미 열려 있으면 닫기 (토글)
+      closeWindow(id)
     } else {
+      // 닫혀 있으면 열기
       openWindow(id, title)
+      focusWindow(id)
     }
   }
 

@@ -115,22 +115,34 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
         )
       }}
       onPointerDown={() => focusWindow(window.id)}
-      initial={false}
+      initial={{
+        opacity: 0,
+        scale: 0.95,
+        x: window.position.x,
+        y: window.position.y + 20,
+      }}
       animate={{
+        opacity: 1,
+        scale: 1,
         x: window.isMaximized ? 0 : window.position.x,
         y: window.isMaximized ? 32 : window.position.y,
         width: window.isMaximized ? '100vw' : window.size.width,
         height: window.isMaximized ? 'calc(100vh - 32px)' : window.size.height,
         zIndex: window.zIndex,
       }}
-      transition={{ type: 'spring', damping: 30, stiffness: 400, mass: 0.5 }}
+      exit={{
+        opacity: 0,
+        scale: 0.95,
+        y: window.position.y + 20,
+        transition: { duration: 0.2 },
+      }}
+      transition={{ type: 'spring', damping: 25, stiffness: 300, mass: 0.5 }}
       className={cn(
         'pointer-events-auto fixed flex flex-col overflow-hidden border border-zinc-200/50 bg-white shadow-2xl',
         window.isMaximized ? 'rounded-none' : 'rounded-2xl',
         isResizing ? 'transition-none select-none' : '',
       )}
     >
-      {/* Resizing Handles (Invisible but active) */}
       {!window.isMaximized && (
         <>
           <div
@@ -149,30 +161,11 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
             className="absolute top-0 right-0 bottom-0 z-50 w-1 cursor-ew-resize"
             onMouseDown={(e) => startResize(e, 'right')}
           />
-
-          <div
-            className="absolute top-0 left-0 z-[60] h-3 w-3 cursor-nwse-resize"
-            onMouseDown={(e) => startResize(e, 'topleft')}
-          />
-          <div
-            className="absolute top-0 right-0 z-[60] h-3 w-3 cursor-nesw-resize"
-            onMouseDown={(e) => startResize(e, 'topright')}
-          />
-          <div
-            className="absolute bottom-0 left-0 z-[60] h-3 w-3 cursor-nesw-resize"
-            onMouseDown={(e) => startResize(e, 'bottomleft')}
-          />
-          <div
-            className="absolute right-0 bottom-0 z-[60] h-3 w-3 cursor-nwse-resize"
-            onMouseDown={(e) => startResize(e, 'bottomright')}
-          />
         </>
       )}
 
-      {/* Title Bar */}
       <div className="group flex h-10 shrink-0 cursor-default items-center justify-between border-b border-zinc-200/50 bg-zinc-50/80 px-4 backdrop-blur-sm select-none">
         <div className="flex items-center gap-3">
-          {/* Traffic Lights */}
           <div className="flex items-center gap-2">
             <button
               onClick={(e) => {
@@ -215,7 +208,6 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
         </div>
       </div>
 
-      {/* Content Area */}
       <div className={cn('relative flex-1 overflow-auto bg-white custom-scrollbar')}>
         {children}
       </div>

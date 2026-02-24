@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { create } from 'zustand'
 
 export type WindowState = {
@@ -43,7 +42,6 @@ export const useWindowStore = create<WindowStore>((set) => ({
         }
       }
 
-      // Default initial state for new windows
       return {
         windows: {
           ...state.windows,
@@ -54,7 +52,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
             isMinimized: false,
             isMaximized: false,
             zIndex: nextZ,
-            position: { x: 100 + nextZ * 5, y: 50 + nextZ * 5 },
+            position: { x: 100 + nextZ * 10, y: 50 + nextZ * 10 },
             size: { width: 1000, height: 700 },
           },
         },
@@ -64,8 +62,14 @@ export const useWindowStore = create<WindowStore>((set) => ({
 
   closeWindow: (id) =>
     set((state) => {
-      const { [id]: _, ...rest } = state.windows
-      return { windows: rest }
+      if (!state.windows[id]) return state
+
+      return {
+        windows: {
+          ...state.windows,
+          [id]: { ...state.windows[id], isOpen: false },
+        },
+      }
     }),
 
   minimizeWindow: (id) =>
@@ -86,6 +90,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
 
   focusWindow: (id) =>
     set((state) => {
+      if (!state.windows[id]) return state
       const nextZ = state.maxZIndex + 1
       return {
         windows: {
@@ -93,7 +98,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
           [id]: {
             ...state.windows[id],
             zIndex: nextZ,
-            isMinimized: false, // Ensure it's no longer minimized when focused
+            isMinimized: false,
           },
         },
         maxZIndex: nextZ,
