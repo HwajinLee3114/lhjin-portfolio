@@ -120,7 +120,7 @@ export function MiniTerminalWidget({ isOpen, onClose }: MiniTerminalWidgetProps)
     setInput('')
   }
 
-  const zIndex = widgets[widgetId]?.zIndex || 2000
+  const zIndex = widgets[widgetId]?.zIndex || 120
 
   return (
     <AnimatePresence>
@@ -133,7 +133,7 @@ export function MiniTerminalWidget({ isOpen, onClose }: MiniTerminalWidgetProps)
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="pointer-events-auto z-[2000] w-[440px] overflow-hidden rounded-2xl border border-zinc-800 bg-[#0f1115] text-zinc-100 shadow-[0_35px_90px_rgba(0,0,0,0.35)]"
+          className="pointer-events-auto w-[440px] overflow-hidden rounded-2xl border border-zinc-800 bg-[#0f1115] text-zinc-100 shadow-[0_35px_90px_rgba(0,0,0,0.35)]"
         >
           <header className="flex items-center justify-between border-b border-zinc-700 bg-zinc-900/70 px-4 py-2">
             <div className="flex items-center gap-2">

@@ -79,6 +79,8 @@ pnpm typecheck     # 타입 검사
 ## 상태 관리
 - `use-window-store`: 창 상태(open/min/max/position/size/z-index)
 - `use-os-store`: Sticky Memo, Music Player 상태 및 persist
+- `use-z-index-store`: 창/위젯 z-index 카운터 분리 관리
+- `use-widget-store`: 위젯 포커스 및 위젯 내부 z-index 관리
 - `Desktop`: Guestbook, Mini Terminal 위젯 open/close 상태 관리
 
 ## 위젯 커맨드
@@ -96,6 +98,8 @@ pnpm typecheck     # 타입 검사
 ## 최근 리팩터링
 - `About / Skills / Projects / Career`의 공통 레이아웃을 `SectionFrame`으로 통합
 - 섹션 프레임(타이틀 + 컨테이너) 중복 제거로 유지보수성 개선
+- z-index 정책 분리로 창(Window)이 위젯보다 항상 상단에 오도록 레이어 우선순위 고정
+- Desktop 윈도우 레이어의 스택 컨텍스트(`z-20`) 제거로 창 포커스 시 위젯보다 위에 정상 노출
 
 ## 배포
 Vercel 배포를 기준으로 설계되어 있으며, 일반적인 Next.js 배포 절차를 그대로 사용할 수 있습니다.

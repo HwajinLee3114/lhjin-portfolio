@@ -29,7 +29,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
   openWindow: (id, title) =>
     set((state) => {
       const existing = state.windows[id]
-      const nextZ = useZIndexStore.getState().getNextZIndex()
+      const nextZ = useZIndexStore.getState().getNextWindowZIndex()
 
       if (existing) {
         return {
@@ -50,7 +50,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
             isMinimized: false,
             isMaximized: false,
             zIndex: nextZ,
-            position: { x: 100 + nextZ % 50, y: 50 + nextZ % 50 },
+            position: { x: 100 + (nextZ % 50), y: 50 + (nextZ % 50) },
             size: { width: 1000, height: 700 },
           },
         },
@@ -88,7 +88,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
   focusWindow: (id) =>
     set((state) => {
       if (!state.windows[id]) return state
-      const nextZ = useZIndexStore.getState().getNextZIndex()
+      const nextZ = useZIndexStore.getState().getNextWindowZIndex()
       return {
         windows: {
           ...state.windows,

@@ -110,7 +110,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
     document.addEventListener('mouseup', handleMouseUp)
   }
 
-  const zIndex = widgets[widgetId]?.zIndex || 2000
+  const zIndex = widgets[widgetId]?.zIndex || 120
 
   return (
     <AnimatePresence>

@@ -90,7 +90,7 @@ export function MusicPlayer() {
     }
   }, [musicInfo.endTime, updateMusic])
 
-  const zIndex = widgets[widgetId]?.zIndex || 2000
+  const zIndex = widgets[widgetId]?.zIndex || 120
 
   return (
     <AnimatePresence>
@@ -106,7 +106,7 @@ export function MusicPlayer() {
             top: 0,
             left: 0,
             backgroundColor: musicInfo.backgroundColor ?? 'rgba(255,255,255,0.6)',
-            zIndex
+            zIndex,
           }}
           onDragEnd={() => {
             updateMusic({ position: { x: x.get(), y: y.get() } })
@@ -114,7 +114,7 @@ export function MusicPlayer() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="pointer-events-auto z-[2000] w-[340px] select-none rounded-[2.5rem] border border-white/40 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.25)] backdrop-blur-3xl group cursor-grab active:cursor-grabbing"
+          className="pointer-events-auto w-[340px] select-none rounded-[2.5rem] border border-white/40 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.25)] backdrop-blur-3xl group cursor-grab active:cursor-grabbing"
         >
           <audio ref={audioRef} />
           <div className="absolute top-4 left-1/2 flex h-4 w-12 -translate-x-1/2 items-center justify-center opacity-40 group-hover:opacity-100">

@@ -128,8 +128,8 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
         y: window.isMaximized ? 32 : window.position.y,
         width: window.isMaximized ? '100vw' : window.size.width,
         height: window.isMaximized ? 'calc(100vh - 32px)' : window.size.height,
-        zIndex: window.zIndex,
       }}
+      style={{ zIndex: window.zIndex }}
       exit={{
         opacity: 0,
         scale: 0.95,

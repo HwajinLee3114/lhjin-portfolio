@@ -18,7 +18,7 @@ export const useWidgetStore = create<WidgetStore>((set) => ({
   initWidget: (id) =>
     set((state) => {
       if (state.widgets[id]) return state
-      const nextZ = useZIndexStore.getState().getNextZIndex()
+      const nextZ = useZIndexStore.getState().getNextWidgetZIndex()
       return {
         widgets: {
           ...state.widgets,
@@ -29,7 +29,7 @@ export const useWidgetStore = create<WidgetStore>((set) => ({
 
   focusWidget: (id) =>
     set((state) => {
-      const nextZ = useZIndexStore.getState().getNextZIndex()
+      const nextZ = useZIndexStore.getState().getNextWidgetZIndex()
       return {
         widgets: {
           ...state.widgets,

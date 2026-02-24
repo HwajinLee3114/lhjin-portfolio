@@ -144,7 +144,7 @@ export function Desktop() {
         ))}
       </div>
 
-      <div className="pointer-events-none relative z-20 h-full w-full">
+      <div className="pointer-events-none relative h-full w-full">
         <AnimatePresence mode="popLayout">
           {Object.values(windows).map((window) => {
             if (!window.isOpen) return null
