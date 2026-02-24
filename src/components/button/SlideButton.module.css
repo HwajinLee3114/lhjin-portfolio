@@ -3,37 +3,44 @@
 }
 
 .link {
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #18181b; /* zinc-900 */
   text-decoration: none;
   position: relative;
+  transition: color 0.4s ease;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.link:hover {
+  color: #18181b;
 }
 
 .link span,
 .link i {
   position: relative;
-}
-
-.link i {
-  margin-left: 0.5em;
+  z-index: 10;
 }
 
 .link .color {
-  width: 2em;
-  height: 2em;
-  border-radius: 2em;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.25rem;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: -0.65em;
+  left: -0.75rem;
   transition:
-    width 0.4s ease,
-    left 0.4s ease;
+    width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
 }
 
 .link:hover .color {
-  width: calc(100% + 1.3em);
-  /* left: calc(100% - 1.45em); */
-  left: -9%;
+  width: calc(100% + 2rem);
+  left: -1rem;
 }

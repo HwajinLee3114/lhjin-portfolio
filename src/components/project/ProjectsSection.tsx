@@ -61,17 +61,14 @@ export default function ProjectsSection() {
       className="flex flex-col items-center min-h-full bg-white dark:bg-[#1a1f24] p-8 md:p-16"
     >
       <div className="w-full max-w-6xl">
-        <header className="mb-16 text-center">
+        <header className="mb-10 text-center">
           <span className="text-zinc-400 text-xs font-black tracking-[0.2em] uppercase">
             Archive
           </span>
-          <h2 className="mt-2 text-4xl font-black text-zinc-900 dark:text-white">
-            프로젝트 결과물
-          </h2>
           <div className="mt-4 h-1 w-12 bg-zinc-900 dark:bg-white mx-auto rounded-full" />
         </header>
 
-        <div className="flex flex-col items-center gap-8 mb-16">
+        <div className="flex flex-col items-center gap-8 mb-10">
           <div className="flex flex-wrap items-center justify-center gap-3">
             {['all', 'feature', 'personal', 'team'].map((f) => {
               const isActive = filter === f

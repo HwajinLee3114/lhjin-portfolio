@@ -19,13 +19,10 @@ export default function Skills() {
       className="flex flex-col items-center min-h-full bg-white dark:bg-[#1a1f24] p-8 md:p-16"
     >
       <div className="w-full max-w-4xl">
-        <header className="mb-16 text-center">
+        <header className="mb-10 text-center">
           <span className="text-zinc-400 text-xs font-black tracking-[0.2em] uppercase">
             Tech Stack
           </span>
-          <h2 className="mt-2 text-3xl font-black text-zinc-900 dark:text-white">
-            내가 다룰 수 있는 기술들
-          </h2>
           <div className="mt-4 h-1 w-12 bg-zinc-900 dark:bg-white mx-auto rounded-full" />
         </header>
 
@@ -45,7 +42,7 @@ export default function Skills() {
             ))}
           </div>
         ) : (
-          <div className="space-y-16">
+          <div className="space-y-10">
             {skills.map((category, idx) => (
               <motion.div
                 key={category.title}

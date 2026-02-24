@@ -40,16 +40,15 @@ export default function Career() {
       className="flex flex-col items-center min-h-full bg-white dark:bg-[#1a1f24] p-8 md:p-16"
     >
       <div className="w-full max-w-4xl">
-        <header className="mb-20 text-center">
+        <header className="mb-10 text-center">
           <span className="text-zinc-400 text-xs font-black tracking-[0.2em] uppercase">
             Journey
           </span>
-          <h2 className="mt-2 text-4xl font-black text-zinc-900 dark:text-white">경력 및 경험</h2>
           <div className="mt-4 h-1 w-12 bg-zinc-900 dark:bg-white mx-auto rounded-full" />
         </header>
 
         {loading ? (
-          <div className="space-y-12">
+          <div className="space-y-10">
             {Array.from({ length: 3 }).map((_, idx) => (
               <div key={idx} className="animate-pulse flex gap-8">
                 <div className="w-16 h-16 bg-zinc-100 rounded-2xl shrink-0" />
