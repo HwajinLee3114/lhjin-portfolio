@@ -29,7 +29,7 @@ export default function Career() {
   return (
     <section
       id="career"
-      className="flex flex-col items-center justify-center min-h-screen bg-themacolor1 dark:bg-[#1f262e] dark:text-darkfg"
+      className="flex flex-col items-center justify-center min-h-full bg-themacolor1 dark:bg-[#1f262e] dark:text-darkfg"
     >
       <h2 className="text-3xl g_titleEngFontBlack mt-3">Career</h2>
       <p className="my-4"></p>

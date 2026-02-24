@@ -16,7 +16,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="flex flex-col items-center justify-center bg-themacolor2 dark:bg-[#1f2a24] dark:text-darkfg min-h-50 md:min-h-35 md:h-full"
+      className="flex flex-col items-center justify-center bg-themacolor2 dark:bg-[#1f2a24] dark:text-darkfg min-h-full"
     >
       <h2 className="text-3xl g_titleEngFontBlack mt-52 md:mt-0">Skills</h2>
       <p className="mt-4">지속적인 변화에 도전하며 개발 역량을 확장하고 있습니다</p>

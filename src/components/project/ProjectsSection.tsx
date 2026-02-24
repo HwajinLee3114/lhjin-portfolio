@@ -48,7 +48,7 @@ export default function ProjectsSection() {
     .sort((a, b) => Number(b.id) - Number(a.id))
 
   return (
-    <section id="projects" className="flex flex-col min-h-screen bg-themacolor3 dark:bg-[#202a24]">
+    <section id="projects" className="flex flex-col min-h-full bg-themacolor3 dark:bg-[#202a24]">
       <div className="text-center text-white dark:text-darkfg">
         <h2 className="text-3xl g_titleEngFontOutline mt-5">Projects</h2>
         {/* <p className="mt-4">다양한 프로젝트 경험을 통해</p> */}

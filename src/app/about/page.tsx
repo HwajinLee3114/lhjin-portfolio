@@ -8,7 +8,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="flex flex-col md:flex-row items-center gap-5 justify-around min-h-50 md:min-h-43 bg-themacolor3 dark:bg-[#202a24] dark:text-darkfg"
+      className="flex flex-col md:flex-row items-center gap-5 justify-around min-h-full bg-themacolor3 dark:bg-[#202a24] dark:text-darkfg"
     >
       <div className="w-full md:w-96 text-center mb-5">
         <h2 className="text-2xl text-white g_titleEngFontBlack">About Me</h2>
