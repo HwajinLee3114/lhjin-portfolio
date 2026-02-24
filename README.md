@@ -9,14 +9,16 @@
 - 데이터 기반(`data/*.json`)으로 콘텐츠 유지보수 단순화
 
 ## 주요 기능
-- 데스크톱 아이콘 더블클릭으로 창 열기/닫기
+- 데스크톱 아이콘 더블클릭(모바일/터치는 단일 탭)으로 창 열기/닫기
 - 창 드래그 이동, 리사이즈, 최소화/최대화, 포커스(z-index) 처리
 - Dock에서 앱(섹션) 전환
 - Sticky Memo 위젯(드래그, 위치 저장)
-- Music Player 위젯(드래그, 재생/일시정지, 진행바)
+- Music Player 위젯(드래그, 재생/일시정지, 진행바, 오디오 파일 없어도 UI 동작)
+- Guestbook 위젯(프론트 UI 데모, 익명 한줄 등록/목록)
+- Mini Terminal 위젯(`help`, `about`, `projects`, `open 3` 등 명령 기반 탐색)
 - Projects 필터/검색 및 상세 모달
 - 다크/라이트/커스텀 테마 토글
-- 반응형 대응(모바일 포함)
+- 반응형 대응 + 키보드 조작 접근성(Enter/Space) 보완
 
 ## 화면/섹션 구조
 - `Home`: 타이핑 인트로
@@ -44,6 +46,7 @@ src/
   data/                 # JSON 데이터 로더/타입
   hooks/                # 커스텀 훅, Zustand 스토어
   lib/                  # 유틸 함수
+    supabase/           # Supabase 스키마/서비스 준비 파일
 
 data/
   projects.json
@@ -76,6 +79,19 @@ pnpm typecheck     # 타입 검사
 ## 상태 관리
 - `use-window-store`: 창 상태(open/min/max/position/size/z-index)
 - `use-os-store`: Sticky Memo, Music Player 상태 및 persist
+- `Desktop`: Guestbook, Mini Terminal 위젯 open/close 상태 관리
+
+## 위젯 커맨드
+- Mini Terminal:
+  - `help`
+  - `about`, `skills`, `projects`, `career`
+  - `open <name|index>` 예: `open projects`, `open 3`
+  - `clear`, `exit`
+
+## Supabase 준비 파일
+- 실제 Supabase 연동 전, 스키마/쿼리와 실행 함수를 미리 분리해둠
+- [guestbook-schema.ts](src/lib/supabase/guestbook-schema.ts): 테이블 생성, RLS, 정책, 트리거 SQL
+- [guestbook-service.ts](src/lib/supabase/guestbook-service.ts): 스키마 실행/조회/등록 함수
 
 ## 최근 리팩터링
 - `About / Skills / Projects / Career`의 공통 레이아웃을 `SectionFrame`으로 통합

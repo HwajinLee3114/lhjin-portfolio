@@ -5,14 +5,22 @@ import { Music2, Play, Pause, SkipBack, SkipForward, X, GripHorizontal } from 'l
 import { useEffect, useRef, useState } from 'react'
 
 import { useOSStore } from '@/hooks/os/use-os-store'
+import { useWidgetStore } from '@/hooks/os/use-widget-store'
 
 export function MusicPlayer() {
+  const { widgets, focusWidget, initWidget } = useWidgetStore()
+  const widgetId = 'music-player'
+
   const { musicInfo, updateMusic, isMusicPlayerOpen, toggleMusicPlayer } = useOSStore()
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [audioAvailable, setAudioAvailable] = useState(Boolean(musicInfo.audioUrl))
 
   const x = useMotionValue(musicInfo.position?.x ?? 800)
   const y = useMotionValue(musicInfo.position?.y ?? 300)
+
+  useEffect(() => {
+    initWidget(widgetId)
+  }, [initWidget])
 
   useEffect(() => {
     if (musicInfo.position) {
@@ -82,12 +90,15 @@ export function MusicPlayer() {
     }
   }, [musicInfo.endTime, updateMusic])
 
+  const zIndex = widgets[widgetId]?.zIndex || 2000
+
   return (
     <AnimatePresence>
       {isMusicPlayerOpen && (
         <motion.div
           drag
           dragMomentum={false}
+          onPointerDown={() => focusWidget(widgetId)}
           style={{
             x,
             y,
@@ -95,6 +106,7 @@ export function MusicPlayer() {
             top: 0,
             left: 0,
             backgroundColor: musicInfo.backgroundColor ?? 'rgba(255,255,255,0.6)',
+            zIndex
           }}
           onDragEnd={() => {
             updateMusic({ position: { x: x.get(), y: y.get() } })
@@ -102,7 +114,7 @@ export function MusicPlayer() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="z-[5] w-[340px] select-none rounded-[2.5rem] border border-white/40 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.25)] backdrop-blur-3xl group cursor-grab active:cursor-grabbing"
+          className="pointer-events-auto z-[2000] w-[340px] select-none rounded-[2.5rem] border border-white/40 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.25)] backdrop-blur-3xl group cursor-grab active:cursor-grabbing"
         >
           <audio ref={audioRef} />
           <div className="absolute top-4 left-1/2 flex h-4 w-12 -translate-x-1/2 items-center justify-center opacity-40 group-hover:opacity-100">

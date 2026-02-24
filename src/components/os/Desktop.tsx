@@ -1,11 +1,13 @@
 'use client'
 
 import { AnimatePresence } from 'framer-motion'
-import { User, Code, Briefcase, Folder, Music } from 'lucide-react'
+import { User, Code, Briefcase, Folder, Music, Heart, Terminal } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react'
 
 import { DesktopIcon } from './DesktopIcon'
 import { Dock } from './Dock'
+import { GuestbookWidget } from './GuestbookWidget'
+import { MiniTerminalWidget } from './MiniTerminalWidget'
 import { MusicPlayer } from './MusicPlayer'
 import { StatusBar } from './StatusBar'
 import { StickyMemo } from './StickyMemo'
@@ -18,12 +20,15 @@ import Skills from '@/app/skills/page'
 import ProjectsSection from '@/components/project/ProjectsSection'
 import { useOSStore } from '@/hooks/os/use-os-store'
 import { useWindowStore } from '@/hooks/os/use-window-store'
+import { cn } from '@/lib/utils'
 
 export function Desktop() {
   const { windows, openWindow } = useWindowStore()
   const { stickyMemos, toggleMusicPlayer } = useOSStore()
   const [mounted, setMounted] = useState(false)
   const [singleTapToOpen, setSingleTapToOpen] = useState(false)
+  const [isGuestbookOpen, setIsGuestbookOpen] = useState(false)
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -62,7 +67,27 @@ export function Desktop() {
   ]
 
   const widgetIcons = [
-    { id: 'music-player', title: 'Music', icon: Music, onClick: () => toggleMusicPlayer() },
+    {
+      id: 'music-player',
+      title: 'Music',
+      icon: Music,
+      onClick: () => toggleMusicPlayer(),
+      color: 'bg-indigo-500 text-white shadow-indigo-100',
+    },
+    {
+      id: 'guestbook',
+      title: 'Guestbook',
+      icon: Heart,
+      onClick: () => setIsGuestbookOpen((prev) => !prev),
+      color: 'bg-rose-400 text-white shadow-rose-100',
+    },
+    {
+      id: 'terminal',
+      title: 'Terminal',
+      icon: Terminal,
+      onClick: () => setIsTerminalOpen((prev) => !prev),
+      color: 'bg-zinc-800 text-emerald-400 shadow-zinc-200',
+    },
   ]
 
   if (!mounted) return null
@@ -106,7 +131,12 @@ export function Desktop() {
             aria-label={`${icon.title} widget open`}
             className="group flex w-24 flex-col items-center gap-1 rounded-lg p-2 transition-all hover:bg-black/5 active:bg-black/10"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900/10 text-zinc-900 shadow-sm ring-1 ring-black/10 transition-all group-hover:bg-zinc-900/20">
+            <div
+              className={cn(
+                'flex h-14 w-14 items-center justify-center rounded-2xl shadow-sm transition-all group-hover:scale-110',
+                icon.color,
+              )}
+            >
               <icon.icon size={28} strokeWidth={2.5} />
             </div>
             <span className="text-[12px] font-bold text-zinc-800">{icon.title}</span>
@@ -140,6 +170,8 @@ export function Desktop() {
       </div>
 
       <MusicPlayer />
+      <GuestbookWidget isOpen={isGuestbookOpen} onClose={() => setIsGuestbookOpen(false)} />
+      <MiniTerminalWidget isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
       <Dock />
 
       <div id="modalTmp" className="z-[2000]"></div>

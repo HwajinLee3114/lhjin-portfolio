@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { useZIndexStore } from './use-z-index-store'
 
 export type WindowState = {
   id: string
@@ -13,7 +14,6 @@ export type WindowState = {
 
 type WindowStore = {
   windows: Record<string, WindowState>
-  maxZIndex: number
   openWindow: (id: string, title: string) => void
   closeWindow: (id: string) => void
   minimizeWindow: (id: string) => void
@@ -25,12 +25,11 @@ type WindowStore = {
 
 export const useWindowStore = create<WindowStore>((set) => ({
   windows: {},
-  maxZIndex: 10,
 
   openWindow: (id, title) =>
     set((state) => {
       const existing = state.windows[id]
-      const nextZ = state.maxZIndex + 1
+      const nextZ = useZIndexStore.getState().getNextZIndex()
 
       if (existing) {
         return {
@@ -38,7 +37,6 @@ export const useWindowStore = create<WindowStore>((set) => ({
             ...state.windows,
             [id]: { ...existing, isOpen: true, isMinimized: false, zIndex: nextZ },
           },
-          maxZIndex: nextZ,
         }
       }
 
@@ -52,11 +50,10 @@ export const useWindowStore = create<WindowStore>((set) => ({
             isMinimized: false,
             isMaximized: false,
             zIndex: nextZ,
-            position: { x: 100 + nextZ * 10, y: 50 + nextZ * 10 },
+            position: { x: 100 + nextZ % 50, y: 50 + nextZ % 50 },
             size: { width: 1000, height: 700 },
           },
         },
-        maxZIndex: nextZ,
       }
     }),
 
@@ -91,7 +88,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
   focusWindow: (id) =>
     set((state) => {
       if (!state.windows[id]) return state
-      const nextZ = state.maxZIndex + 1
+      const nextZ = useZIndexStore.getState().getNextZIndex()
       return {
         windows: {
           ...state.windows,
@@ -101,7 +98,6 @@ export const useWindowStore = create<WindowStore>((set) => ({
             isMinimized: false,
           },
         },
-        maxZIndex: nextZ,
       }
     }),
 
