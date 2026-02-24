@@ -59,13 +59,11 @@ const ProfileCircle: React.FC = () => {
           </g>
         </svg>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
-          {/* <div className="p-4 rounded-lg shadow-lg bg-black bg-opacity-75"> */}
           <div className="memoji__info flex flex-col">
             <span>이화진</span>
             <span>1997.03.01</span>
             <span>✉️ hwajin3114@gmail.com</span>
           </div>
-          {/* </div> */}
         </div>
       </div>
     </div>

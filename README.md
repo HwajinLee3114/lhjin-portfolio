@@ -1,60 +1,85 @@
-## 프론트엔드 개발자 이화진 포트폴리오
+# LHJIN Portfolio OS
 
-### 개요
-- Next.js 기반 포트폴리오 웹사이트
-- 반응형 레이아웃, 다크/라이트/커스텀 테마 지원
-- 프로젝트 상세 모달, 이미지 미리보기 모달 제공
-- 데이터는 `data/*.json`으로 관리
+프론트엔드 개발자 이화진의 포트폴리오 웹사이트입니다.
+데스크톱 OS 형태의 인터랙션 위에 `About / Skills / Projects / Career` 콘텐츠를 창(Window) 기반으로 탐색할 수 있도록 구성했습니다.
 
-### 주요 기능
-- 섹션 스크롤 내비게이션(헤더)
-- 프로젝트 카드 및 상세 모달(이미지 프리뷰 포함)
-- 스크롤 탑 버튼
+## 핵심 컨셉
+- 포트폴리오 콘텐츠를 단순 스크롤 페이지가 아닌 OS UI 패턴으로 탐색
+- 방문자가 직접 조작하며 이해할 수 있는 인터랙티브 UX 제공
+- 데이터 기반(`data/*.json`)으로 콘텐츠 유지보수 단순화
+
+## 주요 기능
+- 데스크톱 아이콘 더블클릭으로 창 열기/닫기
+- 창 드래그 이동, 리사이즈, 최소화/최대화, 포커스(z-index) 처리
+- Dock에서 앱(섹션) 전환
+- Sticky Memo 위젯(드래그, 위치 저장)
+- Music Player 위젯(드래그, 재생/일시정지, 진행바)
+- Projects 필터/검색 및 상세 모달
 - 다크/라이트/커스텀 테마 토글
+- 반응형 대응(모바일 포함)
 
-### 데이터 관리
-- JSON 파일로 데이터 분리
-  - `data/projects.json`
-  - `data/career.json`
-  - `data/skills.json`
-- 타입 및 로딩은 `src/data/*.ts`에서 처리
+## 화면/섹션 구조
+- `Home`: 타이핑 인트로
+- `About`: 프로필/링크/이력서 다운로드
+- `Skills`: 카테고리별 기술 스택
+- `Projects`: 필터/검색/카드/상세
+- `Career`: 경력 타임라인 + 프로젝트 연계
 
-### 주요 명령어
-```bash
-# 개발 서버 실행 (Next.js)
-pnpm dev
+## 기술 스택
+- Next.js 14 (App Router)
+- React 18 + TypeScript
+- Tailwind CSS
+- Framer Motion
+- Zustand (상태 관리)
+- Jest + Testing Library
 
-# 로컬 개발 서버 실행 (포트 4003)
-pnpm start:local
+## 디렉터리
+```text
+src/
+  app/                  # 라우트 및 섹션 페이지
+  components/
+    os/                 # Desktop, Window, Dock, Widget
+    project/            # 프로젝트 카드/상세
+    common/, comn/      # 공통 UI
+  data/                 # JSON 데이터 로더/타입
+  hooks/                # 커스텀 훅, Zustand 스토어
+  lib/                  # 유틸 함수
 
-# 빌드
-pnpm build
-
-# 코드 포맷
-pnpm format
-
-# 코드 포맷 검사
-pnpm format:check
-
-# 린트
-pnpm lint
-
-# 테스트
-pnpm test
-
-# 타입 체크
-pnpm typecheck
+data/
+  projects.json
+  career.json
+  skills.json
 ```
 
-### Tech Stack
-- Next.js 14
-- React 18
-- TypeScript
-- TailwindCSS
-- styled-components
-- framer-motion
-- Jest
+## 실행 방법
+```bash
+pnpm install
+pnpm dev
+```
 
-### 참고
-- 테마 색상은 CSS 변수 기반으로 관리
-- 커스텀 테마는 `.theme-custom` 클래스에 정의됨
+## 스크립트
+```bash
+pnpm dev           # 개발 서버
+pnpm start:local   # 4003 포트 개발 서버
+pnpm build         # 프로덕션 빌드
+pnpm lint          # ESLint
+pnpm format        # Prettier write
+pnpm format:check  # Prettier check
+pnpm test          # Jest
+pnpm typecheck     # 타입 검사
+```
+
+## 데이터 관리
+- 포트폴리오 데이터는 `data/*.json`에서 관리
+- 화면 렌더링용 타입/매핑은 `src/data/*.ts`에서 처리
+
+## 상태 관리
+- `use-window-store`: 창 상태(open/min/max/position/size/z-index)
+- `use-os-store`: Sticky Memo, Music Player 상태 및 persist
+
+## 최근 리팩터링
+- `About / Skills / Projects / Career`의 공통 레이아웃을 `SectionFrame`으로 통합
+- 섹션 프레임(타이틀 + 컨테이너) 중복 제거로 유지보수성 개선
+
+## 배포
+Vercel 배포를 기준으로 설계되어 있으며, 일반적인 Next.js 배포 절차를 그대로 사용할 수 있습니다.

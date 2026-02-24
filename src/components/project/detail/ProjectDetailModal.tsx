@@ -33,7 +33,6 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   const lf_showImgPreview = (imgUrl: string) => {
-    // const img = project.images.find((image) => image.id === imgId);
     if (imgUrl) {
       setPreviewImgUrl(`/images/project/${imgUrl}`)
     }
@@ -82,7 +81,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
             className="text-center w-[92vw] sm:w-[85vw] lg:w-[75vw] max-w-5xl h-[85vh] sm:h-[80vh] overflow-y-auto rounded-md shadow-md bg-themacolor1 dark:bg-[#273038] dark:text-darkfg"
-            onClick={(e) => e.stopPropagation()} // 모달 클릭 시 이벤트 전파 막기
+            onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
           >
@@ -158,18 +157,6 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                   {project.skillItem.map((item) => item.name).join(', ')}
                 </div>
 
-                {/* <div className="flex flex-row items-center mb-2">
-                  {project.skillItem &&
-                    project.skillItem.map((skill) => skillI.url && (
-                      <img
-                        key={`${project.id}_skill_${skill.id}`}
-                        src={`/images/tech/${skill.url}`}
-                        className="w-7"
-                        alt={skill.name}
-                      />
-                    ))}
-                </div> */}
-
                 <div className="whitespace-pre-line">{project.description}</div>
 
                 <div className="flex flex-col md:flex-row items-center gap-3 py-3">
@@ -222,19 +209,21 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                       <img src="/images/hand-100.png" className="w-7" alt="기여 부분" />
                       <div>기여 부분</div>
                     </div>
-                    <ul className="list-disc text-left">
+                    <ul className="text-left space-y-5">
                       {project.contribution.map((contri) => (
-                        <div key={`${project.id}_contri_${contri.id}`} className="mb-5">
+                        <li key={`${project.id}_contri_${contri.id}`} className="list-none">
                           {contri?.title && <QuoteDiv>{contri.title}</QuoteDiv>}
-                          {contri.desc.map((condesc, idx) => (
-                            <li
-                              key={`${contri.id}_contrili_${idx}`}
-                              className="text-gray-700 dark:text-darkfg/80 text-base"
-                            >
-                              {condesc}
-                            </li>
-                          ))}
-                        </div>
+                          <ul className="list-disc pl-5 space-y-1">
+                            {contri.desc.map((condesc, idx) => (
+                              <li
+                                key={`${contri.id}_contrili_${idx}`}
+                                className="text-gray-700 dark:text-darkfg/80 text-base"
+                              >
+                                {condesc}
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
                       ))}
                     </ul>
                   </section>

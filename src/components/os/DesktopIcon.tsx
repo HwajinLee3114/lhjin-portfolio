@@ -8,9 +8,10 @@ interface DesktopIconProps {
   id: string
   title: string
   icon: LucideIcon
+  singleTapToOpen?: boolean
 }
 
-export function DesktopIcon({ id, title, icon: Icon }: DesktopIconProps) {
+export function DesktopIcon({ id, title, icon: Icon, singleTapToOpen }: DesktopIconProps) {
   const { openWindow, closeWindow, focusWindow, windows } = useWindowStore()
 
   const handleOpen = () => {
@@ -18,10 +19,8 @@ export function DesktopIcon({ id, title, icon: Icon }: DesktopIconProps) {
     const isOpen = windowState?.isOpen
 
     if (isOpen) {
-      // 이미 열려 있으면 닫기 (토글)
       closeWindow(id)
     } else {
-      // 닫혀 있으면 열기
       openWindow(id, title)
       focusWindow(id)
     }
@@ -30,6 +29,16 @@ export function DesktopIcon({ id, title, icon: Icon }: DesktopIconProps) {
   return (
     <button
       onDoubleClick={handleOpen}
+      onClick={() => {
+        if (singleTapToOpen) handleOpen()
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          handleOpen()
+        }
+      }}
+      aria-label={`${title} window open`}
       className="group flex w-24 flex-col items-center gap-1 rounded-lg p-2 transition-all hover:bg-black/5 active:bg-black/10"
     >
       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900/10 text-zinc-900 shadow-sm ring-1 ring-black/10 transition-all group-hover:bg-zinc-900/20">

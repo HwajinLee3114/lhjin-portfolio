@@ -5,7 +5,7 @@
 .link {
   font-size: 1.25rem;
   font-weight: 900;
-  color: #18181b; /* zinc-900 */
+  color: #18181b; 
   text-decoration: none;
   position: relative;
   transition: color 0.4s ease;

@@ -2,13 +2,14 @@
 
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
 import { Music2, Play, Pause, SkipBack, SkipForward, X, GripHorizontal } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useOSStore } from '@/hooks/os/use-os-store'
 
 export function MusicPlayer() {
   const { musicInfo, updateMusic, isMusicPlayerOpen, toggleMusicPlayer } = useOSStore()
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const [audioAvailable, setAudioAvailable] = useState(Boolean(musicInfo.audioUrl))
 
   const x = useMotionValue(musicInfo.position?.x ?? 800)
   const y = useMotionValue(musicInfo.position?.y ?? 300)
@@ -21,19 +22,20 @@ export function MusicPlayer() {
   }, [musicInfo.position, x, y])
 
   useEffect(() => {
+    setAudioAvailable(Boolean(musicInfo.audioUrl))
     if (!audioRef.current || !musicInfo.audioUrl) return
     audioRef.current.src = musicInfo.audioUrl
   }, [musicInfo.audioUrl])
 
   useEffect(() => {
     const audio = audioRef.current
-    if (!audio || !musicInfo.audioUrl) return
+    if (!audio || !musicInfo.audioUrl || !audioAvailable) return
     if (musicInfo.isPlaying) {
-      audio.play().catch(() => updateMusic({ isPlaying: false }))
+      audio.play().catch(() => {})
     } else {
       audio.pause()
     }
-  }, [musicInfo.isPlaying, musicInfo.audioUrl, updateMusic])
+  }, [musicInfo.isPlaying, musicInfo.audioUrl, audioAvailable])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -60,12 +62,23 @@ export function MusicPlayer() {
       updateMusic({ isPlaying: false })
     }
 
+    const handleError = () => {
+      setAudioAvailable(false)
+      updateMusic({
+        startTime: '00:00',
+        endTime: '00:00',
+        progress: 0,
+      })
+    }
+
     audio.addEventListener('timeupdate', handleTimeUpdate)
     audio.addEventListener('ended', handleEnded)
+    audio.addEventListener('error', handleError)
 
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate)
       audio.removeEventListener('ended', handleEnded)
+      audio.removeEventListener('error', handleError)
     }
   }, [musicInfo.endTime, updateMusic])
 

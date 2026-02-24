@@ -23,6 +23,7 @@ export function Desktop() {
   const { windows, openWindow } = useWindowStore()
   const { stickyMemos, toggleMusicPlayer } = useOSStore()
   const [mounted, setMounted] = useState(false)
+  const [singleTapToOpen, setSingleTapToOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -36,6 +37,22 @@ export function Desktop() {
       }, 500)
     }
   }, [openWindow])
+
+  useEffect(() => {
+    const media = window.matchMedia('(pointer: coarse)')
+    const syncTapMode = () => {
+      setSingleTapToOpen(media.matches || window.innerWidth < 768)
+    }
+
+    syncTapMode()
+    media.addEventListener('change', syncTapMode)
+    window.addEventListener('resize', syncTapMode)
+
+    return () => {
+      media.removeEventListener('change', syncTapMode)
+      window.removeEventListener('resize', syncTapMode)
+    }
+  }, [])
 
   const desktopIcons = [
     { id: 'about', title: 'About Me', icon: User },
@@ -68,7 +85,7 @@ export function Desktop() {
 
       <div className="absolute top-12 right-4 z-10 grid auto-rows-max grid-flow-row gap-2">
         {desktopIcons.map((icon) => (
-          <DesktopIcon key={icon.id} {...icon} />
+          <DesktopIcon key={icon.id} {...icon} singleTapToOpen={singleTapToOpen} />
         ))}
       </div>
 
@@ -77,6 +94,16 @@ export function Desktop() {
           <button
             key={icon.id}
             onDoubleClick={icon.onClick}
+            onClick={() => {
+              if (singleTapToOpen) icon.onClick()
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                icon.onClick()
+              }
+            }}
+            aria-label={`${icon.title} widget open`}
             className="group flex w-24 flex-col items-center gap-1 rounded-lg p-2 transition-all hover:bg-black/5 active:bg-black/10"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900/10 text-zinc-900 shadow-sm ring-1 ring-black/10 transition-all group-hover:bg-zinc-900/20">

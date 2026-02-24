@@ -28,7 +28,7 @@ export default function ProjectsSection() {
     if (q && q !== filter) {
       setFilter(q)
     }
-  }, [searchParams])
+  }, [searchParams, filter])
 
   const handleFilterChange = (newFilter: string) => {
     setFilter(newFilter)

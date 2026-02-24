@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils'
 interface TagBadgeProps {
   name: string
   color: string
-  txtcolor?: string
   className?: string
 }
 
@@ -18,8 +17,8 @@ const TagBadge: React.FC<TagBadgeProps> = ({ name, color, className }) => {
         className,
       )}
       style={{
-        backgroundColor: color + '15',
-        color: color,
+        backgroundColor: `${color}15`,
+        color,
         border: `1px solid ${color}30`,
       }}
     >
