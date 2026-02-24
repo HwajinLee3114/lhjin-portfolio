@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Search } from 'lucide-react'
 
 import { projects } from '@/data/projects'
+import SectionFrame from '@/components/common/SectionFrame'
 import ProjectCard from '@/components/project/ProjectCard'
 import { cn } from '@/lib/utils'
 
@@ -56,113 +57,101 @@ export default function ProjectsSection() {
   }, [filter, query])
 
   return (
-    <section
-      id="projects"
-      className="flex flex-col items-center min-h-full bg-white dark:bg-[#1a1f24] p-8 md:p-16"
-    >
-      <div className="w-full max-w-6xl">
-        <header className="mb-10 text-center">
-          <span className="text-zinc-400 text-xs font-black tracking-[0.2em] uppercase">
-            Archive
-          </span>
-          <div className="mt-4 h-1 w-12 bg-zinc-900 dark:bg-white mx-auto rounded-full" />
-        </header>
-
-        <div className="flex flex-col items-center gap-8 mb-10">
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {['all', 'feature', 'personal', 'team'].map((f) => {
-              const isActive = filter === f
-              return (
-                <button
-                  key={f}
-                  onClick={() => handleFilterChange(f)}
-                  className={cn(
-                    'relative px-6 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all duration-300',
-                    isActive
-                      ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-lg scale-105'
-                      : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800',
-                  )}
-                >
-                  <span className="relative z-10">{f}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeFilterBg"
-                      className="absolute inset-0 rounded-2xl bg-zinc-900 dark:bg-white shadow-xl"
-                      transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
-                    />
-                  )}
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="relative w-full max-w-md group">
-            <Search
-              size={18}
-              className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-zinc-900 dark:group-focus-within:text-white transition-colors"
-            />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="프로젝트 검색 (제목/설명/스택)"
-              className="w-full pl-12 pr-6 py-4 rounded-[2rem] border-none bg-zinc-50 dark:bg-zinc-800/50 text-sm font-medium focus:ring-2 focus:ring-zinc-900 dark:focus:ring-white outline-none transition-all shadow-inner"
-            />
-          </div>
+    <SectionFrame id="projects" title="Archive" containerClassName="max-w-6xl">
+      <div className="mb-10 flex flex-col items-center gap-8">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {['all', 'feature', 'personal', 'team'].map((f) => {
+            const isActive = filter === f
+            return (
+              <button
+                key={f}
+                onClick={() => handleFilterChange(f)}
+                className={cn(
+                  'relative rounded-2xl px-6 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-300',
+                  isActive
+                    ? 'scale-105 bg-zinc-900 text-white shadow-lg dark:bg-white dark:text-zinc-900'
+                    : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800',
+                )}
+              >
+                <span className="relative z-10">{f}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeFilterBg"
+                    className="absolute inset-0 rounded-2xl bg-zinc-900 shadow-xl dark:bg-white"
+                    transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
+                  />
+                )}
+              </button>
+            )
+          })}
         </div>
 
-        <div className="w-full">
-          <AnimatePresence mode="popLayout">
-            {loading ? (
-              <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                {Array.from({ length: 6 }).map((_, idx) => (
-                  <div key={idx} className="animate-pulse space-y-4">
-                    <div className="aspect-video bg-zinc-100 dark:bg-zinc-800 rounded-3xl" />
-                    <div className="h-4 w-2/3 bg-zinc-100 dark:bg-zinc-800 rounded" />
-                    <div className="flex gap-2">
-                      <div className="h-6 w-16 bg-zinc-100 dark:bg-zinc-800 rounded-full" />
-                      <div className="h-6 w-16 bg-zinc-100 dark:bg-zinc-800 rounded-full" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <motion.ul
-                layout
-                className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-16"
-              >
-                {filteredPj.map((project, index) => (
-                  <motion.li
-                    layout
-                    key={project.id}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                  >
-                    <ProjectCard
-                      id={project.id}
-                      title={project.title}
-                      periodStart={project.periodStart}
-                      periodEnd={project.periodEnd}
-                      skillItem={project.skillItem}
-                      filter={project.filter}
-                      imageSrc={project.thumb}
-                      feature={project.feature}
-                      description={project.description}
-                    />
-                  </motion.li>
-                ))}
-              </motion.ul>
-            )}
-          </AnimatePresence>
-
-          {!loading && filteredPj.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-zinc-400 font-medium">검색 결과가 없습니다.</p>
-            </div>
-          )}
+        <div className="group relative w-full max-w-md">
+          <Search
+            size={18}
+            className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-300 transition-colors group-focus-within:text-zinc-900 dark:group-focus-within:text-white"
+          />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="프로젝트 검색 (제목/설명/스택)"
+            className="w-full rounded-[2rem] border-none bg-zinc-50 py-4 pl-12 pr-6 text-sm font-medium shadow-inner outline-none transition-all focus:ring-2 focus:ring-zinc-900 dark:bg-zinc-800/50 dark:focus:ring-white"
+          />
         </div>
       </div>
-    </section>
+
+      <div className="w-full">
+        <AnimatePresence mode="popLayout">
+          {loading ? (
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, idx) => (
+                <div key={idx} className="animate-pulse space-y-4">
+                  <div className="aspect-video rounded-3xl bg-zinc-100 dark:bg-zinc-800" />
+                  <div className="h-4 w-2/3 rounded bg-zinc-100 dark:bg-zinc-800" />
+                  <div className="flex gap-2">
+                    <div className="h-6 w-16 rounded-full bg-zinc-100 dark:bg-zinc-800" />
+                    <div className="h-6 w-16 rounded-full bg-zinc-100 dark:bg-zinc-800" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <motion.ul
+              layout
+              className="mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {filteredPj.map((project, index) => (
+                <motion.li
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                >
+                  <ProjectCard
+                    id={project.id}
+                    title={project.title}
+                    periodStart={project.periodStart}
+                    periodEnd={project.periodEnd}
+                    skillItem={project.skillItem}
+                    filter={project.filter}
+                    imageSrc={project.thumb}
+                    feature={project.feature}
+                    description={project.description}
+                  />
+                </motion.li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
+
+        {!loading && filteredPj.length === 0 && (
+          <div className="py-20 text-center">
+            <p className="font-medium text-zinc-400">검색 결과가 없습니다.</p>
+          </div>
+        )}
+      </div>
+    </SectionFrame>
   )
 }

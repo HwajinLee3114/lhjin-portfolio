@@ -10,17 +10,17 @@ interface TagBadgeProps {
   className?: string
 }
 
-const TagBadge: React.FC<TagBadgeProps> = ({ name, color, txtcolor, className }) => {
+const TagBadge: React.FC<TagBadgeProps> = ({ name, color, className }) => {
   return (
     <span
       className={cn(
-        "text-[10px] px-2.5 py-1 rounded-full font-black uppercase tracking-wider",
-        className
+        'text-[10px] px-2.5 py-1 rounded-full font-black uppercase tracking-wider',
+        className,
       )}
-      style={{ 
-        backgroundColor: color + '15', 
+      style={{
+        backgroundColor: color + '15',
         color: color,
-        border: `1px solid ${color}30`
+        border: `1px solid ${color}30`,
       }}
     >
       {name}
