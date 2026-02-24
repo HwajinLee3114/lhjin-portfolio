@@ -1,6 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
+
 import { ProjectDetailModal } from './detail/ProjectDetailModal'
 import ModalPortal from '../comn/ModalPortal'
 import ModalOverlay from '../comn/ModalOverlay'
@@ -8,7 +11,6 @@ import { formatPeriod } from '@/lib/period'
 import type { FilterTag, SkillItem } from '@/data/projects'
 import useBodyScrollLock from '@/hooks/useBodyScrollLock'
 import useEscapeKey from '@/hooks/useEscapeKey'
-import { focusRing } from '@/styles/ui'
 import TagBadge from '../comn/TagBadge'
 
 interface ProjectCardProps {
@@ -30,14 +32,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   filter,
   periodStart,
   periodEnd,
-  // feature,
-  // link,
   imageSrc,
   skillItem,
   description,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [activeId, setActiveId] = useState<string>('') // 상세 프로젝트
+  const [activeId, setActiveId] = useState<string>('')
 
   useBodyScrollLock(isOpen)
 
@@ -50,93 +50,85 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <>
-      <div className="group relative w-full h-full rounded-lg overflow-hidden shadow-lg hover:shadow-xl hover:scale-[1.02] p-4 bg-white dark:bg-[#273038] dark:text-darkfg cursor-pointer transition-transform">
-        <div className="flex justify-center">
+      <motion.div
+        layout
+        onClick={() => {
+          if (id) {
+            setIsOpen(true)
+            setActiveId(id)
+          }
+        }}
+        className="group relative flex flex-col h-full rounded-[2rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 cursor-pointer transition-all duration-500 hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-1.5"
+      >
+        <div className="relative aspect-[16/10] rounded-[1.5rem] overflow-hidden bg-zinc-50 dark:bg-zinc-800 mb-4">
           <img
-            className="w-full h-48 object-cover"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             src={`/images/thumb/${imageSrc}`}
             alt={title}
             loading="lazy"
           />
-        </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="pointer-events-none absolute bottom-3 left-3 right-3">
-          <div className="rounded-md bg-white/85 dark:bg-[#1f272e]/85 backdrop-blur-md px-3 py-2 text-xs text-gray-800 dark:text-darkfg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
-            {description}
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute bottom-3 left-3 right-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+            <p className="text-[10px] font-bold text-white/90 leading-snug line-clamp-2">
+              {description}
+            </p>
           </div>
         </div>
-        <div className="py-2">
-          <div className="flex flex-row flex-wrap gap-2 justify-between items-center">
-            <h2 className="text-base font-bold">{title}</h2>
-            {filter && (
-              <div className="flex gap-2 flex-wrap">
-                {filter.map((fil, idx) => (
-                  <TagBadge key={`projectfilter${idx}`} name={fil.name} color={fil.color} />
-                ))}
+
+        <div className="flex flex-col flex-1 space-y-2.5">
+          <div className="flex items-start justify-between gap-2">
+            <h2 className="text-lg font-black text-zinc-900 dark:text-white leading-tight">
+              {title}
+            </h2>
+            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-zinc-50 dark:bg-zinc-800 group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900 transition-all duration-300 shrink-0">
+              <ArrowUpRight size={14} />
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {filter?.map((fil, idx) => (
+              <TagBadge key={`pj-filter-${idx}`} name={fil.name} color={fil.color} />
+            ))}
+          </div>
+
+          <p className="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">
+            {formatPeriod(periodStart, periodEnd)}
+          </p>
+
+          <div className="mt-auto pt-4 border-t border-zinc-50 dark:border-zinc-800 flex items-center -space-x-1.5 group-hover:space-x-1 transition-all duration-500">
+            {skillItem?.slice(0, 5).map(
+              (skill, idx) =>
+                skill.url && (
+                  <div
+                    key={`${id}_skill_${idx}`}
+                    className="w-7 h-7 rounded-full bg-white dark:bg-zinc-900 border-2 border-white dark:border-zinc-900 flex items-center justify-center p-1 shadow-sm group-hover:shadow-md transition-shadow grayscale group-hover:grayscale-0"
+                  >
+                    <img
+                      src={`/images/tech/${skill.url}`}
+                      className="w-full h-full object-contain"
+                      alt={skill.name}
+                    />
+                  </div>
+                ),
+            )}
+            {skillItem.length > 5 && (
+              <div className="w-7 h-7 rounded-full bg-zinc-50 dark:bg-zinc-800 border-2 border-white dark:border-zinc-900 flex items-center justify-center text-[9px] font-black text-zinc-400">
+                +{skillItem.length - 5}
               </div>
             )}
           </div>
-
-          {(periodStart || periodEnd) && (
-            <p className="text-gray-600 dark:text-darkfg/80 text-base md:text-sm">
-              {formatPeriod(periodStart, periodEnd)}
-            </p>
-          )}
-
-          {/* {feature && (
-            <ul className="list-disc pl-3">
-              {feature.map((feat, index) => (
-                <li key={`projectfeat${index}`} className="text-gray-700 text-base">
-                  <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs">
-                    {feat}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )} */}
-          <span className="block overflow-hidden whitespace-nowrap overflow-ellipsis max-w-xs dark:text-darkfg/90">
-            {description}
-          </span>
         </div>
-        {/* <div className="self-start py-1 px-3 mb-2 bg-themacolor15 border-2 border-themacolor4 rounded text-sm">
-          {skillItem.map(item => item.name).join(', ')}
-        </div> */}
-        <div className="flex flex-row gap-1 items-center mb-2 flex-wrap">
-          {skillItem &&
-            skillItem.map(
-              (skillI) =>
-                skillI.url && (
-                  <img
-                    key={`${id}_skill_${skillI.id}`}
-                    src={`/images/tech/${skillI.url}`}
-                    className="w-7"
-                    alt={skillI.name}
-                  />
-                ),
-            )}
-        </div>
-        {id && (
-          <div className="flex justify-end">
-            <button
-              className={`px-3 py-1 border border-gray-300 rounded font-medium text-sm outline-none cursor-pointer hover:bg-yellow-400 hover:text-white hover:border-yellow-400 ${focusRing} focus-visible:ring-yellow-400 focus-visible:ring-offset-2`}
-              onClick={() => {
-                setIsOpen(true)
-                setActiveId(id)
-              }}
-            >
-              DETAIL
-            </button>
-          </div>
+      </motion.div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <ModalPortal>
+            <ModalOverlay onClose={closeModal}>
+              <ProjectDetailModal isOpen={isOpen} activeId={activeId} onClose={closeModal} />
+            </ModalOverlay>
+          </ModalPortal>
         )}
-      </div>
-
-      {isOpen && (
-        <ModalPortal>
-          <ModalOverlay onClose={closeModal}>
-            <ProjectDetailModal isOpen={isOpen} activeId={activeId} onClose={closeModal} />
-          </ModalOverlay>
-        </ModalPortal>
-      )}
+      </AnimatePresence>
     </>
   )
 }
