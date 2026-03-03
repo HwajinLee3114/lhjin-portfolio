@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
-import SkillItem from '@/components/skill/SkillItem'
+import SectionFrame from '@/components/common/SectionFrame'
 import { skills } from '@/data/skills'
 
 export default function Skills() {
@@ -14,45 +15,67 @@ export default function Skills() {
   }, [])
 
   return (
-    <section
-      id="skills"
-      className="flex flex-col items-center justify-center bg-themacolor2 dark:bg-[#1f2a24] dark:text-darkfg min-h-50 md:min-h-35 md:h-full"
-    >
-      <h2 className="text-3xl g_titleEngFontBlack mt-52 md:mt-0">Skills</h2>
-      <p className="mt-4">지속적인 변화에 도전하며 개발 역량을 확장하고 있습니다</p>
+    <SectionFrame id="skills" title="Tech Stack">
+      {loading ? (
+        <div className="space-y-12">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <div key={idx} className="animate-pulse flex items-start gap-8">
+              <div className="h-16 w-16 shrink-0 rounded-2xl bg-zinc-100" />
+              <div className="flex-1 space-y-4 pt-2">
+                <div className="h-4 w-24 rounded bg-zinc-100" />
+                <div className="flex gap-2">
+                  <div className="h-8 w-20 rounded-full bg-zinc-100" />
+                  <div className="h-8 w-24 rounded-full bg-zinc-100" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-10">
+          {skills.map((category, idx) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="group flex flex-col items-start gap-8 md:flex-row"
+            >
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-zinc-50 transition-colors group-hover:bg-zinc-100 dark:bg-zinc-800/50 dark:group-hover:bg-zinc-800">
+                <img
+                  src={category.img}
+                  alt={category.title}
+                  className="h-12 w-12 object-contain grayscale transition-all duration-500 group-hover:grayscale-0"
+                />
+              </div>
 
-      <div className="w-full xl:w-9/12 shadow-md mt-5 rounded-lg bg-themacolor1 dark:bg-[#273038] p-5 md:p-10">
-        {loading ? (
-          <div className="flex flex-col gap-4">
-            {Array.from({ length: 4 }).map((_, idx) => (
-              <div
-                key={`skill_skeleton_${idx}`}
-                className="flex flex-col md:flex-row gap-5 items-center"
-              >
-                <div className="skeleton w-14 h-14 rounded-full" />
-                <div className="skeleton h-5 w-24" />
-                <div className="flex gap-3 flex-wrap">
-                  {Array.from({ length: 6 }).map((__, j) => (
+              <div className="flex-1 pt-1">
+                <h3 className="mb-4 flex items-center gap-3 text-lg font-black text-zinc-900 dark:text-white">
+                  {category.title}
+                  <span className="h-[1px] flex-1 bg-zinc-100 dark:bg-zinc-800" />
+                </h3>
+
+                <div className="flex flex-wrap gap-3">
+                  {category.skills.map((skill) => (
                     <div
-                      key={`skill_skeleton_tag_${idx}_${j}`}
-                      className="skeleton h-6 w-16 rounded-full"
-                    />
+                      key={skill.name}
+                      className="group/item relative rounded-2xl bg-zinc-50 px-5 py-2.5 transition-all hover:bg-zinc-100 dark:bg-[#273038] dark:hover:bg-zinc-700"
+                    >
+                      <span className="text-sm font-bold text-zinc-600 transition-colors group-hover/item:text-zinc-900 dark:text-zinc-300 dark:group-hover/item:text-white">
+                        {skill.name}
+                      </span>
+                      <div
+                        className="absolute bottom-0 left-1/2 h-[3px] w-0 -translate-x-1/2 rounded-full transition-all group-hover/item:w-1/2"
+                        style={{ backgroundColor: skill.color }}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
-        ) : (
-          skills.map((skill, index) => (
-            <SkillItem
-              key={`skills_${index}`}
-              title={skill.title}
-              skills={skill.skills}
-              img={skill.img}
-            />
-          ))
-        )}
-      </div>
-    </section>
+            </motion.div>
+          ))}
+        </div>
+      )}
+    </SectionFrame>
   )
 }

@@ -114,5 +114,29 @@
         "periodEnd": "2025-01"
       }
     ]
+  },
+  {
+    "id": "6",
+    "company": "카사요",
+    "companyInfo": "신차 장기렌트·리스, 내 차 팔기, 자동차 금융·보험, 모바일 앱 서비스를 하나의 구조로 연결한 자동차 통합 플랫폼",
+    "tag": [
+      "Next",
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "Vite"
+    ],
+    "projects": [],
+    "roles": [
+      {
+        "role": "프론트엔드 개발자, 정직원(대리)",
+        "periodStart": "2025-03"
+      },
+      {
+        "role": "프론트엔드 개발자, 계약직",
+        "periodStart": "2024-12",
+        "periodEnd": "2025-02"
+      }
+    ]
   }
 ]

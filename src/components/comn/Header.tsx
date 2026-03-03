@@ -80,7 +80,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="g_titleEngFontOutline">Portfolio</div>
       </button>
       <div className="flex items-center gap-3">
-        {/* PC 메뉴 */}
         <nav className="hidden md:flex space-x-4">
           {NAV_ITEMS.map((item) => (
             <button
@@ -97,7 +96,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="hidden md:block">
           <ThemeToggle />
         </div>
-        {/* 모바일 햄버거 버튼 */}
         <button
           onClick={lf_toggleMenu}
           className={`md:hidden ${focusRing} rounded`}
@@ -106,7 +104,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           <div className={`l_hamburger_menu ${isOpen ? 'animate' : ''}`}></div>
         </button>
       </div>
-      {/* 모바일 사이드 메뉴 */}
       <nav
         className={`shadow-md fixed top-0 right-0 bg-themacolor1 h-screen w-3/4 md:hidden transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'

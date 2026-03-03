@@ -9,8 +9,8 @@ interface SlideButtonProps {
   text: string
   href?: string
   color: string
-  isDown?: boolean // 다운로드 여부
-  url?: string // 다운로드 URL
+  isDown?: boolean
+  url?: string
 }
 
 const SlideButton: React.FC<SlideButtonProps> = ({ text, href, color, isDown, url }) => {

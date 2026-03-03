@@ -41,7 +41,6 @@ export interface Project {
 
 export const projects = projectsJson as Project[]
 
-// 프로젝트 상세
 export const getProjectById = (id: string) => {
   return projects.find((project) => project.id === id)
 }

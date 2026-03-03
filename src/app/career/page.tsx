@@ -1,10 +1,14 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown, Briefcase } from 'lucide-react'
 
+import SectionFrame from '@/components/common/SectionFrame'
 import { career } from '@/data/career'
 import { projects } from '@/data/projects'
 import { formatPeriod } from '@/lib/period'
+import { cn } from '@/lib/utils'
 
 const careerWithProjects = career.map((c) => ({
   ...c,
@@ -22,142 +26,160 @@ export default function Career() {
     const t = setTimeout(() => setLoading(false), 250)
     return () => clearTimeout(t)
   }, [])
+
   const sortedCareer = useMemo(() => {
     return [...careerWithProjects].sort((a, b) => parseInt(b.id) - parseInt(a.id))
   }, [])
 
+  const toggleItem = (id: string) => {
+    setOpenItems((prev) => ({ ...prev, [id]: !prev[id] }))
+  }
+
   return (
-    <section
-      id="career"
-      className="flex flex-col items-center justify-center min-h-screen bg-themacolor1 dark:bg-[#1f262e] dark:text-darkfg"
-    >
-      <h2 className="text-3xl g_titleEngFontBlack mt-3">Career</h2>
-      <p className="my-4"></p>
+    <SectionFrame id="career" title="Career">
+      {loading ? (
+        <div className="space-y-10">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <div key={idx} className="animate-pulse flex gap-8">
+              <div className="h-16 w-16 shrink-0 rounded-2xl bg-zinc-100" />
+              <div className="flex-1 space-y-4 pt-2">
+                <div className="h-4 w-48 rounded bg-zinc-100" />
+                <div className="h-3 w-32 rounded bg-zinc-50" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="relative space-y-10">
+          <div className="absolute bottom-10 left-8 top-10 hidden w-[2px] bg-gradient-to-b from-zinc-200 via-zinc-100 to-transparent dark:from-zinc-700 dark:via-zinc-800 dark:to-transparent md:block" />
 
-      <div className="max-w-2xl w-full">
-        <ul className="relative flex flex-col gap-6 pl-6 border-l border-black/10 dark:border-white/10">
-          {loading
-            ? Array.from({ length: 3 }).map((_, idx) => (
-                <li
-                  key={`career_skeleton_${idx}`}
-                  className="relative bg-white/80 dark:bg-[#273038] rounded-xl shadow-md p-4"
-                >
-                  <span className="absolute left-[-1.9rem] top-6 h-3 w-3 rounded-full bg-themacolor4 shadow ring-4 ring-themacolor1 dark:ring-[#1f262e]" />
-                  <div className="skeleton h-5 w-40 mb-2" />
-                  <div className="skeleton h-4 w-56 mb-3" />
-                  <div className="skeleton h-4 w-full mb-3" />
-                  <div className="flex gap-2">
-                    <div className="skeleton h-6 w-16 rounded-full" />
-                    <div className="skeleton h-6 w-20 rounded-full" />
-                    <div className="skeleton h-6 w-14 rounded-full" />
-                  </div>
-                </li>
-              ))
-            : sortedCareer.map((item, index) => (
-                <li
-                  key={`career_${index}`}
-                  className="relative bg-white/90 dark:bg-[#273038] rounded-xl shadow-md p-5 hover:shadow-xl transition-shadow"
-                  // initial={{ opacity: 0, y: 20 }}
-                  // whileInView={{ opacity: 1, y: 0 }}
-                  // transition={{
-                  //   ease: "easeInOut",
-                  //   duration: 0.5,
-                  //   delay: sortedCareer.indexOf(item) * 0.1,
-                  //   y: { duration: 0.5 },
-                  // }}
-                >
-                  <span className="absolute left-[-1.9rem] top-6 h-3 w-3 rounded-full bg-themacolor4 shadow ring-4 ring-themacolor1 dark:ring-[#1f262e]" />
-                  <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                    <h2 className="text-lg font-bold">{item.company}</h2>
-                  </div>
-                  <div className="flex flex-col gap-1 mb-1">
-                    {item.roles.map((roleItem, roleIndex) => (
-                      <div
-                        key={`${item.id}_role_${roleIndex}`}
-                        className="text-gray-600 dark:text-darkfg/80 text-sm md:text-base"
-                      >
-                        {roleItem.role} {roleItem.role ? '· ' : ''}
-                        {formatPeriod(roleItem.periodStart, roleItem.periodEnd)}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="my-2">{item.companyInfo}</div>
-                  <div className="flex gap-2 mt-2 flex-wrap">
-                    {item.tag.map((t, idx) => (
-                      <p
-                        key={`carrerTag_${idx}`}
-                        className="text-xs px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 text-black/80 dark:text-white/80"
-                      >
-                        {t}
-                      </p>
-                    ))}
-                  </div>
-
-                  {item.projectDetails && item.projectDetails.length > 0 && (
-                    <div className="mt-3">
-                      <button
-                        type="button"
-                        className="text-sm font-semibold text-themacolor4 hover:text-themacolor4/80 inline-flex items-center gap-2"
-                        onClick={() =>
-                          setOpenItems((prev) => ({
-                            ...prev,
-                            [item.id]: !prev[item.id],
-                          }))
-                        }
-                        aria-expanded={!!openItems[item.id]}
-                        aria-controls={`career-details-${item.id}`}
-                      >
-                        자세히 보기
-                        <span
-                          className={`transition-transform ${openItems[item.id] ? 'rotate-180' : 'rotate-0'}`}
-                        >
-                          ▾
-                        </span>
-                      </button>
-
-                      <div
-                        id={`career-details-${item.id}`}
-                        className={`transition-all duration-300 ease-out overflow-hidden ${
-                          openItems[item.id] ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'
-                        }`}
-                      >
-                        <div className="mt-3 space-y-3 rounded-xl bg-gradient-to-br from-black/5 via-black/0 to-black/5 dark:from-white/5 dark:via-white/0 dark:to-white/5 p-4 ring-1 ring-black/5 dark:ring-white/5">
-                          {item.projectDetails.map(
-                            (pj, idx) =>
-                              pj && (
-                                <section
-                                  className="rounded-lg bg-white/70 dark:bg-[#1f272e]/70 p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/5"
-                                  key={`${pj.id}_career_${idx}`}
-                                >
-                                  <div className="flex items-start justify-between gap-3 mb-2">
-                                    <div className="flex items-center gap-2">
-                                      <span className="h-2 w-2 rounded-full bg-themacolor4 shadow-[0_0_12px_rgba(80,160,255,0.5)]" />
-                                      <h3 className="text-sm md:text-base font-semibold text-gray-800 dark:text-darkfg">
-                                        {pj.title}
-                                      </h3>
-                                    </div>
-                                    <div className="text-xs md:text-sm text-gray-500 dark:text-darkfg/70">
-                                      {formatPeriod(pj.periodStart, pj.periodEnd)}
-                                    </div>
-                                  </div>
-                                  <div className="h-px w-full bg-black/5 dark:bg-white/5 mb-2" />
-                                  <div className="text-gray-700 dark:text-darkfg/90 leading-relaxed text-sm md:text-base">
-                                    {pj.description}
-                                  </div>
-                                  <div className="mt-2 text-xs text-gray-500 dark:text-darkfg/60">
-                                    {formatPeriod(pj.periodStart, pj.periodEnd)}
-                                  </div>
-                                </section>
-                              ),
-                          )}
-                        </div>
-                      </div>
-                    </div>
+          {sortedCareer.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="group relative flex flex-col gap-10 md:flex-row"
+            >
+              <div className="relative z-10 shrink-0">
+                <div
+                  className={cn(
+                    'flex h-16 w-16 items-center justify-center overflow-hidden rounded-3xl border-2 text-2xl font-black shadow-sm transition-all duration-500',
+                    idx === 0
+                      ? 'scale-110 border-zinc-900 bg-zinc-900 text-white shadow-xl dark:border-white dark:bg-white dark:text-zinc-900'
+                      : 'border-zinc-100 bg-white text-zinc-400 group-hover:border-zinc-900 group-hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-500 dark:group-hover:border-white dark:group-hover:text-white',
                   )}
-                </li>
-              ))}
-        </ul>
-      </div>
-    </section>
+                >
+                  <span className="transition-transform duration-500 group-hover:scale-110">
+                    {item.company.charAt(0)}
+                  </span>
+                </div>
+                {idx === 0 && (
+                  <span className="absolute -right-1 -top-1 flex h-4 w-4">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex h-4 w-4 scale-50 rounded-full bg-emerald-500"></span>
+                  </span>
+                )}
+              </div>
+
+              <div className="flex-1 pt-1">
+                <div className="mb-4 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+                  <h3 className="text-2xl font-black text-zinc-900 dark:text-white">
+                    {item.company}
+                  </h3>
+                  <div className="flex flex-col items-start gap-1.5 md:items-end">
+                    {item.roles.map((role, rIdx) => (
+                      <div
+                        key={rIdx}
+                        className="rounded bg-zinc-50 px-2 py-1 text-[11px] font-black uppercase tracking-wider text-zinc-400 dark:bg-zinc-800/30 dark:text-zinc-500"
+                      >
+                        {role.role} · {formatPeriod(role.periodStart, role.periodEnd)}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="mb-3 text-lg font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
+                  {item.companyInfo}
+                </p>
+
+                <div className="mb-4 flex flex-wrap gap-2.5">
+                  {item.tag.map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="rounded-xl border border-zinc-100 bg-zinc-50 px-3 py-1.5 text-[10px] font-bold text-zinc-400 transition-colors group-hover:border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800/50 dark:text-zinc-500 dark:group-hover:border-zinc-700"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                {item.projectDetails && item.projectDetails.length > 0 && (
+                  <div className="border-t border-zinc-100 pt-6 dark:border-zinc-800">
+                    <button
+                      onClick={() => toggleItem(item.id)}
+                      className="group/btn flex items-center gap-4 text-xs font-black uppercase tracking-widest text-zinc-900 transition-all hover:opacity-70 dark:text-white"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-zinc-50 transition-all duration-300 group-hover/btn:bg-zinc-900 group-hover/btn:text-white dark:bg-zinc-800 dark:group-hover/btn:bg-white dark:group-hover/btn:text-zinc-900">
+                        <Briefcase size={16} />
+                      </div>
+                      <span className="flex flex-col items-start gap-0.5">
+                        <span className="text-[10px] opacity-50">Case Studies</span>
+                        <span>Projects ({item.projectDetails.length})</span>
+                      </span>
+                      <ChevronDown
+                        size={16}
+                        className={cn(
+                          'ml-auto transition-transform duration-500 ease-in-out',
+                          openItems[item.id] && 'rotate-180',
+                        )}
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {openItems[item.id] && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="mt-8 space-y-4 pb-4">
+                            {item.projectDetails.map(
+                              (pj, pIdx) =>
+                                pj && (
+                                  <motion.div
+                                    key={pj.id}
+                                    initial={{ x: -10, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    transition={{ delay: pIdx * 0.05 }}
+                                    className="group/pj relative rounded-xl border border-zinc-100 bg-zinc-50/50 p-4 transition-all hover:border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800/20 dark:hover:border-zinc-700"
+                                  >
+                                    <div className="mb-2 flex items-start justify-between gap-4">
+                                      <h4 className="text-lg font-black text-zinc-900 transition-colors group-hover/pj:text-zinc-900 dark:text-white">
+                                        {pj.title}
+                                      </h4>
+                                      <span className="rounded-full border border-zinc-100 bg-white px-3 py-1.5 text-[10px] font-black text-zinc-400 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+                                        {formatPeriod(pj.periodStart, pj.periodEnd)}
+                                      </span>
+                                    </div>
+                                    <p className="text-base font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
+                                      {pj.description}
+                                    </p>
+                                  </motion.div>
+                                ),
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
+    </SectionFrame>
   )
 }

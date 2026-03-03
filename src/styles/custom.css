@@ -49,15 +49,15 @@ section {
   box-shadow: inset 0 -4px 0 #faad1a;
 }
 
-/* 사이드메뉴 햄버거 버튼 S */
+
 .l_hamburger_menu,
 .l_hamburger_menu:after,
 .l_hamburger_menu:before {
-  width: 40px; /* 바의 너비 */
-  height: 8px; /* 바의 높이 */
-  border-radius: 2px; /* 바의 테두리 */
+  width: 40px; 
+  height: 8px; 
+  border-radius: 2px; 
   opacity: 0.8;
-  background: #faad1a; /* 바의 색상 */
+  background: #faad1a; 
 }
 
 .l_hamburger_menu {
@@ -70,38 +70,38 @@ section {
 }
 
 .l_hamburger_menu.animate {
-  background: rgba(255, 255, 255, 0); /* 애니메이션 상태일 때 배경 투명화 */
+  background: rgba(255, 255, 255, 0); 
 }
 
 .l_hamburger_menu:before,
 .l_hamburger_menu:after {
-  content: ''; /* 바의 내용 */
+  content: ''; 
   position: absolute;
-  width: 100%; /* 바의 너비 */
-  height: 100%; /* 바의 높이 */
-  transition: all 300ms ease; /* 애니메이션 효과 */
+  width: 100%; 
+  height: 100%; 
+  transition: all 300ms ease; 
 }
 
 .l_hamburger_menu:before {
-  top: -10px; /* 위쪽 바 */
+  top: -10px; 
 }
 
 .l_hamburger_menu:after {
-  bottom: -10px; /* 아래쪽 바 */
+  bottom: -10px; 
 }
 
 .l_hamburger_menu.animate:before {
-  transform: rotate(45deg); /* 위쪽 바 회전 */
-  top: 0; /* 위치 조정 */
+  transform: rotate(45deg); 
+  top: 0; 
 }
 
 .l_hamburger_menu.animate:after {
-  transform: rotate(-45deg); /* 아래쪽 바 회전 */
-  bottom: 0; /* 위치 조정 */
+  transform: rotate(-45deg); 
+  bottom: 0; 
 }
-/* 사이드메뉴 햄버거 버튼 E */
 
-/* 프로젝트 필터 */
+
+
 .l_pjfilter {
   color: #f6f1e3;
 }
