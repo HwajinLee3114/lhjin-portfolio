@@ -59,7 +59,7 @@ export function MusicPlayer() {
     const audio = audioRef.current
     if (!audio || !musicInfo.audioUrl || !audioAvailable) return
     if (musicInfo.isPlaying) {
-      audio.play().catch(() => { })
+      audio.play().catch(() => {})
     } else {
       audio.pause()
     }

@@ -77,7 +77,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
       {
         root: scrollContainerRef.current,
         rootMargin: '-10% 0px -40% 0px',
-        threshold: [0, 0.25, 0.5]
+        threshold: [0, 0.25, 0.5],
       },
     )
 
@@ -120,47 +120,58 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 <div className="flex gap-2 justify-center text-xs md:text-sm px-4">
                   <button
                     onClick={() => handleTabClick('pj-info')}
-                    className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-info'
-                      ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                      }`}
+                    className={`px-4 py-1.5 rounded-full font-semibold transition-all ${
+                      activeTab === 'pj-info'
+                        ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                    }`}
                   >
                     정보
                   </button>
                   <button
                     onClick={() => handleTabClick('pj-feature')}
-                    className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-feature'
-                      ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                      }`}
+                    className={`px-4 py-1.5 rounded-full font-semibold transition-all ${
+                      activeTab === 'pj-feature'
+                        ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                    }`}
                   >
                     기능
                   </button>
-                  {project.contribution && project.contribution.length > 0 && <button
-                    onClick={() => handleTabClick('pj-contrib')}
-                    className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-contrib'
-                      ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                  {project.contribution && project.contribution.length > 0 && (
+                    <button
+                      onClick={() => handleTabClick('pj-contrib')}
+                      className={`px-4 py-1.5 rounded-full font-semibold transition-all ${
+                        activeTab === 'pj-contrib'
+                          ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                          : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                       }`}
-                  >
-                    기여
-                  </button>}
+                    >
+                      기여
+                    </button>
+                  )}
                   <button
                     onClick={() => handleTabClick('pj-images')}
-                    className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-images'
-                      ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                      }`}
+                    className={`px-4 py-1.5 rounded-full font-semibold transition-all ${
+                      activeTab === 'pj-images'
+                        ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                        : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                    }`}
                   >
                     이미지
                   </button>
                 </div>
               </div>
 
-              <div ref={scrollContainerRef} className="flex-1 w-full overflow-y-auto overflow-x-hidden flex flex-col items-center pb-12 relative">
+              <div
+                ref={scrollContainerRef}
+                className="flex-1 w-full overflow-y-auto overflow-x-hidden flex flex-col items-center pb-12 relative"
+              >
                 <div className="w-full flex flex-col items-center px-6 sm:px-10 md:px-16 pt-8 pb-10">
                   <div id="pj-info" className="-mt-8 pt-8" />
-                  <h1 className="text-3xl sm:text-4xl font-black mb-3 text-zinc-900 dark:text-white tracking-tight">{project.title}</h1>
+                  <h1 className="text-3xl sm:text-4xl font-black mb-3 text-zinc-900 dark:text-white tracking-tight">
+                    {project.title}
+                  </h1>
                   <div className="text-zinc-500 dark:text-zinc-400 text-sm font-medium tracking-widest uppercase mb-6">
                     {formatPeriod(project.periodStart, project.periodEnd)}
                   </div>
@@ -209,7 +220,11 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     <section id="pj-feature" className="w-full scroll-mt-24">
                       <div className="flex items-center gap-3 text-2xl font-black text-left mb-6 text-zinc-900 dark:text-white">
                         <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl">
-                          <img src="/images/popular-100.png" className="w-6 h-6 object-contain" alt="주요 기능" />
+                          <img
+                            src="/images/popular-100.png"
+                            className="w-6 h-6 object-contain"
+                            alt="주요 기능"
+                          />
                         </div>
                         <h2 className="tracking-tight">주요 기능</h2>
                       </div>
@@ -231,14 +246,20 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     <section id="pj-contrib" className="w-full scroll-mt-24">
                       <div className="flex items-center gap-3 text-2xl font-black text-left mb-6 text-zinc-900 dark:text-white">
                         <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
-                          <img src="/images/hand-100.png" className="w-6 h-6 object-contain" alt="기여 부분" />
+                          <img
+                            src="/images/hand-100.png"
+                            className="w-6 h-6 object-contain"
+                            alt="기여 부분"
+                          />
                         </div>
                         <h2 className="tracking-tight">기여 부분</h2>
                       </div>
                       <ul className="text-left space-y-8 pl-2">
                         {project.contribution.map((contri) => (
                           <li key={`${project.id}_contri_${contri.id}`} className="list-none">
-                            {contri?.title && <QuoteDiv className="font-bold text-[15px]">{contri.title}</QuoteDiv>}
+                            {contri?.title && (
+                              <QuoteDiv className="font-bold text-[15px]">{contri.title}</QuoteDiv>
+                            )}
                             <ul className="space-y-2 mt-3">
                               {contri.desc.map((condesc, idx) => (
                                 <li
@@ -260,7 +281,11 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     <section id="pj-images" className="w-full scroll-mt-24">
                       <div className="flex items-center gap-3 text-2xl font-black text-left mb-6 text-zinc-900 dark:text-white">
                         <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-                          <img src="/images/monitor-100.png" className="w-6 h-6 object-contain" alt="작업 화면" />
+                          <img
+                            src="/images/monitor-100.png"
+                            className="w-6 h-6 object-contain"
+                            alt="작업 화면"
+                          />
                         </div>
                         <h2 className="tracking-tight">작업 화면</h2>
                       </div>
@@ -293,4 +318,3 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
     </>
   )
 }
-

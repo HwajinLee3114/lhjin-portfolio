@@ -9,16 +9,8 @@ export type ServiceNodeData = {
   color?: string
 }
 
-function ServiceNode({
-  data,
-  isConnectable,
-}: {
-  data: ServiceNodeData
-  isConnectable: boolean
-}) {
-  const Icon = data.iconName
-    ? (LucideIcons[data.iconName] as React.ElementType)
-    : null
+function ServiceNode({ data, isConnectable }: { data: ServiceNodeData; isConnectable: boolean }) {
+  const Icon = data.iconName ? (LucideIcons[data.iconName] as React.ElementType) : null
 
   return (
     <div
@@ -33,20 +25,11 @@ function ServiceNode({
         style={{ borderColor: data.color || '#444' }}
       />
 
-      {Icon && (
-        <Icon
-          className="w-8 h-8 mb-2"
-          style={{ color: data.color || '#fff' }}
-        />
-      )}
+      {Icon && <Icon className="w-8 h-8 mb-2" style={{ color: data.color || '#fff' }} />}
 
-      <div className="text-white font-bold text-sm text-center">
-        {data.label}
-      </div>
+      <div className="text-white font-bold text-sm text-center">{data.label}</div>
       {data.description && (
-        <div className="text-zinc-400 text-xs mt-1 text-center">
-          {data.description}
-        </div>
+        <div className="text-zinc-400 text-xs mt-1 text-center">{data.description}</div>
       )}
 
       <Handle

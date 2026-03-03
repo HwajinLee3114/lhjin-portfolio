@@ -70,7 +70,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
     const checkMobile = () => setIsMobile(globalThis.window.innerWidth < 768)
     globalThis.window.addEventListener('resize', checkMobile)
     return () => globalThis.window.removeEventListener('resize', checkMobile)
-  }, [])
+  }, [x, y])
   useEffect(() => {
     initWidget(widgetId)
   }, [initWidget])
