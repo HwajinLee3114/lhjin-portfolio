@@ -36,7 +36,7 @@ export default function Career() {
   }
 
   return (
-    <SectionFrame id="career" title="Journey">
+    <SectionFrame id="career" title="Career">
       {loading ? (
         <div className="space-y-10">
           {Array.from({ length: 3 }).map((_, idx) => (
@@ -144,7 +144,7 @@ export default function Career() {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="mt-8 space-y-6 pb-4">
+                          <div className="mt-8 space-y-4 pb-4">
                             {item.projectDetails.map(
                               (pj, pIdx) =>
                                 pj && (
@@ -153,9 +153,9 @@ export default function Career() {
                                     initial={{ x: -10, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     transition={{ delay: pIdx * 0.05 }}
-                                    className="group/pj relative rounded-[2.5rem] border border-zinc-100 bg-zinc-50/50 p-8 transition-all hover:border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800/20 dark:hover:border-zinc-700"
+                                    className="group/pj relative rounded-xl border border-zinc-100 bg-zinc-50/50 p-4 transition-all hover:border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800/20 dark:hover:border-zinc-700"
                                   >
-                                    <div className="mb-4 flex items-start justify-between gap-4">
+                                    <div className="mb-2 flex items-start justify-between gap-4">
                                       <h4 className="text-lg font-black text-zinc-900 transition-colors group-hover/pj:text-zinc-900 dark:text-white">
                                         {pj.title}
                                       </h4>

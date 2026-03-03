@@ -12,7 +12,9 @@
       "JSP",
       "PostgreSQL"
     ],
-    "projects": ["1"],
+    "projects": [
+      "1"
+    ],
     "roles": [
       {
         "role": "SW 개발자, 정직원",
@@ -25,7 +27,11 @@
     "id": "2",
     "company": "ArkData",
     "companyInfo": "이기종 DBMS 간 실시간 데이터 복제를 통해 기업의 데이터 통합과 관리의 자유를 제공하는 솔루션",
-    "tag": ["Oracle", "C", "C#"],
+    "tag": [
+      "Oracle",
+      "C",
+      "C#"
+    ],
     "projects": [],
     "roles": [
       {
@@ -50,7 +56,16 @@
       "Oracle",
       "MariaDB"
     ],
-    "projects": ["2", "3", "4", "5", "6", "7", "8", "9"],
+    "projects": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
     "roles": [
       {
         "role": "SW 개발자, 정직원",
@@ -63,8 +78,15 @@
     "id": "4",
     "company": "LUVMOM (럽맘)",
     "companyInfo": "임신, 출산, 육아 플랫폼",
-    "tag": ["프론트엔드 개발", "JavaScript", "JSP", "MySQL"],
-    "projects": ["10"],
+    "tag": [
+      "프론트엔드 개발",
+      "JavaScript",
+      "JSP",
+      "MySQL"
+    ],
+    "projects": [
+      "10"
+    ],
     "roles": [
       {
         "role": "프론트엔드 개발자, 프리랜서",
@@ -77,7 +99,13 @@
     "id": "5",
     "company": "유데미 러닝크루 리더 1기",
     "companyInfo": "유데미 러닝크루 리더 1기 활동을 하며 TypeScript, NextJS 스터디 리더를 맡아 활동하고 있습니다.",
-    "tag": ["Udemy", "유데미", "러닝크루", "TypeScript", "Next"],
+    "tag": [
+      "Udemy",
+      "유데미",
+      "러닝크루",
+      "TypeScript",
+      "Next"
+    ],
     "projects": [],
     "roles": [
       {
@@ -90,8 +118,14 @@
   {
     "id": "6",
     "company": "카사요",
-    "companyInfo": "TODO 카사요 회사 소개",
-    "tag": ["TypeScript", "Next", "React", "Vite", "Tailwind"],
+    "companyInfo": "신차 장기렌트·리스, 내 차 팔기, 자동차 금융·보험, 모바일 앱 서비스를 하나의 구조로 연결한 자동차 쇼핑 통합 플랫폼",
+    "tag": [
+      "Next",
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "Vite"
+    ],
     "projects": [],
     "roles": [
       {

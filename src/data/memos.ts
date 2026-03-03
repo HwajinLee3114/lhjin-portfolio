@@ -18,10 +18,10 @@ export const initialMemos: MemoData[] = [
     color: '#bbf7d0',
     position: { x: 150, y: 350 },
   },
-  {
-    id: 'memo-3',
-    content: '음악 플레이어를 통해 배경음악을 감상하실 수 있습니다. 🎵',
-    color: '#bfdbfe',
-    position: { x: 800, y: 120 },
-  },
+  // {
+  //   id: 'memo-3',
+  //   content: '음악 플레이어를 통해 배경음악을 감상하실 수 있습니다. 🎵',
+  //   color: '#bfdbfe',
+  //   position: { x: 800, y: 120 },
+  // },
 ]
