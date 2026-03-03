@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import {
     ReactFlow,
     useNodesState,
@@ -13,6 +13,8 @@ import {
     Node,
     Edge,
     Connection,
+    ReactFlowProvider,
+    useReactFlow,
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
 
@@ -27,12 +29,11 @@ interface SystemArchitectureFlowProps {
     initialEdges: Edge[]
 }
 
-export default function SystemArchitectureFlow({
-    initialNodes,
-    initialEdges,
-}: SystemArchitectureFlowProps) {
+function FlowContent({ initialNodes, initialEdges }: SystemArchitectureFlowProps) {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+    const { fitView } = useReactFlow()
+    const containerRef = useRef<HTMLDivElement>(null)
 
     const onConnect = useCallback(
         (params: Connection | Edge) =>
@@ -40,8 +41,25 @@ export default function SystemArchitectureFlow({
         [setEdges],
     )
 
+    // ResizeObserver를 통해 컨테이너 크기가 변경될 때 비율을 맞춰줌
+    useEffect(() => {
+        if (!containerRef.current) return
+
+        const observer = new ResizeObserver(() => {
+            window.requestAnimationFrame(() => {
+                fitView({ duration: 500, padding: 0.2 })
+            })
+        })
+
+        observer.observe(containerRef.current)
+
+        return () => {
+            observer.disconnect()
+        }
+    }, [fitView])
+
     return (
-        <div className="w-full h-full min-h-[500px] bg-zinc-950 rounded-xl overflow-hidden border border-zinc-800">
+        <div ref={containerRef} className="w-full h-full min-h-[300px] bg-zinc-950 rounded-xl overflow-hidden border border-zinc-800">
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -50,8 +68,10 @@ export default function SystemArchitectureFlow({
                 onConnect={onConnect}
                 nodeTypes={nodeTypes}
                 fitView
+                fitViewOptions={{ padding: 0.2 }}
                 className="dark"
                 colorMode="dark"
+                proOptions={{ hideAttribution: true }}
             >
                 <Controls className="bg-zinc-800 border-zinc-700 fill-white" />
                 <MiniMap
@@ -66,5 +86,13 @@ export default function SystemArchitectureFlow({
                 />
             </ReactFlow>
         </div>
+    )
+}
+
+export default function SystemArchitectureFlow(props: SystemArchitectureFlowProps) {
+    return (
+        <ReactFlowProvider>
+            <FlowContent {...props} />
+        </ReactFlowProvider>
     )
 }
