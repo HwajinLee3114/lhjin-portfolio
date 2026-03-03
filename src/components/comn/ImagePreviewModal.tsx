@@ -34,7 +34,7 @@ export const ImagePreviewModal = ({ isOpen, imageUrl, onClose }: ImagePreviewMod
                   handleClose()
                 }}
                 aria-label="이미지 미리보기 닫기"
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 p-1 rounded-full bg-white/80 dark:bg-[#1f262e]/80 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2"
+                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2"
               >
                 <img src="/images/b2close-100.png" className="w-8" alt="닫기" />
               </button>

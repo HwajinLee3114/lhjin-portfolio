@@ -32,6 +32,21 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
   const [previewImgUrl, setPreviewImgUrl] = useState<string | undefined>(undefined)
   const [activeTab, setActiveTab] = useState<string>('pj-info')
   const containerRef = useRef<HTMLDivElement | null>(null)
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
+  const isScrolling = useRef(false)
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
+
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId)
+    isScrolling.current = true
+
+    document.getElementById(tabId)?.scrollIntoView({ behavior: 'smooth' })
+
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current)
+    scrollTimeout.current = setTimeout(() => {
+      isScrolling.current = false
+    }, 800)
+  }
 
   const lf_showImgPreview = (imgUrl: string) => {
     if (imgUrl) {
@@ -53,12 +68,17 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isScrolling.current) return
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
         if (visible[0]) setActiveTab(visible[0].target.id)
       },
-      { root: containerRef.current, threshold: [0.2, 0.5, 0.8] },
+      {
+        root: scrollContainerRef.current,
+        rootMargin: '-10% 0px -40% 0px',
+        threshold: [0, 0.25, 0.5]
+      },
     )
 
     targets.forEach((el) => observer.observe(el))
@@ -99,9 +119,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
 
                 <div className="flex gap-2 justify-center text-xs md:text-sm px-4">
                   <button
-                    onClick={() =>
-                      document.getElementById('pj-info')?.scrollIntoView({ behavior: 'smooth' })
-                    }
+                    onClick={() => handleTabClick('pj-info')}
                     className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-info'
                       ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
@@ -110,9 +128,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                     정보
                   </button>
                   <button
-                    onClick={() =>
-                      document.getElementById('pj-feature')?.scrollIntoView({ behavior: 'smooth' })
-                    }
+                    onClick={() => handleTabClick('pj-feature')}
                     className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-feature'
                       ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
@@ -120,21 +136,17 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                   >
                     기능
                   </button>
-                  <button
-                    onClick={() =>
-                      document.getElementById('pj-contrib')?.scrollIntoView({ behavior: 'smooth' })
-                    }
+                  {project.contribution && project.contribution.length > 0 && <button
+                    onClick={() => handleTabClick('pj-contrib')}
                     className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-contrib'
                       ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                       }`}
                   >
                     기여
-                  </button>
+                  </button>}
                   <button
-                    onClick={() =>
-                      document.getElementById('pj-images')?.scrollIntoView({ behavior: 'smooth' })
-                    }
+                    onClick={() => handleTabClick('pj-images')}
                     className={`px-4 py-1.5 rounded-full font-semibold transition-all ${activeTab === 'pj-images'
                       ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
                       : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
@@ -145,7 +157,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                 </div>
               </div>
 
-              <div className="flex-1 w-full overflow-y-auto overflow-x-hidden flex flex-col items-center pb-12 relative">
+              <div ref={scrollContainerRef} className="flex-1 w-full overflow-y-auto overflow-x-hidden flex flex-col items-center pb-12 relative">
                 <div className="w-full flex flex-col items-center px-6 sm:px-10 md:px-16 pt-8 pb-10">
                   <div id="pj-info" className="-mt-8 pt-8" />
                   <h1 className="text-3xl sm:text-4xl font-black mb-3 text-zinc-900 dark:text-white tracking-tight">{project.title}</h1>
