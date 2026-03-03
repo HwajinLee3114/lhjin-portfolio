@@ -17,17 +17,37 @@ export function MusicPlayer() {
 
   const x = useMotionValue(musicInfo.position?.x ?? 800)
   const y = useMotionValue(musicInfo.position?.y ?? 300)
+  const [isMobile, setIsMobile] = useState(false)
+  const [width, setWidth] = useState(340)
+
+  useEffect(() => {
+    const updateLayout = () => {
+      const w = globalThis.window.innerWidth
+      const h = globalThis.window.innerHeight
+      const mobile = w < 768
+      setIsMobile(mobile)
+
+      if (mobile) {
+        x.set((w - (w - 40)) / 2)
+        y.set(h * 0.15)
+        setWidth(w - 40)
+      } else {
+        if (musicInfo.position) {
+          x.set(musicInfo.position.x)
+          y.set(musicInfo.position.y)
+        }
+        setWidth(340)
+      }
+    }
+
+    updateLayout()
+    globalThis.window.addEventListener('resize', updateLayout)
+    return () => globalThis.window.removeEventListener('resize', updateLayout)
+  }, [x, y, musicInfo.position])
 
   useEffect(() => {
     initWidget(widgetId)
   }, [initWidget])
-
-  useEffect(() => {
-    if (musicInfo.position) {
-      x.set(musicInfo.position.x)
-      y.set(musicInfo.position.y)
-    }
-  }, [musicInfo.position, x, y])
 
   useEffect(() => {
     setAudioAvailable(Boolean(musicInfo.audioUrl))
@@ -39,7 +59,7 @@ export function MusicPlayer() {
     const audio = audioRef.current
     if (!audio || !musicInfo.audioUrl || !audioAvailable) return
     if (musicInfo.isPlaying) {
-      audio.play().catch(() => {})
+      audio.play().catch(() => { })
     } else {
       audio.pause()
     }
@@ -96,7 +116,7 @@ export function MusicPlayer() {
     <AnimatePresence>
       {isMusicPlayerOpen && (
         <motion.div
-          drag
+          drag={!isMobile}
           dragMomentum={false}
           onPointerDown={() => focusWidget(widgetId)}
           style={{
@@ -107,6 +127,7 @@ export function MusicPlayer() {
             left: 0,
             backgroundColor: musicInfo.backgroundColor ?? 'rgba(255,255,255,0.6)',
             zIndex,
+            width,
           }}
           onDragEnd={() => {
             updateMusic({ position: { x: x.get(), y: y.get() } })
@@ -114,7 +135,7 @@ export function MusicPlayer() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
-          className="pointer-events-auto w-[340px] select-none rounded-[2.5rem] border border-white/40 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.25)] backdrop-blur-3xl group cursor-grab active:cursor-grabbing"
+          className="pointer-events-auto select-none rounded-[2.5rem] border border-white/40 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.25)] backdrop-blur-3xl group cursor-grab active:cursor-grabbing"
         >
           <audio ref={audioRef} />
           <div className="absolute top-4 left-1/2 flex h-4 w-12 -translate-x-1/2 items-center justify-center opacity-40 group-hover:opacity-100">

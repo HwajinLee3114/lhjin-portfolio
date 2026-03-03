@@ -57,7 +57,20 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
 
   const x = useMotionValue(120)
   const y = useMotionValue(420)
+  const [isMobile, setIsMobile] = useState(false)
 
+  useEffect(() => {
+    const w = globalThis.window.innerWidth
+    setIsMobile(w < 768)
+    if (w < 768) {
+      x.set(20)
+      y.set(80)
+      setSize({ width: w - 40, height: 500 })
+    }
+    const checkMobile = () => setIsMobile(globalThis.window.innerWidth < 768)
+    globalThis.window.addEventListener('resize', checkMobile)
+    return () => globalThis.window.removeEventListener('resize', checkMobile)
+  }, [])
   useEffect(() => {
     initWidget(widgetId)
   }, [initWidget])
@@ -116,7 +129,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          drag={!isResizing}
+          drag={!isResizing && !isMobile}
           dragMomentum={false}
           onPointerDown={() => focusWidget(widgetId)}
           style={{
@@ -213,12 +226,14 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
             </ul>
           </div>
 
-          <div
-            className="absolute bottom-0 right-0 h-6 w-6 cursor-nwse-resize flex items-end justify-end p-1 group/resize"
-            onMouseDown={startResize}
-          >
-            <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 group-hover/resize:bg-yellow-400 transition-colors" />
-          </div>
+          {!isMobile && (
+            <div
+              className="absolute bottom-0 right-0 h-6 w-6 cursor-nwse-resize flex items-end justify-end p-1 group/resize"
+              onMouseDown={startResize}
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-zinc-300 group-hover/resize:bg-yellow-400 transition-colors" />
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

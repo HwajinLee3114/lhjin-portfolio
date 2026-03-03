@@ -40,6 +40,16 @@ export const useWindowStore = create<WindowStore>((set) => ({
         }
       }
 
+      const isClient = typeof window !== 'undefined'
+      const wWidth = isClient ? window.innerWidth : 1200
+      const wHeight = isClient ? window.innerHeight : 800
+
+      const targetWidth = Math.min(1000, wWidth * 0.8)
+      const targetHeight = Math.min(700, wHeight * 0.85)
+
+      const startX = Math.max(0, (wWidth - targetWidth) / 2) + (nextZ % 5) * 20
+      const startY = Math.max(0, (wHeight - targetHeight) / 2) + (nextZ % 5) * 20
+
       return {
         windows: {
           ...state.windows,
@@ -50,8 +60,8 @@ export const useWindowStore = create<WindowStore>((set) => ({
             isMinimized: false,
             isMaximized: false,
             zIndex: nextZ,
-            position: { x: 100 + (nextZ % 50), y: 50 + (nextZ % 50) },
-            size: { width: 1000, height: 700 },
+            position: { x: startX, y: startY },
+            size: { width: targetWidth, height: targetHeight },
           },
         },
       }

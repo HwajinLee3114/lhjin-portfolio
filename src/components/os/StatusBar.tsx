@@ -24,14 +24,14 @@ export function StatusBar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[1000] flex h-8 select-none items-center justify-between border-b border-zinc-200/50 bg-white/70 px-4 text-[13px] font-medium text-zinc-700 backdrop-blur-md">
-      <div className="flex items-center gap-4">
-        <span className="font-black tracking-tighter text-zinc-900">LHJIN Portfolio OS</span>
-        <div className="h-3 w-[1px] bg-zinc-300" />
-        <span className="text-zinc-500">이화진 (Frontend Developer)</span>
+      <div className="flex items-center gap-2 sm:gap-4 overflow-hidden">
+        <span className="font-black tracking-tighter text-zinc-900 shrink-0">LHJIN OS</span>
+        <div className="h-3 w-[1px] bg-zinc-300 shrink-0" />
+        <span className="text-zinc-500 truncate">이화진 (Frontend Developer)</span>
       </div>
 
-      <div className="flex items-center gap-4">
-        <span>{formattedDate}</span>
+      <div className="flex items-center gap-2 sm:gap-4 shrink-0 pl-2">
+        <span className="hidden sm:inline">{formattedDate}</span>
         <span className="font-bold">{formattedTime}</span>
       </div>
     </header>

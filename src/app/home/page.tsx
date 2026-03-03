@@ -37,7 +37,7 @@ export default function HomeSec() {
         </h1>
       </div>
 
-      <ScrollDownBtn />
+      {/* <ScrollDownBtn /> */}
     </section>
   )
 }

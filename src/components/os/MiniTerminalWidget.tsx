@@ -35,7 +35,21 @@ export function MiniTerminalWidget({ isOpen, onClose }: MiniTerminalWidgetProps)
 
   const x = useMotionValue(520)
   const y = useMotionValue(130)
+  const [isMobile, setIsMobile] = useState(false)
+  const [width, setWidth] = useState(440)
 
+  useEffect(() => {
+    const w = globalThis.window.innerWidth
+    setIsMobile(w < 768)
+    if (w < 768) {
+      x.set(20)
+      y.set(20)
+      setWidth(w - 40)
+    }
+    const checkMobile = () => setIsMobile(globalThis.window.innerWidth < 768)
+    globalThis.window.addEventListener('resize', checkMobile)
+    return () => globalThis.window.removeEventListener('resize', checkMobile)
+  }, [])
   useEffect(() => {
     initWidget(widgetId)
   }, [initWidget])
@@ -126,14 +140,14 @@ export function MiniTerminalWidget({ isOpen, onClose }: MiniTerminalWidgetProps)
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          drag
+          drag={!isMobile}
           dragMomentum={false}
           onPointerDown={() => focusWidget(widgetId)}
-          style={{ x, y, position: 'fixed', top: 0, left: 0, zIndex }}
+          style={{ x, y, position: 'fixed', top: 0, left: 0, zIndex, width }}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="pointer-events-auto w-[440px] overflow-hidden rounded-2xl border border-zinc-800 bg-[#0f1115] text-zinc-100 shadow-[0_35px_90px_rgba(0,0,0,0.35)]"
+          className="pointer-events-auto overflow-hidden rounded-2xl border border-zinc-800 bg-[#0f1115] text-zinc-100 shadow-[0_35px_90px_rgba(0,0,0,0.35)]"
         >
           <header className="flex items-center justify-between border-b border-zinc-700 bg-zinc-900/70 px-4 py-2">
             <div className="flex items-center gap-2">

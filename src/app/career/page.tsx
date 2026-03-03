@@ -99,11 +99,11 @@ export default function Career() {
                   </div>
                 </div>
 
-                <p className="mb-6 text-lg font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
+                <p className="mb-3 text-lg font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
                   {item.companyInfo}
                 </p>
 
-                <div className="mb-8 flex flex-wrap gap-2.5">
+                <div className="mb-4 flex flex-wrap gap-2.5">
                   {item.tag.map((tag, tIdx) => (
                     <span
                       key={tIdx}

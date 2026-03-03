@@ -17,6 +17,14 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
     useWindowStore()
 
   const [isResizing, setIsResizing] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(globalThis.window.innerWidth < 768)
+    checkMobile()
+    globalThis.window.addEventListener('resize', checkMobile)
+    return () => globalThis.window.removeEventListener('resize', checkMobile)
+  }, [])
   const resizeRef = useRef<{
     direction: string
     startX: number
@@ -103,9 +111,11 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
 
   if (window.isMinimized) return null
 
+  const isEffectivelyMaximized = window.isMaximized || isMobile
+
   return (
     <motion.div
-      drag={!window.isMaximized && !isResizing}
+      drag={!isEffectivelyMaximized && !isResizing}
       dragMomentum={false}
       onDragEnd={(_, info) => {
         updatePosition(
@@ -118,32 +128,32 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
       initial={{
         opacity: 0,
         scale: 0.95,
-        x: window.position.x,
-        y: window.position.y + 20,
+        x: isMobile ? 0 : window.position.x,
+        y: isMobile ? 32 : window.position.y + 20,
       }}
       animate={{
         opacity: 1,
         scale: 1,
-        x: window.isMaximized ? 0 : window.position.x,
-        y: window.isMaximized ? 32 : window.position.y,
-        width: window.isMaximized ? '100vw' : window.size.width,
-        height: window.isMaximized ? 'calc(100vh - 32px)' : window.size.height,
+        x: isEffectivelyMaximized ? 0 : window.position.x,
+        y: isEffectivelyMaximized ? (isMobile ? 0 : 32) : window.position.y,
+        width: isEffectivelyMaximized ? '100vw' : window.size.width,
+        height: isEffectivelyMaximized ? (isMobile ? '100vh' : 'calc(100vh - 32px)') : window.size.height,
       }}
       style={{ zIndex: window.zIndex }}
       exit={{
         opacity: 0,
         scale: 0.95,
-        y: window.position.y + 20,
+        y: isMobile ? 100 : window.position.y + 20,
         transition: { duration: 0.2 },
       }}
       transition={{ type: 'spring', damping: 25, stiffness: 300, mass: 0.5 }}
       className={cn(
         'pointer-events-auto fixed flex flex-col overflow-hidden border border-zinc-200/50 bg-white shadow-2xl',
-        window.isMaximized ? 'rounded-none' : 'rounded-2xl',
+        isEffectivelyMaximized ? 'rounded-none' : 'rounded-2xl',
         isResizing ? 'transition-none select-none' : '',
       )}
     >
-      {!window.isMaximized && (
+      {!isEffectivelyMaximized && (
         <>
           <div
             className="absolute top-0 right-0 left-0 z-50 h-1 cursor-ns-resize"
@@ -185,18 +195,20 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
             >
               <Minus size={8} className="text-amber-900 opacity-0 group-hover/btn:opacity-100" />
             </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                maximizeWindow(window.id)
-              }}
-              className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-emerald-400 transition-colors hover:bg-emerald-500"
-            >
-              <Maximize2
-                size={8}
-                className="text-emerald-900 opacity-0 group-hover/btn:opacity-100"
-              />
-            </button>
+            {!isMobile && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  maximizeWindow(window.id)
+                }}
+                className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-emerald-400 transition-colors hover:bg-emerald-500"
+              >
+                <Maximize2
+                  size={8}
+                  className="text-emerald-900 opacity-0 group-hover/btn:opacity-100"
+                />
+              </button>
+            )}
           </div>
           <span className="ml-2 text-[12px] font-black tracking-widest text-zinc-500 uppercase">
             {window.title}
