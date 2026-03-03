@@ -137,7 +137,11 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
         x: isEffectivelyMaximized ? 0 : window.position.x,
         y: isEffectivelyMaximized ? (isMobile ? 0 : 32) : window.position.y,
         width: isEffectivelyMaximized ? '100vw' : window.size.width,
-        height: isEffectivelyMaximized ? (isMobile ? '100vh' : 'calc(100vh - 32px)') : window.size.height,
+        height: isEffectivelyMaximized
+          ? isMobile
+            ? '100vh'
+            : 'calc(100vh - 32px)'
+          : window.size.height,
       }}
       style={{ zIndex: window.zIndex }}
       exit={{
