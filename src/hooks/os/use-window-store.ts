@@ -1,6 +1,29 @@
 import { create } from 'zustand'
 import { useZIndexStore } from './use-z-index-store'
 
+const STORAGE_KEY = 'lhjin-os-windows-v1'
+
+const loadWindowsFromStorage = (): Record<string, WindowState> => {
+  if (typeof window === 'undefined') return {}
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY)
+    if (!raw) return {}
+    const parsed = JSON.parse(raw) as Record<string, WindowState>
+    return parsed ?? {}
+  } catch {
+    return {}
+  }
+}
+
+const persistWindowsToStorage = (windows: Record<string, WindowState>) => {
+  if (typeof window === 'undefined') return
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(windows))
+  } catch {
+    // ignore storage errors
+  }
+}
+
 export type WindowState = {
   id: string
   title: string
@@ -23,8 +46,12 @@ type WindowStore = {
   updateSize: (id: string, width: number, height: number) => void
 }
 
+const initialWindows = loadWindowsFromStorage()
+const initialMaxZ = Math.max(300, ...Object.values(initialWindows).map((win) => win.zIndex || 0))
+useZIndexStore.setState({ windowMaxZIndex: initialMaxZ })
+
 export const useWindowStore = create<WindowStore>((set) => ({
-  windows: {},
+  windows: initialWindows,
 
   openWindow: (id, title) =>
     set((state) => {
@@ -46,7 +73,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
 
       const baseWidth = 1000
       const baseHeight = 700
-      const scale = Math.min(wWidth * 0.9 / baseWidth, wHeight * 0.8 / baseHeight, 1)
+      const scale = Math.min((wWidth * 0.9) / baseWidth, (wHeight * 0.8) / baseHeight, 1)
       const targetWidth = Math.max(320, Math.round(baseWidth * scale))
       const targetHeight = Math.max(240, Math.round(baseHeight * scale))
 
@@ -130,3 +157,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
       },
     })),
 }))
+
+useWindowStore.subscribe((state) => {
+  persistWindowsToStorage(state.windows)
+})
