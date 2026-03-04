@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion, useMotionValue } from 'framer-motion'
-import { FormEvent, useState, useEffect } from 'react'
+import { FormEvent, useState, useEffect, useRef } from 'react'
 import { MessageCircleHeart, Send, X, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useWidgetStore } from '@/hooks/os/use-widget-store'
@@ -58,18 +58,38 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const x = useMotionValue(120)
   const y = useMotionValue(420)
   const [isMobile, setIsMobile] = useState(false)
+  const wasMobileRef = useRef(false)
+
+  const DEFAULT_SIZE = { width: 340, height: 500 }
+  const DEFAULT_POS = { x: 120, y: 420 }
 
   useEffect(() => {
-    const w = globalThis.window.innerWidth
-    setIsMobile(w < 768)
-    if (w < 768) {
-      x.set(20)
-      y.set(80)
-      setSize({ width: w - 40, height: 500 })
+    const applyViewportLayout = (w: number) => {
+      const nextIsMobile = w < 768
+      setIsMobile(nextIsMobile)
+
+      if (nextIsMobile) {
+        x.set(20)
+        y.set(80)
+        setSize({ width: Math.max(280, w - 40), height: 500 })
+      } else if (wasMobileRef.current) {
+        x.set(DEFAULT_POS.x)
+        y.set(DEFAULT_POS.y)
+        setSize(DEFAULT_SIZE)
+      }
+
+      wasMobileRef.current = nextIsMobile
     }
-    const checkMobile = () => setIsMobile(globalThis.window.innerWidth < 768)
-    globalThis.window.addEventListener('resize', checkMobile)
-    return () => globalThis.window.removeEventListener('resize', checkMobile)
+
+    const w = globalThis.window.innerWidth
+    applyViewportLayout(w)
+
+    const handleResize = () => {
+      applyViewportLayout(globalThis.window.innerWidth)
+    }
+
+    globalThis.window.addEventListener('resize', handleResize)
+    return () => globalThis.window.removeEventListener('resize', handleResize)
   }, [x, y])
   useEffect(() => {
     initWidget(widgetId)

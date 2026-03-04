@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { X, Minus, Maximize2, GripHorizontal } from 'lucide-react'
-import { ReactNode, useRef, useState, useEffect } from 'react'
+import { ReactNode, useRef, useState, useEffect, forwardRef } from 'react'
 
 import { useWindowStore, WindowState } from '@/hooks/os/use-window-store'
 import { cn } from '@/lib/utils'
@@ -12,7 +12,10 @@ interface WindowFrameProps {
   children: ReactNode
 }
 
-export function WindowFrame({ window, children }: WindowFrameProps) {
+export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function WindowFrame(
+  { window, children },
+  ref,
+) {
   const { closeWindow, minimizeWindow, maximizeWindow, focusWindow, updatePosition, updateSize } =
     useWindowStore()
 
@@ -65,8 +68,10 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
       let newX = startLeft
       let newY = startTop
 
-      const minWidth = 400
-      const minHeight = 300
+      const viewportW = globalThis.window.innerWidth
+      const viewportH = globalThis.window.innerHeight
+      const minWidth = Math.min(400, Math.max(280, viewportW * 0.6))
+      const minHeight = Math.min(300, Math.max(240, viewportH * 0.5))
 
       if (direction.includes('right')) {
         newWidth = Math.max(minWidth, startWidth + dx)
@@ -115,6 +120,7 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
 
   return (
     <motion.div
+      ref={ref}
       drag={!isEffectivelyMaximized && !isResizing}
       dragMomentum={false}
       onDragEnd={(_, info) => {
@@ -186,6 +192,7 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
                 e.stopPropagation()
                 closeWindow(window.id)
               }}
+              aria-label="Close window"
               className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-rose-400 transition-colors hover:bg-rose-500"
             >
               <X size={8} className="text-rose-900 opacity-0 group-hover/btn:opacity-100" />
@@ -195,6 +202,7 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
                 e.stopPropagation()
                 minimizeWindow(window.id)
               }}
+              aria-label="Minimize window"
               className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-amber-400 transition-colors hover:bg-amber-500"
             >
               <Minus size={8} className="text-amber-900 opacity-0 group-hover/btn:opacity-100" />
@@ -205,6 +213,7 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
                   e.stopPropagation()
                   maximizeWindow(window.id)
                 }}
+                aria-label="Toggle maximize window"
                 className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-emerald-400 transition-colors hover:bg-emerald-500"
               >
                 <Maximize2
@@ -229,4 +238,6 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
       </div>
     </motion.div>
   )
-}
+})
+
+WindowFrame.displayName = 'WindowFrame'

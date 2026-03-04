@@ -37,9 +37,10 @@ export function Desktop() {
     const isAboutOpen = Object.values(storeWindows).some((w) => w.id === 'about' && w.isOpen)
 
     if (!isAboutOpen) {
-      setTimeout(() => {
+      const t = setTimeout(() => {
         openWindow('about', 'About Me')
       }, 500)
+      return () => clearTimeout(t)
     }
   }, [openWindow])
 

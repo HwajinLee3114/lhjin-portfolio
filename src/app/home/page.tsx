@@ -8,15 +8,12 @@ export default function HomeSec() {
   const [index, setIndex] = useState<number>(0)
 
   useEffect(() => {
-    const lf_typing = () => {
-      if (index < content.length) {
-        setTitle((prev) => prev + content[index])
-        setIndex((prev) => prev + 1)
-      }
-    }
-
-    const interval = setInterval(lf_typing, 100)
-    return () => clearInterval(interval)
+    if (index >= content.length) return
+    const t = setTimeout(() => {
+      setTitle((prev) => prev + content[index])
+      setIndex((prev) => prev + 1)
+    }, 100)
+    return () => clearTimeout(t)
   }, [index, content])
 
   return (
