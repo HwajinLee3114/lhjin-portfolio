@@ -67,20 +67,13 @@ export default function ProjectsSection() {
                 key={f}
                 onClick={() => handleFilterChange(f)}
                 className={cn(
-                  'relative rounded-2xl px-6 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-300',
+                  'rounded-2xl px-4 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-300',
                   isActive
-                    ? 'scale-105 bg-zinc-900 text-white shadow-lg dark:bg-white dark:text-zinc-900'
+                    ? 'bg-zinc-900 text-white shadow-xl dark:bg-white dark:text-zinc-900'
                     : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800',
                 )}
               >
-                <span className="relative z-10">{f}</span>
-                {isActive && (
-                  <motion.div
-                    layoutId="activeFilterBg"
-                    className="absolute inset-0 rounded-2xl bg-zinc-900 shadow-xl dark:bg-white"
-                    transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
-                  />
-                )}
+                {f}
               </button>
             )
           })}
