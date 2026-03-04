@@ -62,7 +62,7 @@ export default function About() {
             <div className="relative shrink-0">
               <div className="h-36 w-36 sm:h-44 sm:w-44 md:h-48 md:w-48 rotate-3 overflow-hidden rounded-[2.25rem] sm:rounded-[2.75rem] md:rounded-[3rem] border-4 border-white bg-zinc-100 shadow-xl transition-transform duration-500 hover:rotate-0 dark:border-zinc-900 dark:bg-zinc-800">
                 <img
-                  src="/images/profile.jpg"
+                  src="/images/profile.jpeg"
                   alt="Profile"
                   className="h-full w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
                 />
@@ -74,17 +74,15 @@ export default function About() {
 
             <div className="flex-1 pt-1 text-center md:text-left">
               <div className="mb-5 flex flex-wrap items-center justify-center gap-2 md:justify-start">
-                <h3 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">
-                  이화진
-                </h3>
+                <h3 className="text-2xl font-black text-zinc-900 dark:text-white">이화진</h3>
                 <span className="rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-blue-600 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
                   Frontend Developer
                 </span>
               </div>
 
-              <p className="mb-6 text-base sm:text-lg md:text-xl font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
-                지속적인 변화에 도전하며 <br className="hidden md:block" />더 나은 사용자 경험을
-                고민하는 개발자입니다.
+              <p className="mb-6 text-base sm:text-md font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
+                변화에 유연하게 대응하며, <br className="hidden md:block" />
+                사용자를 중심으로 경험을 개선하는 개발자입니다.
               </p>
 
               <div className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap md:justify-start">
