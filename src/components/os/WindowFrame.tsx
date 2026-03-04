@@ -192,6 +192,7 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
                 e.stopPropagation()
                 closeWindow(window.id)
               }}
+              aria-label="Close window"
               className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-rose-400 transition-colors hover:bg-rose-500"
             >
               <X size={8} className="text-rose-900 opacity-0 group-hover/btn:opacity-100" />
@@ -201,6 +202,7 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
                 e.stopPropagation()
                 minimizeWindow(window.id)
               }}
+              aria-label="Minimize window"
               className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-amber-400 transition-colors hover:bg-amber-500"
             >
               <Minus size={8} className="text-amber-900 opacity-0 group-hover/btn:opacity-100" />
@@ -211,6 +213,7 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
                   e.stopPropagation()
                   maximizeWindow(window.id)
                 }}
+                aria-label="Toggle maximize window"
                 className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-emerald-400 transition-colors hover:bg-emerald-500"
               >
                 <Maximize2
