@@ -65,8 +65,10 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
       let newX = startLeft
       let newY = startTop
 
-      const minWidth = 400
-      const minHeight = 300
+      const viewportW = globalThis.window.innerWidth
+      const viewportH = globalThis.window.innerHeight
+      const minWidth = Math.min(400, Math.max(280, viewportW * 0.6))
+      const minHeight = Math.min(300, Math.max(240, viewportH * 0.5))
 
       if (direction.includes('right')) {
         newWidth = Math.max(minWidth, startWidth + dx)
