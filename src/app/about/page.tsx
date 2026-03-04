@@ -115,12 +115,12 @@ export default function About() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + idx * 0.1 }}
-                  className="group rounded-[2.5rem] border border-zinc-100 bg-zinc-50/50 p-8 transition-all duration-500 hover:border-zinc-900 dark:border-zinc-800 dark:bg-zinc-800/30 dark:hover:border-white"
+                  className="group rounded-[1.5rem] border border-zinc-100 bg-zinc-50/50 p-5 transition-all duration-500 hover:border-zinc-900 dark:border-zinc-800 dark:bg-zinc-800/30 dark:hover:border-white"
                 >
                   <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:bg-zinc-900 group-hover:text-white dark:bg-zinc-900 dark:group-hover:bg-white dark:group-hover:text-zinc-900">
                     <Icon size={20} />
                   </div>
-                  <h4 className="mb-2 text-lg font-black text-zinc-900 dark:text-white">
+                  <h4 className="mb-1 text-lg font-black text-zinc-900 dark:text-white">
                     {link.title}
                   </h4>
                   <p className="text-sm font-medium text-zinc-400 transition-colors group-hover:text-zinc-600">

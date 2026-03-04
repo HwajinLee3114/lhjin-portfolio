@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { X, Minus, Maximize2, GripHorizontal } from 'lucide-react'
-import { ReactNode, useRef, useState, useEffect } from 'react'
+import { ReactNode, useRef, useState, useEffect, forwardRef } from 'react'
 
 import { useWindowStore, WindowState } from '@/hooks/os/use-window-store'
 import { cn } from '@/lib/utils'
@@ -12,7 +12,10 @@ interface WindowFrameProps {
   children: ReactNode
 }
 
-export function WindowFrame({ window, children }: WindowFrameProps) {
+export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function WindowFrame(
+  { window, children },
+  ref,
+) {
   const { closeWindow, minimizeWindow, maximizeWindow, focusWindow, updatePosition, updateSize } =
     useWindowStore()
 
@@ -117,6 +120,7 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
 
   return (
     <motion.div
+      ref={ref}
       drag={!isEffectivelyMaximized && !isResizing}
       dragMomentum={false}
       onDragEnd={(_, info) => {
@@ -231,4 +235,6 @@ export function WindowFrame({ window, children }: WindowFrameProps) {
       </div>
     </motion.div>
   )
-}
+})
+
+WindowFrame.displayName = 'WindowFrame'
