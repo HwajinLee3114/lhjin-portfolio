@@ -13,6 +13,7 @@ import {
 import { getProjectById } from '@/data/projects'
 import { ImagePreviewModal } from '@/components/common/ImagePreviewModal'
 import { formatPeriod } from '@/lib/period'
+import { imagePath } from '@/lib/paths'
 import { cn } from '@/lib/utils'
 
 interface ModalProps {
@@ -265,11 +266,11 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                       {project.images.map((img) => (
                         <button
                           key={img.url}
-                          onClick={() => setPreviewImgUrl(`/images/project/${img.url}`)}
+                          onClick={() => setPreviewImgUrl(`${imagePath.projectDetail(img.url)}`)}
                           className="group relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-zinc-100 bg-zinc-50 p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-800/50"
                         >
                           <img
-                            src={`/images/project/${img.url}`}
+                            src={`${imagePath.projectDetail(img.url)}`}
                             className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                             alt={img.name}
                             loading="lazy"

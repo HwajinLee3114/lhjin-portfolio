@@ -3,23 +3,21 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Github, Mail, Linkedin, Globe, Monitor, FileText, Rss } from 'lucide-react'
+import { Mail, Monitor, FileText, Rss } from 'lucide-react'
 import Link from 'next/link'
 
 import { projects } from '@/data/projects'
+import { FILTER_NAMES, filterProjects } from '@/data/filters'
 import SkillList from '@/components/skills/SkillList'
 import { profile } from '@/data/profile'
+import { socialLinks } from '@/data/socialLinks'
 import { cn } from '@/lib/utils'
+import { fadeUp } from '@/lib/animations'
 import SlideButton from '@/components/button/SlideButton'
+import FilterButton from '@/components/common/FilterButton'
+import SectionHeader from '@/components/common/SectionHeader'
 import ProjectCard from '@/components/project/ProjectCard'
 import CareerList from '@/components/career/CareerList'
-
-const fadeUp = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.5 },
-}
 
 const sectionIds = ['about', 'skills', 'projects', 'career'] as const
 
@@ -60,12 +58,9 @@ export default function ResumePage() {
 
   const filteredProjects = useMemo(
     () =>
-      projects
-        .filter((p) => {
-          if (filter === 'all') return true
-          return p.filter.some((f) => f.name === filter)
-        })
-        .sort((a, b) => (b.periodStart || '').localeCompare(a.periodStart || '')),
+      filterProjects(projects, filter).sort((a, b) =>
+        (b.periodStart || '').localeCompare(a.periodStart || ''),
+      ),
     [filter],
   )
 
@@ -160,16 +155,7 @@ export default function ResumePage() {
           transition={{ ...fadeUp.transition, delay: 0.15 }}
           className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3"
         >
-          {[
-            { title: 'GitHub', url: profile.social.github, icon: Github, desc: '소스 코드 저장소' },
-            { title: 'Tistory', url: profile.social.blog, icon: Globe, desc: '기술 블로그' },
-            {
-              title: 'LinkedIn',
-              url: profile.social.linkedin,
-              icon: Linkedin,
-              desc: '커리어 네트워크',
-            },
-          ].map((link) => {
+          {socialLinks.map((link) => {
             const Icon = link.icon
             return (
               <a
@@ -221,19 +207,10 @@ export default function ResumePage() {
             transition={{ ...fadeUp.transition, delay: 0.1 }}
             className="mb-10 flex flex-wrap items-center justify-center gap-3"
           >
-            {['all', 'feature', 'personal', 'team'].map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={cn(
-                  'rounded-xl px-4 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all',
-                  filter === f
-                    ? 'bg-zinc-900 text-white shadow-lg dark:bg-white dark:text-zinc-900'
-                    : 'bg-zinc-100 text-zinc-400 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700',
-                )}
-              >
+            {FILTER_NAMES.map((f) => (
+              <FilterButton key={f} isActive={filter === f} onClick={() => setFilter(f)}>
                 {f}
-              </button>
+              </FilterButton>
             ))}
           </motion.div>
 
@@ -329,15 +306,6 @@ export default function ResumePage() {
           </Link>
         </div>
       </footer>
-    </div>
-  )
-}
-
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div className="mb-12 text-center">
-      <span className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400">{title}</span>
-      <div className="mx-auto mt-4 h-1 w-12 rounded-full bg-zinc-900 dark:bg-white" />
     </div>
   )
 }

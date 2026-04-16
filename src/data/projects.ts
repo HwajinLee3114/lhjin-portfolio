@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { tag } from './filters'
 
 const ProjectImageSchema = z.object({
   url: z.string(),
@@ -71,10 +72,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     title: 'KT GiGA Live CMS',
     periodStart: '2018-11',
     periodEnd: '2020-01',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: '풀스택', color: 'tomato' },
-    ],
+    filter: [tag('team'), tag('풀스택')],
     description: 'VR 계열사 및 관리자가 콘텐츠와 서비스를 효율적으로 관리할 수 있는 CMS입니다.',
     feature: ['VR 카테고리 및 카테고리별 콘텐츠 관리', 'VR 제공 계열사 관리'],
     contribution: [
@@ -95,10 +93,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     title: '분양이부장',
     periodStart: '2021-05',
     periodEnd: '2022-05',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: '풀스택', color: 'tomato' },
-    ],
+    filter: [tag('team'), tag('풀스택')],
     description:
       '전국 아파트 분양 정보를 제공하며, 지역별 분양 정보를 등록하고 홍보 및 구인 활동을 원하는 사용자와 관계자를 위한 반응형 플랫폼입니다.',
     feature: [
@@ -147,10 +142,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     title: 'Pleisure',
     periodStart: '2021-05',
     periodEnd: '2022-02',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'FE', color: 'lightgreen' },
-    ],
+    filter: [tag('team'), tag('FE')],
     description: '간편한 스포츠 레슨 예약 서비스를 제공하는 플랫폼입니다.',
     feature: [
       '원원하는 코치와의 레슨을 간편하게 실시간 예약 가능',
@@ -195,12 +187,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     periodStart: '2021-10',
     periodEnd: '2022-09',
     site: 'https://www.djes.co.kr',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-      { name: 'BE', color: 'coral' },
-    ],
+    filter: [tag('team'), tag('feature'), tag('FE'), tag('BE')],
     description: '대전 체험형 게임 플랫폼으로, 다양한 체험형 프로그램을 제공합니다.',
     feature: [
       '등록된 프로그램을 체험할 수 있는 기능 제공',
@@ -252,12 +239,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     title: '너의 운동은',
     periodStart: '2022-02',
     periodEnd: '2022-05',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-      { name: 'BE', color: 'coral' },
-    ],
+    filter: [tag('team'), tag('feature'), tag('FE'), tag('BE')],
     description: '운동 관리 커뮤니티 반응형 플랫폼입니다.',
     feature: [
       '운동 기록 및 관리 기능 제공',
@@ -297,11 +279,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     title: '포켓데이터',
     periodStart: '2022-06',
     periodEnd: '2022-10',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-    ],
+    filter: [tag('team'), tag('feature'), tag('FE')],
     description: '입찰 정보, 지원 사업, 스타트업 정보를 조회할 수 있는 사이트입니다.',
     feature: [
       '자회사 및 제휴사에게 다양한 맞춤 정보 제공',
@@ -332,10 +310,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     title: '면세점 사이트',
     periodStart: '2022-09',
     periodEnd: '2023-07',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: '풀스택', color: 'tomato' },
-    ],
+    filter: [tag('team'), tag('풀스택')],
     description: '면세 상품 및 점포 관리 사이트입니다.',
     feature: [
       '카테고리별 판매 상품과 점포를 관리할 수 있는 관리자 페이지 제공',
@@ -368,11 +343,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     title: '링크오더',
     periodStart: '2023-08',
     periodEnd: '2024-03',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-    ],
+    filter: [tag('team'), tag('feature'), tag('FE')],
     description: '지역 소상공인을 위한 상품 판매 및 배송 관리 반응형 플랫폼입니다.',
     feature: [
       '판매 상품과 판매, 배송, 직원 등을 관리할 수 있는 점포 관리자 사이트 및 사용자용 판매 링크 사이트 제공',
@@ -426,10 +397,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     periodStart: '2024-03',
     periodEnd: '2024-05',
     site: 'http://we.cookplay.net',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'FE', color: 'lightgreen' },
-    ],
+    filter: [tag('team'), tag('FE')],
     description: '암센터 환자 습관 관리 플랫폼입니다.',
     feature: [
       '환자의 증상에 맞춘 식단 제공',
@@ -473,11 +441,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     periodStart: '2024-06',
     periodEnd: '2024-08',
     site: 'https://lmedrp.com',
-    filter: [
-      { name: 'team', color: 'cornflowerblue' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-    ],
+    filter: [tag('team'), tag('feature'), tag('FE')],
     description: '스튜디오 스케줄 및 촬영 관리 EDRP 시스템입니다.',
     feature: [
       '각 지점별 촬영 일정을 일/월별로 한눈에 볼 수 있는 캘린더 기능 제공',
@@ -535,11 +499,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
     periodStart: '2024-10',
     git: 'https://github.com/HwajinLee3114/lhjin-portfolio',
     site: 'https://lhjin-portfolio.vercel.app/',
-    filter: [
-      { name: 'personal', color: 'indianred' },
-      { name: 'feature', color: 'gold' },
-      { name: 'FE', color: 'lightgreen' },
-    ],
+    filter: [tag('personal'), tag('feature'), tag('FE')],
     description:
       'Next.js, TypeScript를 활용하여 지금까지 진행했던 프로젝트와 사용 기술 스택을 한눈에 볼 수 있는 포트폴리오 사이트를 구현하였습니다.\n앞으로도 지속적으로 발전하는 모습을 반영해 나갈 예정입니다.',
     feature: [
@@ -565,10 +525,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
   //   periodStart: '2024-10',
   //   git: 'https://github.com/HwajinLee3114/lhjin-blog',
   //   site: 'https://lhjin-blog.vercel.app/',
-  //   filter: [
-  //     { name: 'personal', color: 'indianred' },
-  //     { name: 'FE', color: 'lightgreen' },
-  //   ],
+  //   filter: [tag('personal'), tag('FE')],
   //   description:
   //     'Next.js, TypeScript를 활용하여 개인 블로그를 구현하고 있습니다.\n기술 학습 및 아카이빙 용도의 개인 블로그',
   //   feature: [
@@ -593,11 +550,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
   //   periodStart: '2024-11',
   //   git: 'https://github.com/HwajinLee3114/myit',
   //   site: 'https://myit-lhjins-projects.vercel.app/',
-  //   filter: [
-  //     { name: 'personal', color: 'indianred' },
-  //     { name: 'feature', color: 'gold' },
-  //     { name: 'FE', color: 'lightgreen' },
-  //   ],
+  //   filter: [tag('personal'), tag('feature'), tag('FE')],
   //   description:
   //     'React.js, TypeScript를 활용하여 오늘 하루 일정을 정리하여 이미지로 내보낼 수 있습니다.',
   //   feature: [

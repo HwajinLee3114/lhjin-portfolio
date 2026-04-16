@@ -8,7 +8,9 @@ import { Search, LayoutGrid, List } from 'lucide-react'
 import Image from 'next/image'
 
 import { projects } from '@/data/projects'
+import { FILTER_NAMES, filterProjects } from '@/data/filters'
 import { formatPeriod } from '@/lib/period'
+import { imagePath } from '@/lib/paths'
 import SectionFrame from '@/components/common/SectionFrame'
 import ProjectCard from '@/components/project/ProjectCard'
 import { ProjectDetailModal } from '@/components/project/detail/ProjectDetailModal'
@@ -16,6 +18,8 @@ import ModalPortal from '@/components/common/ModalPortal'
 import ModalOverlay from '@/components/common/ModalOverlay'
 import TagBadge from '@/components/common/TagBadge'
 import { cn } from '@/lib/utils'
+import useModal from '@/hooks/useModal'
+import FilterButton from '@/components/common/FilterButton'
 
 export default function ProjectsSection() {
   const searchParams = useSearchParams()
@@ -40,13 +44,7 @@ export default function ProjectsSection() {
   }
 
   const filteredPj = useMemo(() => {
-    return projects
-      .filter((project) => {
-        if (filter === 'personal') return project.filter.some((f) => f.name === 'personal')
-        if (filter === 'team') return project.filter.some((f) => f.name === 'team')
-        if (filter === 'feature') return project.filter.some((f) => f.name === 'feature')
-        return true
-      })
+    return filterProjects(projects, filter)
       .filter((project) => {
         if (!query.trim()) return true
         const q = query.toLowerCase()
@@ -63,23 +61,11 @@ export default function ProjectsSection() {
       <div className="mb-10 flex flex-col items-center gap-8">
         <div className="flex items-center gap-3">
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {['all', 'feature', 'personal', 'team'].map((f) => {
-              const isActive = filter === f
-              return (
-                <button
-                  key={f}
-                  onClick={() => handleFilterChange(f)}
-                  className={cn(
-                    'rounded-2xl px-4 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-300',
-                    isActive
-                      ? 'bg-zinc-900 text-white shadow-xl dark:bg-white dark:text-zinc-900'
-                      : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800',
-                  )}
-                >
-                  {f}
-                </button>
-              )
-            })}
+            {FILTER_NAMES.map((f) => (
+              <FilterButton key={f} isActive={filter === f} onClick={() => handleFilterChange(f)}>
+                {f}
+              </FilterButton>
+            ))}
           </div>
           <div className="flex rounded-xl bg-zinc-50 p-1 dark:bg-zinc-800/50">
             <button
@@ -186,7 +172,7 @@ function ProjectListItem({
   project: (typeof projects)[number]
   index: number
 }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const modal = useModal()
 
   return (
     <>
@@ -194,12 +180,12 @@ function ProjectListItem({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, delay: index * 0.03 }}
-        onClick={() => setIsOpen(true)}
+        onClick={() => modal.open(project.id)}
         className="group flex cursor-pointer items-center gap-4 rounded-2xl p-3 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
       >
         <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <Image
-            src={`/images/project/thumb/${project.thumb}`}
+            src={imagePath.projectThumb(project.thumb)}
             alt={project.title}
             fill
             sizes="80px"
@@ -225,13 +211,13 @@ function ProjectListItem({
       </motion.div>
 
       <AnimatePresence>
-        {isOpen && (
+        {modal.isOpen && (
           <ModalPortal>
-            <ModalOverlay onClose={() => setIsOpen(false)}>
+            <ModalOverlay onClose={modal.close}>
               <ProjectDetailModal
-                isOpen={isOpen}
-                activeId={project.id}
-                onClose={() => setIsOpen(false)}
+                isOpen={modal.isOpen}
+                activeId={modal.activeId}
+                onClose={modal.close}
               />
             </ModalOverlay>
           </ModalPortal>

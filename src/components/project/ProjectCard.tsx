@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
@@ -9,9 +9,9 @@ import { ProjectDetailModal } from './detail/ProjectDetailModal'
 import ModalPortal from '../common/ModalPortal'
 import ModalOverlay from '../common/ModalOverlay'
 import { formatPeriod } from '@/lib/period'
+import { imagePath } from '@/lib/paths'
 import type { FilterTag, SkillItem } from '@/data/projects'
-import useBodyScrollLock from '@/hooks/useBodyScrollLock'
-import useEscapeKey from '@/hooks/useEscapeKey'
+import useModal from '@/hooks/useModal'
 import TagBadge from '../common/TagBadge'
 
 interface ProjectCardProps {
@@ -37,34 +37,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   skillItem,
   description,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [activeId, setActiveId] = useState<string>('')
-
-  useBodyScrollLock(isOpen)
-
-  const closeModal = () => {
-    setIsOpen(false)
-    setActiveId('')
-  }
-
-  useEscapeKey(isOpen, closeModal)
+  const modal = useModal()
 
   return (
     <>
       <motion.div
         layout
-        onClick={() => {
-          if (id) {
-            setIsOpen(true)
-            setActiveId(id)
-          }
-        }}
+        onClick={() => id && modal.open(id)}
         className="group relative flex flex-col h-full rounded-2xl bg-white dark:bg-zinc-900 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-1"
       >
         <div className="relative aspect-[16/10] rounded-t-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-800">
           <Image
             className="object-cover group-hover:scale-105 transition-transform duration-700"
-            src={`/images/project/thumb/${imageSrc}`}
+            src={imagePath.projectThumb(imageSrc || '')}
             alt={title || ''}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -102,7 +87,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                       className="w-6 h-6 rounded-full bg-white dark:bg-zinc-800 border-2 border-white dark:border-zinc-900 flex items-center justify-center p-0.5"
                     >
                       <img
-                        src={`/images/tech/${skill.url}`}
+                        src={imagePath.tech(skill.url)}
                         className="w-full h-full object-contain"
                         alt={skill.name}
                       />
@@ -123,10 +108,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       </motion.div>
 
       <AnimatePresence>
-        {isOpen && (
+        {modal.isOpen && (
           <ModalPortal>
-            <ModalOverlay onClose={closeModal}>
-              <ProjectDetailModal isOpen={isOpen} activeId={activeId} onClose={closeModal} />
+            <ModalOverlay onClose={modal.close}>
+              <ProjectDetailModal
+                isOpen={modal.isOpen}
+                activeId={modal.activeId}
+                onClose={modal.close}
+              />
             </ModalOverlay>
           </ModalPortal>
         )}

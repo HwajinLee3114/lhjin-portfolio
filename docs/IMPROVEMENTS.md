@@ -590,10 +590,22 @@
 ### 스킬 추가 절차
 
 ```
-1. data/skills.json 해당 카테고리에 추가
+1. src/data/skills.ts 해당 카테고리에 추가
    - name, color, txtcolor(선택)
 
 2. 프로필 핵심 기술이면 src/data/profile.ts의 coreSkills 배열에도 추가
+```
+
+### 프로젝트 추가 절차
+
+```
+1. src/data/projects.ts에 항목 추가
+   - 스킬: S.react, S.ts 등 상수 참조 (새 스킬이면 S 객체에 먼저 추가)
+   - 필터 태그: tag('team'), tag('FE') 등 함수 사용 (새 태그면 filters.ts TAG_COLORS에 추가)
+   - ios, android 필드 optional — 앱 스토어 링크가 있으면 추가
+2. 썸네일: public/images/project/thumb/{id}.png
+3. 상세 이미지: public/images/project/{id}_1.png, {id}_2.png ...
+4. 회사 프로젝트면 company 필드에 career id 매핑 (자동 역참조)
 ```
 
 ---

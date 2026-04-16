@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Github, Mail, Linkedin, FileText, Globe, GitBranch } from 'lucide-react'
+import { Mail, FileText, GitBranch } from 'lucide-react'
 
 import SlideButton from '@/components/button/SlideButton'
 import SectionFrame from '@/components/common/SectionFrame'
 import { profile } from '@/data/profile'
+import { socialLinks } from '@/data/socialLinks'
 
 type ContributionDay = { date: string; count: number; level: number }
 
@@ -28,24 +29,6 @@ export default function About() {
       .then(setGithub)
       .catch(() => {})
   }, [])
-
-  const socialLinks = [
-    {
-      id: 'github',
-      title: 'GitHub',
-      url: profile.social.github,
-      icon: Github,
-      desc: '소스 코드 저장소',
-    },
-    { id: 'blog', title: 'Tistory', url: profile.social.blog, icon: Globe, desc: '기술 블로그' },
-    {
-      id: 'linkedin',
-      title: 'LinkedIn',
-      url: profile.social.linkedin,
-      icon: Linkedin,
-      desc: '커리어 네트워크',
-    },
-  ]
 
   return (
     <SectionFrame id="about" title="Profile" headerClassName="mb-8">
