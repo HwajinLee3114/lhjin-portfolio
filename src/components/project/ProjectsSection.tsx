@@ -199,7 +199,7 @@ function ProjectListItem({
       >
         <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
           <Image
-            src={`/images/thumb/${project.thumb}`}
+            src={`/images/project/thumb/${project.thumb}`}
             alt={project.title}
             fill
             sizes="80px"

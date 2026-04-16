@@ -64,7 +64,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="relative aspect-[16/10] rounded-t-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-800">
           <Image
             className="object-cover group-hover:scale-105 transition-transform duration-700"
-            src={`/images/thumb/${imageSrc}`}
+            src={`/images/project/thumb/${imageSrc}`}
             alt={title || ''}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
