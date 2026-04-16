@@ -24,15 +24,13 @@ export default function HomeSec() {
       <div className="l_search_div flex relative items-center">
         <img
           src="/images/search-240.svg"
-          alt="icon"
+          alt="검색 아이콘"
           className="absolute left-2 w-7 md:w-12 md:h-8 lg:w-16 lg:h-10"
         />
         <h1 className="l_main_title g_RiaSansFont text-base md:text-xl lg:text-3xl font-bold text-center text-themacolor2">
           {title}
         </h1>
       </div>
-
-      {/* <ScrollDownBtn /> */}
     </section>
   )
 }

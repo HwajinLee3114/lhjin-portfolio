@@ -3,7 +3,7 @@ import { initialNodes, initialEdges } from '@/data/architecture'
 
 export default function ArchitecturePage() {
   return (
-    <main className="w-screen h-screen bg-black p-8 text-white flex flex-col gap-4">
+    <main className="w-full h-dvh bg-black p-8 text-white flex flex-col gap-4">
       <h1 className="text-3xl font-bold flex items-center gap-2">
         <span className="text-blue-500">
           <svg

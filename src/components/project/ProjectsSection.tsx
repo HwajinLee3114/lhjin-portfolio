@@ -3,12 +3,23 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Search } from 'lucide-react'
+import { Search, LayoutGrid, List } from 'lucide-react'
+
+import Image from 'next/image'
 
 import { projects } from '@/data/projects'
+import { FILTER_NAMES, filterProjects } from '@/data/filters'
+import { formatPeriod } from '@/lib/period'
+import { imagePath } from '@/lib/paths'
 import SectionFrame from '@/components/common/SectionFrame'
 import ProjectCard from '@/components/project/ProjectCard'
+import { ProjectDetailModal } from '@/components/project/detail/ProjectDetailModal'
+import ModalPortal from '@/components/common/ModalPortal'
+import ModalOverlay from '@/components/common/ModalOverlay'
+import TagBadge from '@/components/common/TagBadge'
 import { cn } from '@/lib/utils'
+import useModal from '@/hooks/useModal'
+import FilterButton from '@/components/common/FilterButton'
 
 export default function ProjectsSection() {
   const searchParams = useSearchParams()
@@ -16,12 +27,7 @@ export default function ProjectsSection() {
 
   const [filter, setFilter] = useState<string>(searchParams.get('filter') || 'feature')
   const [query, setQuery] = useState<string>('')
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 250)
-    return () => clearTimeout(t)
-  }, [])
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   useEffect(() => {
     const q = searchParams.get('filter')
@@ -38,13 +44,7 @@ export default function ProjectsSection() {
   }
 
   const filteredPj = useMemo(() => {
-    return projects
-      .filter((project) => {
-        if (filter === 'personal') return project.filter.some((f) => f.name === 'personal')
-        if (filter === 'team') return project.filter.some((f) => f.name === 'team')
-        if (filter === 'feature') return project.filter.some((f) => f.name === 'feature')
-        return true
-      })
+    return filterProjects(projects, filter)
       .filter((project) => {
         if (!query.trim()) return true
         const q = query.toLowerCase()
@@ -53,30 +53,46 @@ export default function ProjectsSection() {
         const inSkill = project.skillItem.some((s) => s.name.toLowerCase().includes(q))
         return inTitle || inDesc || inSkill
       })
-      .sort((a, b) => Number(b.id) - Number(a.id))
+      .sort((a, b) => (b.periodStart || '').localeCompare(a.periodStart || ''))
   }, [filter, query])
 
   return (
     <SectionFrame id="projects" title="Archive" containerClassName="max-w-6xl">
       <div className="mb-10 flex flex-col items-center gap-8">
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {['all', 'feature', 'personal', 'team'].map((f) => {
-            const isActive = filter === f
-            return (
-              <button
-                key={f}
-                onClick={() => handleFilterChange(f)}
-                className={cn(
-                  'rounded-2xl px-4 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-300',
-                  isActive
-                    ? 'bg-zinc-900 text-white shadow-xl dark:bg-white dark:text-zinc-900'
-                    : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800',
-                )}
-              >
+        <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {FILTER_NAMES.map((f) => (
+              <FilterButton key={f} isActive={filter === f} onClick={() => handleFilterChange(f)}>
                 {f}
-              </button>
-            )
-          })}
+              </FilterButton>
+            ))}
+          </div>
+          <div className="flex rounded-xl bg-zinc-50 p-1 dark:bg-zinc-800/50">
+            <button
+              onClick={() => setViewMode('grid')}
+              aria-label="카드 보기"
+              className={cn(
+                'rounded-lg p-2 transition-all',
+                viewMode === 'grid'
+                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200',
+              )}
+            >
+              <LayoutGrid size={14} />
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              aria-label="리스트 보기"
+              className={cn(
+                'rounded-lg p-2 transition-all',
+                viewMode === 'list'
+                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200',
+              )}
+            >
+              <List size={14} />
+            </button>
+          </div>
         </div>
 
         <div className="group relative w-full max-w-md">
@@ -95,22 +111,10 @@ export default function ProjectsSection() {
 
       <div className="w-full">
         <AnimatePresence mode="popLayout">
-          {loading ? (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {Array.from({ length: 6 }).map((_, idx) => (
-                <div key={idx} className="animate-pulse space-y-4">
-                  <div className="aspect-video rounded-3xl bg-zinc-100 dark:bg-zinc-800" />
-                  <div className="h-4 w-2/3 rounded bg-zinc-100 dark:bg-zinc-800" />
-                  <div className="flex gap-2">
-                    <div className="h-6 w-16 rounded-full bg-zinc-100 dark:bg-zinc-800" />
-                    <div className="h-6 w-16 rounded-full bg-zinc-100 dark:bg-zinc-800" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
+          {viewMode === 'grid' ? (
             <motion.ul
               layout
+              key="grid"
               className="mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
             >
               {filteredPj.map((project, index) => (
@@ -136,15 +140,89 @@ export default function ProjectsSection() {
                 </motion.li>
               ))}
             </motion.ul>
+          ) : (
+            <motion.div
+              key="list"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mb-16 space-y-3"
+            >
+              {filteredPj.map((project, index) => (
+                <ProjectListItem key={project.id} project={project} index={index} />
+              ))}
+            </motion.div>
           )}
         </AnimatePresence>
 
-        {!loading && filteredPj.length === 0 && (
+        {filteredPj.length === 0 && (
           <div className="py-20 text-center">
             <p className="font-medium text-zinc-400">검색 결과가 없습니다.</p>
           </div>
         )}
       </div>
     </SectionFrame>
+  )
+}
+
+function ProjectListItem({
+  project,
+  index,
+}: {
+  project: (typeof projects)[number]
+  index: number
+}) {
+  const modal = useModal()
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, delay: index * 0.03 }}
+        onClick={() => modal.open(project.id)}
+        className="group flex cursor-pointer items-center gap-4 rounded-2xl p-3 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+      >
+        <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+          <Image
+            src={imagePath.projectThumb(project.thumb)}
+            alt={project.title}
+            fill
+            sizes="80px"
+            className="object-cover"
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-black text-zinc-900 dark:text-white truncate">
+              {project.title}
+            </h3>
+            <div className="flex shrink-0 gap-1">
+              {project.filter.map((fil, idx) => (
+                <TagBadge key={idx} name={fil.name} color={fil.color} />
+              ))}
+            </div>
+          </div>
+          <p className="mt-0.5 text-xs text-zinc-400 truncate">{project.description}</p>
+        </div>
+        <span className="shrink-0 text-[10px] font-bold text-zinc-300 dark:text-zinc-600">
+          {formatPeriod(project.periodStart, project.periodEnd)}
+        </span>
+      </motion.div>
+
+      <AnimatePresence>
+        {modal.isOpen && (
+          <ModalPortal>
+            <ModalOverlay onClose={modal.close}>
+              <ProjectDetailModal
+                isOpen={modal.isOpen}
+                activeId={modal.activeId}
+                onClose={modal.close}
+              />
+            </ModalOverlay>
+          </ModalPortal>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

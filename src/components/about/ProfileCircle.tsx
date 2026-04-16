@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { profile } from '@/data/profile'
+
 const ProfileCircle: React.FC = () => {
   return (
     <div className="relative flex">
@@ -60,9 +62,9 @@ const ProfileCircle: React.FC = () => {
         </svg>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
           <div className="memoji__info flex flex-col">
-            <span>이화진</span>
+            <span>{profile.name}</span>
             <span>1997.03.01</span>
-            <span>✉️ hwajin3114@gmail.com</span>
+            <span>✉️ {profile.email}</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 
 type ZIndexStore = {
+  maxZIndex: number
+  getNextZIndex: () => number
   windowMaxZIndex: number
   widgetMaxZIndex: number
   getNextWindowZIndex: () => number
@@ -8,16 +10,24 @@ type ZIndexStore = {
 }
 
 export const useZIndexStore = create<ZIndexStore>((set, get) => ({
+  maxZIndex: 300,
+
+  getNextZIndex: () => {
+    const nextZ = get().maxZIndex + 1
+    set({ maxZIndex: nextZ })
+    return nextZ
+  },
+
   windowMaxZIndex: 300,
-  widgetMaxZIndex: 100,
+  widgetMaxZIndex: 300,
   getNextWindowZIndex: () => {
-    const nextZ = get().windowMaxZIndex + 1
-    set({ windowMaxZIndex: nextZ })
+    const nextZ = get().maxZIndex + 1
+    set({ maxZIndex: nextZ, windowMaxZIndex: nextZ })
     return nextZ
   },
   getNextWidgetZIndex: () => {
-    const nextZ = get().widgetMaxZIndex + 1
-    set({ widgetMaxZIndex: nextZ })
+    const nextZ = get().maxZIndex + 1
+    set({ maxZIndex: nextZ, widgetMaxZIndex: nextZ })
     return nextZ
   },
 }))

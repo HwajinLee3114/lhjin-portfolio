@@ -1,29 +1,15 @@
 'use client'
 
-import { User, Code, Briefcase, Folder, LucideIcon } from 'lucide-react'
-
 import { useWindowStore } from '@/hooks/os/use-window-store'
+import { navItems } from '@/data/navigation'
 import { cn } from '@/lib/utils'
-
-interface DockItem {
-  id: string
-  title: string
-  icon: LucideIcon
-}
-
-const dockItems: DockItem[] = [
-  { id: 'about', title: 'About Me', icon: User },
-  { id: 'skills', title: 'Skills', icon: Code },
-  { id: 'projects', title: 'Projects', icon: Folder },
-  { id: 'career', title: 'Career', icon: Briefcase },
-]
 
 export function Dock() {
   const { windows, openWindow, closeWindow, focusWindow } = useWindowStore()
 
   return (
     <div className="fixed bottom-6 left-1/2 z-[1000] flex -translate-x-1/2 items-end gap-2 rounded-[2rem] border border-white/20 bg-white/40 px-3 py-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-2xl transition-all hover:bg-white/60">
-      {dockItems.map((item) => {
+      {navItems.map((item) => {
         const Icon = item.icon
         const windowState = windows[item.id]
         const isOpen = windowState?.isOpen

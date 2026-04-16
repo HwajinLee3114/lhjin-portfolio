@@ -1,15 +1,69 @@
-import skillsJson from '../../data/skills.json'
+import { z } from 'zod'
 
-export interface Skill {
-  name: string
-  color: string
-  txtcolor?: string
-}
+const SkillSchema = z.object({
+  name: z.string(),
+  color: z.string(),
+  txtcolor: z.string().optional(),
+})
 
-export interface SkillCategory {
-  title: string
-  skills: Skill[]
-  img: string
-}
+const SkillCategorySchema = z.object({
+  title: z.string(),
+  skills: z.array(SkillSchema),
+  img: z.string(),
+})
 
-export const skills = skillsJson as SkillCategory[]
+export type Skill = z.infer<typeof SkillSchema>
+export type SkillCategory = z.infer<typeof SkillCategorySchema>
+
+const skillsData = [
+  {
+    title: 'FrontEnd',
+    skills: [
+      { name: 'JavaScript', color: '#efd81d', txtcolor: '#000000' },
+      { name: 'React', color: '#61DBFB', txtcolor: '#ffffff' },
+      { name: 'TypeScript', color: '#2f74c0', txtcolor: '#ffffff' },
+      { name: 'Next.js', color: '#000000', txtcolor: '#ffffff' },
+      { name: 'Zustand', color: '#49443e', txtcolor: '#ffffff' },
+      { name: 'Tailwind CSS', color: '#06B6D4', txtcolor: '#ffffff' },
+    ],
+    img: '/images/fe-100.png',
+  },
+  {
+    title: 'BackEnd',
+    skills: [
+      { name: 'Java', color: '#5382a1', txtcolor: '#ffffff' },
+      { name: 'Spring', color: '#8BC34A', txtcolor: '#ffffff' },
+      { name: 'Supabase', color: '#30a26e', txtcolor: '#ffffff' },
+    ],
+    img: '/images/be-100.png',
+  },
+  {
+    title: 'Database',
+    skills: [
+      { name: 'Oracle', color: '#F80102', txtcolor: '#ffffff' },
+      { name: 'MySQL', color: '#00758f', txtcolor: '#ffffff' },
+      { name: 'MariaDB', color: '#C49A6C', txtcolor: '#ffffff' },
+    ],
+    img: '/images/db-100.png',
+  },
+  {
+    title: 'Tools',
+    skills: [
+      { name: 'GitHub', color: '#000000', txtcolor: '#ffffff' },
+      { name: 'PostMan', color: '#EF5B25', txtcolor: '#ffffff' },
+      { name: 'Slack', color: '#E01E5A', txtcolor: '#ffffff' },
+      { name: 'Notion', color: '#000000', txtcolor: '#ffffff' },
+    ],
+    img: '/images/tool-100.png',
+  },
+  {
+    title: 'Dev Ops',
+    skills: [
+      { name: 'Vercel', color: '#000000', txtcolor: '#ffffff' },
+      { name: 'Netlify', color: '#004746', txtcolor: '#ffffff' },
+    ],
+    img: '/images/dev-100.png',
+  },
+] as const satisfies readonly z.input<typeof SkillCategorySchema>[]
+
+export const skills = z.array(SkillCategorySchema).parse(skillsData)
