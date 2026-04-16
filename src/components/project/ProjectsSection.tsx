@@ -3,11 +3,18 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Search } from 'lucide-react'
+import { Search, LayoutGrid, List } from 'lucide-react'
+
+import Image from 'next/image'
 
 import { projects } from '@/data/projects'
+import { formatPeriod } from '@/lib/period'
 import SectionFrame from '@/components/common/SectionFrame'
 import ProjectCard from '@/components/project/ProjectCard'
+import { ProjectDetailModal } from '@/components/project/detail/ProjectDetailModal'
+import ModalPortal from '@/components/common/ModalPortal'
+import ModalOverlay from '@/components/common/ModalOverlay'
+import TagBadge from '@/components/common/TagBadge'
 import { cn } from '@/lib/utils'
 
 export default function ProjectsSection() {
@@ -16,6 +23,7 @@ export default function ProjectsSection() {
 
   const [filter, setFilter] = useState<string>(searchParams.get('filter') || 'feature')
   const [query, setQuery] = useState<string>('')
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   useEffect(() => {
     const q = searchParams.get('filter')
@@ -53,24 +61,52 @@ export default function ProjectsSection() {
   return (
     <SectionFrame id="projects" title="Archive" containerClassName="max-w-6xl">
       <div className="mb-10 flex flex-col items-center gap-8">
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          {['all', 'feature', 'personal', 'team'].map((f) => {
-            const isActive = filter === f
-            return (
-              <button
-                key={f}
-                onClick={() => handleFilterChange(f)}
-                className={cn(
-                  'rounded-2xl px-4 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-300',
-                  isActive
-                    ? 'bg-zinc-900 text-white shadow-xl dark:bg-white dark:text-zinc-900'
-                    : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800',
-                )}
-              >
-                {f}
-              </button>
-            )
-          })}
+        <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {['all', 'feature', 'personal', 'team'].map((f) => {
+              const isActive = filter === f
+              return (
+                <button
+                  key={f}
+                  onClick={() => handleFilterChange(f)}
+                  className={cn(
+                    'rounded-2xl px-4 py-3 text-[11px] font-black uppercase tracking-widest transition-all duration-300',
+                    isActive
+                      ? 'bg-zinc-900 text-white shadow-xl dark:bg-white dark:text-zinc-900'
+                      : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800',
+                  )}
+                >
+                  {f}
+                </button>
+              )
+            })}
+          </div>
+          <div className="flex rounded-xl bg-zinc-50 p-1 dark:bg-zinc-800/50">
+            <button
+              onClick={() => setViewMode('grid')}
+              aria-label="카드 보기"
+              className={cn(
+                'rounded-lg p-2 transition-all',
+                viewMode === 'grid'
+                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200',
+              )}
+            >
+              <LayoutGrid size={14} />
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              aria-label="리스트 보기"
+              className={cn(
+                'rounded-lg p-2 transition-all',
+                viewMode === 'list'
+                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200',
+              )}
+            >
+              <List size={14} />
+            </button>
+          </div>
         </div>
 
         <div className="group relative w-full max-w-md">
@@ -89,30 +125,48 @@ export default function ProjectsSection() {
 
       <div className="w-full">
         <AnimatePresence mode="popLayout">
-          <motion.ul layout className="mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredPj.map((project, index) => (
-              <motion.li
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-              >
-                <ProjectCard
-                  id={project.id}
-                  title={project.title}
-                  periodStart={project.periodStart}
-                  periodEnd={project.periodEnd}
-                  skillItem={project.skillItem}
-                  filter={project.filter}
-                  imageSrc={project.thumb}
-                  feature={project.feature}
-                  description={project.description}
-                />
-              </motion.li>
-            ))}
-          </motion.ul>
+          {viewMode === 'grid' ? (
+            <motion.ul
+              layout
+              key="grid"
+              className="mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {filteredPj.map((project, index) => (
+                <motion.li
+                  layout
+                  key={project.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                >
+                  <ProjectCard
+                    id={project.id}
+                    title={project.title}
+                    periodStart={project.periodStart}
+                    periodEnd={project.periodEnd}
+                    skillItem={project.skillItem}
+                    filter={project.filter}
+                    imageSrc={project.thumb}
+                    feature={project.feature}
+                    description={project.description}
+                  />
+                </motion.li>
+              ))}
+            </motion.ul>
+          ) : (
+            <motion.div
+              key="list"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mb-16 space-y-3"
+            >
+              {filteredPj.map((project, index) => (
+                <ProjectListItem key={project.id} project={project} index={index} />
+              ))}
+            </motion.div>
+          )}
         </AnimatePresence>
 
         {filteredPj.length === 0 && (
@@ -122,5 +176,67 @@ export default function ProjectsSection() {
         )}
       </div>
     </SectionFrame>
+  )
+}
+
+function ProjectListItem({
+  project,
+  index,
+}: {
+  project: (typeof projects)[number]
+  index: number
+}) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, delay: index * 0.03 }}
+        onClick={() => setIsOpen(true)}
+        className="group flex cursor-pointer items-center gap-4 rounded-2xl p-3 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+      >
+        <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
+          <Image
+            src={`/images/thumb/${project.thumb}`}
+            alt={project.title}
+            fill
+            sizes="80px"
+            className="object-cover"
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-black text-zinc-900 dark:text-white truncate">
+              {project.title}
+            </h3>
+            <div className="flex shrink-0 gap-1">
+              {project.filter.map((fil, idx) => (
+                <TagBadge key={idx} name={fil.name} color={fil.color} />
+              ))}
+            </div>
+          </div>
+          <p className="mt-0.5 text-xs text-zinc-400 truncate">{project.description}</p>
+        </div>
+        <span className="shrink-0 text-[10px] font-bold text-zinc-300 dark:text-zinc-600">
+          {formatPeriod(project.periodStart, project.periodEnd)}
+        </span>
+      </motion.div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <ModalPortal>
+            <ModalOverlay onClose={() => setIsOpen(false)}>
+              <ProjectDetailModal
+                isOpen={isOpen}
+                activeId={project.id}
+                onClose={() => setIsOpen(false)}
+              />
+            </ModalOverlay>
+          </ModalPortal>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
