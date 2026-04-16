@@ -43,6 +43,26 @@ export type Contribution = z.infer<typeof ContributionSchema>
 export type FilterTag = z.infer<typeof FilterTagSchema>
 export type Project = z.infer<typeof ProjectSchema>
 
+const S = {
+  js: { name: 'JavaScript', url: 'js-100.png' },
+  ts: { name: 'TypeScript', url: 'typescript-100.png' },
+  react: { name: 'React', url: 'react-100.png' },
+  next: { name: 'Next.js', url: 'next-100.png' },
+  java: { name: 'Java', url: 'java-100.png' },
+  spring: { name: 'Spring', url: 'spring-100.png' },
+  mysql: { name: 'MySQL', url: 'mysql-100.png' },
+  oracle: { name: 'Oracle', url: 'oracle-100.png' },
+  mariadb: { name: 'MariaDB', url: 'maria-100.png' },
+  postgresql: { name: 'PostgreSQL', url: 'postgreesql-100.png' },
+  django: { name: 'Django', url: 'django-100.png' },
+  tailwind: { name: 'TailwindCSS', url: 'tailwind-100.png' },
+  vercel: { name: 'Vercel', url: 'vercel-100.png' },
+  zustand: { name: 'zustand', url: 'zustand.svg' },
+  styledComponents: { name: 'Styled-Components', url: 'styled-components.png' },
+  jsp: { name: 'JSP' },
+  egov: { name: '전자정부프레임워크' },
+} as const
+
 const projectsData: z.input<typeof ProjectSchema>[] = [
   {
     id: 'kt-giga-cms',
@@ -63,14 +83,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: '전자정부프레임워크' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'PostgreSQL', url: 'postgreesql-100.png' },
-    ],
+    skillItem: [S.egov, S.java, S.spring, S.js, S.jsp, S.postgresql],
     thumb: 'kt-giga-cms.png',
     images: [],
     company: 'a2tec',
@@ -107,13 +120,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'MySQL', url: 'mysql-100.png' },
-    ],
+    skillItem: [S.js, S.jsp, S.java, S.spring, S.mysql],
     thumb: 'bunyang.png',
     images: [
       { url: 'bunyang_1.png', name: 'daily' },
@@ -163,13 +170,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         desc: ['사용자 페이지 디자인 개선', '예약 시스템 데이터 실시간 연동 오류 처리'],
       },
     ],
-    skillItem: [
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'MySQL', url: 'mysql-100.png' },
-    ],
+    skillItem: [S.js, S.jsp, S.java, S.spring, S.mysql],
     thumb: 'pleisure.png',
     images: [
       { url: 'pleisure_1.png', name: 'daily' },
@@ -230,13 +231,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'MySQL', url: 'mysql-100.png' },
-    ],
+    skillItem: [S.js, S.jsp, S.java, S.spring, S.mysql],
     thumb: 'drt.png',
     images: [
       { url: 'drt_1.png', name: 'daily' },
@@ -280,12 +275,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'React', url: 'react-100.png' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'MySQL', url: 'mysql-100.png' },
-    ],
+    skillItem: [S.react, S.java, S.spring, S.mysql],
     thumb: 'your-exercise.png',
     images: [
       { url: 'your-exercise_1.png', name: 'daily' },
@@ -324,12 +314,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'React', url: 'react-100.png' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'MySQL', url: 'mysql-100.png' },
-    ],
+    skillItem: [S.react, S.java, S.spring, S.mysql],
     thumb: 'pocketdata.png',
     images: [
       { url: 'pocketdata_1.png', name: 'daily' },
@@ -371,14 +356,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'React', url: 'react-100.png' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'Oracle', url: 'oracle-100.png' },
-    ],
+    skillItem: [S.js, S.jsp, S.react, S.java, S.spring, S.oracle],
     thumb: 'dutyfree.png',
     images: [],
     company: 'futuresolution',
@@ -419,13 +397,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'MariaDB', url: 'maria-100.png' },
-    ],
+    skillItem: [S.js, S.jsp, S.java, S.spring, S.mariadb],
     thumb: 'linkorder.png',
     images: [
       { url: 'linkorder_1.png', name: 'daily' },
@@ -474,13 +446,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'Java', url: 'java-100.png' },
-      { name: 'Spring', url: 'spring-100.png' },
-      { name: 'MariaDB', url: 'maria-100.png' },
-    ],
+    skillItem: [S.js, S.jsp, S.java, S.spring, S.mariadb],
     thumb: 'we-dolbomi.png',
     images: [
       { url: 'we-dolbomi_1.png', name: 'daily' },
@@ -550,12 +516,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
         ],
       },
     ],
-    skillItem: [
-      { name: 'JavaScript', url: 'js-100.png' },
-      { name: 'JSP' },
-      { name: 'Django', url: 'django-100.png' },
-      { name: 'MySQL', url: 'mysql-100.png' },
-    ],
+    skillItem: [S.js, S.jsp, S.django, S.mysql],
     thumb: 'lmedrp.png',
     images: [
       { url: 'lmedrp_1.png', name: 'daily' },
@@ -586,12 +547,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
       'Vercel 배포를 통한 CI/CD 자동화',
     ],
     contribution: [],
-    skillItem: [
-      { name: 'Next.js', url: 'next-100.png' },
-      { name: 'TypeScript', url: 'typescript-100.png' },
-      { name: 'TailwindCSS', url: 'tailwind-100.png' },
-      { name: 'Vercel', url: 'vercel-100.png' },
-    ],
+    skillItem: [S.next, S.ts, S.tailwind, S.vercel],
     thumb: 'portfolio.png',
     images: [
       { url: 'portfolio_1.png', name: 'main' },
@@ -622,14 +578,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
   //     'zustand로 블로그에 필요한 정보  관리',
   //   ],
   //   contribution: [],
-  //   skillItem: [
-  //     { name: 'Next.js', url: 'next-100.png' },
-  //     { name: 'TypeScript', url: 'typescript-100.png' },
-  //     { name: 'TailwindCSS', url: 'tailwind-100.png' },
-  //     { name: 'Vercel', url: 'vercel-100.png' },
-  //     { name: 'Styled-Components', url: 'styled-components.png' },
-  //     { name: 'zustand', url: 'zustand.svg' },
-  //   ],
+  //   skillItem: [S.next, S.ts, S.tailwind, S.vercel, S.styledComponents, S.zustand],
   //   thumb: 'blog.png',
   //   images: [
   //     { url: 'blog_1.png', name: 'blog_light' },
@@ -655,12 +604,7 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
   //     'Vercel 배포를 통한 CI/CD 자동화',
   //   ],
   //   contribution: [],
-  //   skillItem: [
-  //     { name: 'React.js', url: 'react-100.png' },
-  //     { name: 'TypeScript', url: 'typescript-100.png' },
-  //     { name: 'TailwindCSS', url: 'tailwind-100.png' },
-  //     { name: 'Vercel', url: 'vercel-100.png' },
-  //   ],
+  //   skillItem: [S.react, S.ts, S.tailwind, S.vercel],
   //   thumb: 'myplanit.png',
   //   images: [
   //     { url: 'myplanit_1.png', name: 'main' },

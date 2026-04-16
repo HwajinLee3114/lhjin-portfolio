@@ -203,7 +203,7 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                       {project.contribution.map((contri, cIdx) => (
                         <div key={cIdx}>
                           {contri.title && (
-                            <div className="mb-2 rounded-lg border-l-4 border-zinc-300 bg-zinc-50 py-2 pl-4 text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800/50 dark:text-zinc-300">
+                            <div className="mb-2 border-l-4 border-zinc-300 bg-zinc-50 py-2 pl-4 text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800/50 dark:text-zinc-300">
                               {contri.title}
                             </div>
                           )}
