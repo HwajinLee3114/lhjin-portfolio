@@ -262,6 +262,25 @@
 - [x] `Header.tsx` — 모바일 메뉴 `h-screen` → `h-dvh`
 - [x] 프로젝트 전체 내부 라우트 `<a>` 잔존 없음 확인
 
+### [x] 21. 윈도우/위젯 z-index 통합 (실제 OS 포커스 동작)
+
+**배경:** 위젯(Guestbook, Terminal, Music)이 윈도우 아래 깔려서 클릭해도 안 보임
+
+**원인:**
+
+- 윈도우: `windowMaxZIndex` 300부터 시작 (301, 302, 303...)
+- 위젯: `widgetMaxZIndex` 100부터 시작 (101, 102, 103...)
+- 별도 카운터라 위젯은 절대 윈도우 위로 올라갈 수 없었음
+
+**완료 내역:**
+
+- [x] `use-z-index-store.ts` — 글로벌 `maxZIndex` 단일 카운터로 통합
+- [x] `getNextWindowZIndex()`와 `getNextWidgetZIndex()` 모두 같은 카운터에서 증가
+- [x] 클릭한 윈도우/위젯이 항상 최상위로 올라옴 (실제 OS처럼)
+- [x] `use-window-store.ts` 초기화에서 `maxZIndex`도 함께 세팅
+- [x] GuestbookWidget 기본 위치 수정 (`y: 420` → `y: 60`, Dock에 가려지는 문제 해결)
+- [x] GuestbookWidget 기본 높이 수정 (`500` → `460`, 화면 내 수용)
+
 ---
 
 ## 참고: 잘 된 점 (유지할 것)

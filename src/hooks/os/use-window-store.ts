@@ -48,7 +48,7 @@ type WindowStore = {
 
 const initialWindows = loadWindowsFromStorage()
 const initialMaxZ = Math.max(300, ...Object.values(initialWindows).map((win) => win.zIndex || 0))
-useZIndexStore.setState({ windowMaxZIndex: initialMaxZ })
+useZIndexStore.setState({ maxZIndex: initialMaxZ, windowMaxZIndex: initialMaxZ })
 
 export const useWindowStore = create<WindowStore>((set) => ({
   windows: initialWindows,

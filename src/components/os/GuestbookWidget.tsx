@@ -56,12 +56,12 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const [isResizing, setIsResizing] = useState(false)
 
   const x = useMotionValue(120)
-  const y = useMotionValue(420)
+  const y = useMotionValue(60)
   const [isMobile, setIsMobile] = useState(false)
   const wasMobileRef = useRef(false)
 
-  const DEFAULT_SIZE = { width: 340, height: 500 }
-  const DEFAULT_POS = { x: 120, y: 420 }
+  const DEFAULT_SIZE = { width: 340, height: 460 }
+  const DEFAULT_POS = { x: 120, y: 60 }
 
   useEffect(() => {
     const applyViewportLayout = (w: number) => {
@@ -162,8 +162,8 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
             height: size.height,
             zIndex,
           }}
-          initial={{ opacity: 0, scale: 0.9, y: 450 }}
-          animate={{ opacity: 1, scale: 1, y: 420 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           className="pointer-events-auto flex flex-col overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
         >
