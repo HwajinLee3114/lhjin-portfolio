@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { useZIndexStore } from './use-z-index-store'
 
-const STORAGE_KEY = 'lhjin-os-windows-v1'
+const STORAGE_KEY = 'lhjin-os-windows-v2'
 
 const loadWindowsFromStorage = (): Record<string, WindowState> => {
   if (typeof window === 'undefined') return {}
@@ -55,30 +55,52 @@ export const useWindowStore = create<WindowStore>((set) => ({
 
   openWindow: (id, title) =>
     set((state) => {
-      const existing = state.windows[id]
       const nextZ = useZIndexStore.getState().getNextWindowZIndex()
+      const isClient = typeof window !== 'undefined'
+      const vw = isClient ? window.innerWidth : 1200
+      const vh = isClient ? window.innerHeight : 800
 
+      const STATUS_BAR = 32
+      const DOCK_AREA = 80
+      const availH = vh - STATUS_BAR - DOCK_AREA
+
+      const existing = state.windows[id]
       if (existing) {
+        const w = Number(existing.size.width) || 600
+        const h = Number(existing.size.height) || 400
+        const posX = Math.min(Math.max(0, existing.position.x), Math.max(0, vw - w))
+        const posY = Math.min(
+          Math.max(STATUS_BAR, existing.position.y),
+          Math.max(STATUS_BAR, vh - DOCK_AREA - Math.min(h, 100)),
+        )
+
         return {
           windows: {
             ...state.windows,
-            [id]: { ...existing, isOpen: true, isMinimized: false, zIndex: nextZ },
+            [id]: {
+              ...existing,
+              isOpen: true,
+              isMinimized: false,
+              zIndex: nextZ,
+              position: { x: posX, y: posY },
+            },
           },
         }
       }
 
-      const isClient = typeof window !== 'undefined'
-      const wWidth = isClient ? window.innerWidth : 1200
-      const wHeight = isClient ? window.innerHeight : 800
-
       const baseWidth = 1000
       const baseHeight = 700
-      const scale = Math.min((wWidth * 0.9) / baseWidth, (wHeight * 0.8) / baseHeight, 1)
+      const scale = Math.min((vw * 0.85) / baseWidth, (availH * 0.85) / baseHeight, 1)
       const targetWidth = Math.max(320, Math.round(baseWidth * scale))
       const targetHeight = Math.max(240, Math.round(baseHeight * scale))
 
-      const startX = Math.max(0, (wWidth - targetWidth) / 2) + (nextZ % 5) * 20
-      const startY = Math.max(0, (wHeight - targetHeight) / 2) + (nextZ % 5) * 20
+      const openCount = Object.values(state.windows).filter((w) => w.isOpen).length
+      const offset = (openCount % 4) * 24
+
+      const centerX = (vw - targetWidth) / 2
+      const centerY = STATUS_BAR + (availH - targetHeight) / 2
+      const startX = Math.max(0, Math.min(centerX + offset, vw - targetWidth))
+      const startY = Math.max(STATUS_BAR, Math.min(centerY + offset, vh - DOCK_AREA - 100))
 
       return {
         windows: {

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import {
@@ -37,9 +37,35 @@ const careerWithProjects = career.map((c) => ({
     .reverse(),
 }))
 
+const sectionIds = ['about', 'skills', 'projects', 'career'] as const
+
 export default function ResumePage() {
   const [openCareer, setOpenCareer] = useState<Record<string, boolean>>({})
   const [filter, setFilter] = useState('feature')
+  const [activeSection, setActiveSection] = useState<string>('about')
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    const entries = new Map<string, boolean>()
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          entries.set(id, entry.isIntersecting)
+          const visible = sectionIds.filter((s) => entries.get(s))
+          if (visible.length > 0) setActiveSection(visible[0])
+        },
+        { rootMargin: '-20% 0px -60% 0px', threshold: 0 },
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
 
   const sortedCareer = useMemo(
     () => [...careerWithProjects].sort((a, b) => parseInt(b.id) - parseInt(a.id)),
@@ -65,13 +91,21 @@ export default function ResumePage() {
             LHJIN
           </a>
           <div className="flex items-center gap-6">
-            {['about', 'skills', 'projects', 'career'].map((id) => (
+            {sectionIds.map((id) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className="text-xs font-bold uppercase tracking-widest text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-white"
+                className={cn(
+                  'hidden text-xs font-bold uppercase tracking-widest transition-colors sm:inline-block',
+                  activeSection === id
+                    ? 'text-zinc-900 dark:text-white'
+                    : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-white',
+                )}
               >
                 {id}
+                {activeSection === id && (
+                  <span className="block mx-auto mt-1 h-0.5 w-full rounded-full bg-zinc-900 dark:bg-white" />
+                )}
               </a>
             ))}
             <a

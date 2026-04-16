@@ -1,8 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { X, Minus, Maximize2, GripHorizontal } from 'lucide-react'
-import { ReactNode, useRef, useState, useEffect, forwardRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { X, Minus, Maximize2, GripHorizontal, ChevronUp } from 'lucide-react'
+import { ReactNode, useRef, useState, useEffect, useCallback, forwardRef } from 'react'
 
 import { useWindowStore, WindowState } from '@/hooks/os/use-window-store'
 import { cn } from '@/lib/utils'
@@ -21,6 +21,8 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
 
   const [isResizing, setIsResizing] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [showScrollTop, setShowScrollTop] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(globalThis.window.innerWidth < 768)
@@ -114,6 +116,16 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
     }
   }, [isResizing, window.id, updateSize, updatePosition])
 
+  const handleContentScroll = useCallback(() => {
+    if (scrollRef.current) {
+      setShowScrollTop(scrollRef.current.scrollTop > 200)
+    }
+  }, [])
+
+  const scrollToTop = useCallback(() => {
+    scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   if (window.isMinimized) return null
 
   const isEffectivelyMaximized = window.isMaximized || isMobile
@@ -124,10 +136,15 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
       drag={!isEffectivelyMaximized && !isResizing}
       dragMomentum={false}
       onDragEnd={(_, info) => {
+        const newX = window.position.x + info.offset.x
+        const newY = window.position.y + info.offset.y
+        const vw = globalThis.window.innerWidth
+        const vh = globalThis.window.innerHeight
+        const w = Number(window.size.width) || 400
         updatePosition(
           window.id,
-          window.position.x + info.offset.x,
-          window.position.y + info.offset.y,
+          Math.max(-w + 100, Math.min(newX, vw - 100)),
+          Math.max(0, Math.min(newY, vh - 60)),
         )
       }}
       onPointerDown={() => focusWindow(window.id)}
@@ -233,8 +250,26 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
         </div>
       </div>
 
-      <div className={cn('relative flex-1 overflow-auto bg-white custom-scrollbar')}>
+      <div
+        ref={scrollRef}
+        onScroll={handleContentScroll}
+        className={cn('relative flex-1 overflow-auto bg-white custom-scrollbar')}
+      >
         {children}
+        <AnimatePresence>
+          {showScrollTop && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={scrollToTop}
+              aria-label="맨 위로 이동"
+              className="sticky bottom-4 left-[calc(100%-3.5rem)] z-40 flex h-9 w-9 items-center justify-center rounded-full bg-zinc-900/80 text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-zinc-900"
+            >
+              <ChevronUp size={18} />
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   )

@@ -1,5 +1,7 @@
 'use client'
 
+import { FileText } from 'lucide-react'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export function StatusBar() {
@@ -37,6 +39,14 @@ export function StatusBar() {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4 shrink-0 pl-2">
+        <Link
+          href="/resume"
+          className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-bold text-zinc-500 transition-colors hover:bg-black/5 hover:text-zinc-900"
+        >
+          <FileText size={12} />
+          <span className="hidden sm:inline">이력서</span>
+        </Link>
+        <div className="h-3 w-[1px] bg-zinc-300" />
         <span className="hidden sm:inline">{formattedDate}</span>
         <span className="font-bold">{formattedTime}</span>
       </div>
