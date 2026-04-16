@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Monitor, FileText, Github, Globe, Mail } from 'lucide-react'
 
-const coreSkills = ['React', 'Next.js', 'TypeScript', 'Tailwind CSS']
+import { profile } from '@/data/profile'
 
 export default function LandingPage() {
   return (
@@ -18,8 +18,8 @@ export default function LandingPage() {
       >
         <div className="relative mx-auto mb-6 h-28 w-28 overflow-hidden rounded-[2rem] border-4 border-white shadow-xl dark:border-zinc-800">
           <Image
-            src="/images/profile.jpeg"
-            alt="이화진"
+            src={profile.profileImage}
+            alt={profile.name}
             fill
             sizes="112px"
             className="object-cover"
@@ -28,20 +28,16 @@ export default function LandingPage() {
         </div>
 
         <h1 className="mb-1 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
-          이화진
+          {profile.name}
         </h1>
-        <p className="mb-2 text-sm font-bold text-zinc-400">Frontend Developer</p>
-        <p className="mb-6 text-xs leading-relaxed text-zinc-400">
-          변화에 유연하게 대응하며,
-          <br />
-          사용자를 중심으로 경험을 개선하는 개발자입니다.
-        </p>
+        <p className="mb-2 text-sm font-bold text-zinc-400">{profile.role}</p>
+        <p className="mb-6 text-xs leading-relaxed text-zinc-400">{profile.intro}</p>
 
         <div className="mx-auto mb-8 flex justify-center gap-3">
           {[
-            { href: 'https://github.com/HwajinLee3114', icon: Github, label: 'GitHub' },
-            { href: 'https://lhjini.tistory.com', icon: Globe, label: 'Blog' },
-            { href: 'mailto:hwajin3114@gmail.com', icon: Mail, label: 'Email' },
+            { href: profile.social.github, icon: Github, label: 'GitHub' },
+            { href: profile.social.blog, icon: Globe, label: 'Blog' },
+            { href: `mailto:${profile.email}`, icon: Mail, label: 'Email' },
           ].map((link) => (
             <a
               key={link.label}
@@ -57,7 +53,7 @@ export default function LandingPage() {
         </div>
 
         <div className="mb-8 flex flex-wrap justify-center gap-1.5">
-          {coreSkills.map((skill) => (
+          {profile.coreSkills.map((skill) => (
             <span
               key={skill}
               className="rounded-lg bg-zinc-100 px-3 py-1.5 text-[11px] font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"

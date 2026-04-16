@@ -171,7 +171,8 @@
 - [x] `StatusBar.tsx` — macOS 스타일 드롭다운 메뉴 ("메뉴 ▾" → 문서 모드 / 이력서 미리보기)
 - [x] 드롭다운 `fixed` + `z-[1001]`로 윈도우 위에 정상 표시
 - [x] 바깥 클릭 시 자동 닫힘
-- [x] `resume/preview` 돌아가기 버튼: `Link href="/resume"` → `router.back()`으로 변경 (진입 경로로 정확히 복귀)
+- [x] `resume/preview` 돌아가기 버튼: `Link href="/resume"` → `router.back()`으로 변경 (진입 경로로
+      정확히 복귀)
 
 ---
 
@@ -280,6 +281,23 @@
 - [x] `use-window-store.ts` 초기화에서 `maxZIndex`도 함께 세팅
 - [x] GuestbookWidget 기본 위치 수정 (`y: 420` → `y: 60`, Dock에 가려지는 문제 해결)
 - [x] GuestbookWidget 기본 높이 수정 (`500` → `460`, 화면 내 수용)
+
+---
+
+### [x] 22. 프로필 정보 상수 통합
+
+**배경:** 이메일, 이름, 소개 문구, 소셜 링크가 7개 파일에 하드코딩 중복
+
+**완료 내역:**
+
+- [x] `src/data/profile.ts` 생성 — 이름, 직함, 이메일, 소개, 소셜 링크, 프로필 이미지, 핵심 기술 통합
+- [x] `page.tsx` (랜딩) — `profile.*` 참조로 전환
+- [x] `about/page.tsx` — 동일
+- [x] `resume/page.tsx` — 동일
+- [x] `resume/preview/page.tsx` — 동일
+- [x] `StatusBar.tsx` — 동일
+- [x] `ProfileCircle.tsx` — 동일
+- [x] 이제 `profile.ts` 한 곳만 수정하면 전체 반영
 
 ---
 

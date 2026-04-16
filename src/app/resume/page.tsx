@@ -19,6 +19,7 @@ import Link from 'next/link'
 import { projects } from '@/data/projects'
 import { skills } from '@/data/skills'
 import { sortedCareer } from '@/data/career'
+import { profile } from '@/data/profile'
 import { formatPeriod } from '@/lib/period'
 import { cn } from '@/lib/utils'
 import SlideButton from '@/components/button/SlideButton'
@@ -120,8 +121,8 @@ export default function ResumePage() {
           <div className="relative shrink-0">
             <div className="relative h-40 w-40 rotate-3 overflow-hidden rounded-[3rem] border-4 border-white bg-zinc-100 shadow-xl transition-transform duration-500 hover:rotate-0 dark:border-zinc-800">
               <Image
-                src="/images/profile.jpeg"
-                alt="이화진 프로필"
+                src={profile.profileImage}
+                alt={profile.name}
                 fill
                 sizes="160px"
                 className="object-cover"
@@ -132,13 +133,13 @@ export default function ResumePage() {
 
           <div className="flex-1 text-center md:text-left">
             <div className="mb-4 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-              <h1 className="text-4xl font-black tracking-tight">이화진</h1>
+              <h1 className="text-4xl font-black tracking-tight">{profile.name}</h1>
               <span className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-600 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
-                Frontend Developer
+                {profile.role}
               </span>
             </div>
             <p className="mb-6 text-lg font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
-              변화에 유연하게 대응하며, 사용자를 중심으로 경험을 개선하는 개발자입니다.
+              {profile.intro}
             </p>
             <div className="flex flex-wrap justify-center gap-3 md:justify-start">
               <SlideButton
@@ -148,7 +149,7 @@ export default function ResumePage() {
                 color="#dbeafe"
               />
               <a
-                href="mailto:hwajin3114@gmail.com"
+                href={`mailto:${profile.email}`}
                 className="flex items-center gap-2 rounded-2xl bg-zinc-50 px-5 py-3.5 text-sm font-black text-zinc-900 transition-colors hover:bg-zinc-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
               >
                 <Mail size={18} />
@@ -164,21 +165,11 @@ export default function ResumePage() {
           className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3"
         >
           {[
-            {
-              title: 'GitHub',
-              url: 'https://github.com/HwajinLee3114',
-              icon: Github,
-              desc: '소스 코드 저장소',
-            },
-            {
-              title: 'Tistory',
-              url: 'https://lhjini.tistory.com',
-              icon: Globe,
-              desc: '기술 블로그',
-            },
+            { title: 'GitHub', url: profile.social.github, icon: Github, desc: '소스 코드 저장소' },
+            { title: 'Tistory', url: profile.social.blog, icon: Globe, desc: '기술 블로그' },
             {
               title: 'LinkedIn',
-              url: 'https://www.linkedin.com/in/hwajinlee',
+              url: profile.social.linkedin,
               icon: Linkedin,
               desc: '커리어 네트워크',
             },

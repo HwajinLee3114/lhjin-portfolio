@@ -4,6 +4,8 @@ import { FileText, Eye, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
+import { profile } from '@/data/profile'
+
 export function StatusBar() {
   const [time, setTime] = useState(new Date())
   const [menuOpen, setMenuOpen] = useState(false)
@@ -94,7 +96,9 @@ export function StatusBar() {
         </div>
 
         <div className="h-3 w-[1px] bg-zinc-300 shrink-0" />
-        <span className="text-zinc-500 truncate hidden sm:inline">이화진 (Frontend Developer)</span>
+        <span className="text-zinc-500 truncate hidden sm:inline">
+          {profile.name} ({profile.role})
+        </span>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4 shrink-0 pl-2">

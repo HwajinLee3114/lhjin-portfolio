@@ -7,27 +7,22 @@ import { Github, Mail, Linkedin, FileText, Globe } from 'lucide-react'
 
 import SlideButton from '@/components/button/SlideButton'
 import SectionFrame from '@/components/common/SectionFrame'
+import { profile } from '@/data/profile'
 
 export default function About() {
   const socialLinks = [
     {
       id: 'github',
       title: 'GitHub',
-      url: 'https://github.com/HwajinLee3114',
+      url: profile.social.github,
       icon: Github,
       desc: '소스 코드 저장소',
     },
-    {
-      id: 'blog',
-      title: 'Tistory',
-      url: 'https://lhjini.tistory.com',
-      icon: Globe,
-      desc: '기술 블로그',
-    },
+    { id: 'blog', title: 'Tistory', url: profile.social.blog, icon: Globe, desc: '기술 블로그' },
     {
       id: 'linkedin',
       title: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/hwajinlee',
+      url: profile.social.linkedin,
       icon: Linkedin,
       desc: '커리어 네트워크',
     },
@@ -44,8 +39,8 @@ export default function About() {
           <div className="relative shrink-0">
             <div className="relative h-36 w-36 md:h-48 md:w-48 rotate-3 overflow-hidden rounded-[2.25rem] md:rounded-[3rem] border-4 border-white bg-zinc-100 shadow-xl transition-transform duration-500 hover:rotate-0 dark:border-zinc-900 dark:bg-zinc-800">
               <Image
-                src="/images/profile.jpeg"
-                alt="Profile"
+                src={profile.profileImage}
+                alt={profile.name}
                 fill
                 sizes="(max-width: 768px) 144px, 192px"
                 className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
@@ -60,16 +55,15 @@ export default function About() {
           <div className="flex-1 pt-1 text-center md:text-left">
             <div className="mb-5 flex flex-wrap items-center justify-center gap-2 md:justify-start">
               <h3 className="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white">
-                이화진
+                {profile.name}
               </h3>
               <span className="rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-[9px] md:text-[10px] font-black uppercase tracking-widest text-blue-600 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
-                Frontend Developer
+                {profile.role}
               </span>
             </div>
 
             <p className="mb-6 text-base md:text-md font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
-              변화에 유연하게 대응하며, <br className="hidden md:block" />
-              사용자를 중심으로 경험을 개선하는 개발자입니다.
+              {profile.intro}
             </p>
 
             <div className="flex flex-col justify-center gap-3 md:flex-row md:flex-wrap md:justify-start">
@@ -80,7 +74,7 @@ export default function About() {
                 color="#dbeafe"
               />{' '}
               <a
-                href="mailto:hwajin3114@gmail.com"
+                href={`mailto:${profile.email}`}
                 className="flex items-center justify-center gap-2 rounded-2xl bg-zinc-50 px-5 py-3.5 text-xs md:text-sm font-black text-zinc-900 transition-colors hover:bg-zinc-100 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
               >
                 <Mail size={18} />

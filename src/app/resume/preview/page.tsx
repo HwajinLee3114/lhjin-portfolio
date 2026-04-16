@@ -7,6 +7,7 @@ import { Printer, ArrowLeft } from 'lucide-react'
 import { projects } from '@/data/projects'
 import { skills } from '@/data/skills'
 import { sortedCareer } from '@/data/career'
+import { profile } from '@/data/profile'
 import { formatPeriod } from '@/lib/period'
 
 export default function ResumePreviewPage() {
@@ -35,22 +36,20 @@ export default function ResumePreviewPage() {
         <div className="overflow-hidden rounded-lg bg-white shadow-xl print:rounded-none print:shadow-none">
           <div className="space-y-3 p-10 print:px-16 print:py-12">
             <header className="border-b-2 border-zinc-900 pb-5">
-              <h1 className="mb-1 text-3xl font-black tracking-tight text-zinc-900">이화진</h1>
-              <p className="mb-4 text-base font-bold text-zinc-500">Frontend Developer</p>
+              <h1 className="mb-1 text-3xl font-black tracking-tight text-zinc-900">
+                {profile.name}
+              </h1>
+              <p className="mb-4 text-base font-bold text-zinc-500">{profile.role}</p>
               <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-zinc-600">
-                <span>hwajin3114@gmail.com</span>
-                <span>github.com/HwajinLee3114</span>
-                <span>lhjini.tistory.com</span>
+                <span>{profile.email}</span>
+                <span>{profile.social.github.replace('https://', '')}</span>
+                <span>{profile.social.blog.replace('https://', '')}</span>
               </div>
             </header>
 
             <section>
               <SectionTitle>소개</SectionTitle>
-              <p className="text-sm leading-relaxed text-zinc-700">
-                변화에 유연하게 대응하며, 사용자를 중심으로 경험을 개선하는 프론트엔드 개발자입니다.
-                React, Next.js, TypeScript 기반의 웹 애플리케이션 개발 경험을 보유하고 있으며, SI
-                환경에서 풀스택 개발을 수행한 경험이 있습니다.
-              </p>
+              <p className="text-sm leading-relaxed text-zinc-700">{profile.introResume}</p>
             </section>
 
             <section>
