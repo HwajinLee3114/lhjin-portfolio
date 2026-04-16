@@ -10,47 +10,44 @@ import { skills } from '@/data/skills'
 export default function Skills() {
   return (
     <SectionFrame id="skills" title="Tech Stack">
-      <div className="space-y-10">
+      <div className="space-y-8">
         {skills.map((category, idx) => (
           <motion.div
             key={category.title}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="group flex flex-col items-start gap-8 md:flex-row"
+            transition={{ delay: idx * 0.08 }}
+            className="group flex flex-col gap-5 md:flex-row md:items-start"
           >
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-zinc-50 transition-colors group-hover:bg-zinc-100 dark:bg-zinc-800/50 dark:group-hover:bg-zinc-800">
-              <Image
-                src={category.img}
-                alt={category.title}
-                width={48}
-                height={48}
-                className="object-contain grayscale transition-all duration-500 group-hover:grayscale-0"
-              />
+            <div className="flex items-center gap-3 md:w-32 md:shrink-0 md:pt-1">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-50 transition-colors group-hover:bg-zinc-100 dark:bg-zinc-800/50 dark:group-hover:bg-zinc-800">
+                <Image
+                  src={category.img}
+                  alt={category.title}
+                  width={28}
+                  height={28}
+                  className="object-contain grayscale transition-all duration-500 group-hover:grayscale-0"
+                />
+              </div>
+              <h3 className="text-base font-black text-zinc-900 dark:text-white">
+                {category.title}
+              </h3>
             </div>
 
-            <div className="flex-1 pt-1">
-              <h3 className="mb-4 flex items-center gap-3 text-lg font-black text-zinc-900 dark:text-white">
-                {category.title}
-                <span className="h-[1px] flex-1 bg-zinc-100 dark:bg-zinc-800" />
-              </h3>
-
-              <div className="flex flex-wrap gap-3">
-                {category.skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group/item relative rounded-2xl bg-zinc-50 px-5 py-2.5 transition-all hover:bg-zinc-100 dark:bg-[#273038] dark:hover:bg-zinc-700"
-                  >
-                    <span className="text-sm font-bold text-zinc-600 transition-colors group-hover/item:text-zinc-900 dark:text-zinc-300 dark:group-hover/item:text-white">
-                      {skill.name}
-                    </span>
-                    <div
-                      className="absolute bottom-0 left-1/2 h-[3px] w-0 -translate-x-1/2 rounded-full transition-all group-hover/item:w-1/2"
-                      style={{ backgroundColor: skill.color }}
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-1 flex-wrap gap-2">
+              {category.skills.map((skill) => (
+                <span
+                  key={skill.name}
+                  className="rounded-xl px-3.5 py-2 text-xs font-bold transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    backgroundColor: `${skill.color}18`,
+                    color: skill.color,
+                    border: `1px solid ${skill.color}25`,
+                  }}
+                >
+                  {skill.name}
+                </span>
+              ))}
             </div>
           </motion.div>
         ))}

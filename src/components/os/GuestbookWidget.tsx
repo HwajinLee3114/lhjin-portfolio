@@ -44,6 +44,9 @@ const formatTimeAgo = (dateStr: string) => {
   return `${days}d ago`
 }
 
+const DEFAULT_SIZE = { width: 340, height: 460 }
+const DEFAULT_POS = { x: 120, y: 60 }
+
 export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const { widgets, focusWidget, initWidget } = useWidgetStore()
   const widgetId = 'guestbook'
@@ -55,16 +58,13 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const [submitting, setSubmitting] = useState(false)
   const [cooldown, setCooldown] = useState(false)
 
-  const [size, setSize] = useState({ width: 340, height: 460 })
+  const [size, setSize] = useState({ width: DEFAULT_SIZE.width, height: DEFAULT_SIZE.height })
   const [isResizing, setIsResizing] = useState(false)
 
-  const x = useMotionValue(120)
-  const y = useMotionValue(60)
+  const x = useMotionValue(DEFAULT_POS.x)
+  const y = useMotionValue(DEFAULT_POS.y)
   const [isMobile, setIsMobile] = useState(false)
   const wasMobileRef = useRef(false)
-
-  const DEFAULT_SIZE = { width: 340, height: 460 }
-  const DEFAULT_POS = { x: 120, y: 60 }
 
   const fetchEntries = useCallback(async () => {
     setLoading(true)

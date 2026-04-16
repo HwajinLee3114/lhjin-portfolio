@@ -451,11 +451,13 @@
 
 ### [x] 35. 이미지 미리보기 닫기 시 프로젝트 모달까지 닫히는 버그
 
-**원인:** ImagePreviewModal의 ModalOverlay 닫기 클릭 이벤트가 아래 ProjectCard의 ModalOverlay까지 전파
+**원인:** ImagePreviewModal의 ModalOverlay 닫기 클릭 이벤트가 아래 ProjectCard의 ModalOverlay까지
+전파
 
 **완료 내역:**
 
-- [x] `ModalOverlay.tsx` — `onClick` → `e.target === e.currentTarget` 체크 추가 (배경만 클릭 시 닫기)
+- [x] `ModalOverlay.tsx` — `onClick` → `e.target === e.currentTarget` 체크 추가 (배경만 클릭 시
+      닫기)
 - [x] 이벤트 버블링으로 인한 중첩 모달 동시 닫힘 방지
 
 ---
@@ -480,7 +482,8 @@
 
 ### [x] 37. 이미지 미리보기 UI 리디자인
 
-**배경:** 미리보기 창이 프로젝트 모달 헤더와 겹쳐서 닫기 버튼이 안 보임. 외부 이미지(`b2close-100.png`) 사용.
+**배경:** 미리보기 창이 프로젝트 모달 헤더와 겹쳐서 닫기 버튼이 안 보임. 외부
+이미지(`b2close-100.png`) 사용.
 
 **완료 내역:**
 
@@ -491,6 +494,21 @@
 - [x] 줌 비율 실시간 표시 (100%, 120% 등)
 - [x] 이미지 `max-h-[80dvh]` + `rounded-lg shadow-2xl` 적용
 - [x] Framer Motion 진입/퇴장 애니메이션
+
+---
+
+### [x] 38. Skills 페이지 UI 리디자인
+
+**배경:** 카테고리별 가로 나열 + hover 시 하단 라인만 있어서 밋밋함
+
+**완료 내역:**
+
+- [x] 1행 1카테고리 카드 레이아웃 유지 (유저 피드백으로 grid-2 → 세로 리스트 복원)
+- [x] 각 행을 카드로 감싸기 (`border` + `rounded-2xl` + `hover:shadow-md`)
+- [x] 스킬 배지: 회색 배경 → 실제 브랜드 색상 적용 (`skill.color` + `skill.txtcolor`)
+- [x] 배지 인터랙션: `hover:-translate-y-0.5 hover:shadow-md`
+- [x] 카테고리 아이콘 크기 축소 (80px → 40px)
+- [x] GuestbookWidget `DEFAULT_SIZE`/`DEFAULT_POS` 상수를 컴포넌트 외부로 이동 (ESLint warning 해결)
 
 ---
 
