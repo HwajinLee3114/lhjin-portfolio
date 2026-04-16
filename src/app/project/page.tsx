@@ -4,7 +4,7 @@ import ProjectsSection from '@/components/project/ProjectsSection'
 
 export default function ProjectsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen" />}>
+    <Suspense fallback={<div className="min-h-dvh" />}>
       <ProjectsSection />
     </Suspense>
   )

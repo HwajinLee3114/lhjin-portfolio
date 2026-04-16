@@ -76,9 +76,9 @@ export default function ResumePage() {
     <div className="min-h-dvh bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
       <nav className="sticky top-0 z-50 border-b border-zinc-100 bg-white/80 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/80">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <a href="/os" className="text-sm font-black tracking-tighter">
+          <Link href="/os" className="text-sm font-black tracking-tighter">
             LHJIN
-          </a>
+          </Link>
           <div className="flex items-center gap-6">
             {sectionIds.map((id) => (
               <a
@@ -104,13 +104,13 @@ export default function ResumePage() {
               <FileText size={14} />
               이력서 미리보기
             </Link>
-            <a
+            <Link
               href="/os"
               className="flex items-center gap-1.5 rounded-full bg-zinc-900 px-4 py-2 text-[11px] font-black text-white transition-all hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
             >
               <Monitor size={14} />
               OS 모드
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
@@ -450,12 +450,12 @@ export default function ResumePage() {
           <span className="text-xs font-bold text-zinc-400">
             &copy; {new Date().getFullYear()} LHJIN
           </span>
-          <a
+          <Link
             href="/os"
             className="text-xs font-bold text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-white"
           >
             OS 모드로 보기 →
-          </a>
+          </Link>
         </div>
       </footer>
     </div>

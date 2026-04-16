@@ -105,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         </button>
       </div>
       <nav
-        className={`shadow-md fixed top-0 right-0 bg-themacolor1 h-screen w-3/4 md:hidden transition-transform duration-300 ${
+        className={`shadow-md fixed top-0 right-0 bg-themacolor1 h-dvh w-3/4 md:hidden transition-transform duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         } z-50`}
       >

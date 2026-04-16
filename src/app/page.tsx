@@ -1,52 +1,91 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Monitor, FileText } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { Monitor, FileText, Github, Globe, Mail } from 'lucide-react'
+
+const coreSkills = ['React', 'Next.js', 'TypeScript', 'Tailwind CSS']
 
 export default function LandingPage() {
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center bg-white px-6 dark:bg-zinc-950">
+    <main className="flex min-h-dvh flex-col items-center justify-center bg-white px-6 py-16 dark:bg-zinc-950">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-lg text-center"
+        className="w-full max-w-md text-center"
       >
-        <h1 className="mb-2 text-4xl font-black tracking-tighter text-zinc-900 dark:text-white md:text-5xl">
-          LHJIN
+        <div className="relative mx-auto mb-6 h-28 w-28 overflow-hidden rounded-[2rem] border-4 border-white shadow-xl dark:border-zinc-800">
+          <Image
+            src="/images/profile.jpeg"
+            alt="이화진"
+            fill
+            sizes="112px"
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        <h1 className="mb-1 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
+          이화진
         </h1>
-        <p className="mb-12 text-sm font-medium text-zinc-400">
-          프론트엔드 개발자 이화진 포트폴리오
+        <p className="mb-2 text-sm font-bold text-zinc-400">Frontend Developer</p>
+        <p className="mb-6 text-xs leading-relaxed text-zinc-400">
+          변화에 유연하게 대응하며,
+          <br />
+          사용자를 중심으로 경험을 개선하는 개발자입니다.
         </p>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+        <div className="mx-auto mb-8 flex justify-center gap-3">
+          {[
+            { href: 'https://github.com/HwajinLee3114', icon: Github, label: 'GitHub' },
+            { href: 'https://lhjini.tistory.com', icon: Globe, label: 'Blog' },
+            { href: 'mailto:hwajin3114@gmail.com', icon: Mail, label: 'Email' },
+          ].map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith('mailto') ? undefined : '_blank'}
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 text-zinc-500 transition-all hover:bg-zinc-900 hover:text-white dark:bg-zinc-800 dark:hover:bg-white dark:hover:text-zinc-900"
+            >
+              <link.icon size={16} />
+            </a>
+          ))}
+        </div>
+
+        <div className="mb-8 flex flex-wrap justify-center gap-1.5">
+          {coreSkills.map((skill) => (
+            <span
+              key={skill}
+              className="rounded-lg bg-zinc-100 px-3 py-1.5 text-[11px] font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link
             href="/resume"
-            className="group flex items-center justify-center gap-3 rounded-2xl border border-zinc-200 bg-white px-8 py-5 text-sm font-black text-zinc-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:hover:border-zinc-500"
+            className="group flex items-center justify-center gap-2.5 rounded-2xl border border-zinc-200 bg-white px-6 py-4 text-sm font-black text-zinc-900 transition-all hover:-translate-y-0.5 hover:shadow-lg dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
           >
-            <FileText size={20} className="transition-transform group-hover:scale-110" />
-            <div className="text-left">
-              <div className="text-base">이력서 보기</div>
-              <div className="text-[11px] font-medium text-zinc-400">문서형 · 빠른 탐색</div>
-            </div>
+            <FileText size={18} className="transition-transform group-hover:scale-110" />
+            이력서 보기
           </Link>
 
           <Link
             href="/os"
-            className="group flex items-center justify-center gap-3 rounded-2xl bg-zinc-900 px-8 py-5 text-sm font-black text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg dark:bg-white dark:text-zinc-900"
+            className="group flex items-center justify-center gap-2.5 rounded-2xl bg-zinc-900 px-6 py-4 text-sm font-black text-white transition-all hover:-translate-y-0.5 hover:shadow-lg dark:bg-white dark:text-zinc-900"
           >
-            <Monitor size={20} className="transition-transform group-hover:scale-110" />
-            <div className="text-left">
-              <div className="text-base">체험하기</div>
-              <div className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">
-                OS 시뮬레이터 · 인터랙티브
-              </div>
-            </div>
+            <Monitor size={18} className="transition-transform group-hover:scale-110" />
+            포트폴리오 둘러보기
           </Link>
         </div>
 
-        <p className="mt-8 text-[11px] text-zinc-300 dark:text-zinc-600">
+        <p className="mt-6 text-[10px] text-zinc-300 dark:text-zinc-600">
           모바일에서는 이력서 보기를 권장합니다
         </p>
       </motion.div>
