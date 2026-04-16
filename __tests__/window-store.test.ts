@@ -22,7 +22,10 @@ describe('useWindowStore', () => {
     expect(typeof win.size.width).toBe('number')
     expect(typeof win.size.height).toBe('number')
 
-    const expectedScale = Math.min((800 * 0.9) / 1000, (600 * 0.8) / 700, 1)
+    const STATUS_BAR = 32
+    const DOCK_AREA = 80
+    const availH = 600 - STATUS_BAR - DOCK_AREA
+    const expectedScale = Math.min((800 * 0.85) / 1000, (availH * 0.85) / 700, 1)
     const expectedWidth = Math.max(320, Math.round(1000 * expectedScale))
     const expectedHeight = Math.max(240, Math.round(700 * expectedScale))
 
