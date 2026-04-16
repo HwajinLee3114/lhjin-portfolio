@@ -1,6 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Star, Users, MonitorSmartphone, ExternalLink, type LucideIcon } from 'lucide-react'
+import {
+  X,
+  Star,
+  Users,
+  MonitorSmartphone,
+  ExternalLink,
+  Smartphone,
+  type LucideIcon,
+} from 'lucide-react'
 
 import { getProjectById } from '@/data/projects'
 import { ImagePreviewModal } from '@/components/common/ImagePreviewModal'
@@ -146,8 +154,8 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                   {project.description}
                 </p>
 
-                {(project.git || project.site) && (
-                  <div className="flex gap-3 border-t border-zinc-100 pt-5 dark:border-zinc-800">
+                {(project.git || project.site || project.ios || project.android) && (
+                  <div className="flex flex-wrap gap-3 border-t border-zinc-100 pt-5 dark:border-zinc-800">
                     {project.git && (
                       <a
                         href={project.git}
@@ -168,6 +176,28 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                       >
                         <ExternalLink size={12} />
                         사이트
+                      </a>
+                    )}
+                    {project.ios && (
+                      <a
+                        href={project.ios}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 rounded-xl bg-zinc-900 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+                      >
+                        <Smartphone size={12} />
+                        App Store
+                      </a>
+                    )}
+                    {project.android && (
+                      <a
+                        href={project.android}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 rounded-xl bg-emerald-50 px-4 py-2 text-xs font-bold text-emerald-600 transition-colors hover:bg-emerald-600 hover:text-white dark:bg-emerald-900/20 dark:text-emerald-400 dark:hover:bg-emerald-600 dark:hover:text-white"
+                      >
+                        <Smartphone size={12} />
+                        Google Play
                       </a>
                     )}
                   </div>

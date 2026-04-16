@@ -28,6 +28,8 @@ const ProjectSchema = z.object({
   periodEnd: z.string().optional(),
   git: z.string().optional(),
   site: z.string().optional(),
+  ios: z.string().optional(),
+  android: z.string().optional(),
   filter: z.array(FilterTagSchema),
   description: z.string(),
   feature: z.array(z.string()),
