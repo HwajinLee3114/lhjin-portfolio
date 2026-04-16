@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import { Printer, ArrowLeft } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 
 import { projects } from '@/data/projects'
 import { skills } from '@/data/skills'
@@ -23,13 +23,13 @@ export default function ResumePreviewPage() {
           <ArrowLeft size={16} />
           돌아가기
         </button>
-        <button
+        {/* <button
           onClick={() => globalThis.window.print()}
           className="flex items-center gap-2 rounded-xl bg-zinc-900 px-5 py-2.5 text-xs font-black text-white transition-colors hover:bg-zinc-700"
         >
           <Printer size={14} />
           인쇄 / PDF 저장
-        </button>
+        </button> */}
       </div>
 
       <div className="mx-auto max-w-[210mm] px-4 py-8 print:max-w-none print:px-0 print:py-0">

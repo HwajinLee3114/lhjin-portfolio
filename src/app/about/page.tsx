@@ -9,10 +9,14 @@ import SlideButton from '@/components/button/SlideButton'
 import SectionFrame from '@/components/common/SectionFrame'
 import { profile } from '@/data/profile'
 
+type ContributionDay = { date: string; count: number; level: number }
+
 type GitHubData = {
   publicRepos: number
   followers: number
   recentRepos: { name: string; url: string; updatedAt: string }[]
+  contributions: ContributionDay[]
+  totalContributions: number
 }
 
 export default function About() {
@@ -127,41 +131,63 @@ export default function About() {
           })}
         </div>
 
-        {github && github.recentRepos.length > 0 && (
+        {github && github.contributions.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-8 rounded-2xl border border-zinc-100 bg-zinc-50/50 p-6 dark:border-zinc-800 dark:bg-zinc-800/30"
           >
-            <div className="mb-4 flex items-center gap-2">
+            <div className="mb-3 flex items-center gap-2">
               <GitBranch size={14} className="text-zinc-400" />
               <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">
-                Recent GitHub Activity
-              </span>
-              <span className="ml-auto text-[10px] font-bold text-zinc-300">
-                {github.publicRepos} repos
+                {github.totalContributions} contributions in last year
               </span>
             </div>
-            <div className="space-y-2">
-              {github.recentRepos.map((repo) => (
-                <a
-                  key={repo.name}
-                  href={repo.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between rounded-xl px-3 py-2 text-xs transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700"
-                >
-                  <span className="font-bold text-zinc-700 dark:text-zinc-300">{repo.name}</span>
-                  <span className="text-[10px] text-zinc-400">
-                    {new Date(repo.updatedAt).toLocaleDateString('ko-KR')}
-                  </span>
-                </a>
-              ))}
-            </div>
+            <ContributionGraph contributions={github.contributions} />
           </motion.div>
         )}
       </div>
     </SectionFrame>
+  )
+}
+
+const LEVEL_COLORS = [
+  'bg-zinc-100 dark:bg-zinc-800',
+  'bg-emerald-200 dark:bg-emerald-900',
+  'bg-emerald-400 dark:bg-emerald-700',
+  'bg-emerald-500 dark:bg-emerald-500',
+  'bg-emerald-700 dark:bg-emerald-400',
+]
+
+function ContributionGraph({ contributions }: { contributions: ContributionDay[] }) {
+  const weeks: ContributionDay[][] = []
+  let currentWeek: ContributionDay[] = []
+
+  contributions.forEach((day, i) => {
+    const dayOfWeek = new Date(day.date).getDay()
+    if (dayOfWeek === 0 && i > 0) {
+      weeks.push(currentWeek)
+      currentWeek = []
+    }
+    currentWeek.push(day)
+  })
+  if (currentWeek.length > 0) weeks.push(currentWeek)
+
+  return (
+    <div className="overflow-x-auto">
+      <div className="flex gap-[3px]">
+        {weeks.map((week, wIdx) => (
+          <div key={wIdx} className="flex flex-col gap-[3px]">
+            {week.map((day) => (
+              <div
+                key={day.date}
+                title={`${day.date}: ${day.count} contributions`}
+                className={`h-[11px] w-[11px] rounded-sm ${LEVEL_COLORS[day.level] || LEVEL_COLORS[0]}`}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }

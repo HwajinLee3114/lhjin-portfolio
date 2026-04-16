@@ -1,16 +1,17 @@
 'use client'
 
 import { AnimatePresence } from 'framer-motion'
-import { Music, Heart, Terminal } from 'lucide-react'
+import { Music, Heart, Terminal, Github } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react'
 
 import { DesktopIcon } from './DesktopIcon'
 import { Dock } from './Dock'
+import { GitHubWidget } from './GitHubWidget'
 import { GuestbookWidget } from './GuestbookWidget'
 import { MiniTerminalWidget } from './MiniTerminalWidget'
 import { MusicPlayer } from './MusicPlayer'
 import { StatusBar } from './StatusBar'
-import { StickyMemo } from './StickyMemo'
+// import { StickyMemo } from './StickyMemo'
 import { WindowFrame } from './WindowFrame'
 
 import About from '@/app/about/page'
@@ -25,11 +26,12 @@ import { cn } from '@/lib/utils'
 
 export function Desktop() {
   const { windows, openWindow } = useWindowStore()
-  const { stickyMemos, toggleMusicPlayer } = useOSStore()
+  const { toggleMusicPlayer } = useOSStore()
   const [mounted, setMounted] = useState(false)
   const [singleTapToOpen, setSingleTapToOpen] = useState(false)
   const [isGuestbookOpen, setIsGuestbookOpen] = useState(false)
   const [isTerminalOpen, setIsTerminalOpen] = useState(false)
+  const [isGitHubOpen, setIsGitHubOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -85,6 +87,13 @@ export function Desktop() {
       onClick: () => setIsTerminalOpen((prev) => !prev),
       color: 'bg-zinc-800 text-emerald-400 shadow-zinc-200',
     },
+    {
+      id: 'github',
+      title: 'GitHub',
+      icon: Github,
+      onClick: () => setIsGitHubOpen((prev) => !prev),
+      color: 'bg-zinc-900 text-white shadow-zinc-200',
+    },
   ]
 
   if (!mounted) return null
@@ -97,13 +106,13 @@ export function Desktop() {
         <HomeSec />
       </div>
 
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
         <div className="relative h-full w-full pointer-events-auto">
           {stickyMemos.map((memo) => (
             <StickyMemo key={memo.id} memo={memo} />
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="absolute top-12 right-4 z-10 grid auto-rows-max grid-flow-row gap-2">
         {desktopIcons.map((icon) => (
@@ -169,6 +178,7 @@ export function Desktop() {
       <MusicPlayer />
       <GuestbookWidget isOpen={isGuestbookOpen} onClose={() => setIsGuestbookOpen(false)} />
       <MiniTerminalWidget isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+      <GitHubWidget isOpen={isGitHubOpen} onClose={() => setIsGitHubOpen(false)} />
       <Dock />
 
       <div id="modalTmp" className="z-[2000]"></div>

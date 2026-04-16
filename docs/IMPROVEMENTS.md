@@ -427,14 +427,18 @@
 
 ### 어필/차별화 포인트
 
-#### [x] 33. GitHub 활동 연동
+#### [x] 33. GitHub 활동 + 잔디 그래프 연동
 
 **완료 내역:**
 
-- [x] `/api/github` API Route 생성 — public repos 수 + 최근 업데이트 5개 레포
-- [x] 서버 사이드 캐싱 (1시간 revalidate)
-- [x] `about/page.tsx` — "Recent GitHub Activity" 섹션 추가 (레포 이름 + 날짜)
-- [x] API 실패 시 섹션 숨김 (graceful fallback)
+- [x] `/api/github` API Route — repos + 최근 레포 + contribution 데이터 통합
+- [x] `github-contributions-api` 공개 API 활용 (토큰 불필요, 1시간 캐싱)
+- [x] `about/page.tsx` — GitHub 잔디 그래프 (ContributionGraph 컴포넌트)
+  - 365일 기여 그리드, level 0~4 색상 (emerald 계열)
+  - hover 시 날짜 + 기여 수 표시 (title 속성)
+  - 총 기여 수 표시
+- [x] 최근 레포 목록 (5개)
+- [x] API 실패 시 섹션 숨김
 
 ---
 
@@ -509,6 +513,20 @@
 - [x] 배지 인터랙션: `hover:-translate-y-0.5 hover:shadow-md`
 - [x] 카테고리 아이콘 크기 축소 (80px → 40px)
 - [x] GuestbookWidget `DEFAULT_SIZE`/`DEFAULT_POS` 상수를 컴포넌트 외부로 이동 (ESLint warning 해결)
+
+---
+
+### [x] 41. Sticky Memo 숨김 + GitHub 잔디 위젯
+
+**완료 내역:**
+
+- [x] `Desktop.tsx` — StickyMemo 렌더링 주석 처리 (숨김)
+- [x] `GitHubWidget.tsx` 생성 — 드래그 가능한 잔디 그래프 위젯
+  - 총 기여 수 + public repos 수 + GitHub 프로필 링크
+  - 365일 잔디 그래프 (level 0~4 emerald 색상)
+  - hover 시 날짜별 기여 수 tooltip
+  - 모바일 대응 (드래그 비활성화, 풀 너비)
+- [x] Desktop 좌측 위젯 아이콘에 GitHub 추가 (검정 배경 + 흰색 아이콘)
 
 ---
 
