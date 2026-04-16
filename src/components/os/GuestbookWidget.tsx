@@ -67,6 +67,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const wasMobileRef = useRef(false)
 
   const fetchEntries = useCallback(async () => {
+    if (!supabase) return
     setLoading(true)
     const { data, error } = await supabase
       .from('portfolio_guestbook')
@@ -123,6 +124,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
 
     setSubmitting(true)
 
+    if (!supabase) return
     const { data, error } = await supabase
       .from('portfolio_guestbook')
       .insert({ name: name.trim() || 'Anonymous', message: trimmed })
