@@ -3,12 +3,29 @@
 ## 인프라
 
 - **서비스**: Supabase (PostgreSQL)
+- **클라이언트**: `src/lib/supabase/client.ts`
 - **스키마 파일**: `src/lib/supabase/guestbook-schema.ts`
 - **서비스 파일**: `src/lib/supabase/guestbook-service.ts`
 
+### 환경변수 (`.env.local`)
+
+| 변수 | 설명 |
+|------|------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase 프로젝트 URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon 공개 키 |
+
+### SQL 마이그레이션 파일
+
+Supabase SQL Editor에서 순서대로 실행. `docs/sql/` 디렉토리에 관리.
+
+| 파일 | 설명 |
+|------|------|
+| [`001_guestbook_table.sql`](sql/001_guestbook_table.sql) | 테이블 + 인덱스 생성 |
+| [`002_guestbook_rls.sql`](sql/002_guestbook_rls.sql) | RLS 정책 + updated_at 트리거 |
+
 ## 테이블
 
-### `guestbook_entries`
+### `portfolio_guestbook`
 
 방명록 테이블. 방문자가 남기는 짧은 메시지를 저장.
 
@@ -23,7 +40,7 @@
 
 **인덱스:**
 
-- `idx_guestbook_entries_created_at` — `created_at DESC` (최신순 조회 최적화)
+- `idx_portfolio_guestbook_created_at` — `created_at DESC` (최신순 조회 최적화)
 
 **트리거:**
 

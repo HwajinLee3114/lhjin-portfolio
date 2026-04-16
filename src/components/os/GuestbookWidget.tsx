@@ -1,17 +1,17 @@
 'use client'
 
 import { AnimatePresence, motion, useMotionValue } from 'framer-motion'
-import { FormEvent, useState, useEffect, useRef } from 'react'
-import { MessageCircleHeart, Send, X, Sparkles } from 'lucide-react'
+import { FormEvent, useState, useEffect, useRef, useCallback } from 'react'
+import { MessageCircleHeart, Send, X, Sparkles, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useWidgetStore } from '@/hooks/os/use-widget-store'
+import { supabase } from '@/lib/supabase/client'
 
 type GuestbookEntry = {
   id: string
   name: string
   message: string
-  createdAt: string
-  color: string
+  created_at: string
 }
 
 interface GuestbookWidgetProps {
@@ -27,22 +27,22 @@ const pastelColors = [
   'bg-purple-50 text-purple-700 border-purple-100',
 ]
 
-const initialEntries: GuestbookEntry[] = [
-  {
-    id: 'seed-1',
-    name: '화진',
-    message: '방문해주셔서 감사합니다! 💖',
-    createdAt: 'just now',
-    color: pastelColors[0],
-  },
-  {
-    id: 'seed-2',
-    name: '익명',
-    message: '심플하게 바꿔봤어요! 😊',
-    createdAt: '1m ago',
-    color: pastelColors[1],
-  },
-]
+const getColor = (id: string) => {
+  let hash = 0
+  for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) | 0
+  return pastelColors[Math.abs(hash) % pastelColors.length]
+}
+
+const formatTimeAgo = (dateStr: string) => {
+  const diff = Date.now() - new Date(dateStr).getTime()
+  const minutes = Math.floor(diff / 60000)
+  if (minutes < 1) return 'just now'
+  if (minutes < 60) return `${minutes}m ago`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}h ago`
+  const days = Math.floor(hours / 24)
+  return `${days}d ago`
+}
 
 export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const { widgets, focusWidget, initWidget } = useWidgetStore()
@@ -50,9 +50,11 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
 
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
-  const [entries, setEntries] = useState<GuestbookEntry[]>(initialEntries)
+  const [entries, setEntries] = useState<GuestbookEntry[]>([])
+  const [loading, setLoading] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
-  const [size, setSize] = useState({ width: 340, height: 500 })
+  const [size, setSize] = useState({ width: 340, height: 460 })
   const [isResizing, setIsResizing] = useState(false)
 
   const x = useMotionValue(120)
@@ -62,6 +64,23 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
 
   const DEFAULT_SIZE = { width: 340, height: 460 }
   const DEFAULT_POS = { x: 120, y: 60 }
+
+  const fetchEntries = useCallback(async () => {
+    setLoading(true)
+    const { data, error } = await supabase
+      .from('portfolio_guestbook')
+      .select('id,name,message,created_at')
+      .eq('is_visible', true)
+      .order('created_at', { ascending: false })
+      .limit(50)
+
+    if (!error && data) setEntries(data)
+    setLoading(false)
+  }, [])
+
+  useEffect(() => {
+    if (isOpen) fetchEntries()
+  }, [isOpen, fetchEntries])
 
   useEffect(() => {
     const applyViewportLayout = (w: number) => {
@@ -91,29 +110,31 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
     globalThis.window.addEventListener('resize', handleResize)
     return () => globalThis.window.removeEventListener('resize', handleResize)
   }, [x, y])
+
   useEffect(() => {
     initWidget(widgetId)
   }, [initWidget])
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const trimmed = message.trim()
-    if (!trimmed) return
+    if (!trimmed || submitting) return
 
-    const randomColor = pastelColors[Math.floor(Math.random() * pastelColors.length)]
+    setSubmitting(true)
 
-    setEntries((prev) => [
-      {
-        id: `entry-${Date.now()}`,
-        name: name.trim() || '익명',
-        message: trimmed,
-        createdAt: 'just now',
-        color: randomColor,
-      },
-      ...prev,
-    ])
-    setMessage('')
-    setName('')
+    const { data, error } = await supabase
+      .from('portfolio_guestbook')
+      .insert({ name: name.trim() || 'Anonymous', message: trimmed })
+      .select('id,name,message,created_at')
+      .single()
+
+    if (!error && data) {
+      setEntries((prev) => [data, ...prev])
+      setMessage('')
+      setName('')
+    }
+
+    setSubmitting(false)
   }
 
   const startResize = (e: React.MouseEvent) => {
@@ -167,7 +188,6 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
           exit={{ opacity: 0, scale: 0.9 }}
           className="pointer-events-auto flex flex-col overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
         >
-          {/* Header */}
           <header className="flex shrink-0 items-center justify-between bg-yellow-400 px-6 py-4 cursor-default">
             <div className="flex items-center gap-2.5">
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm">
@@ -197,22 +217,31 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
                   onChange={(e) => setName(e.target.value)}
                   maxLength={10}
                   placeholder="이름"
-                  className="w-24 rounded-2xl border border-zinc-100 bg-zinc-50 px-3 py-2.5 text-xs font-bold outline-none focus:bg-white focus:ring-2 focus:ring-yellow-400/50 transition-all"
+                  disabled={submitting}
+                  className="w-24 rounded-2xl border border-zinc-100 bg-zinc-50 px-3 py-2.5 text-xs font-bold outline-none focus:bg-white focus:ring-2 focus:ring-yellow-400/50 transition-all disabled:opacity-50"
                 />
                 <input
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   maxLength={60}
                   placeholder="메시지를 남겨주세요!"
-                  className="flex-1 rounded-2xl border border-zinc-100 bg-zinc-50 px-4 py-2.5 text-xs font-bold outline-none focus:bg-white focus:ring-2 focus:ring-yellow-400/50 transition-all"
+                  disabled={submitting}
+                  className="flex-1 rounded-2xl border border-zinc-100 bg-zinc-50 px-4 py-2.5 text-xs font-bold outline-none focus:bg-white focus:ring-2 focus:ring-yellow-400/50 transition-all disabled:opacity-50"
                 />
               </div>
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-zinc-900 py-3 text-xs font-black text-white shadow-lg shadow-zinc-200 transition-all hover:bg-zinc-800 active:scale-[0.98]"
+                disabled={submitting}
+                className="flex w-full items-center justify-center gap-2 rounded-2xl bg-zinc-900 py-3 text-xs font-black text-white shadow-lg shadow-zinc-200 transition-all hover:bg-zinc-800 active:scale-[0.98] disabled:opacity-50"
               >
-                <span>보내기</span>
-                <Send size={14} strokeWidth={2.5} />
+                {submitting ? (
+                  <Loader2 size={14} className="animate-spin" />
+                ) : (
+                  <>
+                    <span>보내기</span>
+                    <Send size={14} strokeWidth={2.5} />
+                  </>
+                )}
               </button>
             </form>
 
@@ -224,25 +253,35 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
             </div>
 
             <ul className="custom-scrollbar flex-1 space-y-3 overflow-y-auto pr-1">
-              {entries.map((entry) => (
-                <motion.li
-                  key={entry.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={cn(
-                    'rounded-2xl border border-transparent p-4 transition-all hover:shadow-md',
-                    entry.color,
-                  )}
-                >
-                  <div className="mb-1.5 flex items-center justify-between">
-                    <span className="text-[11px] font-black">{entry.name}</span>
-                    <span className="text-[9px] font-bold opacity-50 uppercase">
-                      {entry.createdAt}
-                    </span>
-                  </div>
-                  <p className="text-xs font-bold leading-relaxed">{entry.message}</p>
-                </motion.li>
-              ))}
+              {loading ? (
+                <li className="flex items-center justify-center py-8">
+                  <Loader2 size={20} className="animate-spin text-zinc-300" />
+                </li>
+              ) : entries.length === 0 ? (
+                <li className="py-8 text-center text-xs text-zinc-400">
+                  아직 메시지가 없어요. 첫 번째로 남겨보세요!
+                </li>
+              ) : (
+                entries.map((entry) => (
+                  <motion.li
+                    key={entry.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={cn(
+                      'rounded-2xl border border-transparent p-4 transition-all hover:shadow-md',
+                      getColor(entry.id),
+                    )}
+                  >
+                    <div className="mb-1.5 flex items-center justify-between">
+                      <span className="text-[11px] font-black">{entry.name}</span>
+                      <span className="text-[9px] font-bold opacity-50 uppercase">
+                        {formatTimeAgo(entry.created_at)}
+                      </span>
+                    </div>
+                    <p className="text-xs font-bold leading-relaxed">{entry.message}</p>
+                  </motion.li>
+                ))
+              )}
             </ul>
           </div>
 

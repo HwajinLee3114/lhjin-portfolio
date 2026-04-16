@@ -1,4 +1,4 @@
-export const GUESTBOOK_TABLE = 'guestbook_entries'
+export const GUESTBOOK_TABLE = 'portfolio_guestbook'
 
 export const CREATE_GUESTBOOK_TABLE_SQL = `
 create extension if not exists pgcrypto;

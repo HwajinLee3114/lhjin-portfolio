@@ -301,6 +301,29 @@
 
 ---
 
+### [x] 23. Guestbook Supabase 연동
+
+**배경:** 방명록이 로컬 state만 사용하여 새로고침하면 사라지고, 다른 사람이 남긴 메시지 확인 불가
+
+**완료 내역:**
+
+- [x] `@supabase/supabase-js` 패키지 설치
+- [x] `.env.local` — `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` 설정
+- [x] `src/lib/supabase/client.ts` — Supabase 클라이언트 초기화 파일 생성
+- [x] `GuestbookWidget.tsx` — 로컬 state → Supabase 실시간 연동
+  - 위젯 열릴 때 `fetchEntries()` 자동 호출
+  - 메시지 전송 시 DB insert → 성공하면 UI에 즉시 반영
+  - 로딩/전송 중 상태 표시 (Loader2 스피너)
+  - 빈 상태 안내 메시지
+  - `formatTimeAgo()` — DB timestamp를 "just now", "3m ago" 등으로 변환
+
+**Supabase 테이블 생성 필요** — SQL Editor에서 순서대로 실행:
+
+1. [`docs/sql/001_guestbook_table.sql`](sql/001_guestbook_table.sql) — 테이블 + 인덱스
+2. [`docs/sql/002_guestbook_rls.sql`](sql/002_guestbook_rls.sql) — RLS 정책 + 트리거
+
+---
+
 ## 참고: 잘 된 점 (유지할 것)
 
 - OS 시뮬레이터 컨셉 — 프론트엔드 역량의 살아있는 증명

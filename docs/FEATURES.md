@@ -90,6 +90,8 @@ React Flow를 이용한 인터랙티브 아키텍처 다이어그램.
 
 방문자 메시지를 Supabase DB에 저장/조회.
 
-- 최대 80자 메시지
-- 이름 선택 입력 (기본: Anonymous)
-- RLS 정책으로 보안 처리
+- **DB**: Supabase `portfolio_guestbook` 테이블 (`src/lib/supabase/client.ts`)
+- 위젯 열릴 때 자동 조회, 전송 시 DB insert + UI 즉시 반영
+- 최대 80자 메시지, 이름 선택 입력 (기본: Anonymous)
+- RLS 정책으로 보안 처리 (SELECT: `is_visible=true`, INSERT: 메시지 길이 검증)
+- 로딩/전송 중 스피너, 빈 상태 안내 표시
