@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { X, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react'
 import ModalPortal from './ModalPortal'
-import ModalOverlay from './ModalOverlay'
 
 interface ImagePreviewModalProps {
   isOpen: boolean
@@ -25,66 +25,77 @@ export const ImagePreviewModal = ({ isOpen, imageUrl, onClose }: ImagePreviewMod
     <AnimatePresence>
       {isOpen && imageUrl && (
         <ModalPortal>
-          <ModalOverlay onClose={handleClose}>
-            <div className="relative flex items-center justify-center w-full h-full">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[2000] flex flex-col bg-black/90 backdrop-blur-sm"
+            onClick={handleClose}
+          >
+            <div className="flex shrink-0 items-center justify-end px-4 py-3">
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation()
                   handleClose()
                 }}
-                aria-label="이미지 미리보기 닫기"
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-themacolor4 focus-visible:ring-offset-2"
+                aria-label="닫기"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white"
               >
-                <img src="/images/b2close-100.png" className="w-8" alt="닫기" />
+                <X size={20} />
               </button>
-              <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 flex gap-2">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    zoomOut()
-                  }}
-                  aria-label="축소"
-                  className="w-8 h-8 rounded-full bg-white/80 dark:bg-[#1f262e]/80 shadow-md text-sm"
-                >
-                  −
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    reset()
-                  }}
-                  aria-label="리셋"
-                  className="w-8 h-8 rounded-full bg-white/80 dark:bg-[#1f262e]/80 shadow-md text-xs"
-                >
-                  1:1
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    zoomIn()
-                  }}
-                  aria-label="확대"
-                  className="w-8 h-8 rounded-full bg-white/80 dark:bg-[#1f262e]/80 shadow-md text-sm"
-                >
-                  +
-                </button>
-              </div>
+            </div>
+
+            <div className="flex flex-1 items-center justify-center overflow-hidden px-4">
               <motion.img
                 src={imageUrl}
                 alt="이미지 미리보기"
-                className="cursor-pointer h-auto max-w-xs max-h-80p sm:max-w-lg md:max-w-2xl xl:max-w-4xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                className="max-h-[80dvh] max-w-full rounded-lg object-contain shadow-2xl"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
                 onClick={(e) => e.stopPropagation()}
                 style={{ transform: `scale(${scale})` }}
               />
             </div>
-          </ModalOverlay>
+
+            <div className="flex shrink-0 items-center justify-center gap-2 px-4 py-4">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  zoomOut()
+                }}
+                aria-label="축소"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white"
+              >
+                <ZoomOut size={16} />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  reset()
+                }}
+                aria-label="원본 크기"
+                className="flex h-9 items-center justify-center rounded-xl bg-white/10 px-3 text-xs font-bold text-white/80 transition-colors hover:bg-white/20 hover:text-white"
+              >
+                <RotateCcw size={14} className="mr-1.5" />
+                {Math.round(scale * 100)}%
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  zoomIn()
+                }}
+                aria-label="확대"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white"
+              >
+                <ZoomIn size={16} />
+              </button>
+            </div>
+          </motion.div>
         </ModalPortal>
       )}
     </AnimatePresence>

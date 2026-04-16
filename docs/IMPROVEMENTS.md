@@ -449,6 +449,51 @@
 
 ---
 
+### [x] 35. 이미지 미리보기 닫기 시 프로젝트 모달까지 닫히는 버그
+
+**원인:** ImagePreviewModal의 ModalOverlay 닫기 클릭 이벤트가 아래 ProjectCard의 ModalOverlay까지 전파
+
+**완료 내역:**
+
+- [x] `ModalOverlay.tsx` — `onClick` → `e.target === e.currentTarget` 체크 추가 (배경만 클릭 시 닫기)
+- [x] 이벤트 버블링으로 인한 중첩 모달 동시 닫힘 방지
+
+---
+
+### [x] 36. ProjectDetailModal UI 리디자인
+
+**배경:** 외부 이미지 의존, 탭 코드 중복, OS 모드 스타일과 불일치
+
+**완료 내역:**
+
+- [x] 닫기 버튼: 외부 이미지(`b2close-100.png`) → Lucide `X` 아이콘
+- [x] 탭 바: 4번 중복 코드 → `tabs` 상수 배열 + `visibleTabs` 필터 + `cn()` 조건부 클래스
+- [x] ARIA: 탭에 `role="tablist"`, `role="tab"`, `aria-selected` 추가
+- [x] 섹션 아이콘: 외부 이미지 → Lucide (`Star`, `Users`, `MonitorSmartphone`)
+- [x] `SectionHeading` 컴포넌트 추출 — 아이콘 + 색상 + 제목 재사용
+- [x] GitHub/사이트 링크: `IconCircleButton` → 심플한 `<a>` 버튼 (ExternalLink 아이콘)
+- [x] 높이 단위: `85vh` → `85dvh` (iOS 대응)
+- [x] 이미지 카드: `div onClick` → `button` (접근성)
+- [x] `IconButton`, `IconCircleButton` import 제거 (의존성 감소)
+
+---
+
+### [x] 37. 이미지 미리보기 UI 리디자인
+
+**배경:** 미리보기 창이 프로젝트 모달 헤더와 겹쳐서 닫기 버튼이 안 보임. 외부 이미지(`b2close-100.png`) 사용.
+
+**완료 내역:**
+
+- [x] `ModalOverlay` 의존 제거 → 자체 `z-[2000]` 풀스크린 오버레이
+- [x] 레이아웃: 상단(닫기) + 중앙(이미지) + 하단(줌 툴바) 3단 구조
+- [x] `bg-black/90 backdrop-blur-sm` 배경 — 프로젝트 모달과 명확히 분리
+- [x] 닫기/줌 버튼: 외부 이미지 → Lucide (`X`, `ZoomIn`, `ZoomOut`, `RotateCcw`)
+- [x] 줌 비율 실시간 표시 (100%, 120% 등)
+- [x] 이미지 `max-h-[80dvh]` + `rounded-lg shadow-2xl` 적용
+- [x] Framer Motion 진입/퇴장 애니메이션
+
+---
+
 ## 데이터 파일 관리 가이드
 
 ### 프로젝트 추가 절차
