@@ -255,15 +255,15 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                         <h2 className="tracking-tight">기여 부분</h2>
                       </div>
                       <ul className="text-left space-y-8 pl-2">
-                        {project.contribution.map((contri) => (
-                          <li key={`${project.id}_contri_${contri.id}`} className="list-none">
+                        {project.contribution.map((contri, cIdx) => (
+                          <li key={`${project.id}_contri_${cIdx}`} className="list-none">
                             {contri?.title && (
                               <QuoteDiv className="font-bold text-[15px]">{contri.title}</QuoteDiv>
                             )}
                             <ul className="space-y-2 mt-3">
                               {contri.desc.map((condesc, idx) => (
                                 <li
-                                  key={`${contri.id}_contrili_${idx}`}
+                                  key={`${project.id}_contri_${cIdx}_${idx}`}
                                   className="flex gap-3 text-zinc-600 dark:text-zinc-400 text-sm sm:text-[15px] leading-relaxed"
                                 >
                                   <span className="text-zinc-300 dark:text-zinc-600 mt-1.5">-</span>

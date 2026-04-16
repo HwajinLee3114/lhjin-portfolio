@@ -12,11 +12,13 @@ import {
   Briefcase,
   ArrowUpRight,
   Monitor,
+  FileText,
 } from 'lucide-react'
+import Link from 'next/link'
 
 import { projects } from '@/data/projects'
 import { skills } from '@/data/skills'
-import { career } from '@/data/career'
+import { sortedCareer } from '@/data/career'
 import { formatPeriod } from '@/lib/period'
 import { cn } from '@/lib/utils'
 import SlideButton from '@/components/button/SlideButton'
@@ -28,14 +30,6 @@ const fadeUp = {
   viewport: { once: true, margin: '-60px' },
   transition: { duration: 0.5 },
 }
-
-const careerWithProjects = career.map((c) => ({
-  ...c,
-  projectDetails: c.projects
-    .map((projectId) => projects.find((p) => p.id === projectId))
-    .filter(Boolean)
-    .reverse(),
-}))
 
 const sectionIds = ['about', 'skills', 'projects', 'career'] as const
 
@@ -67,11 +61,6 @@ export default function ResumePage() {
     return () => observers.forEach((o) => o.disconnect())
   }, [])
 
-  const sortedCareer = useMemo(
-    () => [...careerWithProjects].sort((a, b) => parseInt(b.id) - parseInt(a.id)),
-    [],
-  )
-
   const filteredProjects = useMemo(
     () =>
       projects
@@ -79,7 +68,7 @@ export default function ResumePage() {
           if (filter === 'all') return true
           return p.filter.some((f) => f.name === filter)
         })
-        .sort((a, b) => Number(b.id) - Number(a.id)),
+        .sort((a, b) => (b.periodStart || '').localeCompare(a.periodStart || '')),
     [filter],
   )
 
@@ -108,6 +97,13 @@ export default function ResumePage() {
                 )}
               </a>
             ))}
+            <Link
+              href="/resume/preview"
+              className="flex items-center gap-1.5 rounded-full border border-zinc-200 px-4 py-2 text-[11px] font-black text-zinc-700 transition-all hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            >
+              <FileText size={14} />
+              이력서 미리보기
+            </Link>
             <a
               href="/os"
               className="flex items-center gap-1.5 rounded-full bg-zinc-900 px-4 py-2 text-[11px] font-black text-white transition-all hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"

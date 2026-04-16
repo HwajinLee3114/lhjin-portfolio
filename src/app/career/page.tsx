@@ -1,29 +1,16 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Briefcase } from 'lucide-react'
 
 import SectionFrame from '@/components/common/SectionFrame'
-import { career } from '@/data/career'
-import { projects } from '@/data/projects'
+import { sortedCareer } from '@/data/career'
 import { formatPeriod } from '@/lib/period'
 import { cn } from '@/lib/utils'
 
-const careerWithProjects = career.map((c) => ({
-  ...c,
-  projectDetails: c.projects
-    .map((projectId) => projects.find((p) => p.id === projectId))
-    .filter(Boolean)
-    .reverse(),
-}))
-
 export default function Career() {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({})
-
-  const sortedCareer = useMemo(() => {
-    return [...careerWithProjects].sort((a, b) => parseInt(b.id) - parseInt(a.id))
-  }, [])
 
   const toggleItem = (id: string) => {
     setOpenItems((prev) => ({ ...prev, [id]: !prev[id] }))

@@ -1,6 +1,6 @@
 # 개선사항 목록 — lhjin-portfolio
 
-> 작성일: 2026-04-16 상태 마커: `[ ]` 미착수 / `[~]` 진행중 / `[x]` 완료
+> 작성일: 2026-04-16 | 최종 업데이트: 2026-04-16 상태 마커: `[ ]` 미착수 / `[~]` 진행중 / `[x]` 완료
 
 ---
 
@@ -133,6 +133,108 @@
 
 - [ ] `ProjectDetailModal`에 `useFocusTrap` 적용
 - [ ] 기타 모달에도 적용 검토
+
+---
+
+## 추가 개선 (세션 2 — 2026-04-16)
+
+### [x] 12. OS 윈도우 내부 ScrollTop 버튼
+
+**배경:** Career 같은 긴 콘텐츠에서 스크롤 올리기 번거로움
+
+**완료 내역:**
+
+- [x] `WindowFrame.tsx` — 내부 스크롤 200px 이상 시 우하단 `↑` 버튼 표시
+- [x] Framer Motion fade in/out 애니메이션
+- [x] `sticky` positioning으로 스크롤 콘텐츠에 자연스럽게 부착
+
+---
+
+### [x] 13. 문서 모드 네비게이션 active 상태
+
+**배경:** 헤더에서 섹션 클릭 시 이동은 되지만 현재 위치 표시가 없음
+
+**완료 내역:**
+
+- [x] `resume/page.tsx` — IntersectionObserver로 현재 섹션 감지
+- [x] active 섹션 텍스트 강조 (진한 색 + 하단 인디케이터 라인)
+- [x] 모바일에서 네비 링크 `hidden sm:inline-block` 처리
+
+---
+
+### [x] 14. OS → 문서 모드 전환 버튼
+
+**배경:** OS 모드에서 문서 모드로 전환하는 경로가 없음
+
+**완료 내역:**
+
+- [x] `StatusBar.tsx` — 우측에 `📄 이력서` 링크 추가 (`/resume`로 이동)
+- [x] Lucide `FileText` 아이콘 + Next.js `Link` 사용
+- [x] 모바일에서는 아이콘만 표시 (`hidden sm:inline`)
+
+---
+
+### [x] 15. OS 윈도우 위치/크기 계산 수정
+
+**배경:** PC 작은 창에서 윈도우가 중앙에 안 뜨고 화면 밖으로 벗어남
+
+**원인 분석:**
+
+- z-index 기반 offset (`nextZ % 5 * 20`) — z-index 300+에서 예측 불가능한 위치
+- StatusBar(32px), Dock(80px) 영역 미고려
+- 기존 창 재오픈 시 브라우저 리사이즈 후 화면 밖 위치 미보정
+- offset 후 뷰포트 clamp 없음
+
+**완료 내역:**
+
+- [x] `use-window-store.ts` — 가용 영역 계산 (vh - StatusBar - Dock)
+- [x] offset을 열린 창 개수 기반으로 변경 (`openCount % 4 * 24`)
+- [x] 신규/기존 창 모두 `Math.min/max` clamp로 뷰포트 안에 위치 보장
+- [x] 드래그 후에도 최소 100px 화면 안 유지 (`WindowFrame.tsx`)
+- [x] localStorage 키 `v1` → `v2` 변경 (이전 잘못된 위치 데이터 리셋)
+
+---
+
+### [x] 16. 이력서 미리보기 페이지
+
+**배경:** 문서 모드가 OS를 한 페이지에 나열한 느낌, 실제 이력서 형식이 아님
+
+**완료 내역:**
+
+- [x] `/resume/preview` — A4 문서형 이력서 페이지 생성
+- [x] JSON 데이터 기반 자동 생성 (소개, 기술 스택, 경력+프로젝트, 사이드 프로젝트)
+- [x] 인쇄/PDF 저장 버튼 (`window.print()`)
+- [x] `@media print` CSS — A4 크기, 마진 10mm, 트랜지션/애니메이션 비활성화
+- [x] 문서 모드 헤더에 "이력서 미리보기" 버튼 추가
+
+---
+
+### [x] 17. 데이터 관리 방식 리팩토링
+
+**배경:** JSON 파일에 순차 숫자 ID 하드코딩, career↔project 간 수동 참조가 번거로움
+
+**완료 내역:**
+
+- [x] 숫자 ID → slug ID (`"kt-giga-cms"`, `"bunyang"`, `"linkorder"` 등)
+- [x] project에 `company` 필드 추가 (career id와 매칭: `"a2tec"`, `"futuresolution"`, `"luvmom"`)
+- [x] career.json에서 `projects` 배열 제거 → `getProjectsByCompany()` 자동 역참조
+- [x] `careerWithProjects`, `sortedCareer`를 `src/data/career.ts`로 통합 (3곳 중복 제거)
+- [x] career 정렬: `parseInt(id)` → `periodStart` 기준 `localeCompare` (slug에서도 동작)
+- [x] project 정렬: `Number(id)` → `periodStart` 기준
+- [x] contribution/skillItem/images에서 무의미한 `id` 필드 전량 삭제
+- [x] 타입 정의 정리: `Image` → `ProjectImage` (전역 `Image` 충돌 방지)
+
+---
+
+### [x] 18. 이력서 미리보기 간격/스타일 개선
+
+**배경:** 섹션 간 `mb-8` 간격 과도, 개별 margin 대신 부모 gap으로 통일 필요
+
+**완료 내역:**
+
+- [x] 개별 `section.mb-8` → 부모 `div.space-y-6`으로 통합
+- [x] SectionTitle `mb-3` → `mb-2`
+- [x] header `mb-8` → `pb-5` (space-y에 의해 간격 자동 관리)
 
 ---
 

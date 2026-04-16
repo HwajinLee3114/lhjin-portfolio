@@ -47,7 +47,7 @@ export default function ProjectsSection() {
         const inSkill = project.skillItem.some((s) => s.name.toLowerCase().includes(q))
         return inTitle || inDesc || inSkill
       })
-      .sort((a, b) => Number(b.id) - Number(a.id))
+      .sort((a, b) => (b.periodStart || '').localeCompare(a.periodStart || ''))
   }, [filter, query])
 
   return (

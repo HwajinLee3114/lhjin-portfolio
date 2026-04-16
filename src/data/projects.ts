@@ -1,19 +1,16 @@
 import projectsJson from '../../data/projects.json'
 
-export interface Image {
-  id: string
+export interface ProjectImage {
   url: string
   name: string
 }
 
 export interface SkillItem {
-  id: string
   name: string
   url?: string
 }
 
 export interface Contribution {
-  id: string
   title: string
   desc: string[]
 }
@@ -26,6 +23,7 @@ export interface FilterTag {
 export interface Project {
   id: string
   title: string
+  company?: string
   periodStart?: string
   periodEnd?: string
   git?: string
@@ -36,11 +34,15 @@ export interface Project {
   contribution: Contribution[]
   skillItem: SkillItem[]
   thumb: string
-  images: Image[]
+  images: ProjectImage[]
 }
 
 export const projects = projectsJson as Project[]
 
 export const getProjectById = (id: string) => {
   return projects.find((project) => project.id === id)
+}
+
+export const getProjectsByCompany = (companyId: string) => {
+  return projects.filter((p) => p.company === companyId)
 }

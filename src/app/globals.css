@@ -74,3 +74,15 @@ body {
   --custom-bg: #f9f7f5;
   --custom-fg: #2d2926;
 }
+
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+}
