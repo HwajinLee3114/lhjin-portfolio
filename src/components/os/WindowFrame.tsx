@@ -173,7 +173,9 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
         y: isMobile ? 100 : window.position.y + 20,
         transition: { duration: 0.2 },
       }}
-      transition={{ type: 'spring', damping: 25, stiffness: 300, mass: 0.5 }}
+      transition={
+        isResizing ? { duration: 0 } : { type: 'spring', damping: 25, stiffness: 300, mass: 0.5 }
+      }
       className={cn(
         'pointer-events-auto fixed flex flex-col overflow-hidden border border-zinc-200/50 bg-white shadow-2xl',
         isEffectivelyMaximized ? 'rounded-none' : 'rounded-2xl',
@@ -183,20 +185,36 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
       {!isEffectivelyMaximized && (
         <>
           <div
-            className="absolute top-0 right-0 left-0 z-50 h-1 cursor-ns-resize"
+            className="absolute top-0 right-2 left-2 z-50 h-1 cursor-ns-resize"
             onMouseDown={(e) => startResize(e, 'top')}
           />
           <div
-            className="absolute right-0 bottom-0 left-0 z-50 h-1 cursor-ns-resize"
+            className="absolute right-2 bottom-0 left-2 z-50 h-1 cursor-ns-resize"
             onMouseDown={(e) => startResize(e, 'bottom')}
           />
           <div
-            className="absolute top-0 bottom-0 left-0 z-50 w-1 cursor-ew-resize"
+            className="absolute top-2 bottom-2 left-0 z-50 w-1 cursor-ew-resize"
             onMouseDown={(e) => startResize(e, 'left')}
           />
           <div
-            className="absolute top-0 right-0 bottom-0 z-50 w-1 cursor-ew-resize"
+            className="absolute top-2 right-0 bottom-2 z-50 w-1 cursor-ew-resize"
             onMouseDown={(e) => startResize(e, 'right')}
+          />
+          <div
+            className="absolute top-0 left-0 z-50 h-3 w-3 cursor-nwse-resize"
+            onMouseDown={(e) => startResize(e, 'top-left')}
+          />
+          <div
+            className="absolute top-0 right-0 z-50 h-3 w-3 cursor-nesw-resize"
+            onMouseDown={(e) => startResize(e, 'top-right')}
+          />
+          <div
+            className="absolute bottom-0 left-0 z-50 h-3 w-3 cursor-nesw-resize"
+            onMouseDown={(e) => startResize(e, 'bottom-left')}
+          />
+          <div
+            className="absolute bottom-0 right-0 z-50 h-3 w-3 cursor-nwse-resize"
+            onMouseDown={(e) => startResize(e, 'bottom-right')}
           />
         </>
       )}
