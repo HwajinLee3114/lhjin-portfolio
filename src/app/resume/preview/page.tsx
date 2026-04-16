@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Printer, ArrowLeft } from 'lucide-react'
 
 import { projects } from '@/data/projects'
@@ -10,16 +10,18 @@ import { sortedCareer } from '@/data/career'
 import { formatPeriod } from '@/lib/period'
 
 export default function ResumePreviewPage() {
+  const router = useRouter()
+
   return (
     <div className="min-h-dvh bg-zinc-100 print:bg-white">
       <div className="sticky top-0 z-50 flex items-center justify-between border-b bg-white px-6 py-3 print:hidden">
-        <Link
-          href="/resume"
+        <button
+          onClick={() => router.back()}
           className="flex items-center gap-2 text-sm font-bold text-zinc-500 transition-colors hover:text-zinc-900"
         >
           <ArrowLeft size={16} />
           돌아가기
-        </Link>
+        </button>
         <button
           onClick={() => globalThis.window.print()}
           className="flex items-center gap-2 rounded-xl bg-zinc-900 px-5 py-2.5 text-xs font-black text-white transition-colors hover:bg-zinc-700"

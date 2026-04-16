@@ -146,7 +146,7 @@
 
 - [x] `WindowFrame.tsx` — 내부 스크롤 200px 이상 시 우하단 `↑` 버튼 표시
 - [x] Framer Motion fade in/out 애니메이션
-- [x] `sticky` positioning으로 스크롤 콘텐츠에 자연스럽게 부착
+- [x] `absolute` positioning — 스크롤 영역 위에 오버레이 (sticky → absolute 수정, 안정성 개선)
 
 ---
 
@@ -162,15 +162,16 @@
 
 ---
 
-### [x] 14. OS → 문서 모드 전환 버튼
+### [x] 14. OS ↔ 문서/이력서 모드 전환
 
-**배경:** OS 모드에서 문서 모드로 전환하는 경로가 없음
+**배경:** OS 모드에서 문서 모드/이력서 미리보기로 전환하는 경로가 없음
 
 **완료 내역:**
 
-- [x] `StatusBar.tsx` — 우측에 `📄 이력서` 링크 추가 (`/resume`로 이동)
-- [x] Lucide `FileText` 아이콘 + Next.js `Link` 사용
-- [x] 모바일에서는 아이콘만 표시 (`hidden sm:inline`)
+- [x] `StatusBar.tsx` — macOS 스타일 드롭다운 메뉴 ("메뉴 ▾" → 문서 모드 / 이력서 미리보기)
+- [x] 드롭다운 `fixed` + `z-[1001]`로 윈도우 위에 정상 표시
+- [x] 바깥 클릭 시 자동 닫힘
+- [x] `resume/preview` 돌아가기 버튼: `Link href="/resume"` → `router.back()`으로 변경 (진입 경로로 정확히 복귀)
 
 ---
 
@@ -235,6 +236,31 @@
 - [x] 개별 `section.mb-8` → 부모 `div.space-y-6`으로 통합
 - [x] SectionTitle `mb-3` → `mb-2`
 - [x] header `mb-8` → `pb-5` (space-y에 의해 간격 자동 관리)
+
+### [x] 19. 랜딩 페이지 UI 리디자인
+
+**배경:** 진입점이 타이틀 + 버튼만 있어서 면접관에게 정보 부족
+
+**완료 내역:**
+
+- [x] 프로필 사진 + 이름 + 직함 + 한 줄 소개 추가
+- [x] 소셜 링크 (GitHub, Blog, Email) 아이콘 버튼
+- [x] 핵심 기술스택 태그 (React, Next.js, TypeScript, Tailwind CSS)
+- [x] "체험하기" → "포트폴리오 둘러보기" 워딩 변경
+- [x] 경력 수치 섹션 제거 (유저 피드백)
+
+---
+
+### [x] 20. 전체 라우팅/반응형 검토
+
+**완료 내역:**
+
+- [x] `resume/page.tsx` — `<a href="/os">` 3곳 → `<Link>` 전환 (404 에러 수정)
+- [x] `architecture/page.tsx` — `w-screen h-screen` → `w-full h-dvh`
+- [x] `not-found.tsx` — `min-h-screen` → `min-h-dvh`
+- [x] `project/page.tsx` — `min-h-screen` → `min-h-dvh`
+- [x] `Header.tsx` — 모바일 메뉴 `h-screen` → `h-dvh`
+- [x] 프로젝트 전체 내부 라우트 `<a>` 잔존 없음 확인
 
 ---
 

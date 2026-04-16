@@ -250,12 +250,14 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
         </div>
       </div>
 
-      <div
-        ref={scrollRef}
-        onScroll={handleContentScroll}
-        className={cn('relative flex-1 overflow-auto bg-white custom-scrollbar')}
-      >
-        {children}
+      <div className="relative flex-1 overflow-hidden">
+        <div
+          ref={scrollRef}
+          onScroll={handleContentScroll}
+          className={cn('h-full overflow-auto bg-white custom-scrollbar')}
+        >
+          {children}
+        </div>
         <AnimatePresence>
           {showScrollTop && (
             <motion.button
@@ -264,7 +266,7 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
               exit={{ opacity: 0, scale: 0.8 }}
               onClick={scrollToTop}
               aria-label="맨 위로 이동"
-              className="sticky bottom-4 left-[calc(100%-3.5rem)] z-40 flex h-9 w-9 items-center justify-center rounded-full bg-zinc-900/80 text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-zinc-900"
+              className="absolute bottom-4 right-4 z-40 flex h-9 w-9 items-center justify-center rounded-full bg-zinc-900/80 text-white shadow-lg backdrop-blur-sm transition-colors hover:bg-zinc-900"
             >
               <ChevronUp size={18} />
             </motion.button>
