@@ -10,15 +10,7 @@ import SectionFrame from '@/components/common/SectionFrame'
 import { profile } from '@/data/profile'
 import { socialLinks } from '@/data/socialLinks'
 
-type ContributionDay = { date: string; count: number; level: number }
-
-type GitHubData = {
-  publicRepos: number
-  followers: number
-  recentRepos: { name: string; url: string; updatedAt: string }[]
-  contributions: ContributionDay[]
-  totalContributions: number
-}
+import type { ContributionDay, GitHubData } from '@/types/github'
 
 export default function About() {
   const [github, setGithub] = useState<GitHubData | null>(null)

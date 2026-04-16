@@ -27,6 +27,7 @@ export default function ProjectsSection() {
 
   const [filter, setFilter] = useState<string>(searchParams.get('filter') || 'feature')
   const [query, setQuery] = useState<string>('')
+  const [debouncedQuery, setDebouncedQuery] = useState<string>('')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   useEffect(() => {
@@ -35,6 +36,11 @@ export default function ProjectsSection() {
       setFilter(q)
     }
   }, [searchParams, filter])
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(query), 200)
+    return () => clearTimeout(timer)
+  }, [query])
 
   const handleFilterChange = (newFilter: string) => {
     setFilter(newFilter)
@@ -46,15 +52,15 @@ export default function ProjectsSection() {
   const filteredPj = useMemo(() => {
     return filterProjects(projects, filter)
       .filter((project) => {
-        if (!query.trim()) return true
-        const q = query.toLowerCase()
+        if (!debouncedQuery.trim()) return true
+        const q = debouncedQuery.toLowerCase()
         const inTitle = project.title.toLowerCase().includes(q)
         const inDesc = project.description.toLowerCase().includes(q)
         const inSkill = project.skillItem.some((s) => s.name.toLowerCase().includes(q))
         return inTitle || inDesc || inSkill
       })
       .sort((a, b) => (b.periodStart || '').localeCompare(a.periodStart || ''))
-  }, [filter, query])
+  }, [filter, debouncedQuery])
 
   return (
     <SectionFrame id="projects" title="Archive" containerClassName="max-w-6xl">
