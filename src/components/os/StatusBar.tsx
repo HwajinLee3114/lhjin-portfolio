@@ -6,8 +6,14 @@ export function StatusBar() {
   const [time, setTime] = useState(new Date())
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000)
-    return () => clearInterval(timer)
+    const update = () => setTime(new Date())
+    const msUntilNextMinute = (60 - new Date().getSeconds()) * 1000
+    const initialTimer = setTimeout(() => {
+      update()
+      const interval = setInterval(update, 60000)
+      return () => clearInterval(interval)
+    }, msUntilNextMinute)
+    return () => clearTimeout(initialTimer)
   }, [])
 
   const formattedTime = time.toLocaleTimeString('ko-KR', {

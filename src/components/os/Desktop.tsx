@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence } from 'framer-motion'
-import { User, Code, Briefcase, Folder, Music, Heart, Terminal } from 'lucide-react'
+import { Music, Heart, Terminal } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react'
 
 import { DesktopIcon } from './DesktopIcon'
@@ -18,6 +18,7 @@ import Career from '@/app/career/page'
 import HomeSec from '@/app/home/page'
 import Skills from '@/app/skills/page'
 import ProjectsSection from '@/components/project/ProjectsSection'
+import { navItems } from '@/data/navigation'
 import { useOSStore } from '@/hooks/os/use-os-store'
 import { useWindowStore } from '@/hooks/os/use-window-store'
 import { cn } from '@/lib/utils'
@@ -60,12 +61,7 @@ export function Desktop() {
     }
   }, [])
 
-  const desktopIcons = [
-    { id: 'about', title: 'About Me', icon: User },
-    { id: 'skills', title: 'Skills', icon: Code },
-    { id: 'projects', title: 'Projects', icon: Folder },
-    { id: 'career', title: 'Career', icon: Briefcase },
-  ]
+  const desktopIcons = navItems
 
   const widgetIcons = [
     {
@@ -94,7 +90,7 @@ export function Desktop() {
   if (!mounted) return null
 
   return (
-    <div className="relative h-screen w-full select-none overflow-hidden bg-white">
+    <div className="relative h-dvh w-full select-none overflow-hidden bg-white">
       <StatusBar />
 
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40">

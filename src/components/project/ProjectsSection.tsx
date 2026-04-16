@@ -16,12 +16,6 @@ export default function ProjectsSection() {
 
   const [filter, setFilter] = useState<string>(searchParams.get('filter') || 'feature')
   const [query, setQuery] = useState<string>('')
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 250)
-    return () => clearTimeout(t)
-  }, [])
 
   useEffect(() => {
     const q = searchParams.get('filter')
@@ -95,51 +89,33 @@ export default function ProjectsSection() {
 
       <div className="w-full">
         <AnimatePresence mode="popLayout">
-          {loading ? (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {Array.from({ length: 6 }).map((_, idx) => (
-                <div key={idx} className="animate-pulse space-y-4">
-                  <div className="aspect-video rounded-3xl bg-zinc-100 dark:bg-zinc-800" />
-                  <div className="h-4 w-2/3 rounded bg-zinc-100 dark:bg-zinc-800" />
-                  <div className="flex gap-2">
-                    <div className="h-6 w-16 rounded-full bg-zinc-100 dark:bg-zinc-800" />
-                    <div className="h-6 w-16 rounded-full bg-zinc-100 dark:bg-zinc-800" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <motion.ul
-              layout
-              className="mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {filteredPj.map((project, index) => (
-                <motion.li
-                  layout
-                  key={project.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                >
-                  <ProjectCard
-                    id={project.id}
-                    title={project.title}
-                    periodStart={project.periodStart}
-                    periodEnd={project.periodEnd}
-                    skillItem={project.skillItem}
-                    filter={project.filter}
-                    imageSrc={project.thumb}
-                    feature={project.feature}
-                    description={project.description}
-                  />
-                </motion.li>
-              ))}
-            </motion.ul>
-          )}
+          <motion.ul layout className="mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredPj.map((project, index) => (
+              <motion.li
+                layout
+                key={project.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+              >
+                <ProjectCard
+                  id={project.id}
+                  title={project.title}
+                  periodStart={project.periodStart}
+                  periodEnd={project.periodEnd}
+                  skillItem={project.skillItem}
+                  filter={project.filter}
+                  imageSrc={project.thumb}
+                  feature={project.feature}
+                  description={project.description}
+                />
+              </motion.li>
+            ))}
+          </motion.ul>
         </AnimatePresence>
 
-        {!loading && filteredPj.length === 0 && (
+        {filteredPj.length === 0 && (
           <div className="py-20 text-center">
             <p className="font-medium text-zinc-400">검색 결과가 없습니다.</p>
           </div>

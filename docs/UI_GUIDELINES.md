@@ -6,15 +6,15 @@ CSS 변수 기반 3-테마 시스템. `globals.css`에 정의.
 
 ### 색상 변수
 
-| 변수 | Light | Dark | Custom | 용도 |
-|------|-------|------|--------|------|
-| `--theme-1` | `#f6f1e3` | `#1f262e` | `#faf8f4` | 기본 표면 |
-| `--theme-1-5` | `#f5e8b6` | `#273038` | `#e8e4db` | 보조 표면 |
-| `--theme-2` | `#faad1a` | `#e3a01c` | `#eecd9e` | 액센트 |
-| `--theme-3` | `#344c36` | `#202a24` | `#78716c` | 딥 표면 |
-| `--theme-4` | `#3b82f6` | `#7aa6ff` | `#1e6f53` | 프라이머리 |
-| `--theme-bg` | `#ffffff` | `#1f262e` | `#f9f7f5` | 배경 |
-| `--theme-fg` | `#1f2937` | `#e2e4e4` | `#2d2926` | 텍스트 |
+| 변수          | Light     | Dark      | Custom    | 용도       |
+| ------------- | --------- | --------- | --------- | ---------- |
+| `--theme-1`   | `#f6f1e3` | `#1f262e` | `#faf8f4` | 기본 표면  |
+| `--theme-1-5` | `#f5e8b6` | `#273038` | `#e8e4db` | 보조 표면  |
+| `--theme-2`   | `#faad1a` | `#e3a01c` | `#eecd9e` | 액센트     |
+| `--theme-3`   | `#344c36` | `#202a24` | `#78716c` | 딥 표면    |
+| `--theme-4`   | `#3b82f6` | `#7aa6ff` | `#1e6f53` | 프라이머리 |
+| `--theme-bg`  | `#ffffff` | `#1f262e` | `#f9f7f5` | 배경       |
+| `--theme-fg`  | `#1f2937` | `#e2e4e4` | `#2d2926` | 텍스트     |
 
 ### Tailwind 커스텀 색상 매핑
 
@@ -99,12 +99,12 @@ import ModalOverlay from '@/components/comn/ModalOverlay'
 
 ## 폰트
 
-| 폰트 이름 | CSS 클래스/패밀리 | 용도 |
-|-----------|------------------|------|
-| Pretendard | `CommonFont` (기본) | 본문 전체 |
-| Hakgyoansim Puzzle Black | `g_titleEngFontBlack` | 영문 타이틀 (채움) |
+| 폰트 이름                  | CSS 클래스/패밀리       | 용도               |
+| -------------------------- | ----------------------- | ------------------ |
+| Pretendard                 | `CommonFont` (기본)     | 본문 전체          |
+| Hakgyoansim Puzzle Black   | `g_titleEngFontBlack`   | 영문 타이틀 (채움) |
 | Hakgyoansim Puzzle Outline | `g_titleEngFontOutline` | 영문 타이틀 (윤곽) |
-| RiaSans ExtraBold | `g_RiaSansFont` | 특수 강조 텍스트 |
+| RiaSans ExtraBold          | `g_RiaSansFont`         | 특수 강조 텍스트   |
 
 ## 애니메이션
 
@@ -123,17 +123,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 ### CSS 애니메이션 (`custom.css`)
 
-| 이름 | 용도 |
-|------|------|
-| `blink` | 커서 깜빡임 (0.7s) |
+| 이름               | 용도                 |
+| ------------------ | -------------------- |
+| `blink`            | 커서 깜빡임 (0.7s)   |
 | `skeleton-loading` | 로딩 스켈레톤 (1.2s) |
 
 ### 전역 트랜지션
 
 ```css
 * {
-  transition-property: color, background-color, border-color,
-                       text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-duration: 200ms;
 }
 ```

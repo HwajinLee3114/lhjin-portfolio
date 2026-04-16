@@ -2,20 +2,20 @@
 
 ## 기술 스택
 
-| 카테고리 | 기술 | 버전 |
-|---------|------|------|
-| 프레임워크 | Next.js (App Router) | 14.2.15 |
-| 언어 | TypeScript | 5.9.3 |
-| 스타일링 | Tailwind CSS | 3.4.19 |
-| CSS-in-JS | styled-components | 6.3.9 |
-| 상태관리 | Zustand | 5.0.11 |
-| 애니메이션 | Framer Motion | 11.11.9 |
-| 아이콘 | Lucide React, FontAwesome | - |
-| 다이어그램 | React Flow / XYFlow | 11.11.4 / 12.10.1 |
-| DB | Supabase (PostgreSQL) | - |
-| 테스트 | Jest + Testing Library | 29.7.0 |
-| 린팅 | ESLint + Prettier | - |
-| 패키지매니저 | pnpm | 9.0.0 |
+| 카테고리     | 기술                      | 버전              |
+| ------------ | ------------------------- | ----------------- |
+| 프레임워크   | Next.js (App Router)      | 14.2.15           |
+| 언어         | TypeScript                | 5.9.3             |
+| 스타일링     | Tailwind CSS              | 3.4.19            |
+| CSS-in-JS    | styled-components         | 6.3.9             |
+| 상태관리     | Zustand                   | 5.0.11            |
+| 애니메이션   | Framer Motion             | 11.11.9           |
+| 아이콘       | Lucide React, FontAwesome | -                 |
+| 다이어그램   | React Flow / XYFlow       | 11.11.4 / 12.10.1 |
+| DB           | Supabase (PostgreSQL)     | -                 |
+| 테스트       | Jest + Testing Library    | 29.7.0            |
+| 린팅         | ESLint + Prettier         | -                 |
+| 패키지매니저 | pnpm                      | 9.0.0             |
 
 ## 코딩 컨벤션
 
@@ -36,14 +36,14 @@
 
 ### 네이밍
 
-| 대상 | 규칙 | 예시 |
-|------|------|------|
-| 컴포넌트 파일 | PascalCase | `ProjectCard.tsx` |
-| 훅 파일 | kebab-case + `use-` | `use-window-store.ts` |
-| CSS 클래스 (커스텀) | 접두사 `l_` (로컬) / `g_` (글로벌) | `l_search_div`, `g_titleEngFontBlack` |
-| Tailwind 커스텀 색상 | camelCase | `themacolor1`, `darkbg` |
-| 데이터 파일 | camelCase | `projects.ts` |
-| JSON 데이터 | camelCase 키 | `startDate`, `techStack` |
+| 대상                 | 규칙                               | 예시                                  |
+| -------------------- | ---------------------------------- | ------------------------------------- |
+| 컴포넌트 파일        | PascalCase                         | `ProjectCard.tsx`                     |
+| 훅 파일              | kebab-case + `use-`                | `use-window-store.ts`                 |
+| CSS 클래스 (커스텀)  | 접두사 `l_` (로컬) / `g_` (글로벌) | `l_search_div`, `g_titleEngFontBlack` |
+| Tailwind 커스텀 색상 | camelCase                          | `themacolor1`, `darkbg`               |
+| 데이터 파일          | camelCase                          | `projects.ts`                         |
+| JSON 데이터          | camelCase 키                       | `startDate`, `techStack`              |
 
 ### Import 순서
 
@@ -72,8 +72,8 @@ export const useExampleStore = create<ExampleStore>()(
       value: '',
       setValue: (v) => set({ value: v }),
     }),
-    { name: 'example-storage' }
-  )
+    { name: 'example-storage' },
+  ),
 )
 ```
 

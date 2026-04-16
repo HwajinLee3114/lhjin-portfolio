@@ -15,8 +15,32 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'lhjin 이화진 포트폴리오',
-  description: '이화진 포트폴리오. lhjin Portfolio',
+  metadataBase: new URL('https://lhjin.dev'),
+  title: {
+    default: '이화진 | 프론트엔드 개발자 포트폴리오',
+    template: '%s | 이화진 포트폴리오',
+  },
+  description:
+    '프론트엔드 개발자 이화진의 포트폴리오입니다. Next.js, React, TypeScript 기반의 프로젝트와 경력을 소개합니다.',
+  keywords: ['프론트엔드', '개발자', '포트폴리오', 'React', 'Next.js', 'TypeScript', '이화진'],
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    siteName: '이화진 포트폴리오',
+    title: '이화진 | 프론트엔드 개발자 포트폴리오',
+    description:
+      '프론트엔드 개발자 이화진의 포트폴리오입니다. Next.js, React, TypeScript 기반의 프로젝트와 경력을 소개합니다.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '이화진 | 프론트엔드 개발자 포트폴리오',
+    description:
+      '프론트엔드 개발자 이화진의 포트폴리오입니다. Next.js, React, TypeScript 기반의 프로젝트와 경력을 소개합니다.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({
@@ -25,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   )

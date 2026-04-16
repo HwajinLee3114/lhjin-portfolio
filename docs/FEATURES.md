@@ -2,18 +2,21 @@
 
 ## 라우트 구조
 
-| 경로 | 파일 | 설명 |
-|------|------|------|
-| `/` | `src/app/page.tsx` | 메인 — 데스크탑 OS 시뮬레이터 렌더링 |
-| `/home` | `src/app/home/page.tsx` | 인트로 섹션 (타이핑 애니메이션) |
-| `/about` | `src/app/about/page.tsx` | 프로필, 소셜 링크, 이력서 다운로드 |
-| `/skills` | `src/app/skills/page.tsx` | 기술 스택 (카테고리별 분류) |
-| `/project` | `src/app/project/page.tsx` | 프로젝트 아카이브 (필터링, 검색) |
-| `/career` | `src/app/career/page.tsx` | 경력 타임라인 |
-| `/architecture` | `src/app/architecture/page.tsx` | 시스템 아키텍처 다이어그램 |
+| 경로            | 파일                            | 설명                                       |
+| --------------- | ------------------------------- | ------------------------------------------ |
+| `/`             | `src/app/page.tsx`              | 랜딩 — 모드 선택 (이력서 보기 / OS 체험)   |
+| `/resume`       | `src/app/resume/page.tsx`       | 문서형 포트폴리오 (스크롤 기반)            |
+| `/os`           | `src/app/os/page.tsx`           | 데스크탑 OS 시뮬레이터                     |
+| `/home`         | `src/app/home/page.tsx`         | 인트로 섹션 (타이핑 애니메이션, OS 배경용) |
+| `/about`        | `src/app/about/page.tsx`        | 프로필 (OS 윈도우 내부 콘텐츠)             |
+| `/skills`       | `src/app/skills/page.tsx`       | 기술 스택 (OS 윈도우 내부 콘텐츠)          |
+| `/project`      | `src/app/project/page.tsx`      | 프로젝트 아카이브 (OS 윈도우 내부 콘텐츠)  |
+| `/career`       | `src/app/career/page.tsx`       | 경력 타임라인 (OS 윈도우 내부 콘텐츠)      |
+| `/architecture` | `src/app/architecture/page.tsx` | 시스템 아키텍처 다이어그램                 |
 
 - 404 처리: `src/app/not-found.tsx`
-- 모든 라우트는 OS 데스크탑 내 **윈도우**로 열림
+- `/about`, `/skills`, `/project`, `/career`는 OS 데스크탑 내 **윈도우**로 열림
+- `/resume`는 독립된 문서형 레이아웃 (네비게이션 바 + 스크롤)
 
 ## 핵심 기능
 
@@ -72,10 +75,10 @@ React Flow를 이용한 인터랙티브 아키텍처 다이어그램.
 
 3가지 테마 지원 (CSS 변수 기반).
 
-| 테마 | 클래스 | 배경색 |
-|------|--------|--------|
-| Light | (기본) | `#ffffff` |
-| Dark | `.dark` | `#1f262e` |
+| 테마   | 클래스          | 배경색    |
+| ------ | --------------- | --------- |
+| Light  | (기본)          | `#ffffff` |
+| Dark   | `.dark`         | `#1f262e` |
 | Custom | `.theme-custom` | `#f9f7f5` |
 
 - 전환: `ThemeToggle` 컴포넌트 (`components/comn/ThemeToggle.tsx`)

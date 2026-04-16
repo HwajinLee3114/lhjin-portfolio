@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 
@@ -61,11 +62,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         className="group relative flex flex-col h-full rounded-[2rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 cursor-pointer transition-all duration-500 hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-1.5"
       >
         <div className="relative aspect-[16/10] rounded-[1.5rem] overflow-hidden bg-zinc-50 dark:bg-zinc-800 mb-4">
-          <img
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <Image
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
             src={`/images/thumb/${imageSrc}`}
-            alt={title}
-            loading="lazy"
+            alt={title || ''}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute bottom-3 left-3 right-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">

@@ -1,7 +1,6 @@
 'use client'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { ArrowRight } from 'lucide-react'
 
 import styles from './SlideButton.module.css'
 
@@ -39,7 +38,7 @@ const SlideButton: React.FC<SlideButtonProps> = ({ text, href, color, isDown, ur
       >
         <div className={styles.color} style={{ backgroundColor: color }}></div>
         <span>{text}</span>
-        <FontAwesomeIcon icon={faArrowRight} className="w-8 z-10 ml-2" />
+        <ArrowRight size={20} className="z-10 ml-2" />
       </a>
     </div>
   )

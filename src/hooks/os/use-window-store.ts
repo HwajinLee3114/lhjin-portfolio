@@ -158,6 +158,10 @@ export const useWindowStore = create<WindowStore>((set) => ({
     })),
 }))
 
+let debounceTimer: ReturnType<typeof setTimeout> | null = null
 useWindowStore.subscribe((state) => {
-  persistWindowsToStorage(state.windows)
+  if (debounceTimer) clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(() => {
+    persistWindowsToStorage(state.windows)
+  }, 400)
 })

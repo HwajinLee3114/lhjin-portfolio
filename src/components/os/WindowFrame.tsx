@@ -145,8 +145,8 @@ export const WindowFrame = forwardRef<HTMLDivElement, WindowFrameProps>(function
         width: isEffectivelyMaximized ? '100vw' : window.size.width,
         height: isEffectivelyMaximized
           ? isMobile
-            ? '100vh'
-            : 'calc(100vh - 32px)'
+            ? '100dvh'
+            : 'calc(100dvh - 32px)'
           : window.size.height,
       }}
       style={{ zIndex: window.zIndex }}
