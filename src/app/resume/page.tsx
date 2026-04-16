@@ -18,7 +18,7 @@ import {
 import Link from 'next/link'
 
 import { projects } from '@/data/projects'
-import { skills } from '@/data/skills'
+import SkillList from '@/components/skills/SkillList'
 import { sortedCareer } from '@/data/career'
 import { profile } from '@/data/profile'
 import { formatPeriod } from '@/lib/period'
@@ -125,7 +125,7 @@ export default function ResumePage() {
         </div>
       </nav>
 
-      <section id="about" className="mx-auto max-w-5xl px-6 py-20 md:py-28">
+      <section id="about" className="mx-auto max-w-5xl px-6 py-16">
         <motion.div {...fadeUp} className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
           <div className="relative shrink-0">
             <div className="relative h-40 w-40 rotate-3 overflow-hidden rounded-[3rem] border-4 border-white bg-zinc-100 shadow-xl transition-transform duration-500 hover:rotate-0 dark:border-zinc-800">
@@ -214,45 +214,12 @@ export default function ResumePage() {
             <SectionHeader title="Tech Stack" />
           </motion.div>
 
-          <div className="space-y-8">
-            {skills.map((category, idx) => (
-              <motion.div
-                key={category.title}
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: idx * 0.08 }}
-                className="flex flex-col items-start gap-6 md:flex-row"
-              >
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm dark:bg-zinc-800">
-                  <Image
-                    src={category.img}
-                    alt={category.title}
-                    width={36}
-                    height={36}
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex-1">
-                  <h3 className="mb-3 text-sm font-black text-zinc-900 dark:text-white">
-                    {category.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill) => (
-                      <span
-                        key={skill.name}
-                        className="rounded-xl px-4 py-2 text-xs font-bold shadow-sm"
-                        style={{
-                          backgroundColor: skill.color,
-                          color: skill.txtcolor || '#fff',
-                        }}
-                      >
-                        {skill.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <SkillList
+            variant={{
+              hidden: { opacity: 0, y: 24 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          />
         </div>
       </section>
 
