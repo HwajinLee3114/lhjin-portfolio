@@ -73,6 +73,7 @@ const S = {
   reactQuery: { name: 'React Query' },
   jsp: { name: 'JSP' },
   egov: { name: '전자정부프레임워크' },
+  supabase: { name: 'Supabase' },
 } as const
 
 const projectsData: z.input<typeof ProjectSchema>[] = [
@@ -527,6 +528,56 @@ const projectsData: z.input<typeof ProjectSchema>[] = [
       { url: 'portfolio_4.png', name: 'projects' },
       { url: 'portfolio_5.png', name: 'career' },
     ],
+  },
+  {
+    id: 'banya-log',
+    title: '기록해',
+    periodStart: '2026-01',
+    filter: [tag('personal'), tag('feature'), tag('FE')],
+    description:
+      '독서, 영화, 시리즈, 메모, 북마크, 캐릭터, 스탬프 등 다양한 콘텐츠를 종합 관리하는 개인 일상 기록 PWA 앱입니다.',
+    feature: [
+      '캘린더 기반 일일 로깅 및 루틴/습관 트래커',
+      '독서/영화/시리즈 콘텐츠 통합 관리 및 세션 기록',
+      '마크다운 메모, 웹 북마크 OG 자동 스크랩',
+      '캐릭터 프로필 관리 및 카드 이미지/PDF 내보내기',
+      '스탬프북 수집 및 방문 기록 관리',
+    ],
+    contribution: [
+      {
+        title: 'Supabase Edge Functions 활용 서버리스 아키텍처 구축',
+        desc: [
+          'Kakao Book API, TMDB API 프록시를 Edge Function으로 구현하여 API 키 노출 없이 안전한 외부 API 연동',
+          'OG 메타데이터 스크래핑 Edge Function 구현 (Twitter/X 미디어 추출, favicon 폴백 처리)',
+          '서비스 롤 기반 계정 삭제 Edge Function으로 보안 요구사항 충족',
+        ],
+      },
+      {
+        title: '오프라인 대응 및 데이터 동기화',
+        desc: [
+          '오프라인 mutation 큐를 구현하여 네트워크 불안정 시에도 데이터 유실 없는 optimistic update 처리',
+          'Supabase 실시간 구독과 로컬 상태를 연동한 라이브 싱크 구현',
+        ],
+      },
+      {
+        title: 'PWA 및 네이티브 앱 경험 구현',
+        desc: [
+          'Web Share Target API로 OS 공유 메뉴에서 바로 북마크 등록 가능',
+          'Web Manifest 및 Splash Screen 구성으로 네이티브 앱에 준하는 사용 경험 제공',
+        ],
+      },
+      {
+        title: '성능 최적화 및 코드 품질',
+        desc: [
+          'React.lazy 기반 라우트별 코드 스플리팅으로 초기 로딩 최적화',
+          'Zod 스키마로 DB 응답 런타임 검증 및 타입 안전성 확보',
+          '60+ SQL 마이그레이션으로 체계적인 DB 스키마 버전 관리',
+        ],
+      },
+    ],
+    skillItem: [S.react, S.ts, S.vite, S.tailwind, S.supabase, S.zod, S.framerMotion],
+    thumb: '',
+    images: [],
   },
   // {
   //   id: 'carsayo-homepage',
