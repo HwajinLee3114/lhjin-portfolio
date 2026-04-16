@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server'
+import type { ContributionDay } from '@/types/github'
 
 const GITHUB_USERNAME = 'HwajinLee3114'
 const CACHE_DURATION = 3600
-
-type ContributionDay = { date: string; count: number; level: number }
 
 export async function GET() {
   const [userRes, reposRes, contribRes] = await Promise.all([

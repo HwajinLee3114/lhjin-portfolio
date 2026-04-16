@@ -8,7 +8,10 @@ export function Dock() {
   const { windows, openWindow, closeWindow, focusWindow } = useWindowStore()
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-[1000] flex -translate-x-1/2 items-end gap-2 rounded-[2rem] border border-white/20 bg-white/40 px-3 py-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-2xl transition-all hover:bg-white/60">
+    <nav
+      aria-label="메인 내비게이션"
+      className="fixed bottom-6 left-1/2 z-[1000] flex -translate-x-1/2 items-end gap-2 rounded-[2rem] border border-white/20 bg-white/40 px-3 py-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-2xl transition-all hover:bg-white/60"
+    >
       {navItems.map((item) => {
         const Icon = item.icon
         const windowState = windows[item.id]
@@ -17,6 +20,7 @@ export function Dock() {
         return (
           <button
             key={item.id}
+            aria-label={`${item.title} ${isOpen ? '닫기' : '열기'}`}
             onClick={() => {
               if (isOpen) {
                 closeWindow(item.id)
@@ -48,6 +52,6 @@ export function Dock() {
           </button>
         )
       })}
-    </div>
+    </nav>
   )
 }

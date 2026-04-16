@@ -2,11 +2,15 @@
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
-import { ChevronDown, Briefcase } from 'lucide-react'
+import { ChevronDown, Briefcase, ArrowUpRight } from 'lucide-react'
 
 import { sortedCareer } from '@/data/career'
 import { formatPeriod } from '@/lib/period'
 import { cn } from '@/lib/utils'
+import useModal from '@/hooks/useModal'
+import { ProjectDetailModal } from '@/components/project/detail/ProjectDetailModal'
+import ModalPortal from '@/components/common/ModalPortal'
+import ModalOverlay from '@/components/common/ModalOverlay'
 
 const defaultVariant: Variants = {
   hidden: { opacity: 0, x: -20 },
@@ -19,6 +23,7 @@ interface CareerListProps {
 
 export default function CareerList({ variant = defaultVariant }: CareerListProps) {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({})
+  const modal = useModal()
 
   const toggleItem = (id: string) => {
     setOpenItems((prev) => ({ ...prev, [id]: !prev[id] }))
@@ -127,15 +132,22 @@ export default function CareerList({ variant = defaultVariant }: CareerListProps
                                 initial={{ x: -10, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ delay: pIdx * 0.05 }}
-                                className="group/pj relative rounded-xl border border-zinc-100 bg-zinc-50/50 p-4 transition-all hover:border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800/20 dark:hover:border-zinc-700"
+                                onClick={() => modal.open(pj.id)}
+                                className="group/pj relative cursor-pointer rounded-xl border border-zinc-100 bg-zinc-50/50 p-4 transition-all hover:border-zinc-200 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-800/20 dark:hover:border-zinc-700"
                               >
                                 <div className="mb-2 flex items-start justify-between gap-4">
-                                  <h4 className="text-lg font-black text-zinc-900 transition-colors group-hover/pj:text-zinc-900 dark:text-white">
+                                  <h4 className="text-lg font-black text-zinc-900 dark:text-white">
                                     {pj.title}
                                   </h4>
-                                  <span className="rounded-full border border-zinc-100 bg-white px-3 py-1.5 text-[10px] font-black text-zinc-400 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-                                    {formatPeriod(pj.periodStart, pj.periodEnd)}
-                                  </span>
+                                  <div className="flex items-center gap-2">
+                                    <span className="rounded-full border border-zinc-100 bg-white px-3 py-1.5 text-[10px] font-black text-zinc-400 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+                                      {formatPeriod(pj.periodStart, pj.periodEnd)}
+                                    </span>
+                                    <ArrowUpRight
+                                      size={14}
+                                      className="shrink-0 text-zinc-300 transition-colors group-hover/pj:text-zinc-900 dark:group-hover/pj:text-white"
+                                    />
+                                  </div>
                                 </div>
                                 <p className="text-base font-medium leading-relaxed text-zinc-500 dark:text-zinc-400">
                                   {pj.description}
@@ -152,6 +164,20 @@ export default function CareerList({ variant = defaultVariant }: CareerListProps
           </div>
         </motion.div>
       ))}
+
+      <AnimatePresence>
+        {modal.isOpen && (
+          <ModalPortal>
+            <ModalOverlay onClose={modal.close}>
+              <ProjectDetailModal
+                isOpen={modal.isOpen}
+                activeId={modal.activeId}
+                onClose={modal.close}
+              />
+            </ModalOverlay>
+          </ModalPortal>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

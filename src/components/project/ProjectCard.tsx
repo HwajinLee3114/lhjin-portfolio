@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
@@ -38,6 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
 }) => {
   const modal = useModal()
+  const [imgLoaded, setImgLoaded] = useState(false)
 
   return (
     <>
@@ -48,13 +49,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       >
         <div className="relative aspect-[16/10] rounded-t-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-800">
           {imageSrc ? (
-            <Image
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
-              src={imagePath.projectThumb(imageSrc)}
-              alt={title || ''}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
+            <>
+              {!imgLoaded && (
+                <div className="absolute inset-0 animate-pulse bg-zinc-200 dark:bg-zinc-700" />
+              )}
+              <Image
+                className={`object-cover transition-all duration-700 group-hover:scale-105 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                src={imagePath.projectThumb(imageSrc)}
+                alt={title || ''}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                onLoad={() => setImgLoaded(true)}
+              />
+            </>
           ) : (
             <div className="flex h-full w-full items-center justify-center text-3xl font-black text-zinc-300 dark:text-zinc-600">
               {title?.charAt(0) || '?'}

@@ -7,12 +7,9 @@ import { cn } from '@/lib/utils'
 import { useWidgetStore } from '@/hooks/os/use-widget-store'
 import { supabase } from '@/lib/supabase/client'
 
-type GuestbookEntry = {
-  id: string
-  name: string
-  message: string
-  created_at: string
-}
+import type { GuestbookEntryRow } from '@/lib/supabase/guestbook-service'
+
+type GuestbookEntry = Pick<GuestbookEntryRow, 'id' | 'name' | 'message' | 'created_at'>
 
 interface GuestbookWidgetProps {
   isOpen: boolean
@@ -55,6 +52,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const [message, setMessage] = useState('')
   const [entries, setEntries] = useState<GuestbookEntry[]>([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [cooldown, setCooldown] = useState(false)
 
@@ -69,15 +67,22 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const fetchEntries = useCallback(async () => {
     if (!supabase) return
     setLoading(true)
-    const { data, error } = await supabase
-      .from('portfolio_guestbook')
-      .select('id,name,message,created_at')
-      .eq('is_visible', true)
-      .order('created_at', { ascending: false })
-      .limit(50)
+    setError(false)
+    try {
+      const { data, error: queryError } = await supabase
+        .from('portfolio_guestbook')
+        .select('id,name,message,created_at')
+        .eq('is_visible', true)
+        .order('created_at', { ascending: false })
+        .limit(50)
 
-    if (!error && data) setEntries(data)
-    setLoading(false)
+      if (queryError) throw queryError
+      setEntries(data ?? [])
+    } catch {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
   useEffect(() => {
@@ -263,8 +268,19 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
 
             <ul className="custom-scrollbar flex-1 space-y-3 overflow-y-auto pr-1">
               {loading ? (
-                <li className="flex items-center justify-center py-8">
+                <li className="flex flex-col items-center justify-center gap-2 py-8">
                   <Loader2 size={20} className="animate-spin text-zinc-300" />
+                  <span className="text-[10px] text-zinc-400">불러오는 중...</span>
+                </li>
+              ) : error ? (
+                <li className="flex flex-col items-center justify-center gap-2 py-8">
+                  <span className="text-xs text-zinc-400">불러오기에 실패했어요</span>
+                  <button
+                    onClick={fetchEntries}
+                    className="rounded-xl bg-zinc-100 px-3 py-1.5 text-[10px] font-bold text-zinc-600 transition-colors hover:bg-zinc-200"
+                  >
+                    다시 시도
+                  </button>
                 </li>
               ) : entries.length === 0 ? (
                 <li className="py-8 text-center text-xs text-zinc-400">
