@@ -290,7 +290,8 @@
 
 **완료 내역:**
 
-- [x] `src/data/profile.ts` 생성 — 이름, 직함, 이메일, 소개, 소셜 링크, 프로필 이미지, 핵심 기술 통합
+- [x] `src/data/profile.ts` 생성 — 이름, 직함, 이메일, 소개, 소셜 링크, 프로필 이미지, 핵심 기술
+      통합
 - [x] `page.tsx` (랜딩) — `profile.*` 참조로 전환
 - [x] `about/page.tsx` — 동일
 - [x] `resume/page.tsx` — 동일
@@ -324,6 +325,169 @@
 
 ---
 
+## 전체 검토 (세션 3 — 2026-04-16)
+
+### 코드 정리
+
+#### [x] 24. `comn/` → `common/` 디렉토리 통합
+
+**완료 내역:**
+
+- [x] `comn/` 내 12개 파일을 `common/`으로 이동
+- [x] 전체 import 경로 수정 (4개 파일)
+- [x] `comn/` 디렉토리 삭제
+
+---
+
+#### [x] 25. 미사용 코드 정리
+
+**완료 내역:**
+
+- [x] `ScrollDownBtn.tsx` + `.module.css` 삭제
+- [x] `SkillItem.tsx` 삭제 + `skill/` 디렉토리 삭제
+- [x] `HoverAMenu.tsx`, `ConfettiBurst.tsx`, `Footer.tsx`, `ScrollTopButton.tsx` 삭제
+- [x] `home/page.tsx` 주석 코드 제거
+- [x] `styled-components`, `tailwind-styled-components`, `@types/styled-components` 패키지 삭제
+- [x] `ProjectDetailModal.tsx`의 `tw.div` → 순수 Tailwind className으로 변환
+
+---
+
+#### [x] 26. 중복 Flow 라이브러리 정리
+
+**완료 내역:**
+
+- [x] `reactflow` 패키지 삭제 (실제 사용은 `@xyflow/react`만)
+
+---
+
+### 데이터 관리
+
+#### [x] 27. JSON 스키마 검증 추가 (zod)
+
+**완료 내역:**
+
+- [x] `zod` 패키지 설치
+- [x] `projects.ts` — ProjectSchema, SkillItemSchema 등 정의 + `z.array().parse()`
+- [x] `career.ts` — CareerSchema, RoleSchema 정의 + `z.array().parse()`
+- [x] `skills.ts` — SkillSchema, SkillCategorySchema 정의 + `z.array().parse()`
+- [x] `as Type[]` 캐스트 전량 제거 → 런타임 검증으로 전환
+- [x] JSON 필드 누락/타입 오류 시 빌드 시점에 즉시 에러
+
+---
+
+#### [x] 28. 프로젝트 추가 프로세스 간소화
+
+**완료 내역:**
+
+- [x] `docs/IMPROVEMENTS.md` 하단에 데이터 파일 관리 가이드 작성 완료
+- [x] zod 검증으로 필수 필드 누락 시 빌드 실패 (#27 연계)
+
+---
+
+### 접근성
+
+#### [x] 29. 접근성 개선
+
+**완료 내역:**
+
+- [x] `home/page.tsx` — `alt="icon"` → `alt="검색 아이콘"` 구체화
+- [x] `GuestbookWidget.tsx` — input에 `aria-label` 추가 ("작성자 이름", "방명록 메시지")
+
+---
+
+### 기능 개선
+
+#### [x] 30. Music Player 개선
+
+**완료 내역:**
+
+- [x] 단일 트랙 → Skip 버튼(이전/다음) 제거, 재생/일시정지 버튼만 유지
+- [x] 재생 버튼에 `aria-label` 추가
+- [x] 미사용 import (`SkipBack`, `SkipForward`) 제거
+
+---
+
+#### [x] 31. Guestbook 스팸 방지
+
+**완료 내역:**
+
+- [x] 전송 후 10초 쿨다운 (`cooldown` state)
+- [x] 쿨다운 중 버튼 비활성화 + "잠시 후 다시 시도해주세요" 메시지
+
+---
+
+#### [x] 32. 이력서 미리보기 인쇄 최적화
+
+**완료 내역:**
+
+- [x] `globals.css` — `break-inside: avoid-page` (section, div)
+- [x] `break-after: avoid-page` (h1~h4) — 제목 뒤에서 페이지 안 끊김
+
+---
+
+### 어필/차별화 포인트
+
+#### [x] 33. GitHub 활동 연동
+
+**완료 내역:**
+
+- [x] `/api/github` API Route 생성 — public repos 수 + 최근 업데이트 5개 레포
+- [x] 서버 사이드 캐싱 (1시간 revalidate)
+- [x] `about/page.tsx` — "Recent GitHub Activity" 섹션 추가 (레포 이름 + 날짜)
+- [x] API 실패 시 섹션 숨김 (graceful fallback)
+
+---
+
+#### [x] 34. 블로그 최신 글 연동
+
+**완료 내역:**
+
+- [x] `/api/blog` API Route 생성 — Tistory RSS 파싱, 최근 5개 포스트
+- [x] 서버 사이드 캐싱 (1시간 revalidate)
+- [x] `resume/page.tsx` — Career 섹션 아래에 "Blog" 섹션 추가
+- [x] RSS 파싱 실패 시 섹션 숨김 (graceful fallback)
+
+---
+
+## 데이터 파일 관리 가이드
+
+### 프로젝트 추가 절차
+
+```
+1. data/projects.json에 항목 추가
+   - id: 슬러그 (예: "new-project")
+   - company: career.json의 id와 매칭 (예: "carsayo"), 개인은 생략
+   - thumb: "pjN.png" 파일을 public/images/thumb/에 배치
+   - images: [{url: "N_1.png", name: "설명"}] 파일을 public/images/project/에 배치
+
+2. 경력은 자동 연결됨 (company 필드 기준)
+
+3. 빌드 확인: pnpm build
+```
+
+### 경력 추가 절차
+
+```
+1. data/career.json에 항목 추가
+   - id: 슬러그 (예: "new-company")
+   - projects 배열은 없음 (자동 역참조)
+
+2. 기존 projects.json에서 해당 회사 프로젝트에 company 필드 추가/수정
+
+3. 빌드 확인: pnpm build
+```
+
+### 스킬 추가 절차
+
+```
+1. data/skills.json 해당 카테고리에 추가
+   - name, color, txtcolor(선택)
+
+2. 프로필 핵심 기술이면 src/data/profile.ts의 coreSkills 배열에도 추가
+```
+
+---
+
 ## 참고: 잘 된 점 (유지할 것)
 
 - OS 시뮬레이터 컨셉 — 프론트엔드 역량의 살아있는 증명
@@ -331,4 +495,7 @@
 - WindowFrame 리사이즈 로직 — 최소 크기 제한, 뷰포트 대응, 모바일 자동 최대화
 - Framer Motion 활용 — spring 파라미터가 자연스럽고 과하지 않음
 - TypeScript strict 모드 + 일관적인 인터페이스 정의
-- Career-Project JSON 간 ID 참조로 데이터 정규화
+- 프로필 상수 통합 (`profile.ts`) — 한 곳 수정으로 전체 반영
+- Career → Project 자동 역참조 — 프로젝트 추가 시 career 수정 불필요
+- SQL 마이그레이션 파일 관리 (`docs/sql/`)
+- 문서 자동 업데이트 체계

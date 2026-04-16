@@ -53,6 +53,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const [entries, setEntries] = useState<GuestbookEntry[]>([])
   const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [cooldown, setCooldown] = useState(false)
 
   const [size, setSize] = useState({ width: 340, height: 460 })
   const [isResizing, setIsResizing] = useState(false)
@@ -118,7 +119,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const trimmed = message.trim()
-    if (!trimmed || submitting) return
+    if (!trimmed || submitting || cooldown) return
 
     setSubmitting(true)
 
@@ -132,6 +133,8 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
       setEntries((prev) => [data, ...prev])
       setMessage('')
       setName('')
+      setCooldown(true)
+      setTimeout(() => setCooldown(false), 10000)
     }
 
     setSubmitting(false)
@@ -217,6 +220,7 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
                   onChange={(e) => setName(e.target.value)}
                   maxLength={10}
                   placeholder="이름"
+                  aria-label="작성자 이름"
                   disabled={submitting}
                   className="w-24 rounded-2xl border border-zinc-100 bg-zinc-50 px-3 py-2.5 text-xs font-bold outline-none focus:bg-white focus:ring-2 focus:ring-yellow-400/50 transition-all disabled:opacity-50"
                 />
@@ -225,17 +229,20 @@ export function GuestbookWidget({ isOpen, onClose }: GuestbookWidgetProps) {
                   onChange={(e) => setMessage(e.target.value)}
                   maxLength={60}
                   placeholder="메시지를 남겨주세요!"
+                  aria-label="방명록 메시지"
                   disabled={submitting}
                   className="flex-1 rounded-2xl border border-zinc-100 bg-zinc-50 px-4 py-2.5 text-xs font-bold outline-none focus:bg-white focus:ring-2 focus:ring-yellow-400/50 transition-all disabled:opacity-50"
                 />
               </div>
               <button
                 type="submit"
-                disabled={submitting}
+                disabled={submitting || cooldown}
                 className="flex w-full items-center justify-center gap-2 rounded-2xl bg-zinc-900 py-3 text-xs font-black text-white shadow-lg shadow-zinc-200 transition-all hover:bg-zinc-800 active:scale-[0.98] disabled:opacity-50"
               >
                 {submitting ? (
                   <Loader2 size={14} className="animate-spin" />
+                ) : cooldown ? (
+                  <span>잠시 후 다시 시도해주세요</span>
                 ) : (
                   <>
                     <span>보내기</span>

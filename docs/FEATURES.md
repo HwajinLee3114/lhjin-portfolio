@@ -14,6 +14,8 @@
 | `/project`        | `src/app/project/page.tsx`        | 프로젝트 아카이브 (OS 윈도우 내부 콘텐츠)  |
 | `/career`         | `src/app/career/page.tsx`         | 경력 타임라인 (OS 윈도우 내부 콘텐츠)      |
 | `/architecture`   | `src/app/architecture/page.tsx`   | 시스템 아키텍처 다이어그램                 |
+| `/api/github`     | `src/app/api/github/route.ts`     | GitHub 활동 API (repos, 최근 업데이트)     |
+| `/api/blog`       | `src/app/api/blog/route.ts`       | Tistory RSS → 최근 블로그 글 5개           |
 
 - 404 처리: `src/app/not-found.tsx`
 - `/about`, `/skills`, `/project`, `/career`는 OS 데스크탑 내 **윈도우**로 열림

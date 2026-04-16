@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
-import { Music2, Play, Pause, SkipBack, SkipForward, X, GripHorizontal } from 'lucide-react'
+import { Music2, Play, Pause, X, GripHorizontal } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { useOSStore } from '@/hooks/os/use-os-store'
@@ -186,15 +186,13 @@ export function MusicPlayer() {
               </p>
             </div>
 
-            <div className="mb-10 flex items-center gap-10">
-              <button className="text-zinc-300 transition-all hover:text-zinc-900 active:scale-75">
-                <SkipBack size={28} fill="currentColor" />
-              </button>
+            <div className="mb-10 flex items-center justify-center">
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   updateMusic({ isPlaying: !musicInfo.isPlaying })
                 }}
+                aria-label={musicInfo.isPlaying ? '일시정지' : '재생'}
                 className="flex h-20 w-20 items-center justify-center rounded-full bg-zinc-900 text-white shadow-[0_15px_35px_rgba(0,0,0,0.3)] transition-all hover:scale-110 active:scale-90"
               >
                 {musicInfo.isPlaying ? (
@@ -202,9 +200,6 @@ export function MusicPlayer() {
                 ) : (
                   <Play size={32} fill="currentColor" className="ml-1.5" />
                 )}
-              </button>
-              <button className="text-zinc-300 transition-all hover:text-zinc-900 active:scale-75">
-                <SkipForward size={28} fill="currentColor" />
               </button>
             </div>
 

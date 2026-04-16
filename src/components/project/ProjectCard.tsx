@@ -6,13 +6,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 
 import { ProjectDetailModal } from './detail/ProjectDetailModal'
-import ModalPortal from '../comn/ModalPortal'
-import ModalOverlay from '../comn/ModalOverlay'
+import ModalPortal from '../common/ModalPortal'
+import ModalOverlay from '../common/ModalOverlay'
 import { formatPeriod } from '@/lib/period'
 import type { FilterTag, SkillItem } from '@/data/projects'
 import useBodyScrollLock from '@/hooks/useBodyScrollLock'
 import useEscapeKey from '@/hooks/useEscapeKey'
-import TagBadge from '../comn/TagBadge'
+import TagBadge from '../common/TagBadge'
 
 interface ProjectCardProps {
   id?: string

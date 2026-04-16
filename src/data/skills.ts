@@ -1,15 +1,19 @@
+import { z } from 'zod'
 import skillsJson from '../../data/skills.json'
 
-export interface Skill {
-  name: string
-  color: string
-  txtcolor?: string
-}
+const SkillSchema = z.object({
+  name: z.string(),
+  color: z.string(),
+  txtcolor: z.string().optional(),
+})
 
-export interface SkillCategory {
-  title: string
-  skills: Skill[]
-  img: string
-}
+const SkillCategorySchema = z.object({
+  title: z.string(),
+  skills: z.array(SkillSchema),
+  img: z.string(),
+})
 
-export const skills = skillsJson as SkillCategory[]
+export type Skill = z.infer<typeof SkillSchema>
+export type SkillCategory = z.infer<typeof SkillCategorySchema>
+
+export const skills = z.array(SkillCategorySchema).parse(skillsJson)

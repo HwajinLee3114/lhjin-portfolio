@@ -1,43 +1,50 @@
+import { z } from 'zod'
 import projectsJson from '../../data/projects.json'
 
-export interface ProjectImage {
-  url: string
-  name: string
-}
+const ProjectImageSchema = z.object({
+  url: z.string(),
+  name: z.string(),
+})
 
-export interface SkillItem {
-  name: string
-  url?: string
-}
+const SkillItemSchema = z.object({
+  name: z.string(),
+  url: z.string().optional(),
+})
 
-export interface Contribution {
-  title: string
-  desc: string[]
-}
+const ContributionSchema = z.object({
+  title: z.string(),
+  desc: z.array(z.string()),
+})
 
-export interface FilterTag {
-  name: string
-  color: string
-}
+const FilterTagSchema = z.object({
+  name: z.string(),
+  color: z.string(),
+})
 
-export interface Project {
-  id: string
-  title: string
-  company?: string
-  periodStart?: string
-  periodEnd?: string
-  git?: string
-  site?: string
-  filter: FilterTag[]
-  description: string
-  feature: string[]
-  contribution: Contribution[]
-  skillItem: SkillItem[]
-  thumb: string
-  images: ProjectImage[]
-}
+const ProjectSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  company: z.string().optional(),
+  periodStart: z.string().optional(),
+  periodEnd: z.string().optional(),
+  git: z.string().optional(),
+  site: z.string().optional(),
+  filter: z.array(FilterTagSchema),
+  description: z.string(),
+  feature: z.array(z.string()),
+  contribution: z.array(ContributionSchema),
+  skillItem: z.array(SkillItemSchema),
+  thumb: z.string(),
+  images: z.array(ProjectImageSchema),
+})
 
-export const projects = projectsJson as Project[]
+export type ProjectImage = z.infer<typeof ProjectImageSchema>
+export type SkillItem = z.infer<typeof SkillItemSchema>
+export type Contribution = z.infer<typeof ContributionSchema>
+export type FilterTag = z.infer<typeof FilterTagSchema>
+export type Project = z.infer<typeof ProjectSchema>
+
+export const projects = z.array(ProjectSchema).parse(projectsJson)
 
 export const getProjectById = (id: string) => {
   return projects.find((project) => project.id === id)

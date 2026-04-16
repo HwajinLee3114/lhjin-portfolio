@@ -85,4 +85,16 @@ body {
     size: A4;
     margin: 10mm;
   }
+
+  section,
+  div {
+    break-inside: avoid-page;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid-page;
+  }
 }

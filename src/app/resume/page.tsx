@@ -13,6 +13,7 @@ import {
   ArrowUpRight,
   Monitor,
   FileText,
+  Rss,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -23,7 +24,7 @@ import { profile } from '@/data/profile'
 import { formatPeriod } from '@/lib/period'
 import { cn } from '@/lib/utils'
 import SlideButton from '@/components/button/SlideButton'
-import TagBadge from '@/components/comn/TagBadge'
+import TagBadge from '@/components/common/TagBadge'
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -38,6 +39,14 @@ export default function ResumePage() {
   const [openCareer, setOpenCareer] = useState<Record<string, boolean>>({})
   const [filter, setFilter] = useState('feature')
   const [activeSection, setActiveSection] = useState<string>('about')
+  const [blogPosts, setBlogPosts] = useState<{ title: string; link: string; pubDate: string }[]>([])
+
+  useEffect(() => {
+    fetch('/api/blog')
+      .then((r) => (r.ok ? r.json() : { posts: [] }))
+      .then((d) => setBlogPosts(d.posts || []))
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -435,6 +444,41 @@ export default function ResumePage() {
           </div>
         </div>
       </section>
+
+      {blogPosts.length > 0 && (
+        <section className="border-t border-zinc-100 dark:border-zinc-800">
+          <div className="mx-auto max-w-5xl px-6 py-20">
+            <motion.div {...fadeUp}>
+              <SectionHeader title="Blog" />
+            </motion.div>
+            <div className="space-y-3">
+              {blogPosts.map((post) => (
+                <motion.a
+                  key={post.link}
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  {...fadeUp}
+                  className="group flex items-center justify-between rounded-2xl border border-zinc-100 bg-white p-5 transition-all hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900"
+                >
+                  <div className="flex items-center gap-3">
+                    <Rss
+                      size={14}
+                      className="shrink-0 text-zinc-300 transition-colors group-hover:text-zinc-900 dark:group-hover:text-white"
+                    />
+                    <span className="text-sm font-bold text-zinc-700 dark:text-zinc-300">
+                      {post.title}
+                    </span>
+                  </div>
+                  <span className="shrink-0 text-[10px] text-zinc-400">
+                    {new Date(post.pubDate).toLocaleDateString('ko-KR')}
+                  </span>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <footer className="border-t border-zinc-100 dark:border-zinc-800">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-8">

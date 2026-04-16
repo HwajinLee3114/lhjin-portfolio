@@ -9,19 +9,19 @@
 
 ### 환경변수 (`.env.local`)
 
-| 변수 | 설명 |
-|------|------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase 프로젝트 URL |
+| 변수                            | 설명                  |
+| ------------------------------- | --------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase 프로젝트 URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon 공개 키 |
 
 ### SQL 마이그레이션 파일
 
 Supabase SQL Editor에서 순서대로 실행. `docs/sql/` 디렉토리에 관리.
 
-| 파일 | 설명 |
-|------|------|
-| [`001_guestbook_table.sql`](sql/001_guestbook_table.sql) | 테이블 + 인덱스 생성 |
-| [`002_guestbook_rls.sql`](sql/002_guestbook_rls.sql) | RLS 정책 + updated_at 트리거 |
+| 파일                                                     | 설명                         |
+| -------------------------------------------------------- | ---------------------------- |
+| [`001_guestbook_table.sql`](sql/001_guestbook_table.sql) | 테이블 + 인덱스 생성         |
+| [`002_guestbook_rls.sql`](sql/002_guestbook_rls.sql)     | RLS 정책 + updated_at 트리거 |
 
 ## 테이블
 

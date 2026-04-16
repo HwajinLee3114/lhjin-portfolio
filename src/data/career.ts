@@ -1,23 +1,28 @@
+import { z } from 'zod'
 import careerJson from '../../data/career.json'
 import { getProjectsByCompany, type Project } from './projects'
 
-export interface Career {
-  id: string
-  company: string
-  companyInfo: string
-  tag: string[]
-  roles: {
-    role: string
-    periodStart: string
-    periodEnd?: string
-  }[]
-}
+const RoleSchema = z.object({
+  role: z.string(),
+  periodStart: z.string(),
+  periodEnd: z.string().optional(),
+})
+
+const CareerSchema = z.object({
+  id: z.string(),
+  company: z.string(),
+  companyInfo: z.string(),
+  tag: z.array(z.string()),
+  roles: z.array(RoleSchema),
+})
+
+export type Career = z.infer<typeof CareerSchema>
 
 export interface CareerWithProjects extends Career {
   projectDetails: Project[]
 }
 
-export const career = careerJson as Career[]
+export const career = z.array(CareerSchema).parse(careerJson)
 
 export const careerWithProjects: CareerWithProjects[] = career.map((c) => ({
   ...c,

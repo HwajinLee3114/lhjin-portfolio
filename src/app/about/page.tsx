@@ -1,15 +1,30 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Github, Mail, Linkedin, FileText, Globe } from 'lucide-react'
+import { Github, Mail, Linkedin, FileText, Globe, GitBranch } from 'lucide-react'
 
 import SlideButton from '@/components/button/SlideButton'
 import SectionFrame from '@/components/common/SectionFrame'
 import { profile } from '@/data/profile'
 
+type GitHubData = {
+  publicRepos: number
+  followers: number
+  recentRepos: { name: string; url: string; updatedAt: string }[]
+}
+
 export default function About() {
+  const [github, setGithub] = useState<GitHubData | null>(null)
+
+  useEffect(() => {
+    fetch('/api/github')
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setGithub)
+      .catch(() => {})
+  }, [])
+
   const socialLinks = [
     {
       id: 'github',
@@ -111,6 +126,41 @@ export default function About() {
             )
           })}
         </div>
+
+        {github && github.recentRepos.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mt-8 rounded-2xl border border-zinc-100 bg-zinc-50/50 p-6 dark:border-zinc-800 dark:bg-zinc-800/30"
+          >
+            <div className="mb-4 flex items-center gap-2">
+              <GitBranch size={14} className="text-zinc-400" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">
+                Recent GitHub Activity
+              </span>
+              <span className="ml-auto text-[10px] font-bold text-zinc-300">
+                {github.publicRepos} repos
+              </span>
+            </div>
+            <div className="space-y-2">
+              {github.recentRepos.map((repo) => (
+                <a
+                  key={repo.name}
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between rounded-xl px-3 py-2 text-xs transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                >
+                  <span className="font-bold text-zinc-700 dark:text-zinc-300">{repo.name}</span>
+                  <span className="text-[10px] text-zinc-400">
+                    {new Date(repo.updatedAt).toLocaleDateString('ko-KR')}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
     </SectionFrame>
   )

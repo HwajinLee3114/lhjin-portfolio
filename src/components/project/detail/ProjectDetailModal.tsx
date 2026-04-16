@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import tw from 'tailwind-styled-components'
-
 import { getProjectById } from '@/data/projects'
-import { ImagePreviewModal } from '@/components/comn/ImagePreviewModal'
+import { ImagePreviewModal } from '@/components/common/ImagePreviewModal'
 import { formatPeriod } from '@/lib/period'
-import IconCircleButton from '@/components/comn/IconCircleButton'
-import IconButton from '@/components/comn/IconButton'
+import IconCircleButton from '@/components/common/IconCircleButton'
+import IconButton from '@/components/common/IconButton'
 
 interface ModalProps {
   isOpen: boolean
@@ -14,18 +12,8 @@ interface ModalProps {
   onClose?: () => void
 }
 
-const QuoteDiv = tw.div`
-  py-2
-  pl-4
-  mb-4
-  border-l-4 border-zinc-300
-  text-zinc-600
-  bg-zinc-50
-  rounded-r-lg
-  dark:border-zinc-600
-  dark:text-zinc-300
-  dark:bg-zinc-800/50
-`
+const quoteDivClass =
+  'py-2 pl-4 mb-4 border-l-4 border-zinc-300 text-zinc-600 bg-zinc-50 rounded-r-lg dark:border-zinc-600 dark:text-zinc-300 dark:bg-zinc-800/50'
 
 export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) => {
   const project = activeId ? getProjectById(activeId) : null
@@ -258,7 +246,9 @@ export const ProjectDetailModal = ({ isOpen, activeId, onClose }: ModalProps) =>
                         {project.contribution.map((contri, cIdx) => (
                           <li key={`${project.id}_contri_${cIdx}`} className="list-none">
                             {contri?.title && (
-                              <QuoteDiv className="font-bold text-[15px]">{contri.title}</QuoteDiv>
+                              <div className={`${quoteDivClass} font-bold text-[15px]`}>
+                                {contri.title}
+                              </div>
                             )}
                             <ul className="space-y-2 mt-3">
                               {contri.desc.map((condesc, idx) => (
