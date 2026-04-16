@@ -3,28 +3,16 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import {
-  Github,
-  Mail,
-  Linkedin,
-  Globe,
-  ChevronDown,
-  Briefcase,
-  ArrowUpRight,
-  Monitor,
-  FileText,
-  Rss,
-} from 'lucide-react'
+import { Github, Mail, Linkedin, Globe, Monitor, FileText, Rss } from 'lucide-react'
 import Link from 'next/link'
 
 import { projects } from '@/data/projects'
 import SkillList from '@/components/skills/SkillList'
-import { sortedCareer } from '@/data/career'
 import { profile } from '@/data/profile'
-import { formatPeriod } from '@/lib/period'
 import { cn } from '@/lib/utils'
 import SlideButton from '@/components/button/SlideButton'
-import TagBadge from '@/components/common/TagBadge'
+import ProjectCard from '@/components/project/ProjectCard'
+import CareerList from '@/components/career/CareerList'
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -36,7 +24,6 @@ const fadeUp = {
 const sectionIds = ['about', 'skills', 'projects', 'career'] as const
 
 export default function ResumePage() {
-  const [openCareer, setOpenCareer] = useState<Record<string, boolean>>({})
   const [filter, setFilter] = useState('feature')
   const [activeSection, setActiveSection] = useState<string>('about')
   const [blogPosts, setBlogPosts] = useState<{ title: string; link: string; pubDate: string }[]>([])
@@ -258,37 +245,18 @@ export default function ResumePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="group relative overflow-hidden rounded-2xl border border-zinc-100 bg-white transition-all hover:-translate-y-1 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-zinc-50 dark:bg-zinc-800">
-                  <Image
-                    src={`/images/thumb/${project.thumb}`}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="mb-2 flex items-start justify-between gap-2">
-                    <h3 className="text-base font-black leading-tight">{project.title}</h3>
-                    <ArrowUpRight
-                      size={14}
-                      className="mt-1 shrink-0 text-zinc-300 transition-colors group-hover:text-zinc-900 dark:group-hover:text-white"
-                    />
-                  </div>
-                  <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-                    {project.description}
-                  </p>
-                  <div className="mb-2 flex flex-wrap gap-1">
-                    {project.filter.map((fil, fIdx) => (
-                      <TagBadge key={fIdx} name={fil.name} color={fil.color} />
-                    ))}
-                  </div>
-                  <p className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
-                    {formatPeriod(project.periodStart, project.periodEnd)}
-                  </p>
-                </div>
+                <ProjectCard
+                  id={project.id}
+                  title={project.title}
+                  periodStart={project.periodStart}
+                  periodEnd={project.periodEnd}
+                  skillItem={project.skillItem}
+                  filter={project.filter}
+                  imageSrc={project.thumb}
+                  feature={project.feature}
+                  description={project.description}
+                />
               </motion.div>
             ))}
           </div>
@@ -304,111 +272,12 @@ export default function ResumePage() {
             <SectionHeader title="Career" />
           </motion.div>
 
-          <div className="relative space-y-10">
-            <div className="absolute bottom-10 left-8 top-10 hidden w-[2px] bg-gradient-to-b from-zinc-200 via-zinc-100 to-transparent dark:from-zinc-700 dark:via-zinc-800 md:block" />
-
-            {sortedCareer.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: idx * 0.08 }}
-                className="group relative flex flex-col gap-6 md:flex-row md:gap-10"
-              >
-                <div className="relative z-10 shrink-0">
-                  <div
-                    className={cn(
-                      'flex h-16 w-16 items-center justify-center rounded-3xl border-2 text-2xl font-black shadow-sm transition-all',
-                      idx === 0
-                        ? 'scale-110 border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
-                        : 'border-zinc-200 bg-white text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-500',
-                    )}
-                  >
-                    {item.company.charAt(0)}
-                  </div>
-                  {idx === 0 && (
-                    <span className="absolute -right-1 -top-1 flex h-4 w-4">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-4 w-4 scale-50 rounded-full bg-emerald-500" />
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex-1">
-                  <div className="mb-3 flex flex-col justify-between gap-3 md:flex-row md:items-center">
-                    <h3 className="text-xl font-black">{item.company}</h3>
-                    <div className="flex flex-col items-start gap-1 md:items-end">
-                      {item.roles.map((role, rIdx) => (
-                        <span
-                          key={rIdx}
-                          className="rounded bg-zinc-100 px-2 py-1 text-[11px] font-bold text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
-                        >
-                          {role.role} · {formatPeriod(role.periodStart, role.periodEnd)}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="mb-3 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
-                    {item.companyInfo}
-                  </p>
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    {item.tag.map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="rounded-lg border border-zinc-100 bg-zinc-50 px-2.5 py-1 text-[10px] font-bold text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-500"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {item.projectDetails && item.projectDetails.length > 0 && (
-                    <div className="border-t border-zinc-100 pt-4 dark:border-zinc-800">
-                      <button
-                        onClick={() =>
-                          setOpenCareer((prev) => ({ ...prev, [item.id]: !prev[item.id] }))
-                        }
-                        className="flex items-center gap-3 text-xs font-black uppercase tracking-widest transition-all hover:opacity-70"
-                      >
-                        <Briefcase size={14} />
-                        Projects ({item.projectDetails.length})
-                        <ChevronDown
-                          size={14}
-                          className={cn(
-                            'transition-transform duration-300',
-                            openCareer[item.id] && 'rotate-180',
-                          )}
-                        />
-                      </button>
-
-                      {openCareer[item.id] && (
-                        <div className="mt-4 space-y-3">
-                          {item.projectDetails.map(
-                            (pj) =>
-                              pj && (
-                                <div
-                                  key={pj.id}
-                                  className="rounded-xl border border-zinc-100 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-800/50"
-                                >
-                                  <div className="mb-1 flex items-start justify-between gap-3">
-                                    <h4 className="text-sm font-black">{pj.title}</h4>
-                                    <span className="shrink-0 text-[10px] font-bold text-zinc-400">
-                                      {formatPeriod(pj.periodStart, pj.periodEnd)}
-                                    </span>
-                                  </div>
-                                  <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-                                    {pj.description}
-                                  </p>
-                                </div>
-                              ),
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <CareerList
+            variant={{
+              hidden: { opacity: 0, y: 24 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          />
         </div>
       </section>
 
