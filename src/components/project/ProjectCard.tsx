@@ -47,13 +47,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         className="group relative flex flex-col h-full rounded-2xl bg-white dark:bg-zinc-900 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] hover:-translate-y-1"
       >
         <div className="relative aspect-[16/10] rounded-t-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-          <Image
-            className="object-cover group-hover:scale-105 transition-transform duration-700"
-            src={imagePath.projectThumb(imageSrc || '')}
-            alt={title || ''}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
+          {imageSrc ? (
+            <Image
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              src={imagePath.projectThumb(imageSrc)}
+              alt={title || ''}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-3xl font-black text-zinc-300 dark:text-zinc-600">
+              {title?.charAt(0) || '?'}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col flex-1 space-y-2 p-4">

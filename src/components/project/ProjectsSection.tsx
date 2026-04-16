@@ -184,13 +184,19 @@ function ProjectListItem({
         className="group flex cursor-pointer items-center gap-4 rounded-2xl p-3 transition-all hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
       >
         <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800">
-          <Image
-            src={imagePath.projectThumb(project.thumb)}
-            alt={project.title}
-            fill
-            sizes="80px"
-            className="object-cover"
-          />
+          {project.thumb ? (
+            <Image
+              src={imagePath.projectThumb(project.thumb)}
+              alt={project.title}
+              fill
+              sizes="80px"
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-lg font-black text-zinc-300 dark:text-zinc-600">
+              {project.title.charAt(0)}
+            </div>
+          )}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
