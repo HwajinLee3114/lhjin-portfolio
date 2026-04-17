@@ -56,8 +56,7 @@ SI 풀스택(Java/Spring) 경험이 있어 **백엔드 구조를 이해하고 AP
   멀티스텝 위저드 재설계, B2B 딜러 웹앱 연동 프론트엔드 개발
 - **하이브리드 네이티브 브릿지** 유지보수 및 이슈 대응 — Android WebView / iOS WKWebView 인터페이스,
   네이티브 이미지 피커, FCM 푸시, 딥링크
-- **Toss Payments 결제 연동** — 백엔드 개발자와 결제 플로우를 함께 설계하여 카드/가상계좌 결제, 결제
-  상태 관리 구현
+- **Toss Payments 결제 연동** — 백엔드 개발자와 결제 플로우를 함께 설계하여 카드/가상계좌 결제 및 상태 관리 구현
 - **이미지 처리 파이프라인** — CropperJS 크롭 + 클라이언트 사이드 압축 + S3 Presigned URL 업로드
 - 앱 전반 FE 이슈 및 버그 수정 주도 (신차 장기렌트/리스, 사고수리, 결제 등 전 영역)
 
@@ -129,7 +128,7 @@ SI 풀스택(Java/Spring) 경험이 있어 **백엔드 구조를 이해하고 AP
 - 리뉴얼 착수 전 백엔드 개발자와 **Code Convention을 함께 수립** — 네이밍
   규칙(PascalCase/camelCase), 컴포넌트 분리 기준, 상태 선언 위치, Boolean 접두사(is-) 등 팀 전체
   코드 일관성 확보
-- 프로젝트 간 **기술 스택 통일** 추진 — 기존 React 프로젝트를 Next.js로 마이그레이션하여 빌드/배포 파이프라인과 코드 구조 표준화
+- 프로젝트 간 **기술 스택 통일** 추진 — React 기반 프로젝트를 Next.js로 전환하여 코드 구조 및 빌드/배포 파이프라인 표준화
 - 전체 프로젝트 **GitHub Actions 기반 CI/CD 배포** 운영
 
 **Tech Stack |** `JavaScript`, `TypeScript`, `React`, `Next.js`, `Vite`, `TailwindCSS`, `MUI`,
@@ -145,8 +144,7 @@ SI 풀스택(Java/Spring) 경험이 있어 **백엔드 구조를 이해하고 AP
 
 **| LMEDRP**
 
-- 기존 `context` 방식을 `AJAX`로 변경하여 **페이지 로딩 시간을 30% 단축**하고, 사용자 경험(UX)을
-  개선
+- 기존 `context` 방식을 `AJAX`로 변경하여 **페이지 로딩 시간을 30% 단축**
 - 다중 파일 업로드 시 **Chunk 방식을 도입**하여 **업로드 시간을 50% 단축**, 프로그레스 바로 진행
   상황 실시간 제공
   ([트러블슈팅](https://lhjini.tistory.com/entry/파일-다중-업로드-Chunk-적용기-대용량-파일-업로드-최적화))
