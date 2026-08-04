@@ -366,6 +366,85 @@
 
 ---
 
+## 8. 카사요 서비스 통합 모노레포 구축 및 리팩토링
+
+- **id**: carsayo-monorepo
+- **periodStart**: 2026-05
+- **periodEnd**: 진행 중
+- **filter**: team, feature, FE
+- **skillItem**: TypeScript, React 19, Next.js 16, React Native, Expo, Expo Router, NativeWind,
+  pnpm Workspace, Turborepo, TanStack Query, Zustand, Zod, Vitest, GitHub Actions
+
+### description
+
+분리되어 있던 카사요의 Expo/React Native 앱과 Next.js 웹 프로젝트를 하나의 pnpm Workspace와
+Turborepo로 통합하고, 서비스 간 중복된 API·타입·도메인·상태·검증 로직을 공유 패키지로 재설계하는
+프론트엔드 모노레포 리팩토링 프로젝트입니다. 신규 서비스도 동일한 아키텍처와 개발 절차를 따르도록
+구성하여 앱·웹 간 기능 정합성과 유지보수성을 함께 높이고 있습니다.
+
+### feature
+
+- 6개 서비스 앱 통합 운영
+  - 카사요 사용자 앱 (Expo/React Native)
+  - 카사요 메인 웹 (Next.js)
+  - 중고차 딜러 앱 (Expo/React Native)
+  - 중고차 딜러 웹 (Next.js)
+  - 복지몰 지원 웹 (Next.js)
+  - 법인 임직원 초대 웹 (Next.js)
+- `apps/*`와 `packages/*`를 분리한 워크스페이스 디렉터리 구조
+- `@repo/api`, `@repo/types`, `@repo/domain`, `@repo/constants`, `@repo/utils`, `@repo/store`,
+  `@repo/hooks`, `@repo/notification-gateway` 공유 패키지
+- Swagger 생성 API 클라이언트 단일화 및 앱별 API 인스턴스 주입
+- 앱·웹 기능 축 페어 기반 도메인 규칙, 검증, 상태 흐름 정합
+- 단일 lockfile, 루트 환경설정, Turbo task pipeline 기반 통합 명령
+- Vitest 기반 공유 순수 로직 단위 테스트와 전체 워크스페이스 typecheck
+- GitHub Actions 기반 앱·웹별 빌드 및 배포 파이프라인
+
+### contribution
+
+- **모노레포 아키텍처 및 디렉터리 구조 설계**
+  - 실행 가능한 서비스는 `apps/*`, 여러 서비스가 공유하는 순수 로직은 `packages/*`로 분리
+  - 앱은 모든 공유 패키지를 사용할 수 있지만 패키지는 앱을 참조하지 않도록 단방향 의존성 규칙 수립
+  - 타입 전용 leaf 패키지를 분리하여 utils와 domain 사이의 순환 의존 제거
+  - 패키지별 public export를 정의하여 내부 파일 경로에 직접 의존하지 않는 import 구조 구성
+
+- **프론트엔드 공통 로직 단일 출처(SSOT) 구축**
+  - 앱·웹에 중복되어 있던 Swagger 생성 API 클라이언트를 `@repo/api`로 통합
+  - 차량·견적 도메인의 타입, Zod 스키마, DTO 빌더, 포맷팅·검증 로직을 공유 패키지로 이전
+  - TanStack Query Hook은 API 인스턴스를 주입받는 Factory 패턴으로 설계하여 인증·baseURL 차이를
+    유지하면서 조회 로직과 캐시 정책 공통화
+  - 신차 견적의 선택·구매·요청 상태와 검증 함수를 `@repo/store`의 canonical Zustand Store로
+    통합하고, 세션 범위 상태에는 불필요한 persist를 적용하지 않도록 정책화
+  - 푸시 알림 payload 해석과 화면 이동 규칙을 notification gateway로 분리하여 사용자 앱과 딜러 앱의
+    라우팅 중복 제거
+
+- **React Native·Next.js 플랫폼 경계 관리**
+  - 도메인·타입·유틸 패키지는 환경변수와 `className`에 의존하지 않는 TypeScript 로직으로 구성
+  - 앱과 웹은 동일한 도메인 규칙·폼 검증·상태 전이를 사용하고, UI·스토리지·네이티브 SDK 연동만
+    플랫폼별 구현으로 분리
+  - 대리운전은 사용자 앱과 복지몰 웹, 중고차 딜러는 RN 앱과 Next.js 웹을 기능 축 페어로 관리
+  - 플랫폼별 구현 차이를 명시적으로 문서화하여 한쪽 기능 변경 시 대응 프로젝트도 함께 검토하는 절차
+    수립
+
+- **워크스페이스 개발 환경 및 품질 검증 표준화**
+  - 프로젝트별 lockfile을 루트 pnpm lockfile로 단일화하고 workspace 의존성은 `workspace:*`로 관리
+  - Turborepo task dependency로 워크스페이스 의존 순서에 맞춘 build·lint·typecheck 실행을 자동화
+  - 루트 명령 한 번으로 전체 앱과 패키지의 typecheck 및 API 클라이언트 생성을 실행하도록 스크립트
+    통합
+  - 공유 패키지의 포맷팅·검증·상태 변환 같은 순수 로직에 Vitest 단위 테스트 도입
+  - React·React Native·Expo 버전 정합과 Metro의 pnpm symlink 해석을 구성하여 네이티브 번들 환경
+    안정화
+
+- **점진적 마이그레이션 및 배포 체계 구축**
+  - 기존 앱·웹의 import 경로를 공유 패키지 re-export로 먼저 전환하여 대규모 수정에 따른 회귀 위험
+    최소화
+  - 공통화 가능한 로직과 플랫폼 전용 로직을 구분하고 사용처가 없는 추상화는 만들지 않는 점진적 이전
+    원칙 적용
+  - 루트 환경변수와 앱별 실행 스크립트를 정리하고 GitHub Actions 기반 서비스별 CI/CD 파이프라인 운영
+  - 신규 중고차 딜러 앱·웹, 복지몰, 법인 초대 웹을 동일한 디렉터리·의존성·검증 규칙으로 확장
+
+---
+
 ## iOS 네이티브 기능 상세 (앱 프로젝트 contribution에 반영)
 
 ### 카사요 앱 iOS 네이티브 기능

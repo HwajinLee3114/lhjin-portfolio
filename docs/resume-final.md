@@ -123,6 +123,24 @@ SI 풀스택(Java/Spring) 경험이 있어 **백엔드 구조를 이해하고 AP
 - 설계사/고객/상담/계약/정산 관리 어드민 FE 개발
 - **보험비교 API 연동** — 고객 상담 요청 기반으로 보험사별 견적을 비교하고 금액 결과지를 제공하는 프로세스 구현
 
+**| 카사요 서비스 통합 모노레포 구축 및 리팩토링 (2026.05 ~ 진행 중)**
+
+- TypeScript, React 19, Next.js 16, React Native, Expo, Expo Router, NativeWind, pnpm Workspace,
+  Turborepo, TanStack Query, Zustand, Zod, Vitest
+
+- **6개 서비스 앱을 운영하는 통합 모노레포 설계·구축** — 기존 Expo/React Native 앱과 Next.js 웹을
+  `apps/*`로 통합하고, 신규 딜러 앱·웹, 복지몰, 법인 초대 웹을 동일 워크스페이스에 편입
+- **8개 공유 패키지로 프론트엔드 단일 출처(SSOT) 구축** — Swagger 생성 API 클라이언트, 타입, 도메인
+  스키마·DTO 빌더, 검증 로직, Query Hook, Zustand Store, 유틸, 알림 라우팅을 `@repo/*`로 공통화
+- **플랫폼 경계를 고려한 공통 아키텍처 설계** — 도메인·데이터 패키지는 환경변수와 UI 스타일에
+  의존하지 않는 TypeScript 계층으로 유지하고, 인증 정책과 baseURL이 다른 API 인스턴스는 앱에서
+  주입하는 Factory 패턴 적용
+- **React Native·웹 기능 정합 체계 수립** — 대리운전, 중고차 딜러, 신차 견적 기능을 앱·웹 페어로
+  관리하여 도메인 규칙·검증·상태 흐름은 공유하고 UI와 네이티브 연동만 플랫폼별로 분리
+- **개발·검증·배포 파이프라인 표준화** — 단일 lockfile과 루트 환경설정, Turbo 기반
+  build·lint·typecheck, Vitest 공유 로직 테스트, GitHub Actions 배포 체계를 구성하여 프로젝트별 개발
+  절차 통일
+
 **| 공통 — 개발 프로세스 개선**
 
 - 리뉴얼 착수 전 백엔드 개발자와 **Code Convention을 함께 수립** — 네이밍
@@ -131,8 +149,10 @@ SI 풀스택(Java/Spring) 경험이 있어 **백엔드 구조를 이해하고 AP
 - 프로젝트 간 **기술 스택 통일** 추진 — React 기반 프로젝트를 Next.js로 전환하여 코드 구조 및 빌드/배포 파이프라인 표준화
 - 전체 프로젝트 **GitHub Actions 기반 CI/CD 배포** 운영
 
-**Tech Stack |** `JavaScript`, `TypeScript`, `React`, `Next.js`, `Vite`, `TailwindCSS`, `MUI`,
-`Zustand`, `React Query`, `React Hook Form`, `Zod`, `Toss Payments`, `Framer Motion`, `Recharts`, `GitHub Actions`
+**Tech Stack |** `JavaScript`, `TypeScript`, `React`, `Next.js`, `React Native`, `Expo`, `Vite`,
+`Expo Router`, `TailwindCSS`, `NativeWind`, `MUI`, `Zustand`, `TanStack Query`, `React Hook Form`,
+`Zod`, `Toss Payments`, `Framer Motion`, `Recharts`, `pnpm Workspace`, `Turborepo`, `Vitest`,
+`GitHub Actions`
 
 ---
 
@@ -223,9 +243,10 @@ SW 개발자, 정직원(연구원)
 
 ### | Front-End
 
-주력: `React`, `Next.js`, `TypeScript`, `TailwindCSS`, `Zustand`, `React Query`
+주력: `React`, `Next.js`, `React Native`, `Expo`, `TypeScript`, `TailwindCSS`, `Zustand`,
+`TanStack Query`
 
-활용: `MUI`, `React Hook Form`, `Zod`, `Framer Motion`, `Vite`
+활용: `Expo Router`, `NativeWind`, `MUI`, `React Hook Form`, `Zod`, `Framer Motion`, `Vite`
 
 경험: `Styled-components`, `Redux`, `JavaScript (ES6+)`
 
@@ -239,7 +260,7 @@ SW 개발자, 정직원(연구원)
 
 ### | DevOps
 
-`Vercel`, `Netlify`, `GitHub Actions`
+`Vercel`, `Netlify`, `GitHub Actions`, `pnpm Workspace`, `Turborepo`
 
 ### | Tools
 
